@@ -222,6 +222,16 @@ class Server:
                 raise ValueError("sample_weighted_mean requires one sample count per update")
         n_clients = len(gradients)
 
+        # Per-client update magnitude, recorded for every aggregation method so
+        # that rejection decisions can be related to update geometry across
+        # methods. Purely observational: it is not read by any filter, does not
+        # enter aggregation, and leaves every decision unchanged. Updates are
+        # already validated as finite, but a finite update can still have a
+        # norm too large to represent; such a norm is recorded as null rather
+        # than raising or emitting a numerical warning from a diagnostic path.
+        with np.errstate(over='ignore', invalid='ignore'):
+            update_norms = np.linalg.norm(gradients, axis=1)
+
         # Measure filtering time
         start_time = time.time()
 
@@ -477,6 +487,22 @@ class Server:
         accepted_ids = [participating_ids[i] for i in benign_indices]
         rejected_ids = [participating_ids[i] for i in anomaly_indices]
 
+        # Diagnostic geometry keyed by participant id. `l0_distances` exists
+        # only for the MDBSCAN family, which computes it for its own trust
+        # region; other methods report update norms alone.
+        update_norms_by_id = {
+            str(participant_id): (float(norm) if np.isfinite(norm) else None)
+            for participant_id, norm in zip(participating_ids, update_norms)
+        }
+        raw_l0_distances = filter_info.get('l0_distances')
+        if raw_l0_distances is not None and len(raw_l0_distances) == len(participating_ids):
+            l0_distances_by_id = {
+                str(participant_id): float(distance)
+                for participant_id, distance in zip(participating_ids, raw_l0_distances)
+            }
+        else:
+            l0_distances_by_id = {}
+
         result = {
             'benign_indices': benign_indices,
             'anomaly_indices': anomaly_indices,
@@ -495,6 +521,8 @@ class Server:
             'filter_info': filter_info,
             'n_benign': len(benign_indices),
             'n_anomaly': len(anomaly_indices),
+            'update_norms': update_norms_by_id,
+            'l0_distances': l0_distances_by_id,
             # xAI attack-alert reporting
             'attack_alert': attack_alert,
             'density_gap_detected': density_gap_detected,

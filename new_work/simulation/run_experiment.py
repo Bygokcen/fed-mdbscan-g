@@ -481,6 +481,11 @@ def run_single_experiment(config, method, seed=42):
                 'server_input_ids': server_input_ids,
                 'attack_diagnostics': attack_diagnostics,
                 'optimizer_steps': optimizer_steps,
+                # Update geometry per participant. Recorded so that the local
+                # step count, the resulting update magnitude and the accept or
+                # reject decision can be analysed together after the run.
+                'update_norms': result.get('update_norms', {}),
+                'l0_distances': result.get('l0_distances', {}),
                 'group_confusion': group_counts,
                 'balanced_accuracy': server.last_class_metrics['balanced_accuracy'],
                 'per_class_accuracy': server.last_class_metrics['per_class_accuracy'],

@@ -217,3 +217,49 @@ def test_server_runtime_parameters_are_constructed_from_resolved_config():
     assert server.method_params == config["method_params"]["fed_mdbscan_g"]
     assert server.aggregation_operator == "sample_weighted_mean"
     assert server.fallback_policy == "skip_round"
+
+
+def test_update_geometry_is_recorded_for_every_method_without_changing_decisions():
+    """Diagnostic geometry must be observable, id-keyed, and decision-neutral."""
+    updates = [
+        np.array([1.0, 0.0], dtype=np.float32),
+        np.array([3.0, 4.0], dtype=np.float32),
+        np.array([0.0, 2.0], dtype=np.float32),
+    ]
+    participant_ids = [7, 8, 9]
+    expected_norms = {"7": 1.0, "8": 5.0, "9": 2.0}
+
+    for method in ("fedavg", "coord_median", "fed_mdbscan_g"):
+        result = _server(method).aggregate(
+            [u.copy() for u in updates], list(participant_ids), round_id=0
+        )
+        norms = result["update_norms"]
+        assert set(norms) == {str(pid) for pid in participant_ids}
+        for key, expected in expected_norms.items():
+            assert norms[key] == pytest.approx(expected)
+        # Accepted and rejected sets must together cover exactly the inputs,
+        # so the diagnostic fields cannot have perturbed the decision.
+        decision = result["decision"]
+        assert sorted(decision["accepted_ids"] + decision["rejected_ids"]) == participant_ids
+
+    # Distances to the Layer-0 geometric median exist only where a geometric
+    # trust region is actually computed.
+    mdbscan_result = _server("fed_mdbscan_g").aggregate(
+        [u.copy() for u in updates], list(participant_ids), round_id=0
+    )
+    assert set(mdbscan_result["l0_distances"]) == {str(pid) for pid in participant_ids}
+    assert _server("fedavg").aggregate(
+        [u.copy() for u in updates], list(participant_ids), round_id=0
+    )["l0_distances"] == {}
+
+
+def test_update_norm_beyond_floating_point_range_is_recorded_as_null():
+    """A finite update may still have an unrepresentable norm; never warn or raise."""
+    huge = np.float32(1e38)
+    result = _server("fedavg").aggregate(
+        [np.array([huge, huge], dtype=np.float32),
+         np.array([1.0, 1.0], dtype=np.float32)],
+        [0, 1], round_id=0,
+    )
+    assert result["update_norms"]["0"] is None
+    assert result["update_norms"]["1"] == pytest.approx(np.sqrt(2.0))
