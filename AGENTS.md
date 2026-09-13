@@ -1,6 +1,6 @@
 # Research workspace rules
 
-This repository is the isolated Fed-MDBSCAN-G TIFS workspace. Read README.md and tifs_submission/REVISION_STATUS.md before changing scientific claims.
+This repository is the isolated Fed-MDBSCAN-G TIFS workspace. Read START_HERE.md, README.md, and tifs_submission/REVISION_STATUS.md before changing scientific claims. The local .venv is already transferred and validated; use .venv/bin/python and do not reinstall Python or dependencies unless an actual failure requires it.
 
 - Edit working simulation code only under new_work/simulation. Do not modify frozen source or canonical evidence under new_work/results/validated/audit-v2/full_20260910.
 - Historical experiment paths and source hashes are provenance, not paths to rewrite globally. Create a new campaign for new execution profiles, code, data settings, or environments.

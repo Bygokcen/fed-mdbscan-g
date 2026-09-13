@@ -1,0 +1,43 @@
+{
+  "source": "/home/gokcen/Fed_MDBSCAN/venv",
+  "destination": "/home/gokcen/Fed_MDBSCAN_TIFS/.venv",
+  "method": "independent copy; relocated launchers and activation scripts",
+  "packages_reinstalled": false,
+  "modified_launchers": [
+    "pyvenv.cfg",
+    "bin/proton",
+    "bin/torchrun",
+    "bin/f2py",
+    "bin/activate",
+    "bin/pyftsubset",
+    "bin/torchfrtrace",
+    "bin/pip",
+    "bin/py.test",
+    "bin/activate.csh",
+    "bin/ttx",
+    "bin/numpy-config",
+    "bin/pip3.12",
+    "bin/vba_extract.py",
+    "bin/pyftmerge",
+    "bin/proton-viewer",
+    "bin/activate.fish",
+    "bin/fonttools",
+    "bin/isympy",
+    "bin/pip3",
+    "bin/pytest",
+    "bin/pygmentize"
+  ],
+  "relocated_symlinks": [],
+  "pip_freeze_identical": true,
+  "pip_check": "passed",
+  "cuda": {
+    "available": true,
+    "torch": "2.11.0+cu130",
+    "cuda_build": "13.0",
+    "device": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "matrix_check": "passed"
+  },
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "python_prefix": "/home/gokcen/Fed_MDBSCAN_TIFS/.venv",
+  "tests": "97 passed, 10 warnings in 5.29s"
+}
