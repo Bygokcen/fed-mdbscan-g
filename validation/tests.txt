@@ -1,0 +1,24 @@
+........................................................................ [ 74%]
+.........................                                                [100%]
+=============================== warnings summary ===============================
+new_work/tests/test_audit_protocol.py::test_paired_end_to_end_counts_and_identity
+new_work/tests/test_audit_protocol.py::test_paired_end_to_end_counts_and_identity
+new_work/tests/test_audit_protocol.py::test_paired_end_to_end_counts_and_identity
+  /home/gokcen/Fed_MDBSCAN_TIFS/new_work/simulation/data_distributor.py:123: DeprecationWarning: __array__ implementation doesn't accept a copy keyword, so passing copy=False failed. __array__ must implement 'dtype' and 'copy' keyword arguments. To learn more, see the migration guide https://numpy.org/devdocs/numpy_2_0_migration_guide.html#adapting-to-changes-in-the-copy-keyword
+    labels = np.array(dataset.targets)
+
+new_work/tests/test_audit_protocol.py::test_paired_end_to_end_counts_and_identity
+new_work/tests/test_audit_protocol.py::test_paired_end_to_end_counts_and_identity
+new_work/tests/test_audit_protocol.py::test_paired_end_to_end_counts_and_identity
+new_work/tests/test_audit_protocol.py::test_paired_end_to_end_counts_and_identity
+new_work/tests/test_audit_protocol.py::test_paired_end_to_end_counts_and_identity
+new_work/tests/test_audit_protocol.py::test_paired_end_to_end_counts_and_identity
+  /home/gokcen/Fed_MDBSCAN_TIFS/new_work/simulation/data_distributor.py:193: DeprecationWarning: __array__ implementation doesn't accept a copy keyword, so passing copy=False failed. __array__ must implement 'dtype' and 'copy' keyword arguments. To learn more, see the migration guide https://numpy.org/devdocs/numpy_2_0_migration_guide.html#adapting-to-changes-in-the-copy-keyword
+    labels = np.array(dataset.targets)
+
+new_work/tests/test_server_contracts.py::test_temporal_state_is_transactional_when_model_update_overflows
+  /home/gokcen/Fed_MDBSCAN_TIFS/new_work/simulation/server.py:450: RuntimeWarning: overflow encountered in add
+    candidate_weights = self.global_weights + avg_gradient
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+97 passed, 10 warnings in 5.30s

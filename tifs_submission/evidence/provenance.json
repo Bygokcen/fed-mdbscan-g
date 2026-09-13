@@ -1,0 +1,44 @@
+{
+  "campaign": "new_work/results/validated/audit-v2/full_20260910",
+  "manifest_sha256": "1a027705362680f070445d4c3e9a248ef2d304cb607e9b6aa7858d62830be7f1",
+  "source": {
+    "commit": "5c189a9bcb838b5562b19b1e46acd39c89f140ab",
+    "dirty": false,
+    "dirty_state_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source_digest": "a535f661821961cadd88e6ac34bdde000c9d9bc1c2c506a71ced2127de1558ed",
+    "source_files": {
+      "__init__.py": "03d9ca51e2a5b64ba142b97bcbb30e61faf2e783511236dbe3c2dd3259cf3a84",
+      "audit_attacks.py": "54e6b97d3442ffb794f3dfb499d9a22421b1ce1235398e81779dd31f53dcec22",
+      "baselines.py": "f6c0ef8d79164929a5e139255a234bf8dc462bccd3fbe478f5fbba2b0d8c9709",
+      "client.py": "d06d9958963a41718a2d061dea4f7be88869cf17f21edfa8bed03fbfc0ae1b61",
+      "contracts.py": "3ebbdfa2fcd2681126d5992c64d3ac03050aa2f5b6f449184902e31c8da4fc98",
+      "data_distributor.py": "bebcc2222f5e35f9cd9fbc402c061888acb2ab0bb0d7c49cbb51c26cfb8459e1",
+      "evidence.py": "2e078d62695e50bd9918cd170d47d741c576e49cfe9f247fe43be06a2921b1ad",
+      "generate_attack_signatures.py": "3bd61f7986753a71366428a9aa0d490c5a811555d0ae12e050316c23c80e8661",
+      "generate_graphical_abstract.py": "165cfdc4a8b0312d307a411b639a8e99302a0654cb75453a52549477ed67a221",
+      "generate_paper_figures.py": "4915bc587c9e51bdcc095d9d1e1ba235dff7e499f7fba6b69ff530d974968b1f",
+      "har_loader.py": "5ddca2a39aa16db670cea4b77c68857370e6fa11bb6ef1053647b653df5b405b",
+      "mdbscan.py": "3b70755ce2ede18259cb1030adc7183b58a969926a561fd84f46995234034eb3",
+      "metrics.py": "48d343b9bceac2a7b921aea55b4c8a27a6bff57c149ec911928cca6913def643",
+      "models.py": "20dfd084e1fb4dc272ab1778a37c2df486736471ed71f71b4314fe4ff8875bcc",
+      "report_audit.py": "e869b85cf3a46e0168efeee390a8cc2cb8253e52bed68478d9996d9873f3b7ad",
+      "report_phase2b.py": "d09c635638e6c787c3cfc665c536fc5a0478197ffb792243b3cf32b08b971787",
+      "report_wilcoxon.py": "f00bc9be4b45f293845110967f07460505bc7b532b0f9d60fd2a9ba27d995647",
+      "run_audit_campaign.py": "1ebf60aa79c6df09a23ac93fe6325d58d7b541a41830f317de315032a1ebf67d",
+      "run_batch_experiments.py": "d20abf4a1178078ec1ffbb3fdd48cdafd9b50ea7fd3adc9a9c57b3e45ffb0ada",
+      "run_experiment.py": "c88479dce26a0159f78270af1f9cd79036f41a19aa592baf1bd383d2ccb0f545",
+      "server.py": "39821d9768bf27e97b5e85bb5bdfa7a933a385a055cc793e01bfb138baaa8815",
+      "visualize.py": "3483646dd9cfc787f6cc3bc16e38f72cbaeeac734e88dfc08adef2f4eee9fdf9"
+    }
+  },
+  "copied_report_sha256": {
+    "units.csv": "3809360bb583e25df3011f06391f9dcad75033a4a94b7e0b7b83d043b3b94bd3",
+    "cells.csv": "2c24cab61b6092547e31077d33207a5e97516b3c0b7eeb93c21896eb58ea22e7",
+    "paired_deltas.csv": "ce3eee20afb251a859cf8baab0b450d183ff5b552741a95e98a66e7087317dfc",
+    "paired_summary.csv": "ba8aa0b6887c2720c5a312d9471cc049cfbf6cbfdd79711168313b7848974a84",
+    "outcomes.csv": "ee2be56d48ef0457cb65e0abc1a645c1485f5b5b2ea2d998ebc87fd92930f983",
+    "benign_groups.csv": "d375fde6493479e139fab7f6a4b968e344c93a1db2301d2f858a0eefcb4bec4b",
+    "cell_status.csv": "7421bd4f56fd70eede50213d1f9803bace37c84c89d886c5ea0214dda3587164"
+  },
+  "note": "Canonical audit-v2 only; deterministic CIFAR diagnosis is separate."
+}

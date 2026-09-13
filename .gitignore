@@ -1,0 +1,34 @@
+# Local environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.DS_Store
+# Credentials and machine settings
+.env
+.env.*
+!.env.example
+.idea/
+.vscode/
+# Datasets and immutable experiment archives are distributed separately
+/new_work/data/
+/new_work/results/
+# Build intermediates; reviewed PDFs and small evidence CSVs are intentional
+*.aux
+*.log
+*.out
+*.blg
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.zip
+*.tar
+*.tar.gz
+*.pt
+*.pth
+*.ckpt
+# Local transfer inventory; keep its summary in version control
+/migration_file_inventory.json

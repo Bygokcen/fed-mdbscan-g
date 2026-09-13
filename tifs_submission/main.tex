@@ -1,0 +1,156 @@
+% Audit-v2 revision. Canonical evidence: evidence/provenance.json.
+% Working manuscript for author review; submission readiness: REVISION_STATUS.md.
+\documentclass[journal]{IEEEtran}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx,booktabs}
+\usepackage{algorithm,algorithmic}
+\usepackage{url}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\newcommand{\method}{Fed-MDBSCAN-G}
+\newcommand{\rd}{\mathrm{rd}}
+\begin{document}
+\title{\method{}: Evaluating Multi-Density Filtering for Federated Poisoning Defense under Data Heterogeneity}
+\author{G\"okcen~\"Ozden and Kadir~Sar{\i}kaya%
+\thanks{Department of Computer Engineering, Tokat Gaziosmanpa\c{s}a University, Tokat, T\"urkiye. Correspondence: bygokcen@gmail.com.}}
+\markboth{Manuscript for IEEE Transactions on Information Forensics and Security}{\"Ozden and Sar{\i}kaya: Fed-MDBSCAN-G}
+\maketitle
+\begin{abstract}
+Geometric separation of federated model updates can reflect either malicious behavior or legitimate data heterogeneity. We investigate this ambiguity using Fed-MDBSCAN-G, a layered filter combining a geometric-median acceptance region, relative-density gap detection, shared-neighbor cluster validation, and temporal alarm memory. An audited evaluation plans 2,130 method--condition--seed runs across MNIST, Fashion-MNIST, human activity recognition, and CIFAR-10, including matched attack-disabled controls, omniscient distance-constrained attacks, patch backdoors, and component ablations. Of these runs, 2,125 produce valid results and five retain documented failures. The findings delimit the defense's effectiveness. In attack-free extreme-heterogeneity conditions, honest-client rejection ranges from 24.37 to 42.57 percent, and every evaluated round raises an attack alarm. Across 36 paired ablation endpoints, the full architecture improves final accuracy over its geometric-median filter alone by only 0.081 percentage points on average. Under the tested patch backdoor, attack success exceeds 96 percent while clean accuracy alone conceals the security failure. Additional controlled CIFAR-10 repetitions identify backend-dependent divergence; a deterministic execution profile reproduces two complete trajectories but does not restore predictive utility. These results motivate separate evaluation of filtering, alarm specificity, clean utility, and targeted attack success, and establish concrete limitations of density-based evidence under heterogeneous federated training.
+\end{abstract}
+\begin{IEEEkeywords}
+Federated learning, poisoning, robust aggregation, data heterogeneity, relative density, backdoors, reproducibility.
+\end{IEEEkeywords}
+\IEEEpeerreviewmaketitle
+
+\section{Introduction}
+\IEEEPARstart{F}{ederated} learning aggregates locally computed updates while retaining training examples at their originating clients~\cite{mcmahan2017}. This separation limits direct inspection of local training and creates opportunities for poisoned data or manipulated updates~\cite{fang2020,bagdasaryan2020}. A server can examine update geometry, but distance from the majority need not identify malicious intent: clients holding different classes or different numbers of examples can also submit distinct updates.
+
+We study whether a multi-density filter can resolve this ambiguity. MDBSCAN separates density regimes and recovers low-density natural clusters in centralized clustering~\cite{qian2024mdbscan}. Our adaptation, \method{}, combines these ideas with a geometric-median acceptance region and cluster-level consensus checks. The design aims to preserve useful heterogeneous updates while removing harmful deviations. These objectives must be tested independently: a geometric rejection rule does not establish attack attribution, and low attack success is uninformative when the model itself fails to learn.
+
+The evaluation consequently separates four questions. Does filtering improve final accuracy relative to simple aggregation? Does it reject honest clients under attack-free heterogeneity? Does the alarm distinguish attacked from clean rounds? Do additional density and temporal components contribute beyond the initial geometric filter? Matched attack-disabled controls and targeted backdoor measurements address damage and security outcomes separately.
+
+Our contribution is an implemented layered filter together with an auditable evaluation of its capabilities and limitations. We report 2,130 planned units, including failures, rather than restricting the evidence to completed favorable runs. The evaluation provides counterexamples to broad minority-protection and reliable-alarm interpretations of the architecture. Component ablations show that the average accuracy contribution beyond the initial filter is small in the tested block. A separate reproducibility investigation distinguishes completion under deterministic execution from successful learning. We make no first-of-its-kind claim and no general superiority or Byzantine-convergence guarantee.
+
+\section{Related Work and Scope}
+Statistical robust aggregation includes neighbor-based selection such as Krum~\cite{blanchard2017}, coordinate-wise robust estimators~\cite{yin2018}, and geometric-median aggregation~\cite{pillutla2022rfa}. FLTrust introduces a server-side trusted dataset and similarity-based weighting~\cite{cao2021fltrust}. These approaches impose different information and modeling assumptions. Their theoretical properties cannot be transferred to a composite filter merely because it uses a related distance statistic.
+
+Clustering-based defenses inspect structure among submitted updates. FLAME combines HDBSCAN-based selection with clipping and noise~\cite{nguyen2022flame}; it should not be characterized as an ordinary fixed-radius DBSCAN baseline. MDBSCAN instead addresses multiple density regimes through relative-density partitioning and shared-neighbor clustering~\cite{qian2024mdbscan}. We reuse this motivation without assuming that natural clusters correspond to honest participants. Coordinated attackers may themselves form coherent groups.
+
+Poisoning evaluation also depends on adversary strength. Random perturbations, distance-constrained coordinated attacks~\cite{shejwalkar2021}, and targeted backdoors~\cite{bagdasaryan2020} test distinct failure modes. A weak perturbation that barely damages an unprotected mean cannot establish strong defense effectiveness. The present work therefore includes multiple attack families and paired controls, while limiting conclusions to their concrete implementations.
+
+The experiments are centralized simulations with statistical heterogeneity and controlled participation. HAR supplies smartphone activity features, but the evaluation does not measure radio traffic, device energy, asynchronous deployment, or privacy leakage. Access to individual plaintext updates is assumed; secure aggregation compatibility and differential privacy are not established.
+
+\section{System and Threat Model}
+At round $r$, the server broadcasts weights $w_r$. An active client trains locally and submits $u_{r,i}=w^{\mathrm{local}}_{r,i}-w_r$. These vectors are multi-step model deltas, not single-batch gradients. For an accepted set $B_r$, the full method uses
+\begin{equation}
+w_{r+1}=w_r+\frac{1}{|B_r|}\sum_{i\in B_r}u_{r,i}.
+\end{equation}
+Uniform averaging and example-count-weighted averaging are separate baselines. Calling both simply FedAvg would conceal an experimental difference.
+
+The server is trusted and clients have fixed identities. Attackers manipulate their own training or updates; the experiments do not implement identity creation or a general Sybil adversary. Gray-box random-direction probes do not observe other clients' updates. In contrast, the Min-Max and Min-Sum implementations explicitly access the current benign updates and are labeled omniscient. These knowledge models are not interchangeable. Ground-truth attacker labels are used for evaluation and the explicitly marked oracle block, not supplied to the deployable full filter.
+
+Attack ratios in the manifest refer to the configured client population. The evaluation records actual participating malicious identities per round, because conditional participation changes the realized ratio. Main runs use a fixed round-size policy with configured dropout 0.1 and an always-participate malicious policy. Paired controls retain the corresponding experimental identities and schedules while disabling attacks.
+
+\section{Layered Filtering Method}
+\subsection{Geometric Acceptance Region}
+Given $n$ submitted updates, the initial layer approximates
+\begin{equation}
+ m=\arg\min_z\sum_{i=1}^{n}\|u_i-z\|_2
+\end{equation}
+by Weiszfeld iteration, with at most 100 iterations and tolerance $10^{-5}$. It accepts
+\begin{equation}
+ B_0=\{i:\|u_i-m\|_2\leq 2.5\,\operatorname{median}_j\|u_j-m\|_2\}.
+ \label{eq:l0}
+\end{equation}
+The radius is a multiple of the median radial distance; it is not a calibrated median-absolute-deviation hypothesis test. Robustness of a location estimator does not imply robustness of this acceptance region followed by an ordinary mean. In particular, the geometric median's breakdown properties do not prove poisoning resistance or honest-client retention for the complete pipeline.
+
+\subsection{Density Gap and Alarm Gate}
+With effective neighborhood size $k' = \min(5,n-1)$, the implementation computes
+\begin{equation}
+\rd(i)=\frac{k'}{\sum_{j\in k'\mathrm{NN}(i)}\|u_i-u_j\|_2}.
+\end{equation}
+Zero-distance and small-population cases have explicit numerical branches in the frozen implementation. Consecutive gaps in sorted densities define a maximum-to-median gap ratio. A ratio above 10 triggers a density-gap indicator and places a split at the largest gap. Otherwise a tenth-percentile threshold is available when a previous alarm keeps the upper layer active.
+
+The current-round attack gate requires both the gap indicator and at least $\max(2,\lceil0.05n\rceil)$ initial-layer rejections. Both statistics are computed from the same updates: this is corroborating geometric evidence, not statistically independent evidence. The threshold is a heuristic; no calibrated significance level or distribution-free false-alarm bound is asserted.
+
+\subsection{Cluster Validation and Temporal State}
+Shared-neighbor clustering groups low-density updates. When a density gap exists, the neighborhood-radius estimate excludes the low-density subset; otherwise it uses the broader population. This conditional estimation does not guarantee that the retained subset is uncontaminated.
+
+For a recovered group $S$, centroid $c_S$, and geometric median $m_{B_0}$ of the initial accepted pool, the group is rejected if
+\begin{equation}
+ \|c_S-m_{B_0}\|_2>2\,\operatorname{median}_{j\in B_0}\|u_j-m_{B_0}\|_2.
+\end{equation}
+The ordinary combined decision is $B=B_0\setminus\bigcup_{S\mathrm{\ rejected}}S$. Thus an upper layer cannot recover a client rejected by $B_0$. This set-inclusion property constrains minority recovery as well as attack rejection; it is not a security guarantee.
+
+A three-round memory of gate decisions can sustain the alarm until the clean-streak condition suppresses it. The alarm controls whether the upper filtering layer is active. It is therefore not a side channel independent of filtering. If the combined layer accepts fewer than half the submitted updates, the valve reverts to $B_0$. This does not enforce an FPR bound or establish that $B_0$ contains half the population.
+
+\subsection{Execution Contract}
+The audit contract records accepted IDs, fallback decisions, identities, and per-round metrics. An invalid empty acceptance decision is governed by the configured fallback policy; main audit-v2 uses an explicitly degraded accept-all policy. Nonfinite updates are not silently reclassified as successful results. These operational branches must be distinguished from the ordinary set-inclusion rule and from successful attack detection. The reference implementation is frozen by source hashes; neither the recovery attempts nor the subsequent CIFAR diagnostics overwrite it.
+
+\section{Experimental Protocol}
+\input{generated/coverage.tex}
+\subsection{Data, Models, and Training}
+The matrix uses MNIST~\cite{lecun1998}, Fashion-MNIST~\cite{xiao2017fmnist}, UCI HAR~\cite{anguita2013har}, and CIFAR-10. MNIST and Fashion use a 784--200--10 MLP. HAR uses a 561--128--64--6 MLP with dropout 0.2. CIFAR uses two convolutional layers with 32 and 64 channels, pooling, and fully connected layers of widths 256 and 10, with dropout 0.25. Main configurations use 100 clients, 30 rounds, seeds 42, 137, and 2024, batch size 32, three local epochs, learning rate 0.01, and optimizer momentum 0.9. Optimizer momentum is distinct from the alarm-memory ablation.
+
+Dirichlet concentration~\cite{hsu2019} varies over 0.5, 0.1, and 0.01 in the base block. Main partitioning uses a minimum-count repair policy with 20 examples per client and records the number moved. Therefore the final partition should not be described as an untouched Dirichlet draw. Preserve-empty and five-local-step blocks examine alternative partition/training policies. The fixed-step control matters because three epochs imply different optimization effort for clients with different sample counts.
+
+The plan contains 149 jobs and 2,130 units, partitioned as in Table~\ref{tab:coverage}. It is not a full factorial across every dataset, attack, and method. Three original datasets share a 17-condition base block, whereas CIFAR has a smaller condition set. Supplementary CSVs and the scenario manifest enumerate the exact coverage.
+
+\subsection{Attacks and Controls}
+Loud Gaussian noise uses per-coordinate standard deviation 5. The stealth probe adds a random-direction perturbation whose total norm is 0.005 times the original update norm. The legacy identifier \texttt{adaptive\_gaussian} denotes bounded random-direction noise at relative scale 0.3; it is not an optimized defense-adaptive attack, nor does it preserve the update norm exactly. Label flipping modifies local training labels.
+
+The omniscient Min-Max and Min-Sum probes choose a common update along the negative benign-mean unit direction, with a scalar constrained by the respective benign distance bounds. They test that specified direction, not all possible optimized attack constructions. Patch backdoors use a bottom-right $3\times3$ white patch, target class 0, and configured poisoning fraction 0.2. Attack-disabled controls retain trigger evaluation so that naturally occurring target predictions are visible. Oracle results are diagnostic references rather than deployable methods.
+
+\subsection{Baselines and Ablations}
+The main baseline family comprises uniform mean, sample-weighted mean, norm clipping, coordinate median, Krum with configured attack bound 0.3, normalized FLTrust with a 100-example root set, and the HDBSCAN FLAME implementation. These labels identify the concrete local implementations; matching every original paper's training and privacy calibration is not claimed. In particular, the FLAME noise setting is $0.001$, and performance here is not a universal assessment of FLAME.
+
+Seven ablation variants remove upper filtering, momentum, or the valve, or vary the trust-region multiplier. The \texttt{fed\_g2l\_25} identifier is a geometric-median-distance control, not evidence of reproducing the complete published FedG2L system. Each variant has 36 matched endpoints across three datasets and four conditions. Full method parameters remain fixed within the canonical evaluation.
+
+\subsection{Metrics and Failure Accounting}
+The primary utility metric is final-round test accuracy. Honest-client FPR is $FP/(FP+TN)$ and attacker rejection rate is $TP/(TP+FN)$, pooled over participating clients. Alarm FPR is instead computed over attack-free rounds. A false alarm cannot be assessed by restricting the denominator to attacked rounds. Backdoor ASR uses triggered examples excluding the target class. Balanced accuracy and client-group counts are retained in the supplementary data.
+
+We use matched method and attack-disabled differences where the report establishes the corresponding identities. Descriptive averages weight the specified conditions and seeds equally; they do not estimate a deployment's unknown attack prevalence. Three seeds and correlated conditions do not justify treating every round or client as an independent replicate. No significance claim or legacy Wilcoxon result is carried into this revision. Failed runs remain explicit outcomes, rather than zero-accuracy imputations or silently replaced seeds.
+
+\section{Results}
+\subsection{Coverage and Utility}
+The canonical matrix contains 2,125 valid results and five documented failures. Resource-related incomplete work was recovered separately while preserving prior successful artifacts. Four persistent failures belong to sample-weighted HAR training and one to CIFAR FLAME under Min-Max. Table~\ref{tab:accuracy} summarizes the common base block and does not support a claim that the full method has the highest mean accuracy across datasets. The conditional HAR sample-weighted entry cannot be ranked fairly against complete entries without accounting for failure coverage.
+\input{generated/accuracy.tex}
+
+\subsection{Attack-Free Heterogeneity}
+Table~\ref{tab:clean} isolates the extreme attack-free condition. The full method rejects 24.37--42.57\% of honest submitted updates. All 90 rounds per dataset raise an alarm. We checked the twelve underlying run files: actual malicious identity lists are empty and the alarm counts agree with the report. Heterogeneity alone is sufficient to activate both the initial outlier support and the density gate in these cases.
+\input{generated/clean.tex}
+
+These outcomes contradict general interpretations of the alarm as trustworthy attack attribution. They also prevent aggregate FPR from being used as evidence of minority protection. A minority-specific claim would require group-conditioned retention together with learning outcomes; the supplementary group records enable this analysis but the aggregate table alone cannot establish it.
+
+\subsection{Contribution of Additional Layers}
+Table~\ref{tab:ablation} reports variant-minus-full final accuracy. The full architecture gains only 0.081 percentage points on average over L0 alone. Condition-specific differences range in both directions, so the mean is not a universal equivalence statement. The no-momentum variant has exactly the same final accuracy as the full method at all 36 endpoints, verified against raw run files. This does not show that temporal alarm trajectories are identical.
+\input{generated/ablation.tex}
+
+Removing the valve improves accuracy by 0.278 points on average in this block, with mixed condition-specific effects. Changing the trust multiplier also has nonmonotonic outcomes. Selecting a preferred variant after observing these results would constitute further development; independent validation would be required for a resulting improved-method claim.
+
+\subsection{Backdoor Success Despite Clean Utility}
+Under the tested moderate-heterogeneity patch attack, the full method reaches ASR of 99.993\% on MNIST, 99.930\% on Fashion, and 96.589\% on CIFAR (Table~\ref{tab:backdoor}). Corresponding attack-disabled control ASRs are much lower. High clean test accuracy therefore masks a targeted security failure. Conversely, the weaker clean models in the extreme-heterogeneity block must not be credited as effective defenses merely because their ASR is lower.
+\input{generated/backdoor.tex}
+
+\subsection{Numerical Failures and CIFAR Repetition}
+The four HAR failures occur for sample-weighted mean in conditions 3.1 (seeds 42 and 2024) and 3.2 (seeds 137 and 2024). Isolated repetitions reproduce numerical failure, with nonfinite parameters or updates observed during local training. Correctly normalized aggregation weights do not by themselves ensure stable local optimization. These cases remain failed outcomes under the evaluated protocol.
+
+The canonical CIFAR FLAME condition 7.1/seed 42 fails in both the original and isolated recovery attempts, while an instrumented diagnostic completes at 10\% accuracy. Two subsequent three-round non-deterministic-profile repetitions already differ at the first client's first update. Their partition and initial-model hashes match. Under a deterministic GPU profile, two short runs and an instrumented short run instead yield matching traces.
+
+Two separate 30-round deterministic-profile repetitions then complete with all 2,730 recorded trace entries matching and final accuracy 9.94\% in both. The profile enables deterministic algorithms and cuDNN determinism and configures the cuBLAS workspace. This supports repeatability for this condition and environment; it does not establish portability, diagnose one specific GPU kernel, or validate every CIFAR condition. These diagnostic runs are not inserted into the canonical five-failure matrix, because the backend profile differs. Completion and predictive robustness remain separate outcomes.
+
+\section{Discussion and Limitations}
+The central limitation is a mismatch between geometric structure and adversarial intent. Honest minority updates can lie outside the initial region; later cluster validation cannot recover them because its ordinary acceptance set is a subset of $B_0$. Conversely, a backdoor can retain useful clean-task behavior and evade rejection. Adding temporal memory can prolong an alarm without supplying new evidence of maliciousness.
+
+Accordingly, neither the set-inclusion property nor the use of a robust center establishes an end-to-end security theorem. The gap test needs calibration on attack-free heterogeneous populations before operational alert precision can be claimed. Filter decisions, clean utility, alarm specificity, and targeted ASR require separate evaluation. There is no demonstrated system-level privacy, communication-efficiency, or IoT-energy benefit in this simulation.
+
+The evidence is limited by three seeds, short training horizons, small models, and uneven dataset coverage. Canonical CIFAR results are descriptive observations under a backend profile with demonstrated repeatability limitations. Baseline fidelity, attack direction choices, data-repair policy, and conditioning on successful outcomes also bound interpretation. An improved filter should be developed on designated conditions and tested on held-out seeds and attack settings; rerunning the same matrix until favorable outcomes occur would not address these limitations.
+
+\section{Conclusion}
+\method{} combines geometric filtering, relative-density analysis, group validation, and temporal state. Its audited evaluation reveals substantial false rejection and false alarms under attack-free extreme heterogeneity, a small average accuracy contribution from the upper layers in the ablation block, and high success of the tested patch backdoor. The work supports a bounded empirical account of density-based filtering rather than a general superiority claim. The resulting evidence motivates calibrated alerting, explicit recovery of useful minority updates, and evaluation protocols that preserve numerical failures and separate reproducibility from security effectiveness.
+
+\section*{Artifact Availability}
+The accompanying evidence package contains per-unit outcomes, paired differences, group counts, configuration coverage, and source/report hashes. Raw training artifacts and the frozen implementation are retained in the project archive. No public repository URL, archival DOI, or third-party accessibility is asserted until a release is actually made.
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+\end{document}
