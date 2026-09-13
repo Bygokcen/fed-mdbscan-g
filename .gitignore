@@ -13,6 +13,11 @@ __pycache__/
 !.env.example
 .idea/
 .vscode/
+# Agent tooling and session state; machine-local, not part of the research record
+.agents/
+.claude/
+_bmad/
+_bmad-output/
 # Datasets and immutable experiment archives are distributed separately
 /new_work/data/
 /new_work/results/

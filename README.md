@@ -23,19 +23,21 @@ Bu klasör, eski karma depodan ayrılmış bağımsız çalışma kopyasıdır. 
 
 `new_work` ve `tifs_submission` adları, mevcut kodun göreli yollarını korumak için bırakıldı. Bu klasörde eski deney serileri, kökteki diğer simülasyon sürümleri ve eski makale grafik arşivleri yoktur.
 
-## Python ortamı
+## Python ortamı — yerel kurulum hazır
 
-Eski 5 GB sanal ortam kopyalanmadı. Bu proje kendi ortamını kullanmalı:
+Mevcut makinedeki Python 3.12 ortamı paketler yeniden indirilmeden `.venv/` altına bağımsız kopyalandı. Başlatıcı ve etkinleştirme yolları yeni klasöre uyarlandı. Eski projenin sanal ortamına bağlantı kullanılmıyor; sistem Python çalıştırıcısı `/usr/bin/python3` olarak ortak kalıyor. Python veya paketleri yeniden kurmanıza gerek yok.
 
 ```sh
 cd /home/gokcen/Fed_MDBSCAN_TIFS
-python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements.txt -r requirements-dev.txt
 python -m pytest new_work/tests -q
 ```
 
-Bu gereksinimler geliştirme ortamını kurar; tarihsel GPU ortamını birebir yeniden kurma garantisi vermez. Orijinal kayıt `environment/audit-v2-pip-freeze.txt` içindedir; PyTorch CUDA derlemesi, sürücü ve backend ayarları ayrıca eşleştirilmelidir. Yeni bir ortam farklıysa eski kampanyayı sürdürmek yerine yeni kampanya oluşturun. Kopyalama doğrulama testleri mevcut makinenin Python ortamıyla, bu klasördeki kod üzerinde çalıştırıldı; ayrı `.venv` kurulmuş değildir.
+VS Code yerel `.vscode/settings.json` içinden `.venv/bin/python` yorumlayıcısını seçer. Daha önce farklı bir yorumlayıcı seçildiyse “Python: Select Interpreter” komutuyla bu yolu seçin. `.venv` ve `.vscode` Git dışında kalır. Taşıma ve doğrulama kaydı: `environment/local_environment_transfer.json`.
+
+Başka bir makinedeki temiz Git klonunda `.venv` bulunmaz. Yalnızca o durumda yeni bir ortam oluşturup gereksinimleri kurmak gerekir. Tarihsel GPU paket kaydı `environment/audit-v2-pip-freeze.txt` içindedir; CUDA sürücüsü ayrıca eşleştirilmelidir. Ortam kopyalama kontrolü, kanonik deneylerin başka bir makinede birebir tekrarlandığını kanıtlamaz.
+
+Yeni konuşmada **START_HERE.md** dosyasından devam edin.
 
 ## Yeni deney oluşturma
 
