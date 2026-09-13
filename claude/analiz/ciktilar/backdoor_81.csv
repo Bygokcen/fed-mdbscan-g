@@ -1,0 +1,4 @@
+dataset,full_asr,fedavg_asr,kontrol_asr,full_acc,fedavg_acc,saldirgan_ret_tpr,alarm_recall
+cifar10,0.96589,0.96404,0.05756,0.49547,0.49513,0.00165,0.0
+fashion_mnist,0.9993,0.99941,0.0263,0.8334,0.8339,0.01193,0.0
+mnist,0.99993,0.99993,0.00573,0.9397,0.93967,0.00206,0.0

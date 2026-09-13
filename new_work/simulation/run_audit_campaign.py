@@ -24,9 +24,14 @@ PRIMARY = ['fed_mdbscan_g', 'fedavg', 'sample_weighted_mean', 'norm_clip',
 ABLATIONS = ['mdbg_l0_only', 'mdbg_no_momentum', 'mdbg_no_valve',
              'mdbg_rtr15', 'mdbg_rtr20', 'mdbg_rtr30', 'fed_g2l_25']
 SEEDS = [42, 137, 2024]
+# Fixed local step budgets for the step-control profile. Together with the
+# canonical three-epoch arm these give three points on the local-effort axis,
+# which is what makes the relationship readable as a trend rather than a
+# single contrast.
+STEP_BUDGETS = [5, 20]
 
 
-def plan_jobs(data_dir, profile='full'):
+def plan_jobs(data_dir, profile='full', step_budgets=None):
     jobs = []
     scenarios = {s['id']: s for s in SCENARIOS}
     for sid, attack, alpha in [('7.1', 'minmax_omniscient', .1),
@@ -54,6 +59,40 @@ def plan_jobs(data_dir, profile='full'):
             job['seeds'] = [42]
             job['num_rounds'] = 2
             job['config_overrides']['max_local_steps'] = 1
+        return jobs
+
+    if profile == 'step_control':
+        # Local-step control block. The canonical matrix trains three local
+        # epochs, so a client's optimizer step count -- and therefore its
+        # update norm -- scales with its local dataset size. This block holds
+        # the cohort, partition and seeds fixed and varies only the local step
+        # budget, which separates "rejected because the update is far" from
+        # "rejected because the client holds more data".
+        #
+        # 6.2 is attack-free, so every rejection is a false positive and the
+        # attacker-side confound is absent. 3.1 is the matched attacked
+        # condition: the loud Gaussian attack is the one the trust region does
+        # detect, so it distinguishes "size bias removed" from "filter simply
+        # stopped rejecting anything". Both readings are needed; the clean
+        # condition alone cannot tell them apart.
+        #
+        # fltrust_normalized is retained deliberately as a sign control: it
+        # rescales updates to the root-update norm, so if update magnitude is
+        # the mechanism, it should not follow the other methods.
+        step_methods = ['fed_mdbscan_g', 'mdbg_l0_only', 'flame_hdbscan',
+                        'krum_bound30', 'fltrust_normalized', 'fedavg']
+        for budget in (step_budgets or STEP_BUDGETS):
+            for dataset in ['har', 'mnist', 'fashion_mnist']:
+                for sid in ['6.2', '3.1']:
+                    add(f'step_control_{budget}', dataset, sid, step_methods,
+                        max_local_steps=budget)
+            # CIFAR carries no tuned convergence claim and has a narrower
+            # reference arm in the canonical matrix, so only the conditions and
+            # methods that actually have a three-epoch counterpart are run.
+            add(f'step_control_{budget}', 'cifar10', '6.2',
+                ['fed_mdbscan_g', 'fedavg', 'flame_hdbscan'],
+                max_local_steps=budget)
+        assert len({j['id'] for j in jobs}) == len(jobs)
         return jobs
 
     # Severe clean and attack conditions are first so critical evidence arrives early.
@@ -130,7 +169,7 @@ def verify_snapshot(root, manifest):
         raise ValueError('campaign environment changed; use a new campaign')
 
 
-def create_campaign(root, data_dir, profile):
+def create_campaign(root, data_dir, profile, step_budgets=None):
     root = Path(root).resolve()
     root.mkdir(parents=True, exist_ok=False)
     original = Path(__file__).resolve().parents[2]
@@ -148,7 +187,7 @@ def create_campaign(root, data_dir, profile):
     (source / 'pip-freeze.txt').write_text(freeze.stdout)
     from simulation.data_distributor import load_dataset
     from simulation.run_experiment import _dataset_identity
-    jobs = plan_jobs(data_dir, profile)
+    jobs = plan_jobs(data_dir, profile, step_budgets=step_budgets)
     dataset_identities = {}
     for name in sorted({j['dataset'] for j in jobs}):
         train, test = load_dataset(name, str(Path(data_dir).resolve()))
@@ -252,7 +291,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--campaign', required=True)
     parser.add_argument('--data-dir', default='./data')
-    parser.add_argument('--profile', choices=['full', 'smoke'], default='full')
+    parser.add_argument('--profile', choices=['full', 'smoke', 'step_control'],
+                        default='full')
+    parser.add_argument('--step-budgets', dest='step_budgets',
+                        type=lambda v: [int(x) for x in v.split(',') if x],
+                        default=None,
+                        help='step_control only: comma separated local step '
+                             'budgets, e.g. 5 or 5,20 (default: %(default)s -> '
+                             f'{STEP_BUDGETS})')
     parser.add_argument('--worker', action='store_true')
     parser.add_argument('--job')
     parser.add_argument('--resume', action='store_true')
@@ -262,7 +308,8 @@ def main():
     else:
         root = Path(args.campaign).resolve()
         if not args.resume:
-            create_campaign(root, args.data_dir, args.profile)
+            create_campaign(root, args.data_dir, args.profile,
+                            step_budgets=args.step_budgets)
         print(json.dumps({'campaign': str(root), 'pid': launch(root),
                           'expected_units': load_manifest(root)['expected_units']}))
 

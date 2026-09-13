@@ -499,6 +499,10 @@ def fed_mdbscan_g_filter(gradients,
             'degraded': False,
             'l0_rejected_count': len(l0_anomalies),
             'rd_values': rd_values.tolist(),
+            # Per-client L2 distance to the Layer-0 geometric median. Already
+            # computed for the acceptance test; exposed so that the rejection
+            # decision can be traced back to update geometry. Diagnostic only.
+            'l0_distances': l0_distances.tolist(),
             'auto_t': float(t_est),
             'auto_eps': 0.0,
             'n_clusters': 1,
@@ -600,6 +604,8 @@ def fed_mdbscan_g_filter(gradients,
         'l0_rejected_count': len(l0_anomalies),
         'l2_rejected_count': len(l2_anomalies),
         'rd_values': rd_values.tolist(),
+        # See the Layer-0-only branch: diagnostic geometry, not a decision input.
+        'l0_distances': l0_distances.tolist(),
         'low_density_count': int(len(low_data)),
         'high_density_count': int(len(high_data)),
         'natural_clusters_count': len(natural_clusters),
