@@ -47,6 +47,26 @@ def plan_jobs(data_dir, profile='full', step_budgets=None):
                          num_clients=100, num_rounds=30, dropout_rate=.1, data_size_sigma=.5,
                          config_overrides={'data_dir': str(Path(data_dir).resolve()), **overrides}))
 
+    if profile in ('cutoff_study', 'cutoff_smoke'):
+        methods = ['fed_mdbscan_g', 'mdbg_no_snnc_cutoff', 'mdbg_l0_only', 'fedavg']
+        for dataset in (['mnist'] if profile == 'cutoff_smoke' else ['mnist', 'fashion_mnist']):
+            for sid, attack, alpha in [('cut_gaussian', 'gaussian', .01),
+                                       ('cut_minmax', 'minmax_omniscient', .01),
+                                       ('cut_backdoor', 'patch_backdoor', .1)]:
+                scenarios[sid] = dict(id=sid, alpha=alpha, malicious_ratio=.2,
+                                     attack_type=attack, label=sid)
+                for mode in ['clean', 'attacked']:
+                    add('cutoff_' + mode, dataset, sid, methods,
+                        attack_mode=mode, max_local_steps=5, gaussian_std=5.,
+                        backdoor_fraction=.2, backdoor_target=0, backdoor_patch_size=3,
+                        attack_start_round=0, attack_end_round=None)
+        if profile == 'cutoff_smoke':
+            for job in jobs:
+                job['num_rounds'] = 1
+                job['seeds'] = [42]
+        assert len({j['id'] for j in jobs}) == len(jobs)
+        return jobs
+
     if profile == 'smoke':
         for sid in ['6.2', '3.3', '7.1', '7.2']:
             add('main', 'har', sid, PRIMARY + ['mdbg_l0_only'])
@@ -291,7 +311,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--campaign', required=True)
     parser.add_argument('--data-dir', default='./data')
-    parser.add_argument('--profile', choices=['full', 'smoke', 'step_control'],
+    parser.add_argument('--profile', choices=['full', 'smoke', 'step_control', 'cutoff_study', 'cutoff_smoke'],
                         default='full')
     parser.add_argument('--step-budgets', dest='step_budgets',
                         type=lambda v: [int(x) for x in v.split(',') if x],
@@ -303,6 +323,15 @@ def main():
     parser.add_argument('--job')
     parser.add_argument('--resume', action='store_true')
     args = parser.parse_args()
+    execution_profile = (load_manifest(args.campaign)['profile']
+                         if args.worker or args.resume else args.profile)
+    if execution_profile in ('cutoff_study', 'cutoff_smoke'):
+        os.environ['CUBLAS_WORKSPACE_CONFIG'] = ':4096:8'
+        torch.use_deterministic_algorithms(True)
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
+        if not torch.cuda.is_available():
+            raise RuntimeError('cutoff study requires the validated CUDA environment')
     if args.worker:
         worker(args.campaign, args.job)
     else:

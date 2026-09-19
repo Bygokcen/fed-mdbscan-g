@@ -346,7 +346,8 @@ def fed_mdbscan_g_filter(gradients,
                        safety_valve_ratio=0.5,
                        enable_l2=True,
                        enable_momentum=True,
-                       enable_safety_valve=True):
+                       enable_safety_valve=True,
+                       enable_snnc_cutoff=True):
 
     """
     Fed-MDBSCAN-G: Hybrid explainable density-based robust aggregator.
@@ -531,6 +532,8 @@ def fed_mdbscan_g_filter(gradients,
     else:
         eps_est = float(eps)
 
+    # enable_snnc_cutoff=False disables only the 3*eps neighbor cutoff.
+    # Radius estimation, the minimum group size, and consensus stay unchanged.
     # SNNC natural-cluster recovery in the low-density region.
     # In a poisoning context, these "natural clusters" are almost always
     # **attacker coalitions** that share a structured direction distinct
@@ -541,7 +544,8 @@ def fed_mdbscan_g_filter(gradients,
     natural_clusters = []
     if len(low_data) > 1:
         natural_clusters, _ = snnc(
-            low_data, k, eps=eps_est, original_indices=low_indices
+            low_data, k, eps=eps_est if enable_snnc_cutoff else None,
+            original_indices=low_indices
         )
 
     # The "trusted pool" for consensus validation is the Layer-0
