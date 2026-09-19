@@ -1,4 +1,6 @@
-> **Son durum:** kök sinyali hattı **kapandı**. Tanı tamamlandı (`analysis/root_signal_20260919/REPORT.md`), ardından şişme ayrımı ve görelilik kontrolü de tamamlandı (`analysis/root_direction_deinflation_20260919/REPORT.md`). Kök yön skoru döndürülmüş yöne kör ve kullanılabilir eşik vermiyor; kök sinyaline dayanan geniş eğitim başlatılmamalı. Sıradaki iş için son bölüme bakın.
+> **Son durum:** kök sinyali hattı kapandı; ardından **zamansal imza fizibilitesi** koşuldu ve B yolunda dar bir kapı buldu: `analysis/temporal_signature_20260919/REPORT.md`. Sıradaki iş o raporun sonundaki de-şişirme sınamasıdır — geçmeden hiçbir iddia yazılmamalı.
+
+> **Önceki durum:** kök sinyali hattı **kapandı**. Tanı tamamlandı (`analysis/root_signal_20260919/REPORT.md`), ardından şişme ayrımı ve görelilik kontrolü de tamamlandı (`analysis/root_direction_deinflation_20260919/REPORT.md`). Kök yön skoru döndürülmüş yöne kör ve kullanılabilir eşik vermiyor; kök sinyaline dayanan geniş eğitim başlatılmamalı. Sıradaki iş için son bölüme bakın.
 
 > **Güncel sonraki iş:** yakın-yön olumsuz kontrolleri tamamlandı ve aday tek başına reddedici filtre olarak elendi. Son bölümdeki kök örnek kapsamı/ayrıklık denetimiyle devam edin.
 
@@ -183,3 +185,39 @@ Yeni yöntem sürümü seçilmeden katkı iddiası yazılmamalı.
 
 Simülasyon kodu, kanonik kanıt ve makale değiştirilmedi. Commit/push yok.
 Çalışan GPU işi yok.
+
+## Zamansal imza fizibilitesi — dar bir kapı açık — 19 Eylül 2026
+
+Rapor `analysis/temporal_signature_20260919/REPORT.md`, protokol sonuç öncesi
+sabitlendi. Çevrimdışı; 36 eşleşmiş saldırılı/plasebo çifti, yeni eğitim yok.
+Plasebo kolu aynı partition/ilk model/takvim ve aynı 18 gizil kimliği taşıyor
+(36/36 doğrulandı), yani istemci kimliğini tespit eden bir istatistik yakalanır.
+
+**İlan edilen tek yönlü tahmin başarısız.** Saldırganın göreli konumunun daha az
+kalıcı olacağı beklenmişti; tersi çıktı (`-lag1` AUC 0,342/0,036/0,479). Ters
+çevrilip başarı yazılmadı. Min-Max saldırganı kararlı bir dürüst ortalamanın
+deterministik fonksiyonu olduğu için gürültülü dürüst istemciden daha kalıcı.
+
+**Keşifsel `trend` (göreli normun turlar boyunca eğilimi) Min-Max'ı ayırıyor:**
+saldırılı AUC medyanı 0,994 (6 koşumda 0,78-1,00), plasebo 0,521, tek turluk
+kontrol 0,695, `sample_count` ile ρ 0,18 (kontrolde 0,45). Projede ilk kez bir
+aday üç şartı birden sağladı: kontrolü geçiyor, plaseboyu geçiyor, veri hacmi
+dedektörü değil.
+
+**Dört kayıt:** (1) yön sonuçlara bakıldıktan sonra seçildi — geliştirme
+verisinden seçim, bağımsız doğrulama şart; (2) Min-Max kısıtı gamma için üst
+sınırdır, saldırgan daha küçük ölçek seçip profili düzleştirebilir — de-şişirme
+yapılmadan savunma adayı sayılamaz; (3) gaussian'da kontrol zaten 1,000, backdoor'da
+hiçbir şey ayırmıyor; (4) arşivler tur bazında yalnız skaler tutuyor, yön tabanlı
+zamansal istatistikler sınanamadı.
+
+**Sıradaki iş:** 1) göreli normunu düz tutan Min-Max varyantıyla de-şişirme,
+kısıt ihlali ölçülerek; sinyal kaybolursa bedelini (ASR/doğruluk) ölç.
+2) Kullanılmamış seed ve farklı α/saldırgan oranı bağımsız doğrulama olarak
+önceden ayrılsın. 3) Ancak ikisi de geçerse yöntem tasarımı konuşulur.
+
+Karar notu (`tifs_submission/KARAR_NOTU_20260919.md`) bu bulguyla güncellenmeli:
+B yolu tamamen kapalı değil, backdoor için kapalı, koordineli saldırılar için
+de-şişirmeye bağlı.
+
+Simülasyon, kanonik kanıt ve makale değiştirilmedi. Commit/push bu bölümde yok.
