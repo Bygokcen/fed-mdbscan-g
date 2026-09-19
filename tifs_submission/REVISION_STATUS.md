@@ -94,3 +94,12 @@ eklenmedi.
 
 Ana PDF **7 sayfa** (sınır 13); tanımsız atıf/çapraz referans ve overfull uyarısı
 yok. Ek belge değişmedi. Özete dokunulmadı.
+
+
+## 19 Eylül — bağımsız denetim düzeltmelerinin ikinci kontrolü
+
+`1f99484` sonrasında kalan ortak mekanizma ve geometri/zamansal bilgi tükenmesi ifadeleri ana metin, karar notu ve brifingde daraltıldı. Komşu-yön skorunun kısıt geçerli küçük pertürbasyonlarda AUC 1 kaldığı eklendi. Rotasyonda güncellemenin kendisinin değil ek bileşenin ortalamaya dik olduğu açıklandı.
+
+Ana makaleye Tablo VI ve keşifsel norm-profili deneyi eklendi. Kök-yön θ=0 medyanları 1,000/0,833; minimumları 0,681/0,167 olarak açıklandı. Patch eşik sonuçları toplulaştırılmış gözlem sayılarından %61,57 dürüst, %70,37 saldırgan işaretlenmesi olarak verildi; eşdeğerlik iddiası kaldırıldı. Brifing ve karar notundaki FedAvg karşılaştırması yuvarlanmış CSV'den ASR yüzde puan farklarına dönüştürüldü.
+
+Ana PDF 8, ek PDF 3 sayfa. İkisi de derlendi; tanımsız atıf/referans ve overfull yok; underfull dizgi uyarıları mevcut. Tablo sayfası görsel incelendi. Simülasyon ve ham/frozen sonuçlar değişmedi; yeni deney yapılmadı. Önceki bilimsel açıklıklar ve baseline sadakati ihtiyacı devam ediyor.
