@@ -78,6 +78,7 @@ DEFAULT_EXPERIMENT_CONFIG = {
     "stealth_rho": 0.005,
     "stealth_rho_sensitivity": [0.001, 0.01],
     "adaptive_alpha": 0.3,
+    "coordinated_profile_ratio": 1.0,
     "backdoor_fraction": 0.2,
     "backdoor_target": 0,
     "backdoor_patch_size": 3,
@@ -139,6 +140,7 @@ SUPPORTED_DATASETS = {"mnist", "fashion_mnist", "har", "cifar10"}
 SUPPORTED_ATTACKS = {
     "gaussian", "label_flip", "stealth_gaussian", "adaptive_gaussian",
     "scale", "sign_flip", "minmax_omniscient", "minsum_omniscient", "patch_backdoor",
+    "minmax_flat_omniscient",
 }
 
 
@@ -285,6 +287,8 @@ def resolve_experiment_config(config: Mapping[str, Any] | None = None) -> dict[s
         raise ValueError('image patch backdoor is not defined for HAR')
     if resolved["attack_type"] not in SUPPORTED_ATTACKS:
         raise ValueError(f"unsupported attack_type: {resolved['attack_type']}")
+    _finite_number("coordinated_profile_ratio", resolved["coordinated_profile_ratio"],
+                   minimum=0.0)
     methods = resolved["methods"]
     if (not isinstance(methods, list) or not methods
             or any(not isinstance(method, str) for method in methods)

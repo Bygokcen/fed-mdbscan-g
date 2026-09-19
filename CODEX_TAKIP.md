@@ -1,4 +1,4 @@
-> **Son durum:** kök sinyali hattı kapandı; ardından **zamansal imza fizibilitesi** koşuldu ve B yolunda dar bir kapı buldu: `analysis/temporal_signature_20260919/REPORT.md`. Sıradaki iş o raporun sonundaki de-şişirme sınamasıdır — geçmeden hiçbir iddia yazılmamalı.
+> **Son durum:** zamansal eğilim sinyali de-şişirmeyi **geçemedi** ve elendi: `analysis/temporal_deinflation_20260919/REPORT.md`. Norm profilini gözeten saldırgan tespiti 0,994'ten 0,585'e düşürüyor ve hasarının %75'ini koruyor, 0 kısıt ihlaliyle. Skaler zamansal kanat kapandı. Sıradaki iş **makale kararıdır**; yeni sinyal arayışı için kalan iki eksen raporun sonundadır.
 
 > **Önceki durum:** kök sinyali hattı **kapandı**. Tanı tamamlandı (`analysis/root_signal_20260919/REPORT.md`), ardından şişme ayrımı ve görelilik kontrolü de tamamlandı (`analysis/root_direction_deinflation_20260919/REPORT.md`). Kök yön skoru döndürülmüş yöne kör ve kullanılabilir eşik vermiyor; kök sinyaline dayanan geniş eğitim başlatılmamalı. Sıradaki iş için son bölüme bakın.
 
@@ -221,3 +221,37 @@ B yolu tamamen kapalı değil, backdoor için kapalı, koordineli saldırılar i
 de-şişirmeye bağlı.
 
 Simülasyon, kanonik kanıt ve makale değiştirilmedi. Commit/push bu bölümde yok.
+
+## Zamansal eğilim de-şişirmesi — sinyal elendi — 19 Eylül 2026
+
+Rapor `analysis/temporal_deinflation_20260919/REPORT.md`. 24/24 hücre, 31 dk,
+kısıt ihlali 0, 24/24 hücrede partition/ilk model/takvim mevcut Min-Max
+koşumlarıyla birebir eşleşti.
+
+**Önce bir uyarı:** `new_work/results/temporal_deinflation/flat_20260919_182253`
+**kullanılmamalıdır** (`SUPERSEDED.txt` var). O koşumda saldırgan sakatlanmıştı:
+norm `|‖mean‖ − γ|` bir V eğrisi ve hedefe iki koldan ulaşılır; ilk uygulama
+yalnız yakın kolu (yön `+mean`, yani saldırı değil) çözüyordu, ulaşılamayınca
+γ=0'a kırpılıyor ve saldırgan hiç saldırmıyordu. "Kaçış imkânsız" sonucu bundan
+çıkıyordu ve yanlıştı. Düzeltilmiş sürüm uzak kolu kullanır; kusuru yakalayan
+test eklendi (poisoned·mean < 0). Test sayısı **118**.
+
+**Sonuç:** saldırgan normunu dürüst medyana oturttuğunda `trend` AUC
+**0,994 → 0,585** (koşum aralığı 0,354–0,805, biri şansın altında) ve hasarının
+**%75'ini** koruyor (fedavg 0,4526 → 0,3376; tam yöntem 0,1830 → 0,1353).
+Hedefe ulaşılamayan tur yalnız %5. Protokolün 1. karar kuralı: sinyal
+kullanılabilir değildir.
+
+`ratio=2,0` kontrolü 180/180 kırpılıp bütçe saldırısıyla aynı sonucu verdi —
+geri düşüş mekanizması doğrulandı.
+
+**Anlamı:** sinyal saldırganlığı değil, bu saldırı uygulamasının bütçesini sonuna
+kadar harcama alışkanlığını yakalıyormuş. Diğer beş sinyalle aynı kalıp.
+
+**Kalan sınanmamış eksenler (ikisi de hiç denenmedi):** yön tabanlı zamansal
+istatistikler (tur bazında vektör yakalaması gerekir, arşivlerde yok) ve aktif
+yoklama (sistem varsayımlarını değiştirir). Mevcut kanıtla A yolu önerisi
+güçlenmiştir.
+
+Yeni saldırı tipi `minmax_flat_omniscient` eklendi; mevcut `constrained_poison`
+ve kanonik arşiv değiştirilmedi.

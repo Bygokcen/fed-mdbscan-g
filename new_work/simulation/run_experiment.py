@@ -393,12 +393,18 @@ def run_single_experiment(config, method, seed=42):
             participating_ids.append(client.client_id)
             sample_counts.append(client.get_data_size())
 
-        if (config['attack_type'] in ('minmax_omniscient', 'minsum_omniscient')
+        if (config['attack_type'] in ('minmax_omniscient', 'minsum_omniscient',
+                                      'minmax_flat_omniscient')
                 and actual_malicious_ids and config['attack_mode'] != 'oracle'):
-            from simulation.audit_attacks import constrained_poison
             references = np.asarray([g for cid, g in zip(participating_ids, client_gradients)
                                      if cid not in actual_malicious_ids])
-            poisoned, diag = constrained_poison(references, config['attack_type'])
+            if config['attack_type'] == 'minmax_flat_omniscient':
+                from simulation.audit_attacks import profile_constrained_poison
+                poisoned, diag = profile_constrained_poison(
+                    references, config['coordinated_profile_ratio'])
+            else:
+                from simulation.audit_attacks import constrained_poison
+                poisoned, diag = constrained_poison(references, config['attack_type'])
             for idx, cid in enumerate(participating_ids):
                 if cid in actual_malicious_ids:
                     client_gradients[idx] = poisoned.copy()
