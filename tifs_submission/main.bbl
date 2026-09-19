@@ -70,6 +70,14 @@ T.~D. Nguyen, P.~Rieger, H.~Chen, H.~Yalame, H.~M{\"o}llering, H.~Fereidooni,
   Sadeghi, and T.~Schneider, ``{FLAME}: Taming backdoors in federated
   learning,'' in \emph{Proc. 31st USENIX Security Symp.}, 2022, pp. 1415--1432.
 
+\bibitem{wang2020fednova}
+\BIBentryALTinterwordspacing
+J.~Wang, Q.~Liu, H.~Liang, G.~Joshi, and H.~V. Poor, ``Tackling the objective
+  inconsistency problem in heterogeneous federated optimization,'' \emph{arXiv
+  preprint arXiv:2007.07481}, 2020. [Online]. Available:
+  \url{https://arxiv.org/abs/2007.07481}
+\BIBentrySTDinterwordspacing
+
 \bibitem{shejwalkar2021}
 V.~Shejwalkar and A.~Houmansadr, ``Manipulating the {B}yzantine: Optimizing
   model poisoning attacks and defenses for federated learning,'' in \emph{Proc.
