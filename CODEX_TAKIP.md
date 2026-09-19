@@ -1,4 +1,6 @@
-> **Güncel devir — 19 Eylül, Atlas ikinci kontrolü:** `1f99484` düzeltmeleri kısmen yeterliydi; karar notu/brifingde geometri tükendi ve zamansal umut kapandı, makalede ortak tek neden iddiaları kalmıştı. Bunlar çalışma ağacında düzeltildi. Makaleye Tablo VI (sinyal–müdahale–gözlem–zarar/kapsam) ve 24 koşumluk keşifsel zamansal deney eklendi. Ana PDF 8, ek 3 sayfa; derleme hatası, tanımsız atıf/referans veya overfull yok. Underfull dizgi uyarıları var. Tablo sayfası görsel kontrol edildi. Yeni deney/test koşumu yok; simülasyon değişmedi. Commit/push yapılmadı.
+> **Güncel devir — 19 Eylül, FLTrust sadakat kontrolü:** `analysis/fltrust_fidelity_20260919/REPORT.md`. Yazar demo kodu indirildi (lisans YOK, depoya konmadı); kanonik `fltrust_normalized` yayımlanmış kuralla kayan nokta hassasiyetinde örtüşüyor, `fltrust` (düz) varyantı örtüşmüyor ama kanonik matriste hiç kullanılmamış. Üç fark kaydedildi; biri makale ifadesini etkiliyor (FLTrust'ta "ret" yok, sıfır ağırlık var). Sıradaki iş: bu ifadeyi düzeltmek, sonra FLAME/Krum sadakati ayrı karar.
+>
+> **Önceki devir — Atlas ikinci kontrolü:** `1f99484` düzeltmeleri kısmen yeterliydi; karar notu/brifingde geometri tükendi ve zamansal umut kapandı, makalede ortak tek neden iddiaları kalmıştı. Bunlar çalışma ağacında düzeltildi. Makaleye Tablo VI (sinyal–müdahale–gözlem–zarar/kapsam) ve 24 koşumluk keşifsel zamansal deney eklendi. Ana PDF 8, ek 3 sayfa; derleme hatası, tanımsız atıf/referans veya overfull yok. Underfull dizgi uyarıları var. Tablo sayfası görsel kontrol edildi. Yeni deney/test koşumu yok; simülasyon değişmedi. Commit/push yapılmadı.
 >
 > **Sıradaki somut iş:** `analysis/baseline_fidelity_20260914/REPORT.md` üzerinden, yerel Multi-Krum veya FLTrust için özgün yazar uygulamasıyla davranış karşılaştırmasını somutlaştır. Kaynak sürümü/lisansı ve eşleşen girişlerde farkları kaydet. Bir baseline kontrolünün bütün savunma ailesine genelleme sağlamadığını koru. Güncel literatür konumlandırması ve bağımsız güvenlik doğrulaması hâlâ açık; makale gönderime hazır sayılmıyor. Aşağıdaki eski “son durum” blokları tarihçedir.
 
@@ -295,3 +297,40 @@ kanıtı aşıyordu.** 11 bulgunun tamamı kabul edildi ve işlendi:
     belirsizdir, kapalı değildir.** A bir tercih olarak gerekçelendirilir.
 
 Makale yeniden derlendi: 7 sayfa, uyarı yok. Yeni GPU koşumu yapılmadı.
+
+## FLTrust uygulama sadakati — 19 Eylül 2026
+
+Rapor `analysis/fltrust_fidelity_20260919/REPORT.md`. Bağımsız değerlendirmenin
+sıradaki iş maddesi uygulandı. Yeni eğitim yok; 144 karşılaştırma, gate-v2
+matrisleri girdi.
+
+**Kaynak:** yazar demo arşivi `https://people.duke.edu/~zg70/code/fltrust.zip`
+(arXiv:2012.13995 sayfasından). Üç dosya, 318 satır, MXNet. **Lisans yok** —
+depoya kopyalanmadı, hash'leri `author_code_provenance.json` içinde. Makale
+denklemleri PDF'ten doğrudan okundu; bir web özetleyici normalizasyon sorusunu
+yanlış cevapladı, kullanılmadı.
+
+**Sonuç:** `fltrust_normalized` yayımlanmış kuralla örtüşüyor — güven skoru
+≤2,1e-06, ağırlık ≤6,0e-08, ölçekleme ≤5,0e-09, toplam göreli fark ≤2,8e-07,
+kosinüs ≥0,99999999999997. Kanonik matriste 61 işin tamamı bu varyantı kullanıyor,
+yani **mevcut toplama sonuçları etkilenmiyor**.
+
+`fltrust` (düz) varyantı yayımlanmış kural **değildir**: yalnız kök normundan
+büyük olanları ölçekliyor, makale bütün istemcileri ölçekliyor. Toplam göreli
+fark 0,41–0,76, kosinüs 0,910–0,931. Kanonik matriste **hiç kullanılmamış**.
+
+**Üç fark:**
+- **F1 (ifade düzeltmesi gerekir):** yerel uygulama kosinüsü pozitif olmayan
+  istemcileri *reddediyor*; yayımlanmış kuralda ret yok, sıfır ağırlık var.
+  Toplam aynı, ama FPR/TPR metriklerimiz bunları ret sayıyor. Makaledeki FLTrust
+  dürüst FPR'si (~%31) bir reddetme kararı değil, kosinüsü pozitif olmayanların
+  oranıdır. **Sayılar değişmiyor, anlamı değişiyor.**
+- **F2:** makalede `w ← w + α·g`; yerelde α=1. Varsayım olarak kaydedildi.
+- **F3:** makale kök ve istemci için aynı `R_l` iterasyon sayısını paylaştırıyor;
+  yerelde epoch/lr/batch eşleşiyor ama kök 100 örnek olduğu için ~12 iterasyon,
+  istemciler 3–60. Etkisi ölçülmedi.
+
+**Sıradaki iş:** F1'in makale ve raporlardaki ifadesini düzeltmek (yeniden koşum
+gerekmez). Ardından FLAME/Krum için aynı sadakat kontrolünün yapılıp
+yapılmayacağı ayrı karar; bir baseline'ın sadakati diğerleri hakkında bir şey
+söylemez.
