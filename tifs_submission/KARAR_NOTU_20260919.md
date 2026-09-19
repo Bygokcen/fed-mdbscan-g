@@ -18,7 +18,7 @@ A'nın açıkları kapatılmadan gönderilebilir değil.
 
 ## Elimizdeki kanıt tutarlı ve güçlü
 
-Altı ayrı deney hattı aynı yere çıktı:
+Yedi ayrı deney hattı aynı yere çıktı:
 
 | Bulgu | Kaynak |
 |---|---|
@@ -29,11 +29,14 @@ Altı ayrı deney hattı aynı yere çıktı:
 | Saldırganlar uzlaşma testine **hiç ulaşmıyor**; 144/144 kapı karşılaştırmasında kabul kümesi değişmiyor | `gate_replay_20260914` |
 | Komşu-yön sinyali yalnız kopyalanmış saldırı vektörünü yakalıyor; 18 aynı yönlü dürüstü reddediyor | `direction_probe/robustness/negative_controls_20260919` |
 | Kök kaybı skoru normla ρ=0,82 (norm dedektörü); kök yön skoru aynı kısıt altında döndürülünce AUC 0,51/0,44'e iniyor, 0 ihlal | `root_signal_20260919`, `root_direction_deinflation_20260919` |
+| Zamansal eğilim sinyali Min-Max'ı ayırıyordu (AUC 0,994) ama norm profilini gözeten saldırgan AUC'yi 0,585'e düşürüp hasarının %75'ini koruyor, 0 ihlal | `temporal_signature_20260919`, `temporal_deinflation_20260919` |
 
-**Birleştirici cümle:** kabul yarıçapı, komşu uzlaşması ve güvenilir-veri gradyan
-açısı — üçü de *uzlaşmadan uzaklaşma*yı ölçüyor. Aşırı heterojenlikte dürüst
-istemciler uzaklaşıyor; mesafe kısıtıyla sınırlı bir saldırgan uzaklaşmayan bir yön
-seçebiliyor. Güncelleme geometrisi bu ortamda tükenmiş görünüyor.
+**Birleştirici cümle:** kabul yarıçapı, komşu uzlaşması, güvenilir-veri gradyan
+açısı ve norm eğilimi — dördü de saldırganın *niyetini* değil, o saldırı
+uygulamasının bir ayrıntısını ölçüyor. Kısıt içinde serbest kalan her parametre
+(yön, ölçek) saldırgana kaçış bırakıyor: yönü döndürmek kök sinyalini, ölçeği
+kısmak zamansal sinyali öldürüyor — ikisi de **sıfır kısıt ihlaliyle** ve zararın
+büyük kısmını koruyarak. Güncelleme geometrisi bu ortamda tükenmiş görünüyor.
 
 Bunu söylemek için gereken titizlik mevcut: önceden sabitlenmiş protokoller,
 sabit-matris tekrarları, sentetik olumsuz kontroller, şişme ayrımı, korunmuş
@@ -42,11 +45,11 @@ başarısızlıklar, hash zinciri.
 ## Kanıtın **desteklemediği** şeyler
 
 - Genel üstünlük, backdoor dayanıklılığı, istatistiksel anlamlılık.
-- "Hiçbir geometrik istatistik başaramaz" — yalnız denenen üçü başarısız.
+- "Hiçbir geometrik istatistik başaramaz" — yalnız denenen dördü başarısız.
 - FLAME/Krum/FLTrust hakkında genel hüküm: bunlar **yerel uygulamalar**, yazar
   koduyla davranış karşılaştırması yapılmadı. Bu, A yolunun en büyük açığı.
-- Döndürülmüş saldırının aynı zararı verdiği: yalnız tespit edilebilirlik ölçüldü,
-  ASR ölçülmedi.
+- Döndürülmüş saldırının aynı zararı verdiği: orada yalnız tespit edilebilirlik
+  ölçüldü, ASR ölçülmedi. (Ölçek kısan saldırıda hasar ölçüldü: %75 korunuyor.)
 
 ## Yol A — sınırlayıcı bulgu olarak gönder
 
@@ -68,11 +71,27 @@ GPU maliyeti düşük.
 
 Kanıt, geometrinin tükendiğini söylüyor; yeni sürüm **ek bilgi** gerektirir.
 Denenmiş ve elenmiş olanlar: sunucu kök verisi, komşu-yön uzlaşması, kapı/kesme
-değişkenleri, yerel adım eşitleme. Geriye kalan adaylar (turlar arası geçmiş,
-istemci tarafı doğrulama, farklı tehdit modeli) bu projede hiç denenmedi.
+değişkenleri, yerel adım eşitleme, **ve turlar arası skaler eğilim**.
 
-**Maliyet ve risk:** süre belirsiz, muhtemelen aylar; başarı garantisi yok; başarısız
-olursa A yoluna geri dönülür ama zaman kaybedilmiş olur.
+Sonuncusu bu notun ilk sürümünden sonra sınandı ve önemlidir: turlar arası okuma
+gerçekten tek turluk okumadan fazlasını veriyordu (AUC 0,994), ama saldırgan
+ölçeğini kısarak tespiti 0,585'e düşürüp zararının dörtte üçünü koruyabiliyor.
+Yani "zamansal bilgi" umudu da kapandı.
+
+Geriye **hiç denenmemiş iki eksen** kalıyor:
+
+1. **Yön tabanlı zamansal istatistikler** — `cos(d_t, d_{t-1})` gibi. Arşivler tur
+   bazında yalnız skaler tutuyor; bu eksen için yeni bir vektör yakalaması ve yeni
+   bir eğitim kampanyası gerekir.
+2. **Aktif yoklama** — gelen güncellemeyi puanlamak yerine istemcinin sunucunun
+   gönderdiğine tutarlı cevap verip vermediğini sınamak. Daha az işlenmiş alan,
+   ama sistem varsayımlarını değiştiriyor (sunucu farklı istemcilere farklı model
+   yollayabilmeli) ve bunun savunulması gerekir.
+
+**Maliyet ve risk:** süre belirsiz, muhtemelen aylar; başarı garantisi yok. Üstelik
+her iki eksen de yeni veri yakalaması ya da yeni bir tehdit/sistem modeli istiyor,
+yani mevcut kanıt tabanının üstüne doğrudan inşa edilemiyor. Başarısız olursa
+A yoluna dönülür, zaman kaybedilmiş olur.
 
 ## Önerim
 
@@ -80,6 +99,10 @@ olursa A yoluna geri dönülür ama zaman kaybedilmiş olur.
 başarısız" değil, "denetlenmiş bir olumsuz sonuç: güncelleme geometrisi tek başına
 bu ortamda ne verebilir" olarak yazmak. Birleştirici mekanizma cümlesi ve iki
 metodolojik uyarı bunu taşıyabilir.
+
+Son iki deney bu öneriyi **güçlendirdi**: dört aday sinyalin dördü de, saldırgan
+kısıt içinde bir parametresini değiştirdiğinde çöktü. Bu artık tek bir yöntemin
+kusuru değil, tekrarlanan ve mekanizması gösterilen bir örüntü.
 
 Buna karşılık **dürüst olmam gereken üç şey:**
 
