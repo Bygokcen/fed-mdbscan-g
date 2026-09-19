@@ -1,0 +1,20 @@
+{
+  "date": "2026-09-14",
+  "evidence_files_verified": 9,
+  "abstract_words": 205,
+  "builds": {
+    "main": {
+      "pages": 6,
+      "sha256": "a7237a6cb1b10ae720eacdc11b88ee94640001d5cf6b6cf637314062ae724886"
+    },
+    "supplement": {
+      "pages": 3,
+      "sha256": "7058e964d6a90c46baf26ccd4336792d05cb6251f1936bdff4bae6bb132e3533"
+    }
+  },
+  "visual_checked": [
+    "main page 5",
+    "supplement page 3"
+  ],
+  "scope": "Editorial integration of verified local results; no new experiments or literature review in this revision."
+}

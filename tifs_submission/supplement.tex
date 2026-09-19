@@ -91,6 +91,37 @@ Normal-profile short repetitions share initial-model and partition hashes but di
 
 These runs concern only CIFAR-10, condition 7.1, HDBSCAN FLAME, seed 42. The deterministic profile sets \texttt{CUBLAS\_WORKSPACE\_CONFIG=:4096:8}, enables deterministic PyTorch algorithms, enables cuDNN determinism, and disables cuDNN benchmarking. This is an execution-profile intervention, not a change promoted into the canonical audit-v2 matrix. Trace equality does not prove cross-device repeatability or effective defense. The raw trace and comparison files remain in the investigation directory identified by the project report.
 
+
+\section{Separate Mechanism Studies}
+The following evidence is additional to the canonical 2,130-unit plan. It does not replace failed canonical runs or add independent seeds. A subsequent 117-unit five-step campaign includes 63 attack-free runs; their 1,890 rounds contain 170,100 client submissions. Spearman associations were computed within dataset, method, seed, and round, then summarized by the median over rounds and the median over seeds. Undefined correlations were left undefined. In MNIST, the full method's sample-count/update-norm association is 0.678 overall but 0.056 when restricted to clients with more than 20 samples. Restricting that range changes the population; it does not isolate a causal repair effect. Step equalization does not implement aggregation normalization.
+
+A 27-run single-round pilot and a later shared-checkpoint study use the A/B/C regimes defined in the main text. In the pilot, eight of nine dataset--seed combinations reject no clients in any arm; MNIST/137 is the exception. Therefore a zero median across seeds cannot be interpreted as no rejection in every initial round. The forward study consists of nine reference trajectories and 108 branches, separate from the earlier 117-unit five-step campaign.
+
+\subsection{Matching and Paired Contrasts}
+Checkpoint rounds 0, 9, 19, and 29 were specified before the forward branches ran. Models, participation, partitions, and defense history are shared within each cell. Four round-dependent random streams are remapped to the checkpoint round; replay counters are reset while decision memory is restored. Deterministic PyTorch/cuDNN execution and the cuBLAS workspace configuration are used. B/C first-batch and first-update hashes match in all 3,240 client--checkpoint comparisons. All 36 A/reference comparisons match the recorded metrics and norms; reference full-update hashes were not recorded for all 36 cells.
+
+\input{generated/mechanism_cases.tex}
+Across the 12 MNIST seed--checkpoint cells, C minus A changes FPR in four cells, with differences from $-17.78$ to $+1.11$ percentage points. The full paired table is supplied in the mechanism evidence directory. These correlated checkpoints and three seeds do not establish an equivalence test or a general gain. Table~\ref{tab:branch_cases} illustrates two selected contrasts, not a representative estimate of deployment benefit. Accuracy at MNIST/2024/round9 changes from 34.51\% to 46.81\% under A to C; this is one-round utility, not a long-horizon learning result.
+
+\subsection{Matched Cluster Replay}
+For MNIST/2024/round9, three additional instrumented branches reproduce the original A/B/C input matrices by SHA-256 and reproduce their final decisions. The captured matrices are then passed through the frozen filter offline. Cluster-consensus decisions and SNNC clusters match the instrumented records. Final acceptance can thus be checked directly against the initial accepted pool minus rejected-cluster membership.
+
+A produces six natural clusters, five rejected; only three of those rejected clusters add clients beyond L0, totaling 14. B produces three natural clusters, two rejected, adding ten rejections. C produces two natural clusters, one rejected, adding four. The ten clients avoiding additional rejection under A to C all remain low-density. Four members of one A cluster and four of another become singleton groups; two members of a six-client A cluster also become singletons while the other four remain a rejected cluster.
+
+The neighborhood distance cutoffs, $3\varepsilon$, are 0.208397, 0.178391, and 0.190852 for A/B/C. Natural-cluster size thresholds are 3.230769, 2.073171, and 2, respectively. In C, six of the ten clients have no retained neighbors; the other four form two pairs whose members retain only one another. Mutual neighbors need not share a third neighbor: the two one-element neighbor sets have empty intersection. All ten therefore remain singleton groups, below the cluster-size threshold, and are not subject to additional cluster rejection.
+
+The three A clusters responsible for additional rejection have centroid-distance/consensus-threshold ratios 1.837, 1.895, and 1.990. C's remaining rejected cluster has ratio 1.718. Hence the observed change is not those ten clients joining a cluster that now passes consensus. All arms keep the alarm active and use the L0+L2 path without the safety valve. The six other newly accepted clients change their L0 status. The two layer counts are descriptive accounting, not independent causal mediation effects.
+
+\subsection{Comparison with the Original MDBSCAN Specification}
+Inspection of the original article (page 5, Algorithms 1--2; page 6, Fig.~7) clarifies three differences. Its SNNC pseudocode does not specify the additional $3\varepsilon$ neighbor cutoff; its natural-cluster threshold is based on mean group size without the explicit floor of two used locally; and its remaining points undergo DBSCAN followed by nearest-cluster assignment for DBSCAN noise. The federated filter does not execute that last stage. A separate generic clustering routine exists in the source, but it is not the server's defense path. The filter's \texttt{min\_pts} argument does not enter its acceptance computation.
+
+There is also a boundary ambiguity in the article itself: Eq.~(4) uses a strict greater-than comparison against mean group size, whereas Algorithm 1, line 29, and Fig.~7 use greater-than-or-equal. A reproduction should state the chosen interpretation and check equality cases. The local implementation uses greater-than-or-equal with its added floor. This textual comparison is not verification against the original authors' executable implementation. Consequently, the observed singleton acceptance is attributed to the local federated adaptation, not to the original clustering algorithm.
+
+\subsection{Interpretation Limits}
+Batching changes updates, neighbor rankings, radius estimates, and the initial trusted pool together. No intervention here isolates radius from update geometry. Likewise, whole-client arrival loss and post-training loss are not measured by the first and fifth training-mini-batch losses: the fifth loss precedes the fifth optimizer step, and its batch may differ from the first. Net update norm is distinct from cumulative path length and from distance to the cohort's geometric median.
+
+The diagnosis concerns the local SNNC adaptation and a selected attack-free checkpoint. It neither verifies fidelity to an original author's implementation nor demonstrates an adversarial exploit. Repeating one batch is not proposed as a defense. Candidate corrections require designated development conditions and independent validation of clean retention, utility, and attack success.
+
 \section{Evidence File Guide}
 \begin{itemize}
 \item \texttt{units.csv}: successful-unit final metrics and identity fields.
@@ -101,5 +132,7 @@ These runs concern only CIFAR-10, condition 7.1, HDBSCAN FLAME, seed 42. The det
 \item \texttt{scenario\_manifest.json}: exact 149-job plan.
 \item \texttt{provenance.json}: source identity and copied CSV hashes.
 \end{itemize}
+The separate \texttt{evidence/mechanism\_20260914/} directory contains the stratified summary, all paired checkpoint contrasts, layer counts, selected cluster membership, neighborhood diagnostics, and their provenance. Canonical provenance remains unchanged.
+
 The preserve-empty and oracle blocks remain in these files. They are protocol sensitivity and evaluator-reference experiments, respectively; neither is silently pooled into the main method ranking. Full statistical inference, original-author baseline reproduction, public artifact deposition, and a complete novelty assessment remain author-review tasks before submission.
 \end{document}
