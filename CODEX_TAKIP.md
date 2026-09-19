@@ -1,6 +1,8 @@
-> **Son durum:** zamansal eğilim sinyali de-şişirmeyi **geçemedi** ve elendi: `analysis/temporal_deinflation_20260919/REPORT.md`. Norm profilini gözeten saldırgan tespiti 0,994'ten 0,585'e düşürüyor ve hasarının %75'ini koruyor, 0 kısıt ihlaliyle. Skaler zamansal kanat kapandı. Sıradaki iş **makale kararıdır**; yeni sinyal arayışı için kalan iki eksen raporun sonundadır.
+> **Son durum:** **Bağımsız denetim (Atlas) 11 bulgu kaydetti ve hepsi kabul edilip işlendi:** `analysis/independent_review_20260919/REPORT.md`. Sayısal çekirdek yeniden üretildi; yorumların bir kısmı kanıtı aşıyordu. Brifing, karar notu, makale ve iki rapor düzeltildi. Sıradaki iş yeni koşum değil, bu düzeltmelerin yeterliliğinin denetlenmesidir.
+>
+> Zamansal eğilim sinyali de-şişirmede zayıfladı: norm profilini gözeten saldırgan tespiti 0,994'ten 0,585'e düşürüyor, 0 kısıt ihlaliyle. Zarar **medyanların oranı** olarak %75; hücre bazında %2,5–94,7. "Skaler zamansal kanat kapandı" demek fazla geniştir — elenen tek bir istatistiktir.
 
-> **Önceki durum:** kök sinyali hattı **kapandı**. Tanı tamamlandı (`analysis/root_signal_20260919/REPORT.md`), ardından şişme ayrımı ve görelilik kontrolü de tamamlandı (`analysis/root_direction_deinflation_20260919/REPORT.md`). Kök yön skoru döndürülmüş yöne kör ve kullanılabilir eşik vermiyor; kök sinyaline dayanan geniş eğitim başlatılmamalı. Sıradaki iş için son bölüme bakın.
+> **Önceki durum:** kök sinyali adayı **elendi**. Tanı tamamlandı (`analysis/root_signal_20260919/REPORT.md`), ardından şişme ayrımı ve görelilik kontrolü de tamamlandı (`analysis/root_direction_deinflation_20260919/REPORT.md`). Kök yön skoru döndürülmüş yöne kör ve kullanılabilir eşik vermiyor; kök sinyaline dayanan geniş eğitim başlatılmamalı. Sıradaki iş için son bölüme bakın.
 
 > **Güncel sonraki iş:** yakın-yön olumsuz kontrolleri tamamlandı ve aday tek başına reddedici filtre olarak elendi. Son bölümdeki kök örnek kapsamı/ayrıklık denetimiyle devam edin.
 
@@ -143,7 +145,7 @@ seçilmeden makaleye katkı yazma — mevcut kanıt olumsuz/sınırlayıcı bir 
 Bu aşamada simülasyon kodu, kanonik kanıt ve makale değiştirilmedi; commit/push yok.
 Çalışan GPU işi yok (controller PID 292418 sona erdi; `status.json` complete).
 
-## Kök yön skoru şişme ayrımı ve görelilik — tamamlandı, hat kapandı — 19 Eylül 2026
+## Kök yön skoru şişme ayrımı ve görelilik — aday elendi — 19 Eylül 2026
 
 Rapor `analysis/root_direction_deinflation_20260919/REPORT.md`, protokol aynı
 dizinde ve sonuç öncesi sabitlendi. Tamamen çevrimdışı; yeni eğitim yok, gate-v2
@@ -255,3 +257,37 @@ güçlenmiştir.
 
 Yeni saldırı tipi `minmax_flat_omniscient` eklendi; mevcut `constrained_poison`
 ve kanonik arşiv değiştirilmedi.
+
+## Bağımsız denetim ve düzeltmeler — 19 Eylül 2026
+
+`analysis/independent_review_20260919/REPORT.md` (Atlas, HEAD `d7a96ab`). Ham
+arşivden 24 koşum/720 tur yeniden hesaplandı; medyan AUC 0,585366, hash'ler
+eşleşti, 118 test geçti. **Sayısal çekirdek doğrulandı; yorumların bir kısmı
+kanıtı aşıyordu.** 11 bulgunun tamamı kabul edildi ve işlendi:
+
+1. **Protokol–uygulama uyuşmazlığı.** `temporal_deinflation` protokolü koşumdan
+   sonra düzeltildi; v1 metni korunarak başına **v2 değişiklik kaydı** eklendi.
+   O aşama artık **keşifsel** olarak etiketli, "tam önkayıtlı" değil.
+2. **Rotasyonun zararı ölçülmedi.** Karar notundaki ortak "zararı koruyarak"
+   ifadesi kaldırıldı. 90°'de `poisoned·mean = ‖mean‖² > 0`, yani güncelleme
+   ortalamaya dik; saldırı niteliğini koruduğu gösterilmedi.
+3. **"Saldırganlar uzlaşma testine hiç ulaşmıyor" yanlıştı.** Yalnız Min-Max için
+   doğru; patch saldırganları kümelere giriyor ve testi geçiyor. Makale, karar
+   notu ve brifing düzeltildi.
+4. **"Dört sinyal aynı müdahaleyle çöktü" geri çekildi.** Sinyal–müdahale–zarar
+   tablosu eklendi; komşu-yön sinyali rotasyonla değil özgüllük kontrolleriyle
+   elendi ve küçük pertürbasyonlarda AUC 1 kalmıştı.
+5. **Makaledeki AUC aralığı düzeltildi.** 0,81–1,00 medyan aralığıydı; checkpoint
+   minimumları 0,68 (Fashion) ve 0,17 (MNIST).
+6. Brifingdeki batch yorumu düzeltilmiş haliyle ana tabloya taşındı.
+7. **%75 medyanların oranıdır**, her eşleşmenin sonucu değil (hücre %2,5–94,7,
+   bir hücrede negatif taban).
+8. Eşik ifadesi düzeltildi: `min(saldırgan z)` %100 recall veren **en büyük**
+   eşiktir; tek çalışma noktası, evrensel kullanılamazlık kanıtı değil.
+9. **Hash kronoloji kanıtı değildir**; brifingde içerik bütünlüğü ile önkayıt
+   ayrıldı.
+10. Her turda `poisoned·mean` kaydı yok; ileri koşumlarda kaydedilecek.
+11. Olumsuz sonuç bağımsız doğrulama ihtiyacını kaldırmaz; **B yolu pahalı ve
+    belirsizdir, kapalı değildir.** A bir tercih olarak gerekçelendirilir.
+
+Makale yeniden derlendi: 7 sayfa, uyarı yok. Yeni GPU koşumu yapılmadı.

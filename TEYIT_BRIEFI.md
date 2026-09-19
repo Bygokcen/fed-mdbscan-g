@@ -14,8 +14,13 @@ Aşağıda zayıf bıraktığımız yerleri açıkça işaretledim; önce oraya 
 **Katman 1 — yalnız Git deposuyla.** Depo raporları, CSV/JSON çıktılarını,
 analiz betiklerini, simülasyon kodunu ve makaleyi içerir. Bununla şunlar
 denetlenebilir: raporlardaki sayıların kendi CSV'leriyle tutarlılığı, aritmetik,
-protokollerin sonuçlardan önce yazılıp yazılmadığı, makaledeki iddiaların kanıtla
-örtüşmesi, kod ile metindeki sabitlerin eşleşmesi.
+makaledeki iddiaların kanıtla örtüşmesi, kod ile metindeki sabitlerin eşleşmesi.
+
+**Hash kronoloji kanıtı değildir.** `provenance.json` içindeki protokol hash'i
+yalnız *içerik bütünlüğünü* gösterir; dosyanın sonuçlardan önce var olduğunu
+göstermez. Önkayıt iddiası ayrıca zaman damgalı bir kayıt ister. Bu projede
+`temporal_deinflation` protokolü koşumdan sonra düzeltildi ve v2 olarak
+etiketlendi — o aşama **keşifseldir**.
 
 **Katman 2 — yerel ham arşivlerle.** `new_work/results` **6,7 GB** ve Git dışında;
 `new_work/data` 756 MB. Ham kayıtlardan yeniden türetme yalnız bu makinede
@@ -40,13 +45,13 @@ hesaplanabilir.
 | 3 | Üst katmanların doğruluk katkısı 36 uç noktada 0,081 puan | `evidence/paired_deltas.csv` |
 | 4 | Patch backdoor ASR %96,6–99,99; tam yöntem FedAvg ile ölçülebilir biçimde aynı | `claude/analiz/ciktilar/backdoor_81.csv` |
 | 5 | Yerel adımları eşitlemek FPR'yi düşürüyor ama kaldırmıyor; ilişki taban/taban-üstü ayrımı | `analysis/step_control_stratified/REPORT.md` |
-| 6 | Taban etkisi tur 0'da yok, öğrenmeyle çıkıyor; batch rejimi açıklamıyor | `analysis/forward_round_20260913/REPORT.md` |
-| 7 | 144/144 kapı karşılaştırmasında kabul kümesi değişmiyor; saldırganlar uzlaşma testine ulaşmıyor | `analysis/gate_replay_20260914/COMPLETION_REPORT.md` |
+| 6 | Taban etkisi tur 0'da yok, öğrenmeyle çıkıyor. **"Batch rejimi hiçbir turda fark yaratmıyor" yorumu geri çekildi**: seed bazında karşı örnek var (MNIST/137/tur0 A/B/C %23,33/%15,56/%5,56) | `forward_round_20260913/REPORT.md` + `forward_round_review_20260914/REVIEW.md` |
+| 7 | 144/144 kapı karşılaştırmasında kabul kümesi değişmiyor. Min-Max saldırganları uzlaşma testinin incelediği kümelere hiç girmiyor; **patch saldırganları giriyor ve testi geçiyor** — iki ayrı mekanizma | `analysis/gate_replay_20260914/COMPLETION_REPORT.md` |
 | 8 | Komşu-yön sinyali yalnız kopyalanmış vektörü yakalıyor; 18 aynı yönlü dürüstü reddediyor | `analysis/direction_negative_controls_20260919/REPORT.md` |
 | 9 | Kök kaybı skoru normla ρ=0,82, her koşulda AUC<0,5 | `analysis/root_signal_20260919/REPORT.md` |
 | 10 | Kök yön skoru döndürülünce 90°'de AUC 0,51/0,44, **0 kısıt ihlali** | `analysis/root_direction_deinflation_20260919/REPORT.md` |
 | 11 | Göreli norm eğilimi Min-Max'ı ayırıyor: saldırılı 0,994 / plasebo 0,521 / kontrol 0,695 | `analysis/temporal_signature_20260919/REPORT.md` |
-| 12 | **İddia 11 elendi:** norm profilini gözeten saldırgan AUC'yi 0,585'e düşürüp hasarının %75'ini koruyor, 0 kısıt ihlaliyle | `analysis/temporal_deinflation_20260919/REPORT.md` |
+| 12 | **İddia 11 zayıfladı:** norm profilini gözeten saldırgan AUC'yi 0,585'e düşürüyor, 0 kısıt ihlaliyle. Zarar: **medyanların oranı** %75, eşleşmiş hücre oranları %2,5–94,7 | `analysis/temporal_deinflation_20260919/REPORT.md` |
 
 ---
 
@@ -88,7 +93,13 @@ kontrol etmek; tekrar keşfetmek değil.
    şişirir. De-şişirme iddia 10 ve iddia 11 için yapıldı; **diğer AUC'ler için
    yapılmadı**.
 5. **Rotasyonla kaçış yalnız tespit edilebilirlik için skorlandı**; verdiği zarar
-   (ASR/doğruluk) ölçülmedi. "Kaçtı" ≠ "aynı zararı verdi".
+   (ASR/doğruluk) ölçülmedi. Dahası 90°'de `poisoned·mean = ‖mean‖² > 0`, yani
+   üretilen güncelleme ortalamaya **karşı değil dik**; ters-ortalama saldırı
+   niteliğini koruduğu gösterilmedi. "Kaçtı" ≠ "aynı zararı verdi".
+5b. **"Dört sinyal aynı müdahaleyle çöktü" denmemeli.** Müdahaleler farklı:
+   komşu-yön sinyali rotasyonla değil sentetik özgüllük kontrolleriyle elendi ve
+   kısıt geçerli küçük pertürbasyonlar altında AUC 1 kalmıştı. Zarar yalnız
+   zamansal deneyde ölçüldü.
 6. **CIFAR keşifseldir.** Backend belirsizliği gösterildi; CIFAR'dan genel sonuç
    çıkarılmamalı.
 7. **Temiz kök varsayımı** bir sistem varsayımıdır, kanıtlanmadı. Kök verisi
@@ -126,6 +137,7 @@ Aşağıdakilerden biri gösterilirse ilgili iddia düşer:
 - `git reset` / `git clean` yapılmaz; ağaçta başka araçların çalışması olabilir.
 - Python: `.venv/bin/python`. Yeniden kurulmaz.
 - Testler: `.venv/bin/python -m pytest new_work/tests -q` → şu an **118 geçiyor**.
+  Test başarısı bilimsel yorumu doğrulamaz.
 - `status.json` içindeki "running" ve PID kayıtları **bayat olabilir**; süreci
   `ps` ve `nvidia-smi` ile ayrıca doğrulayın.
 - Elsevier MDBSCAN makalesi yerelde var ama `.gitignore` ile dışarıda; telifli,
@@ -174,13 +186,23 @@ heterojenlikte dürüst istemciler uzaklaşıyor; mesafe kısıtıyla sınırlı
 saldırgan uzaklaşmayan bir yön seçebiliyor. **Tek turluk güncelleme geometrisi bu
 ortamda tükenmiş görünüyor.**
 
-İddia 11 bu tabloya kısa süreli bir istisna eklemişti; iddia 12 onu da kapattı.
-Norm profilini gözeten saldırgan tespiti 0,585'e düşürüp hasarının %75'ini
-koruyor. Yani turlar arası **skaler** okuma da tek turluk okumadan daha dayanıklı
-değil. Backdoor için hiçbir şey değişmedi ve yapısal nedeni duruyor.
+İddia 11 bu tabloya kısa süreli bir istisna eklemişti; iddia 12 o skoru zayıflattı.
+Savunulabilir ifade: *bu geliştirme koşullarında incelenen sinyaller, saldırganın
+kısıt içinde serbest bıraktığı bir parametreyi oynatmasına karşı dayanıksız çıktı.*
+"Geometri tükendi" veya "B yolu kapandı" bundan daha geniş iddialardır ve
+kanıtlanmadı. Backdoor için hiçbir şey değişmedi ve yapısal nedeni duruyor.
 
 Makale şu an bu sınırlayıcı bulgu ekseniyle yazılmış (7 sayfa, sınır 13) ve
 gönderilmedi. Karar notu: `tifs_submission/KARAR_NOTU_20260919.md`.
+
+## 9. Yapılmış bağımsız denetim
+
+Atlas adlı bağımsız model bu depoyu HEAD `d7a96ab` üzerinde denetledi ve 11 bulgu
+kaydetti: `analysis/independent_review_20260919/REPORT.md`. Sayısal çekirdek
+yeniden üretildi (24 koşum, 720 tur, medyan AUC 0,585366, hash'ler eşleşti); buna
+karşılık yorumların bir kısmı kanıtı aşıyordu. Bulguların tamamı kabul edildi ve
+bu brifing, karar notu, makale ve iki rapor buna göre düzeltildi. Sonraki denetçi
+o raporu da okumalı ve **düzeltmelerin yeterli olup olmadığını** kontrol etmelidir.
 
 **Denetçiye son not:** bu çalışmanın değeri olumlu sonuçlarında değil, olumsuz
 sonuçlarının ne kadar sıkı kurulduğundadır. Dolayısıyla en yararlı denetim,

@@ -1,6 +1,11 @@
 # Zamansal eğilim sinyalinin de-şişirilmesi — sonuçlar
 
-`PROTOCOL.md` sonuç öncesi sabitlendi. **Sonuç: sinyal dayanmadı; iddia 11 düştü.**
+**Sonuç: incelenen skor bu koşullarda dayanmadı; iddia 11 bu haliyle savunulamaz.**
+
+> **Önkayıt uyarısı.** `PROTOCOL.md` v1 olarak sonuçlardan önce yazıldı, ancak
+> saldırı formülü ilk (geçersiz) koşumdan sonra düzeltildi ve protokol v2 olarak
+> güncellendi. Geçerli koşum bu nedenle **tam anlamıyla önkayıtlı değildir**;
+> değişiklik kaydı protokolün başındadır. Bu aşama keşifsel sayılmalıdır.
 
 Koşum: `new_work/results/temporal_deinflation/flat_20260919_190011`, 24/24 hücre,
 31 dakika, başarısızlık yok.
@@ -31,7 +36,7 @@ yakalayan test eklendi (poisoned·mean < 0). Test sayısı 118.
 - `ratio=2,0` kontrolü 180/180 kırpıldı ve bütçe saldırısıyla **aynı** sonucu
   verdi — geri düşüş mekanizmasının çalıştığını doğrular.
 
-## Sonuç: kaçış işe yarıyor ve ucuz
+## Sonuç: kaçış işe yarıyor; bedeli hücreye göre değişiyor
 
 `ratio=1,0`, yani saldırgan normunu dürüst medyana oturtuyor:
 
@@ -44,28 +49,41 @@ yakalayan test eklendi (poisoned·mean < 0). Test sayısı 118.
 
 - Tespit **0,994 → 0,585**'e iniyor. Koşum bazında dağılım `0,354 – 0,805`;
   bir koşumda şansın altında. Güvenilir ayrım kalmamıştır.
-- Saldırgan hasarının **%75'ini koruyor** (fedavg), tam yöntemde **%74'ünü**.
+- Hasar: bu sayılar **medyanların oranıdır**, her eşleşmenin sonucu değil.
+  Eşleşmiş hücre oranları fedavg'de %55,1–94,7 (medyan %88,8), tam yöntemde
+  %2,5–94,7 (medyan %80,7). Tam yöntem MNIST/137'de zarar 0,0686 → 0,0017, yani
+  yalnız **%2,5** korunuyor; Fashion/42'de bütçe saldırısının zararı zaten negatif
+  (−0,0064) olduğu için oran anlamsızdır. Doğru özet: **medyan zararın çoğu
+  korunuyor, ama bütün hücrelerde değil.**
 
 Protokolün 1. karar kuralı: *"AUC ~0,5'e iner ve hasar karşılaştırılabilir kalırsa
-sinyal değersizdir."* Hasar dörtte üç oranında korunduğu için 2. kural (bedel
-dayatma) geçerli değildir. **Sinyal, norm profilini gözeten bir saldırgana karşı
-kullanılabilir değildir.**
+sinyal değersizdir."* Medyan hasarın çoğu korunduğu için 2. kural (bedel dayatma)
+genel olarak geçerli değildir. **İncelenen skaler eğilim skoru, norm profilini
+gözeten bir saldırgana karşı bu koşullarda güvenilir değildir.** Bu, o skorun
+dayanıklılık iddiasına karşı kanıttır; zamansal bilginin tümü veya geometrik
+savunmaların tamamı hakkında bir hüküm değildir. `~0,5` ve "karşılaştırılabilir
+zarar" nitel eşiklerdi; kesin eleme kuralı olarak sunulmamalıdır.
 
 ## Anlamı
 
 Zamansal eğilim, *bu saldırı uygulamasının* bütçesini sonuna kadar harcama
 alışkanlığını yakalıyordu — saldırganlığı değil. Saldırgan bütçesinin bir kısmından
-vazgeçtiğinde sinyal kayboluyor, buna karşılık zararının çoğunu koruyor.
+vazgeçtiğinde sinyal kayboluyor; medyan zararın çoğu korunuyor, ama bedel hücreden
+hücreye çok değişiyor (%2,5 ile %94,7 arası).
 
-Bu, projedeki diğer beş sinyalin başarısızlığıyla **aynı kalıp**: ölçülen şey
-saldırganın niyeti değil, o saldırının uygulama ayrıntısı. Kısıt içinde serbest
-kalan her parametre (yön, ölçek) saldırgana kaçış imkânı bırakıyor.
+Bu, projedeki diğer sinyallerin başarısızlığıyla **benzer** bir kalıp gösteriyor:
+ölçülen şey saldırganın niyeti değil, o saldırının uygulama ayrıntısı. Ancak
+"dört sinyal aynı saldırgan müdahalesiyle çöktü" demek yanlış olur: komşu-yön
+sinyali rotasyonla değil, sentetik özgüllük kontrolleriyle elendi ve kısıt geçerli
+küçük pertürbasyonlar altında AUC 1 kalmıştı. Her sinyalin müdahalesi, sonucu ve
+kapsamı ayrı ayrı okunmalıdır.
 
 ## B yolu için karar
 
-`analysis/temporal_signature_20260919/REPORT.md`'de açılan "dar kapı" **kapandı**.
-Skaler zamansal bilgi de tek turluk bilgiden daha dayanıklı değil. Backdoor için
-zaten hiç sinyal yoktu.
+`analysis/temporal_signature_20260919/REPORT.md`'de açılan "dar kapı", **incelenen
+skor için** kapandı. Bu, tek bir skaler eğilim istatistiğidir; zamansal bilginin
+tamamını temsil etmez ve B yolunun bilimsel olarak kapandığını göstermez.
+Backdoor için zaten hiç sinyal yoktu.
 
 Geriye B yolu için sınanmamış iki eksen kalıyor, ikisi de bu projede hiç denenmedi:
 yön tabanlı **zamansal** istatistikler (tur bazında vektör yakalaması gerektirir;

@@ -26,17 +26,29 @@ Yedi ayrı deney hattı aynı yere çıktı:
 | Temiz aşırı heterojenlikte dürüst ret %24,37–42,57; dört veri kümesinde 90/90 tur alarm | kanonik audit-v2 |
 | Üst katmanların doğruluk katkısı 36 uç noktada ortalama 0,081 puan | ablation bloğu |
 | Patch backdoor ASR %96,6–99,99; savunma FedAvg'den ölçülebilir biçimde farksız | kanonik audit-v2 |
-| Saldırganlar uzlaşma testine **hiç ulaşmıyor**; 144/144 kapı karşılaştırmasında kabul kümesi değişmiyor | `gate_replay_20260914` |
+| 144/144 kapı karşılaştırmasında kabul kümesi değişmiyor. Min-Max saldırganları uzlaşma testinin incelediği kümelere hiç girmiyor; **patch saldırganları giriyor ve testi geçiyor** | `gate_replay_20260914` |
 | Komşu-yön sinyali yalnız kopyalanmış saldırı vektörünü yakalıyor; 18 aynı yönlü dürüstü reddediyor | `direction_probe/robustness/negative_controls_20260919` |
 | Kök kaybı skoru normla ρ=0,82 (norm dedektörü); kök yön skoru aynı kısıt altında döndürülünce AUC 0,51/0,44'e iniyor, 0 ihlal | `root_signal_20260919`, `root_direction_deinflation_20260919` |
-| Zamansal eğilim sinyali Min-Max'ı ayırıyordu (AUC 0,994) ama norm profilini gözeten saldırgan AUC'yi 0,585'e düşürüp hasarının %75'ini koruyor, 0 ihlal | `temporal_signature_20260919`, `temporal_deinflation_20260919` |
+| Zamansal eğilim sinyali Min-Max'ı ayırıyordu (AUC 0,994) ama norm profilini gözeten saldırgan AUC'yi 0,585'e düşürüyor, 0 ihlal. Zarar: **medyanların oranı** %75, hücre aralığı %2,5–94,7 | `temporal_signature_20260919`, `temporal_deinflation_20260919` |
 
-**Birleştirici cümle:** kabul yarıçapı, komşu uzlaşması, güvenilir-veri gradyan
-açısı ve norm eğilimi — dördü de saldırganın *niyetini* değil, o saldırı
-uygulamasının bir ayrıntısını ölçüyor. Kısıt içinde serbest kalan her parametre
-(yön, ölçek) saldırgana kaçış bırakıyor: yönü döndürmek kök sinyalini, ölçeği
-kısmak zamansal sinyali öldürüyor — ikisi de **sıfır kısıt ihlaliyle** ve zararın
-büyük kısmını koruyarak. Güncelleme geometrisi bu ortamda tükenmiş görünüyor.
+**Ortak örüntü — dikkatli ifadesiyle.** Dört aday sinyalin dördü de, saldırganın
+niyetinden çok o saldırı uygulamasının bir ayrıntısına duyarlı çıktı. Ama
+**müdahaleler ve kanıt dereceleri farklı**, aynı kefeye konmamalı:
+
+| Sinyal | Nasıl elendi | Zarar ölçüldü mü |
+|---|---|---|
+| Kabul yarıçapı (L0) | Heterojenlikte dürüstleri reddediyor; saldırganı ayırmıyor | — |
+| Komşu-yön uzlaşması | Sentetik özgüllük kontrolleri: aynı yönlü dürüstler de reddediliyor. Küçük pertürbasyonlar altında AUC 1 kalmıştı | Hayır |
+| Kök yön açısı | Saldırgan yönü döndürünce AUC 0,51/0,44, 0 kısıt ihlali | **Hayır** |
+| Norm eğilimi (zamansal) | Saldırgan ölçeğini kısınca AUC 0,585 | **Evet:** medyan zararın çoğu korunuyor (hücre aralığı %2,5–94,7) |
+
+Yalnız sonuncusunda zarar ölçüldü. Kök yön deneyinde 90°'de üretilen güncelleme
+ortalamaya dik bir bileşen ekliyor (`poisoned·mean = ‖mean‖² > 0`), yani
+ters-ortalama saldırı niteliğini koruduğu **gösterilmedi**.
+
+Savunulabilir özet: *bu geliştirme koşullarında incelenen sinyaller, saldırganın
+kısıt içinde serbest bıraktığı bir parametreyi oynatmasına karşı dayanıksız çıktı.*
+"Güncelleme geometrisi tükendi" bundan daha geniş bir iddiadır ve kanıtlanmadı.
 
 Bunu söylemek için gereken titizlik mevcut: önceden sabitlenmiş protokoller,
 sabit-matris tekrarları, sentetik olumsuz kontroller, şişme ayrımı, korunmuş
@@ -45,7 +57,12 @@ başarısızlıklar, hash zinciri.
 ## Kanıtın **desteklemediği** şeyler
 
 - Genel üstünlük, backdoor dayanıklılığı, istatistiksel anlamlılık.
-- "Hiçbir geometrik istatistik başaramaz" — yalnız denenen dördü başarısız.
+- "Hiçbir geometrik istatistik başaramaz" veya "geometri tükendi" — yalnız denenen
+  dört aday, denenen müdahalelere karşı dayanıksız çıktı.
+- Döndürülmüş saldırının zarar verdiği: ölçülmedi. 90°'de güncelleme ortalamaya
+  dik; mesafe kısıtını sağlamak saldırı niteliğini korumak değildir.
+- "Saldırganlar uzlaşma testine hiç ulaşmıyor": yalnız Min-Max için doğru. Patch'te
+  saldırganlar doğal kümelere giriyor ve testi **geçiyor** — farklı mekanizma.
 - FLAME/Krum/FLTrust hakkında genel hüküm: bunlar **yerel uygulamalar**, yazar
   koduyla davranış karşılaştırması yapılmadı. Bu, A yolunun en büyük açığı.
 - Döndürülmüş saldırının aynı zararı verdiği: orada yalnız tespit edilebilirlik
@@ -88,10 +105,13 @@ Geriye **hiç denenmemiş iki eksen** kalıyor:
    ama sistem varsayımlarını değiştiriyor (sunucu farklı istemcilere farklı model
    yollayabilmeli) ve bunun savunulması gerekir.
 
-**Maliyet ve risk:** süre belirsiz, muhtemelen aylar; başarı garantisi yok. Üstelik
-her iki eksen de yeni veri yakalaması ya da yeni bir tehdit/sistem modeli istiyor,
-yani mevcut kanıt tabanının üstüne doğrudan inşa edilemiyor. Başarısız olursa
-A yoluna dönülür, zaman kaybedilmiş olur.
+**Maliyet ve risk:** süre belirsiz, muhtemelen aylar; başarı garantisi yok. Her iki
+eksen de yeni veri yakalaması ya da yeni bir tehdit/sistem modeli istiyor, yani
+mevcut kanıt tabanının üstüne doğrudan inşa edilemiyor. Başarısız olursa A yoluna
+dönülür, zaman kaybedilmiş olur.
+
+**Ama açıkça:** elenen tek bir skaler eğilim istatistiğidir; zamansal bilginin
+tamamını temsil etmez. B yolu **pahalı ve belirsizdir, kapalı değildir.**
 
 ## Önerim
 
@@ -100,9 +120,10 @@ başarısız" değil, "denetlenmiş bir olumsuz sonuç: güncelleme geometrisi t
 bu ortamda ne verebilir" olarak yazmak. Birleştirici mekanizma cümlesi ve iki
 metodolojik uyarı bunu taşıyabilir.
 
-Son iki deney bu öneriyi **güçlendirdi**: dört aday sinyalin dördü de, saldırgan
-kısıt içinde bir parametresini değiştirdiğinde çöktü. Bu artık tek bir yöntemin
-kusuru değil, tekrarlanan ve mekanizması gösterilen bir örüntü.
+Son iki deney bu öneriyi destekliyor: dört aday sinyal de, denenen müdahalelere
+karşı dayanıksız çıktı. Ancak bu **B yolunun bilimsel olarak kapandığı** anlamına
+gelmez; A, bir araştırma ve yayın tercihi olarak gerekçelendirilebilir, kaçınılmaz
+bir sonuç olarak değil.
 
 Buna karşılık **dürüst olmam gereken üç şey:**
 
