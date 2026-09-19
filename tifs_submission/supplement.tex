@@ -6,6 +6,7 @@
 \author{Working companion to the main manuscript}
 \maketitle
 \setcounter{table}{5}
+% FLTrust metric semantics are explained independently of full-method group tables.
 \section{Scope and Provenance}
 This supplement describes the canonical audit-v2 matrix and diagnostic repetitions separately. Tables continue the numbering of the main manuscript. Numerical data are copied without changing the canonical run files; SHA-256 hashes are listed in \texttt{evidence/provenance.json}. The scenario manifest enumerates datasets, methods, seeds, attack parameters, and overrides. A reported standard deviation in the CSVs is over seeds, not independent rounds.
 
@@ -135,4 +136,8 @@ The diagnosis concerns the local SNNC adaptation and a selected attack-free chec
 The separate \texttt{evidence/mechanism\_20260914/} directory contains the stratified summary, all paired checkpoint contrasts, layer counts, selected cluster membership, neighborhood diagnostics, and their provenance. Canonical provenance remains unchanged.
 
 The preserve-empty and oracle blocks remain in these files. They are protocol sensitivity and evaluator-reference experiments, respectively; neither is silently pooled into the main method ranking. Full statistical inference, original-author baseline reproduction, public artifact deposition, and a complete novelty assessment remain author-review tasks before submission.
+\section{FLTrust Metric Interpretation and Fidelity Scope}
+For the normalized FLTrust implementation, stored client FPR and TPR count zero-trust-weight assignments to honest and malicious updates in the ordinary cosine-weighting path. They are not evidence of a separate malicious-client classifier. The full-method group-rejection tables in this supplement retain their original meaning. Missing or near-zero root updates invoke a local fallback, so the zero-weight interpretation must not be extended to fallback rounds without checking the executed path.
+
+The formula comparison uses 18 recorded matrices, four constructed root vectors, and two local variants: 144 comparison rows, with 72 input cases for each variant. It compares a NumPy transcription of the author-demo rule with a helper using the local filter and a re-expression of server aggregation. It does not execute the author training system or the production server path, test all degenerate inputs, or establish equivalence of root and client training schedules. Only the normalized variant is identified as canonical in the accompanying audit; the clipped-only variant should not be interpreted as the published normalization rule.
 \end{document}
