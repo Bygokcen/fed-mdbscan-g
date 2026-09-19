@@ -54,7 +54,7 @@ saldırı da her koşulda ayrılmıyor.
 
 Skorlar checkpoint içinde **etiketsiz** olarak medyan/MAD ile robust z-skora
 çevrildi; tanımsız checkpoint 0. Eşik yalnız **saldırılı Min-Max geliştirme
-koluna** bakılarak, bütün saldırganları yakalayan en küçük değer olarak seçildi:
+koluna** bakılarak, bütün saldırganları yakalayan **en büyük** değer olarak seçildi (z ≥ eşik kuralında `min(saldırgan z)`; daha büyük bir eşik en düşük skorlu saldırganı kaçırırdı):
 **z = −0,3658** (geliştirme verisinden seçilmiştir; savunma önerisi değildir).
 Aynı eşik değiştirilmeden diğer kollara uygulandı:
 
@@ -93,11 +93,17 @@ sonuçla birlikte kapanır. **Kök sinyaline dayanan geniş eğitim başlatılma
 
 ## Gösterilmemiş olanlar
 
-- θ=90° saldırısı kısıtı sağlıyor ama orijinalden daha zayıf bir saldırı olabilir;
-  bu tarama saldırı gücünü (ASR/doğruluk etkisi) ölçmedi, yalnız tespit edilebilirliği
-  ölçtü. "Kaçtı" demek "aynı zararı verdi" demek değildir.
-- Bölüm B eşiği geliştirme verisinden seçildi; bağımsız doğrulama koşulları ayrılmadı.
-  Ancak sonuç olumsuz olduğu için ayrı doğrulama gerekmiyor — olumlu bir iddia yok.
+- θ=90°'de `v ⊥ u` olduğundan `poisoned·mean = ‖mean‖² > 0`: üretilen güncelleme
+  artık ortalamaya **karşı** değil, ortalamaya dik bir bileşen ekliyor. Mesafe
+  kısıtını sağlaması, ters-ortalama saldırı niteliğini veya zararı koruduğu
+  anlamına gelmez. Bu tarama yalnız tespit edilebilirliği ölçtü; **zarar
+  ölçülmedi**. "Kaçtı" demek "aynı zararı verdi" demek değildir ve bu rapor
+  öyle bir iddia taşımaz.
+- Bölüm B **tek bir çalışma noktasının** sonucudur: %100 saldırgan yakalama
+  gerektiren eşik. Başka recall–FPR dengelerinin veya bir kalibrasyonun
+  faydasız olduğu gösterilmedi. Olumsuz sonuç, dar bir karşı örnek için yeni
+  kampanya gerektirmez; ama buradan skorun her çalışma noktasında
+  kullanılamaz olduğu sonucu **çıkmaz**.
 - İki veri kümesi, üç seed, üç tur, yalnız Min-Max ve patch; betimsel istatistik,
   anlamlılık iddiası yok.
 - Kök yön skorunun norm/örnek sayısı dedektörü olmadığı bulgusu (ρ −0,173/−0,115)

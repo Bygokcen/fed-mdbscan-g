@@ -1,7 +1,28 @@
 # Zamansal eğilim sinyalinin de-şişirilmesi — sonuç öncesi protokol
 
-Durum: uygulanacak. `analysis/temporal_signature_20260919/REPORT.md` sıradaki iş
+Durum: uygulandı. `analysis/temporal_signature_20260919/REPORT.md` sıradaki iş
 listesinin 1. maddesi. Yeni savunma iddiası yok.
+
+> **v2 — DEĞİŞİKLİK KAYDI (koşumdan sonra yazıldı).** Aşağıdaki v1 metni, saldırı
+> ölçeğini `γ = ‖mean‖ − hedef` **yakın kolundan** çözüyordu ve "gerçek koşumlarda
+> γ_max < ‖mean‖" gerekçesine dayanıyordu. İlk koşum
+> (`flat_20260919_182253`) bu formülle yapıldı ve **geçersizdir**: yakın kol
+> `+mean` yönü verir, yani saldırı değildir; ulaşılamayınca γ=0'a kırpılıp
+> saldırgan hiç saldırmamıştır (180/180 tur kırpıldı).
+>
+> Bu, sonuçlara bakılırken fark edildi. Geçerli koşum (`flat_20260919_190011`)
+> `γ = min(‖mean‖ + hedef, γ_max)` **uzak kolunu** kullanır. Gerçek veride
+> γ_max > ‖mean‖ olduğu için uzak kol erişilebilirdir; v1'deki ters gerekçe
+> yanlıştı.
+>
+> Dolayısıyla **geçerli koşum tam anlamıyla önkayıtlı değildir**: saldırı formülü
+> ilk sonuçlar görüldükten sonra düzeltildi. Okuma kuralları (aşağıdaki karar
+> kuralları) değiştirilmedi, ama `~0,5` ve "karşılaştırılabilir zarar" gibi nitel
+> eşikler kesin eleme kuralı değildir. Bu aşama **keşifsel** sayılmalıdır.
+> Değişikliği yakalayan test: `poisoned·mean < 0`
+> (`new_work/tests/test_flat_profile_attack.py`).
+
+### v1 metni (tarihsel, olduğu gibi korunmuştur)
 
 ## Soru
 
@@ -33,7 +54,7 @@ aralığına kırpılır.
 
 `ratio` config alanı `coordinated_profile_ratio`; taranan değerler **1,0 ve 2,0**.
 
-**Ulaşılabilir aralık — önceden saptandı.** Poisoned vektör ortalamayla eş
+**Ulaşılabilir aralık — v1'DE YANLIŞ, bkz. yukarıdaki değişiklik kaydı.** Poisoned vektör ortalamayla eş
 doğrusal ve `γ ∈ [0, γ_max]` olduğu için üretilebilecek normlar kapalı bir
 aralıktır: uçlar `‖mean‖` (γ=0) ve `|‖mean‖ − γ_max|` (bütçe saldırısı). Gerçek
 koşumlarda γ_max < ‖mean‖ olduğu gözlendiğinden, **kayıtlı saldırgan normu
