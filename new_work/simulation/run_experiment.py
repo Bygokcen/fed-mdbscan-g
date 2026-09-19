@@ -492,6 +492,10 @@ def run_single_experiment(config, method, seed=42):
                 # reject decision can be analysed together after the run.
                 'update_norms': result.get('update_norms', {}),
                 'l0_distances': result.get('l0_distances', {}),
+                # Which aggregation branch actually ran, and the root magnitude
+                # that selects it, so a silent fallback is not invisible later.
+                'aggregation_operator': result.get('aggregation_operator', 'none'),
+                'root_gradient_norm': result.get('root_gradient_norm'),
                 'group_confusion': group_counts,
                 'balanced_accuracy': server.last_class_metrics['balanced_accuracy'],
                 'per_class_accuracy': server.last_class_metrics['per_class_accuracy'],

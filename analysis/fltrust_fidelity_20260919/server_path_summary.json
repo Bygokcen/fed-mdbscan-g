@@ -87,7 +87,8 @@
       "operator": "fltrust",
       "fallback_reason": "no_accepted_updates",
       "degraded": true,
-      "relative_gap": 1.5,
+      "relative_gap": null,
+      "absolute_gap": 1.5,
       "cosine": null,
       "applied_norm": 1.5,
       "reference_norm": 0.0
@@ -103,7 +104,8 @@
       "operator": "uniform_mean",
       "fallback_reason": "none",
       "degraded": false,
-      "relative_gap": 0.7071067811865476,
+      "relative_gap": null,
+      "absolute_gap": 0.7071067811865476,
       "cosine": null,
       "applied_norm": 0.7071067811865476,
       "reference_norm": 0.0
@@ -120,6 +122,7 @@
       "fallback_reason": "none",
       "degraded": false,
       "relative_gap": 0.0009980039980103427,
+      "absolute_gap": 0.0009970089790631853,
       "cosine": 1.0,
       "applied_norm": 1.0,
       "reference_norm": 0.9990029910209368
@@ -136,6 +139,7 @@
       "fallback_reason": "none",
       "degraded": false,
       "relative_gap": 2.0000000584584397e-09,
+      "absolute_gap": 2.0000000544584395e-09,
       "cosine": 1.0,
       "applied_norm": 1.0,
       "reference_norm": 0.999999998

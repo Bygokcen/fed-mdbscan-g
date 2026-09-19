@@ -1,3 +1,5 @@
+> **DÜZELTME — 294c693 sonrası gerçek yürütme:** Aşağıdaki ilk incelemenin 2. maddesinde sunucunun boş kabul kümesinde güncellemeyi atladığı yorumu yanlıştı. Önceki accept_all_degraded dalını atlamıştım. Server.aggregate sınır testi çalıştırılarak doğrulandı: tüm güvenler sıfırsa tüm istemciler kabul edilip ortalama alınır, degraded/no_accepted_updates işaretlenir. Bu benim inceleme hatamdır. Yeni sayımın sessiz sıfır-kök yolunu dışlamadığına ilişkin ayrıntı `ATLAS_SECOND_REVIEW.md` içindedir.
+
 # FLTrust kural kontrolünün bağımsız kapsam incelemesi
 
 F1 kabul: normal toplama yolunda yerel filtre trust<=0 istemcileri anomaly_indices'e koyar; bunlar sıfır katkılı güncellemelerdir. Ana makale ve ekte bu metrik semantiği açıklandı. Ham sayılar, kanonik sonuçlar ve simülasyon kodu değiştirilmedi. Tam yöntem temiz-FPR tablosu FLTrust tablosu değildir; oradaki ret tanımı değiştirilmedi.

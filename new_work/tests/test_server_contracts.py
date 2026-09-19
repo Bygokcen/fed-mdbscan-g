@@ -263,3 +263,29 @@ def test_update_norm_beyond_floating_point_range_is_recorded_as_null():
     )
     assert result["update_norms"]["0"] is None
     assert result["update_norms"]["1"] == pytest.approx(np.sqrt(2.0))
+
+
+def test_round_records_which_aggregation_branch_ran():
+    """A silent fallback must not be invisible: the operator is always reported."""
+    updates = [np.ones(2, dtype=np.float32), np.full(2, 2.0, dtype=np.float32),
+               np.full(2, 3.0, dtype=np.float32)]
+    result = _server("fedavg").aggregate(updates, [0, 1, 2], round_id=0)
+    assert result["aggregation_operator"] == "uniform_mean"
+    # No root model is configured here, so no root magnitude exists to report.
+    assert result["root_gradient_norm"] is None
+
+
+def test_degenerate_root_is_reported_through_its_magnitude(monkeypatch):
+    """FLTrust falls back to a plain mean when the root update vanishes; the
+    recorded magnitude is what makes that branch identifiable afterwards."""
+    server = _server("fltrust_normalized")
+    server.root_model = server.model
+    server.root_loader = [()]
+    monkeypatch.setattr(server, "_train_root_gradient",
+                        lambda **kwargs: np.zeros(2, dtype=np.float64))
+    result = server.aggregate(
+        [np.ones(2, dtype=np.float32), np.full(2, 2.0, dtype=np.float32)],
+        [0, 1], round_id=0)
+    assert result["root_gradient_norm"] == 0.0
+    assert result["aggregation_operator"] == "uniform_mean"
+    assert result["decision"]["rejected_ids"] == []
