@@ -46,6 +46,7 @@ hesaplanabilir.
 | 9 | Kök kaybı skoru normla ρ=0,82, her koşulda AUC<0,5 | `analysis/root_signal_20260919/REPORT.md` |
 | 10 | Kök yön skoru döndürülünce 90°'de AUC 0,51/0,44, **0 kısıt ihlali** | `analysis/root_direction_deinflation_20260919/REPORT.md` |
 | 11 | Göreli norm eğilimi Min-Max'ı ayırıyor: saldırılı 0,994 / plasebo 0,521 / kontrol 0,695 | `analysis/temporal_signature_20260919/REPORT.md` |
+| 12 | **İddia 11 elendi:** norm profilini gözeten saldırgan AUC'yi 0,585'e düşürüp hasarının %75'ini koruyor, 0 kısıt ihlaliyle | `analysis/temporal_deinflation_20260919/REPORT.md` |
 
 ---
 
@@ -78,13 +79,14 @@ kontrol etmek; tekrar keşfetmek değil.
    Denetçi: raporlarda bu sınırın her yerde korunup korunmadığını kontrol edin.
 2. **Üç seed, betimsel istatistik.** Hiçbir yerde anlamlılık iddiası olmamalı.
    Bir rapor "doğrulandı", "anlamlı" veya "genel olarak" diyorsa işaretleyin.
-3. **`trend` yönü sonradan seçildi** (iddia 11). Yönsüz ilan edilmişti, "artan =
-   şüpheli" sonuçlara bakılınca belirlendi. Bağımsız doğrulaması yok. Bu, en yeni
-   ve en kırılgan bulgudur.
+3. **İddia 11 elendi (iddia 12).** Yönü sonradan seçilmişti ve de-şişirmeyi
+   geçemedi. Raporlarda ve makalede iddia 11'in sınırlandırılmadan geçtiği bir yer
+   kalmışsa işaretleyin; `temporal_signature` raporu tek başına okunursa fazla
+   umutlu görünür.
 4. **Min-Max AUC şişmesi.** `constrained_poison` tek vektör üretip 18 saldırgana
    kopyalıyor; saldırgan skorları checkpoint başına tek değer. Bu, birçok AUC'yi
-   şişirir. De-şişirme yalnız kök yön skoru için yapıldı (iddia 10);
-   **iddia 11 için henüz yapılmadı**.
+   şişirir. De-şişirme iddia 10 ve iddia 11 için yapıldı; **diğer AUC'ler için
+   yapılmadı**.
 5. **Rotasyonla kaçış yalnız tespit edilebilirlik için skorlandı**; verdiği zarar
    (ASR/doğruluk) ölçülmedi. "Kaçtı" ≠ "aynı zararı verdi".
 6. **CIFAR keşifseldir.** Backend belirsizliği gösterildi; CIFAR'dan genel sonuç
@@ -109,8 +111,11 @@ Aşağıdakilerden biri gösterilirse ilgili iddia düşer:
 - Bir sinyal `delta_norm` veya `sample_count` ile yüksek korelasyonluysa ve bu
   raporlanmamışsa.
 - Makaledeki bir cümle, dayandığı raporun sınırından daha genel bir şey söylüyorsa.
-- İddia 11 için: göreli normunu düz tutan bir Min-Max varyantı sinyali yok ediyorsa
-  (bu test **henüz yapılmadı**, sıradaki iştir).
+- Bir de-şişirme koşumunda saldırganın gerçekten saldırdığı doğrulanmıyorsa.
+  Bu bir kez oldu: `flat_20260919_182253` sakatlanmış saldırganla koştu ve yanlış
+  bir "kaçış imkânsız" sonucu verdi; `SUPERSEDED.txt` ile işaretli, atıf vermeyin.
+  Denetçi, her saldırı varyantında `poisoned·mean < 0` ve `gamma_clamped` oranını
+  kontrol etmelidir.
 
 ---
 
@@ -120,7 +125,7 @@ Aşağıdakilerden biri gösterilirse ilgili iddia düşer:
   `source/` **değiştirilmez**. Denetim salt okunur yapılmalı.
 - `git reset` / `git clean` yapılmaz; ağaçta başka araçların çalışması olabilir.
 - Python: `.venv/bin/python`. Yeniden kurulmaz.
-- Testler: `.venv/bin/python -m pytest new_work/tests -q` → şu an **110 geçiyor**.
+- Testler: `.venv/bin/python -m pytest new_work/tests -q` → şu an **118 geçiyor**.
 - `status.json` içindeki "running" ve PID kayıtları **bayat olabilir**; süreci
   `ps` ve `nvidia-smi` ile ayrıca doğrulayın.
 - Elsevier MDBSCAN makalesi yerelde var ama `.gitignore` ile dışarıda; telifli,
@@ -140,6 +145,15 @@ Bu oturumda çalıştırılıp doğrulananlar (proje kökünden):
 .venv/bin/python analysis/root_signal_20260919/evaluate_scores.py             # iddia 9
 .venv/bin/python analysis/root_direction_deinflation_20260919/run_deinflation.py  # iddia 10
 .venv/bin/python analysis/temporal_signature_20260919/run_probe.py            # iddia 11
+.venv/bin/python analysis/temporal_deinflation_20260919/analyze.py            # iddia 12
+```
+
+İddia 12'nin eğitim koşumu (24 hücre, ~31 dk GPU) şu komutlarla yeniden kurulur;
+mevcut sonucu tekrar üretmek için gerekmez:
+
+```sh
+.venv/bin/python analysis/temporal_deinflation_20260919/run_matrix.py --prepare
+.venv/bin/python analysis/temporal_deinflation_20260919/run_matrix.py --run <dizin>
 ```
 
 Codex tarafından yazılan betikler (bu oturumda çalıştırılmadı, kendi raporlarında
@@ -160,9 +174,10 @@ heterojenlikte dürüst istemciler uzaklaşıyor; mesafe kısıtıyla sınırlı
 saldırgan uzaklaşmayan bir yön seçebiliyor. **Tek turluk güncelleme geometrisi bu
 ortamda tükenmiş görünüyor.**
 
-En yeni bulgu (iddia 11) bu tabloya dar bir istisna ekliyor: turlar arası okuma,
-Min-Max için tek turluk okumadan fazlasını veriyor. Backdoor için hiçbir şey
-değişmedi ve yapısal nedeni duruyor.
+İddia 11 bu tabloya kısa süreli bir istisna eklemişti; iddia 12 onu da kapattı.
+Norm profilini gözeten saldırgan tespiti 0,585'e düşürüp hasarının %75'ini
+koruyor. Yani turlar arası **skaler** okuma da tek turluk okumadan daha dayanıklı
+değil. Backdoor için hiçbir şey değişmedi ve yapısal nedeni duruyor.
 
 Makale şu an bu sınırlayıcı bulgu ekseniyle yazılmış (7 sayfa, sınır 13) ve
 gönderilmedi. Karar notu: `tifs_submission/KARAR_NOTU_20260919.md`.
