@@ -43,11 +43,11 @@ hesaplanabilir.
 | 1 | Kanonik matris 2.130 planlı, 2.125 geçerli, 5 başarısız; başarısızlıklar korunmuş | `tifs_submission/evidence/outcomes.csv` |
 | 2 | Temiz α=0,01'de dürüst ret %24,37–42,57; dört veri kümesinde 90/90 tur alarm | `evidence/units.csv`, `claude/analiz/` |
 | 3 | Üst katmanların doğruluk katkısı 36 uç noktada 0,081 puan | `evidence/paired_deltas.csv` |
-| 4 | Patch backdoor ASR %96,6–99,99; tam yöntem FedAvg ile ölçülebilir biçimde aynı | `claude/analiz/ciktilar/backdoor_81.csv` |
+| 4 | Patch backdoor ASR %96,6–99,99; tam yöntem − FedAvg ASR farkı: CIFAR +0,185, Fashion −0,011, MNIST 0,000 yüzde puan (yuvarlanmış CSV; eşdeğerlik iddiası yok) | `claude/analiz/ciktilar/backdoor_81.csv` |
 | 5 | Yerel adımları eşitlemek FPR'yi düşürüyor ama kaldırmıyor; ilişki taban/taban-üstü ayrımı | `analysis/step_control_stratified/REPORT.md` |
-| 6 | Taban etkisi tur 0'da yok, öğrenmeyle çıkıyor. **"Batch rejimi hiçbir turda fark yaratmıyor" yorumu geri çekildi**: seed bazında karşı örnek var (MNIST/137/tur0 A/B/C %23,33/%15,56/%5,56) | `forward_round_20260913/REPORT.md` + `forward_round_review_20260914/REVIEW.md` |
+| 6 | Tur ve seed bazında sonuçlar değişiyor. **"Batch rejimi hiçbir turda fark yaratmıyor" yorumu geri çekildi**: seed bazında karşı örnek var (MNIST/137/tur0 A/B/C %23,33/%15,56/%5,56) | `forward_round_20260913/REPORT.md` + `forward_round_review_20260914/REVIEW.md` |
 | 7 | 144/144 kapı karşılaştırmasında kabul kümesi değişmiyor. Min-Max saldırganları uzlaşma testinin incelediği kümelere hiç girmiyor; **patch saldırganları giriyor ve testi geçiyor** — iki ayrı mekanizma | `analysis/gate_replay_20260914/COMPLETION_REPORT.md` |
-| 8 | Komşu-yön sinyali yalnız kopyalanmış vektörü yakalıyor; 18 aynı yönlü dürüstü reddediyor | `analysis/direction_negative_controls_20260919/REPORT.md` |
+| 8 | Komşu-yön sinyali koordineli yönlere duyarlı; kısıt geçerli küçük pertürbasyonlarda AUC 1 kalıyor; 18 aynı yönlü dürüstü reddediyor | `analysis/direction_negative_controls_20260919/REPORT.md` |
 | 9 | Kök kaybı skoru normla ρ=0,82, her koşulda AUC<0,5 | `analysis/root_signal_20260919/REPORT.md` |
 | 10 | Kök yön skoru döndürülünce 90°'de AUC 0,51/0,44, **0 kısıt ihlali** | `analysis/root_direction_deinflation_20260919/REPORT.md` |
 | 11 | Göreli norm eğilimi Min-Max'ı ayırıyor: saldırılı 0,994 / plasebo 0,521 / kontrol 0,695 | `analysis/temporal_signature_20260919/REPORT.md` |
@@ -180,15 +180,10 @@ denetlerken önce o hash'lerin ham dosyalarla eşleştiğini kontrol edin.
 
 ## 8. Bağlam: çalışmanın vardığı yer
 
-Altı deney hattı aynı sonuca çıktı: kabul yarıçapı, komşu uzlaşması ve
-güvenilir-veri gradyan açısı — üçü de *uzlaşmadan uzaklaşma*yı ölçüyor. Aşırı
-heterojenlikte dürüst istemciler uzaklaşıyor; mesafe kısıtıyla sınırlı bir
-saldırgan uzaklaşmayan bir yön seçebiliyor. **Tek turluk güncelleme geometrisi bu
-ortamda tükenmiş görünüyor.**
+Deneyler farklı sınırlılıklar gösteriyor: heterojenlikte dürüst ret, sentetik gruplarda özgüllük sorunu ve kök-yön skorunun yön duyarlılığı. Bunlar tek bir nedensel mekanizma veya güncelleme geometrisinin tükenmesi değildir.
 
 İddia 11 bu tabloya kısa süreli bir istisna eklemişti; iddia 12 o skoru zayıflattı.
-Savunulabilir ifade: *bu geliştirme koşullarında incelenen sinyaller, saldırganın
-kısıt içinde serbest bıraktığı bir parametreyi oynatmasına karşı dayanıksız çıktı.*
+Savunulabilir ifade: *profil değişikliği, incelenen çevrimdışı norm eğilimi skorunu zayıflatırken medyan eğitim zararının önemli bir bölümünü korudu; diğer sinyallerin müdahaleleri ve kanıt kapsamı ayrıdır.*
 "Geometri tükendi" veya "B yolu kapandı" bundan daha geniş iddialardır ve
 kanıtlanmadı. Backdoor için hiçbir şey değişmedi ve yapısal nedeni duruyor.
 
