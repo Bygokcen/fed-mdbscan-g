@@ -1,6 +1,8 @@
 > **Güncel — 294c693 FLTrust ikinci inceleme:** Gerçek Server.aggregate sınır testleri tekrar çalıştırıldı. Önceki Atlas “güncelleme atlanır” yorumu yanlış: accept_all_degraded ortalama alıyor. Ancak “kanonik sınır yolları hiç çalışmadı” da kanıtlanmadı: sıfır-kök yolu bayraksız; 5490 turda root_norm/operator yok, 135 tur herkes kabul edilmiş (sessiz fallback kanıtı değil, dışlanamayan adaylar). Sıradaki iş bu 135 turu ayrıştırıp ek iz varlığını denetlemek; gerekirse seçilmiş frozen/izli tekrar. Rapor: `analysis/fltrust_fidelity_20260919/ATLAS_SECOND_REVIEW.md`. Sonra Multi-Krum sadakati; yeni büyük kampanya yok. Bu oturum commit/push yapmadı.
 
-> **Güncel — FLTrust açığı daraltıldı, kalıcı enstrümantasyon eklendi:** İkinci Atlas incelemesi haklıydı: "sapan yollar hiç çalışmadı" çıkarımı döngüseldi, çünkü sıfır-kök yolu zaten bayrak üretmiyor. Tur kayıtlarında kök normu ve toplama operatörü yok. Ayrıştırılması gereken 135 tur karakterize edildi: 100'ü ilk 5 turda, 0'ı son 5 turda, α=0,5 temizde yoğun — normal yolun deseni, sessiz fallback'inki değil (rastgele başlatılmış modelde kök deltası 1e-10'un altına düşmez). Bu bir **çıkarımdır, kayıt değildir**. Açık kalıcı kapatıldı: `server.py`/`run_experiment.py` artık her tur `aggregation_operator` ve `root_gradient_norm` kaydediyor, iki regresyon testiyle (toplam 120 test). Mutlak/göreli fark etiketi de düzeltildi. Sıradaki iş: Multi-Krum sadakat kontrolü; makale yazımı paralel.
+> **Güncel — Multi-Krum sadakat kontrolü tamamlandı:** `analysis/multikrum_fidelity_20260919/REPORT.md`. Skor, f, komşu sayısı ve mesafe hesabı makale tanımıyla birebir (cdist float32/float64 bit düzeyinde aynı). Tek fark eşitlik bozmada: Min-Max tek vektörü 18 saldırgana kopyaladığı için skorları **tam eşit** ve blok kesmeyi aşıyor (sıra 48–65, m=61); hangi 13'ünün alındığını sıralama belirliyor. **Toplam değişmiyor** (2,5e-08) ve kabul/ret sayıları sabit. İki yapısal sapma: geçerlilik koşulu `2f+2<n` hiç denetlenmiyor, f sessizce n−3'e kırpılıyor. Kanonik 171 koşum/5.130 turda ikisi de tetiklenmedi (kohort hep 90, f=27, seçilen hep 61). Yeniden koşum gerekmiyor. FLTrust'ın 135 turu **açık** kalıyor.
+>
+> **Önceki — FLTrust açığı daraltıldı, kalıcı enstrümantasyon eklendi:** İkinci Atlas incelemesi haklıydı: "sapan yollar hiç çalışmadı" çıkarımı döngüseldi, çünkü sıfır-kök yolu zaten bayrak üretmiyor. Tur kayıtlarında kök normu ve toplama operatörü yok. Ayrıştırılması gereken 135 tur karakterize edildi: 100'ü ilk 5 turda, 0'ı son 5 turda, α=0,5 temizde yoğun — normal yolun deseni, sessiz fallback'inki değil (rastgele başlatılmış modelde kök deltası 1e-10'un altına düşmez). Bu bir **çıkarımdır, kayıt değildir**. Açık kalıcı kapatıldı: `server.py`/`run_experiment.py` artık her tur `aggregation_operator` ve `root_gradient_norm` kaydediyor, iki regresyon testiyle (toplam 120 test). Mutlak/göreli fark etiketi de düzeltildi. Sıradaki iş: Multi-Krum sadakat kontrolü; makale yazımı paralel.
 >
 > **Önceki — FLTrust sınır durumları ve gerçek sunucu yolu:** Atlas incelemesinin altı maddesi de doğrulandı ve işlendi. Gerçek `Server.aggregate` yolunda `fltrust_normalized` yayımlanmış kuralla ≤2,4e-07 örtüşüyor. Sınır durumları çalıştırıldı: bütün güvenler sıfırken sunucu **atlamıyor**, `accept_all_degraded` politikasıyla herkesi kabul edip ortalama alıyor ve `degraded` işaretliyor — hem ilk yardımcının hem incelemenin tarifi yanlıştı, okuyarak değil çalıştırarak görüldü. Sıfır kökte uniform mean'e düşüyor ve **hiçbir bayrak koymuyor**. Kanonik 183 koşum / 5.490 turda bu yolların hiçbiri tetiklenmedi (boş kabul 0, degraded 0, fallback 0), dolayısıyla **hiçbir kanonik sonuç etkilenmiyor**. Rapor güncellendi. Sıradaki iş: FLAME/Krum için aynı kontrolün yapılıp yapılmayacağı kararı.
 >
@@ -342,3 +344,38 @@ fark 0,41–0,76, kosinüs 0,910–0,931. Kanonik matriste **hiç kullanılmamı
 gerekmez). Ardından FLAME/Krum için aynı sadakat kontrolünün yapılıp
 yapılmayacağı ayrı karar; bir baseline'ın sadakati diğerleri hakkında bir şey
 söylemez.
+
+## Multi-Krum sadakat kontrolü — 19 Eylül 2026
+
+Rapor `analysis/multikrum_fidelity_20260919/REPORT.md`. Gerçek `Server.aggregate`
+yoluyla; yeni eğitim yok.
+
+**Uyuşan:** skor tanımı (n−f−2 en yakına karesel mesafe toplamı), f=27, komşu=61,
+m=61, mesafe hesabı (Gram vs cdist bağıl fark 1,65e-13; float32 ve float64
+bit düzeyinde aynı). Sunucunun bildirdiği f/m değerleri türetmeyle eşleşiyor.
+
+**Tek fark — eşitlik bozma.** Min-Max saldırısı tek vektörü 18 saldırgana
+kopyaladığı için 18 istemcinin skoru **tam eşit** (34,369287, bağıl boşluk 0) ve
+blok kesmeyi aşıyor: sıralar 48–65, m=61. Hangi 13'ünün alındığını kural değil
+`np.argsort` (kararsız) belirliyor; makale eşitlik bozmayı tanımlamıyor. Altı
+matrisin dördünde seçim 4–6 üye ayrışıyor. **Sonuç değişmiyor:** toplam bağıl
+fark 2,5e-08, kabul/ret sayısı (13/5) sıralamadan bağımsız, blok tamamen
+saldırganlardan oluştuğu için dürüst metrikler etkilenmiyor.
+
+**İki yapısal sapma (kanonikte tetiklenmedi):**
+- `2f+2 < n` geçerlilik koşulu **hiç denetlenmiyor**; f n−3'e, komşu ≥1'e
+  kırpılıp devam ediliyor. Küçük kohort/yüksek oranda yöntem yayımlanmış
+  geçerlilik bölgesinin dışında sessizce çalışır.
+- f kırpması varsayılan düşman sayısını düşürüyor ve tur kaydına yazılmıyor.
+
+**Kanonik tarama:** 171 koşum, 5.130 tur, kohort hep 90, seçilen hep 61,
+geçerlilik ihlali 0, n<3 olan tur 0, degraded 0, fallback 0. **Yeniden koşum
+gerekmiyor**; etkilenen tek şey koordineli saldırı turlarında hangi saldırganın
+reddedildiği bilgisidir.
+
+**m tercihi:** yerel m=n−f−2=61, makalenin deneyinde m=n−f=63. Kural hatası değil,
+kayıtlı tercih; m=63 ile örtüşme 61 üyenin 59–61'i. Önceki raporun "Multi-Krum,
+m=n−⌈0,3n⌉−2 olarak yazılmalı" kararı doğrulandı.
+
+**Sıradaki iş:** FLAME sadakati ayrı karar. İki baseline kontrol edilmiş olması
+aile düzeyinde genelleme vermez.
