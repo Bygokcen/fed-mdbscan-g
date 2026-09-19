@@ -114,6 +114,143 @@ cd /home/gokcen/Fed_MDBSCAN_TIFS/new_work
 
 ---
 
+## (b-sonuç) Adım kontrolü deneyi — **tamamlandı, 117/117 geçerli**
+
+Kampanya: `new_work/results/step_control/steps5_20260913`, 2,64 saat, başarısızlık yok.
+Analiz: [analiz/adim_kontrolu.py](analiz/adim_kontrolu.py) → `ciktilar/adimkontrol_*`
+
+### Müdahale gerçekten çalıştı mı? Evet, adımlar tam eşitlendi
+
+Temiz α=0,01, fed_mdbscan_g, 24.300 istemci-tur gözlemi:
+
+| çeyrek | medyan örnek | **3 epoch** adım/tur | ret | **5 sabit adım** adım/tur | ret |
+|---|---|---|---|---|---|
+| q0 | 20 | 3,00 | %2,4 | 5,00 | %4,5 |
+| q1 | 20 | 3,00 | %5,6 | 5,00 | %2,4 |
+| q2 | 20 | 8,16 | %43,3 | 5,00 | %25,7 |
+| q3 | 628 | **128,61** | **%89,6** | 5,00 | %37,5 |
+
+Kanonikte 43× adım farkı vardı; yeni koşumda **tüm istemciler tam olarak 5 adım**.
+
+### Ölçütlere göre karar
+
+| Ölçüt | Sonuç |
+|---|---|
+| **1.** Sabit adımda FPR yüksek kalırsa hipotez düşer | **Güçlü hali ÇÜRÜDÜ.** Eğim azalıyor ama kaybolmuyor; FLAME/Krum'da toplam FPR neredeyse hiç düşmüyor |
+| **2.** Etki yalnızca bizim yöntemde olursa düşer | **Tetiklenmedi** — FLAME, Krum, Fed-MDBSCAN-G üçünde de var |
+| **3.** FLTrust diğerleriyle aynı yöne giderse zayıflar | **Tetiklenmedi** — ters işaret korundu (−0,233 → −0,216) |
+| **4. Tuzak:** FPR→0 ama TPR→0 ise filtre kapanmıştır | **GEÇTİ** — TPR tam 1,0000 kaldı, doğruluk çökmedi |
+
+Temiz α=0,01 (6.2), çeyrek eğimi (q3−q0) ve toplam FPR:
+
+| yöntem | 3 epoch eğim | 5 adım eğim | azalma | 3 epoch FPR | 5 adım FPR |
+|---|---|---|---|---|---|
+| fed_mdbscan_g | +0,892 | +0,379 | %57 | 0,364 | 0,201 |
+| mdbg_l0_only | +0,865 | +0,308 | %64 | 0,323 | 0,165 |
+| flame_hdbscan | +0,850 | +0,541 | %36 | 0,459 | **0,455** |
+| krum_bound30 | +0,859 | +0,552 | %36 | 0,322 | **0,322** |
+| fltrust_normalized | −0,233 | −0,216 | — | 0,312 | 0,317 |
+
+Saldırılı 3.1'de tespit tamamen korundu: fed_mdbscan_g TPR 1,0000 → 1,0000,
+FPR 0,173 → 0,054, yani J +0,827 → **+0,946**. FLAME ve Krum da TPR 1,0.
+
+### ★ Beklenmeyen bulgu: yanlılık, bilinen düzeltmeden sağ çıkıyor
+
+Enstrümantasyon tam da bunu görünür kıldı. **Adımlar tam eşitken bile** (hepsi 5):
+
+- Spearman(örnek sayısı, güncelleme normu) = **+0,540**
+- Spearman(norm, ret) = **+0,608**
+- Spearman(örnek sayısı, ret) = **+0,518**
+
+Kova analizi yapıyı gösteriyor — gözlemlerin **%64,3'ü tam 20 örnekli** istemciler
+(`repair_minimum` tabanı):
+
+| örnek sayısı | gözlem | medyan norm | ret |
+|---|---|---|---|
+| =20 (taban) | 15.626 | 0,271 | **%3,0** |
+| 21–50 | 1.162 | 0,681 | %37,4 |
+| 51–150 | 1.370 | 0,610 | %33,2 |
+| 151–500 | 2.735 | 0,694 | %37,1 |
+| >500 | 3.407 | 0,777 | **%55,1** |
+
+Yani **iki üst üste binmiş protokol artefaktı** var:
+
+1. **`repair_minimum` tabanı.** İstemcilerin çoğu tam 20 örnekte oturuyor; α=0,01'de
+   bu 20 örnek neredeyse tek etiketli, yerel hedef birkaç adımda tükeniyor →
+   küçük norm → neredeyse hiç reddedilmiyor.
+2. **Epoch tabanlı eğitim.** Adım sayısı veri hacmiyle ölçekleniyor → eğimi büyütüyor.
+
+(2)'yi düzeltmek eğimin ~%57'sini alıyor; (1) kalıyor.
+
+### ⚠ DÜZELTME — yukarıdaki yorumların bir kısmı geri çekildi
+
+Bağımsız inceleme ([REVIEW.md](../analysis/claude_step_review_20260913/REVIEW.md))
+ve tabakalı analiz ([REPORT.md](../analysis/step_control_stratified/REPORT.md))
+aşağıdaki noktalarda haklı; bu bölümün ilk hali fazla güçlüydü.
+
+**D1 — "FedNova'nın reçetesi uygulandı" ifadesi yanlıştı.** Beş sabit adım, bütün
+istemcilerin *eğitim adımı sayısını* eşitler. FedNova ise heterojen yerel
+güncellemeleri *toplama sırasında* normalize eden bir yöntemdir; kodda FedNova
+toplaması, normalizasyon katsayısı veya FedNova kontrol kolu yok. Doğru ifade:
+**adım sayısını eşitlemek, bu protokolde kalan yanlış retleri ortadan kaldırmadı.**
+FedNova hakkında hüküm vermek için gerçek bir FedNova kolu gerekir.
+
+**D2 — "İki protokol artefaktı" nedensel olarak gösterilmedi.** Tek müdahale
+`max_local_steps` idi. Onarım politikası, etiket bileşimi, son mini-batch boyutu ve
+aynı örneklerin tekrar görülmesi ayrıştırılmadı. "Yerel hedef birkaç adımda
+tükeniyor" için kayıp/gradyan eğrisi ölçülmedi. Doğru ifade: **adım müdahalesinin
+etkisi ve geriye kalan hacim–ret ilişkisi gözlendi; bileşenleri henüz ayrışmadı.**
+
+**D3 — Havuzlanmış korelasyon yanıltıcıydı.** Yukarıdaki +0,540 üç veri kümesini,
+üç seed'i ve 30 turu tek havuzda sıralıyor. Veri kümesi/seed/tur içinde
+hesaplandığında ilişki neredeyse tamamen **taban/taban-üstü ayrımından** geliyor,
+sürekli bir hacim ölçeklenmesinden değil:
+
+| Veri kümesi | örnek–norm ρ (tümü) | **>20 örnekte ρ** | =20'de FPR | >20'de FPR |
+|---|---:|---:|---:|---:|
+| MNIST | +0,678 | **+0,056** | %6,69 | %71,25 |
+| Fashion | +0,541 | **+0,134** | %2,96 | %34,58 |
+| HAR | +0,267 | **−0,095** | %0,47 | %4,58 |
+| CIFAR | +0,686 | **−0,034** | %7,19 | %59,89 |
+
+Yani "yanlış pozitif veri hacmine göre **sıralıdır**" demek yanlış. Doğrusu:
+**minimum-örnek tabanındaki istemciler neredeyse hiç reddedilmiyor, tabanın
+üstündekiler yüksek oranda reddediliyor; taban üstünde hacimle ilişki zayıf ya da
+yok.**
+
+**D4 — Krum'un sabit FPR'si tasarımından geliyor.** Yerel Krum m = n − f − 2
+güncelleme seçer; katılım ve saldırı üst sınırı sabitken temiz koşulda ret sayısı
+zaten sabittir. %32,22'nin iki rejimde de aynı çıkması, adım müdahalesinin
+etkisizliğine bağımsız kanıt değil. Yukarıdaki ölçüt-1 satırı bu nedenle Krum'a
+dayandırılmamalı.
+
+**D5 — FLTrust'ın ters işareti tek başına norm normalizasyonunun kanıtı değil.**
+Kök veri, yön benzerliği ve ağırlıklandırma birlikte değişiyor.
+
+### Geriye kalan savunulabilir ifade
+
+> Adım sayısını eşitlemek, tam yöntemde temiz yanlış pozitifi düşürdü (%35,2 → %17,5)
+> ve Gaussian tespitini bozmadı (TPR 1,0 korundu). Ancak yanlış pozitifleri ortadan
+> kaldırmadı ve FLAME'de neredeyse hiç değiştirmedi. Kalan farkın baskın yapısı
+> minimum-örnek tabanı ile taban üstü arasındaki ayrımdır; bu ayrımın nedeni
+> (veri miktarı mı, örnek tekrarı mı, batch rejimi mi, etiket bileşimi mi) henüz
+> ayrıştırılmamıştır.
+
+Bu, (c)'deki özgünlük değerlendirmesini **değiştirmiyor**: FedNova hâlâ atıf
+verilmesi gereken önceki çalışmadır ve "yayımlanmamış güvenlik sonucu" ifadesi
+hedefli aramada bulunamamış olmaktan çıkarılamaz — aday katkıdır, doğrulanmış
+özgünlük sonucu değil.
+
+### Sınırlar
+
+- Tek adım bütçesi (5). 20-adım kolu koşulmadı; doz-yanıt eğrisi yok.
+- Taban etkisi bu çalışmanın `repair_minimum`/min=20 politikasına özgü. Genellenebilir
+  ifade "bölüşüm onarım politikası ölçülen FPR'yi büyük ölçüde belirler" olmalı.
+- Yalnızca α=0,01. 3 seed, betimsel istatistik; anlamlılık iddiası yok.
+- FLAME/Krum yerel uygulamalar; özgün yazar kodlarıyla karşılaştırılmadı.
+
+---
+
 ## (c) Literatür yenilik kontrolü — **tamamlandı; konumlandırma değişmeli**
 
 **Sonuç: katkı gerçek ama incelemede çerçevelediğimden dar. Mekanizmanın kendisi
@@ -196,3 +333,45 @@ new_work/tests/test_server_contracts.py  +46
 
 Hepsi `AGENTS.md`'nin izin verdiği alanda (`new_work/simulation`, `new_work/tests`).
 Kanonik arşiv, dondurulmuş kaynak, kanıt CSV'leri ve makale dosyaları değiştirilmedi.
+
+## Sonraki bağımsız düzeltme ve tabakalı analiz
+
+117 koşum korundu. Yukarıdaki “FedNova tam uygulandı”, “iki artefakt kanıtlandı” ve “adımlar eşitlenince kayboluyor” ifadeleri sonraki incelemeyle sınırlandırılmıştır; güncel bilimsel sonuç olarak kullanılmamalıdır. [Bağımsız inceleme](../analysis/claude_step_review_20260913/REVIEW.md) ve [veri kümesi/seed/tur analizi](../analysis/step_control_stratified/REPORT.md) esas alınmalıdır. Beş-adım tam yöntem FPR'si HAR'da %1,35, MNIST'te %34,94; 20 örneklik taban dışlandığında norm-hacim ilişkisi belirgin biçimde zayıflıyor. Bunun nedenini ayıracak [batch/örnek yenilenmesi kontrolü](../analysis/step_control_stratified/NEXT_EXPERIMENT.md) tasarlandı, henüz çalıştırılmadı.
+
+---
+
+## (d) İleri tur A/B/C deneyi — **tamamlandı, 117/117**
+
+Codex'in `NEXT_EXPERIMENT.md`'de tasarlayıp başlatmadığı deney uygulandı.
+Tam rapor: [analysis/forward_round_20260913/REPORT.md](../analysis/forward_round_20260913/REPORT.md)
+
+**Yapılan.** Yeni modül `new_work/simulation/forward_round_probe.py` (Codex'in
+`batch_control_probe.py`'sine dokunulmadı; örnekleme fonksiyonu oradan içe
+aktarıldı), 5 hedefli test (106 test geçiyor), süpervizör
+`analysis/forward_round_20260913/run_forward.py`. 9 referans yörünge × 0/9/19/29
+checkpoint × A/B/C = 117 birim, 26 dakika.
+
+**Bütünlük.** 36/36 hücrede A kolu referans turunu **birebir** yeniden üretti. Bu,
+tur bağımlı dört seed amacının checkpoint turuna yeniden eşlenmesiyle sağlandı ve
+süpervizör tarafından her hücrede zorunlu tutuluyor.
+
+**Sonuçlar.**
+
+1. **Batch/örnek yenilenmesi rejimi hiçbir turda fark yaratmıyor.** Taban üstü
+   istemciler A'da 160, B'de ~90, C'de 20 benzersiz örnek görüyor — 8 kat aralık —
+   ama MNIST ret oranı üç kolda da ~%42. Aday açıklama **elendi**.
+2. **Fark tur 0'da yok, öğrenmeyle ortaya çıkıyor.** MNIST taban üstü ret: tur 0'da
+   %0, tur 9'dan sonra ~%83. Pilotun null sonucunun nedeni bu: etki tam olarak
+   pilotun ölçtüğü noktada mevcut değil.
+3. **Mekanizma, turun başlangıç noktasında.** Taban istemcileri tura zaten
+   uydurulmuş geliyor (MNIST kayıp 0,08), taban üstü yüksek kayıpla geliyor (3,11)
+   ve beş adımda çok daha uzun yol alıyor → büyük norm → ret. Bu, günlükteki
+   "yerel hedef tur içinde tükeniyor" ifadesini düzeltir.
+4. **Filtrenin katkısı sınırlandı.** Hiç reddetmeyen uniform mean kolunda da ~2–3
+   katlık ayrışma var; tam yöntem bunu MNIST'te ~9,7 kata çıkarıyor, Fashion'da
+   çıkarmıyor (1,94 → 2,00). Yani ayrışmanın bir kısmı bölüşümün kendisinden
+   geliyor, güçlendirme ise yalnız çok reddeden koşulda.
+
+**Hâlâ ayrışmamış.** Onarım politikası (`repair_minimum` vs `preserve_empty`),
+etiket bileşimi ve veri miktarı birbirinden ayrılmadı. Saldırı altında davranış
+ölçülmedi. FedNova yine uygulanmadı.

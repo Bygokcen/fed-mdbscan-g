@@ -1,0 +1,9 @@
+{
+  "full_method_units": 36,
+  "rounds": 1080,
+  "all_l0_counts_match": true,
+  "all_l0_only_accepted_sets_match": true,
+  "raw_hashes_match_previous_validation": true,
+  "attacked_minmax_backdoor_rounds": 360,
+  "l0_guard_rounds": 0
+}

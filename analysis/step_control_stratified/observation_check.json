@@ -1,0 +1,8 @@
+{
+  "dataset": "har",
+  "seed": 42,
+  "arm": "A",
+  "uninstrumented_training_input_hash_equals_probe": true,
+  "accepted_rejected_accuracy_norms_equal": true,
+  "scope": "one smoke condition only"
+}
