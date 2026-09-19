@@ -84,10 +84,14 @@ Kural karşılaştırması bu yolları hiç uyarmıyordu; `compare.py` sıfır k
 
 | Durum | Sunucunun yaptığı | Yayımlanmış kural | Fark | İşaretleniyor mu |
 |---|---|---|---:|---|
-| Bütün güvenler sıfır | accept-all degraded fallback, uniform mean | sıfır güncelleme | göreli 1,5 | **evet** (`no_accepted_updates`, `degraded=true`) |
-| Kök güncellemesi sıfır | accept-all + uniform mean | sıfır güncelleme | göreli 0,71 | **hayır** — sessiz |
+| Bütün güvenler sıfır | accept-all degraded fallback, uniform mean | sıfır güncelleme | **mutlak** 1,5 | **evet** (`no_accepted_updates`, `degraded=true`) |
+| Kök güncellemesi sıfır | accept-all + uniform mean | sıfır güncelleme | **mutlak** 0,71 | **hayır** — sessiz |
 | İstemci normu eşikte | eşik altındaki istemciyi reddediyor | küçük ağırlıkla tutuyor | göreli 1,0e-03 | hayır |
-| Bir güven tam sıfır | eşleşiyor | — | 2,0e-09 | — |
+| Bir güven tam sıfır | eşleşiyor | — | göreli 2,0e-09 | — |
+
+İlk iki satırda referans güncelleme sıfırdır, dolayısıyla oran tanımsızdır;
+1,5 ve 0,71 **mutlak fark normudur**, göreli hata değildir. (Harness bunu
+karıştırıyordu, düzeltildi.)
 
 **Not:** ilk durumu hem bu projenin ilk karşılaştırma yardımcısı hem de bağımsız
 inceleme yanlış tarif etmişti. Yardımcı sessizce ortalama döndürüyordu; inceleme
@@ -111,9 +115,39 @@ uniform mean'e düşüyor ve bunu **hiçbir bayrakla işaretlemiyor**.
 | En az kabul edilen istemci sayısı | 14 |
 | En çok sıfır güvenli istemci sayısı | 76 |
 
-Kabul kümesi hiçbir turda boşalmadı, hiçbir fallback tetiklenmedi. **Sapan sınır
-yolları kanonik kayıtlarda hiç çalışmadı; hiçbir kanonik sonuç etkilenmiyor ve
-yeniden koşum gerekmiyor.**
+Kabul kümesi hiçbir turda boşalmadı, hiçbir bayrak tetiklenmedi.
+
+**Ama bu, sapan yolların hiç çalışmadığını kanıtlamaz.** Yukarıdaki tablonun
+ikinci satırı tam olarak şunu söylüyor: sıfır-kök yolu **bayrak üretmiyor**.
+Bayrakların sıfır olmasını o yolun çalışmadığına kanıt saymak döngüsel olur.
+Tur kayıtlarında ne kök normu ne de gerçekleşen toplama operatörü var.
+
+Ayrıştırılması gereken turlar, herkesin kabul edildiği **135 tur** (5.490'ın
+%2,5'i). Bunların dağılımı normal yolla tutarlı, sessiz fallback'le değil:
+
+| | |
+|---|---:|
+| İlk 5 turda | **100 / 135** |
+| Son 5 turda | **0** |
+| En yoğun koşullar | α=0,5 temiz (1.1): MNIST 15, Fashion 12, HAR 10 |
+
+Erken turlarda bütün istemciler aynı iniş yönünde hareket eder, dolayısıyla kökle
+kosinüsleri pozitiftir ve kimse reddedilmez; heterojenlik arttıkça bazı kosinüsler
+negatife döner. Düşük α'da uzlaşma daha yüksektir. Sıfır-kök fallback'i ise kök
+deltasının normunun 1e-10'un altına düşmesini gerektirir; **rastgele başlatılmış
+modelde, ilk turda, 100 örnek üzerinde 3 epoch SGD'den sonra** bu olmaz — ve etki
+tam olarak orada yoğunlaşıyor.
+
+**Sonuç:** kanıt sessiz fallback'in çalışmadığı yönünde güçlü, ama bu bir
+**çıkarımdır, kayıt değildir**. Kesin dışlama için kök normunun ve operatörün
+kayıtlı olması gerekirdi; kanonik koşumlarda ikisi de yok.
+
+### Açık kalıcı olarak kapatıldı
+
+`server.py` ve `run_experiment.py` artık her tur için `aggregation_operator` ve
+`root_gradient_norm` kaydediyor; iki regresyon testi bunu koruyor (toplam 120
+test). Bundan sonraki hiçbir koşumda sessiz fallback görünmez olmayacak. Kanonik
+arşiv geriye dönük değiştirilmedi.
 
 ## Toplama dışında üç fark
 

@@ -74,8 +74,13 @@ def agreement(applied, reference_aggregate):
     left = np.asarray(applied, dtype=np.float64)
     right = np.asarray(reference_aggregate, dtype=np.float64)
     denominator = float(np.linalg.norm(left) * np.linalg.norm(right))
+    reference_norm = float(np.linalg.norm(right))
     return dict(
-        relative_gap=float(np.linalg.norm(left - right) / (np.linalg.norm(right) or 1.0)),
+        # Only a ratio when there is something to divide by; with a zero
+        # reference this is the absolute difference norm and is named so.
+        relative_gap=(float(np.linalg.norm(left - right) / reference_norm)
+                      if reference_norm else None),
+        absolute_gap=float(np.linalg.norm(left - right)),
         cosine=float(left @ right / denominator) if denominator else None,
         applied_norm=float(np.linalg.norm(left)),
         reference_norm=float(np.linalg.norm(right)))

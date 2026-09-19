@@ -221,6 +221,7 @@ class Server:
             if sample_counts is None or len(sample_counts) != len(gradients):
                 raise ValueError("sample_weighted_mean requires one sample count per update")
         n_clients = len(gradients)
+        root_gradient_norm = None
 
         # Per-client update magnitude, recorded for every aggregation method so
         # that rejection decisions can be related to update geometry across
@@ -316,6 +317,10 @@ class Server:
                 momentum=self.method_params.get('root_momentum', 0.9),
             )
             root_training_time = time.perf_counter() - root_started
+            # Recorded so that a degenerate root, which routes the filter to a
+            # silent uniform-mean fallback, is visible afterwards in the run.
+            root_gradient_norm = (None if root_grad is None
+                                  else float(np.linalg.norm(root_grad)))
             if root_grad is None:
                 benign_indices = list(range(n_clients))
                 anomaly_indices = []
@@ -522,6 +527,8 @@ class Server:
             'filter_info': filter_info,
             'n_benign': len(benign_indices),
             'n_anomaly': len(anomaly_indices),
+            'aggregation_operator': effective_aggregation_operator,
+            'root_gradient_norm': root_gradient_norm,
             'update_norms': update_norms_by_id,
             'l0_distances': l0_distances_by_id,
             # xAI attack-alert reporting
