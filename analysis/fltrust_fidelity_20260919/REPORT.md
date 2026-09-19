@@ -115,7 +115,8 @@ uniform mean'e düşüyor ve bunu **hiçbir bayrakla işaretlemiyor**.
 | En az kabul edilen istemci sayısı | 14 |
 | En çok sıfır güvenli istemci sayısı | 76 |
 
-Kabul kümesi hiçbir turda boşalmadı, hiçbir bayrak tetiklenmedi.
+Kabul kümesi hiçbir turda boşalmadı, hiçbir bayrak tetiklenmedi. Bu yalnız
+*bayraklı* yolları dışlar.
 
 **Ama bu, sapan yolların hiç çalışmadığını kanıtlamaz.** Yukarıdaki tablonun
 ikinci satırı tam olarak şunu söylüyor: sıfır-kök yolu **bayrak üretmiyor**.
@@ -131,16 +132,17 @@ Ayrıştırılması gereken turlar, herkesin kabul edildiği **135 tur** (5.490'
 | Son 5 turda | **0** |
 | En yoğun koşullar | α=0,5 temiz (1.1): MNIST 15, Fashion 12, HAR 10 |
 
-Erken turlarda bütün istemciler aynı iniş yönünde hareket eder, dolayısıyla kökle
-kosinüsleri pozitiftir ve kimse reddedilmez; heterojenlik arttıkça bazı kosinüsler
-negatife döner. Düşük α'da uzlaşma daha yüksektir. Sıfır-kök fallback'i ise kök
-deltasının normunun 1e-10'un altına düşmesini gerektirir; **rastgele başlatılmış
-modelde, ilk turda, 100 örnek üzerinde 3 epoch SGD'den sonra** bu olmaz — ve etki
-tam olarak orada yoğunlaşıyor.
+Bu dağılım normal işleyişle uyumludur: erken turlarda istemciler büyük ölçüde
+aynı iniş yönünde hareket edebilir, dolayısıyla kökle kosinüsleri pozitif olur ve
+kimse reddedilmez. Düşük α'da uzlaşma daha yüksektir. Ancak **aynı dağılım tek
+başına sessiz fallback'i dışlamaz**: erken turlarda yoğunlaşma her iki açıklamayla
+da bağdaşabilir ve kök normunun hangi turlarda ne olduğu kayıtlı değildir.
 
-**Sonuç:** kanıt sessiz fallback'in çalışmadığı yönünde güçlü, ama bu bir
-**çıkarımdır, kayıt değildir**. Kesin dışlama için kök normunun ve operatörün
-kayıtlı olması gerekirdi; kanonik koşumlarda ikisi de yok.
+**Sonuç: sessiz sıfır-kök fallback'i bu 135 tur için dışlanamadı.** Mevcut
+kayıtlarla ayrıştırılamayan turlar olarak açık bırakılıyor. Kesin ayrım kök
+normunun ve toplama operatörünün kayıtlı olmasını gerektirirdi; kanonik
+koşumlarda ikisi de yok ve **yeni kayıt alanları geçmiş koşumların belirsizliğini
+geriye dönük kapatmaz**.
 
 ### Açık kalıcı olarak kapatıldı
 
@@ -179,8 +181,11 @@ Etkisi ölçülmedi.
 
 ## Etkilenen sonuçlar ve yeniden koşum kararı
 
-- **Toplama kuralı:** kanonik sonuçlar etkilenmiyor; `fltrust_normalized` sadık.
-  Yeniden koşum gerekmiyor.
+- **Toplama kuralı (sınanan girdilerde):** `fltrust_normalized` yayımlanmış
+  kuralla uyuşuyor. Bu, **sınanan girdilerde toplama kuralı uyumudur**; bütün
+  eğitim protokolünün sadakati değildir. Bilinen bir sapma nedeniyle yeniden
+  koşum gerekmiyor.
+- **135 belirsiz tur:** sessiz fallback dışlanamadı; açık madde olarak duruyor.
 - **Metrik yorumu (F1):** makale ve raporlardaki FLTrust FPR/TPR ifadeleri
   düzeltilmeli. Sayılar değişmiyor, anlamı değişiyor.
 - **F2 ve F3:** kaydedilmeli; etkilerini ölçmek isteyen bir çalışma için ayrı

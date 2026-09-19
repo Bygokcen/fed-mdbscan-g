@@ -1,0 +1,7 @@
+ref,round,clients,f,neighbours,m,paper_experiment_m,validity_holds,server_m,server_f,selection_identical,selection_symmetric_difference,tied_at_cutoff,tie_straddles_cutoff,aggregate_relative_gap,overlap_with_paper_m,operator,fallback_reason
+ref_00,0,90,27,61,61,63,True,61,27,True,0,1,False,2.5366346928478604e-08,61,uniform_mean,none
+ref_00,9,90,27,61,61,63,True,61,27,False,6,18,True,2.5677270434533972e-08,60,uniform_mean,none
+ref_00,29,90,27,61,61,63,True,61,27,False,6,18,True,2.562341241180426e-08,60,uniform_mean,none
+ref_01,0,90,27,61,61,63,True,61,27,True,0,1,False,2.569380566780455e-08,61,uniform_mean,none
+ref_01,9,90,27,61,61,63,True,61,27,False,6,18,True,2.5055017413163293e-08,59,uniform_mean,none
+ref_01,29,90,27,61,61,63,True,61,27,False,4,18,True,2.5118540894170784e-08,60,uniform_mean,none
