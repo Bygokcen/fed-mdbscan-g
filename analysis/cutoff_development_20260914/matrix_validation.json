@@ -1,0 +1,44 @@
+[
+  {
+    "arm": "A",
+    "method": "fed_mdbscan_g",
+    "full_filter_info_match": true,
+    "server_ids_match": true,
+    "rejected": 34
+  },
+  {
+    "arm": "A",
+    "method": "mdbg_no_snnc_cutoff",
+    "full_filter_info_match": true,
+    "server_ids_match": true,
+    "rejected": 20
+  },
+  {
+    "arm": "B",
+    "method": "fed_mdbscan_g",
+    "full_filter_info_match": true,
+    "server_ids_match": true,
+    "rejected": 25
+  },
+  {
+    "arm": "B",
+    "method": "mdbg_no_snnc_cutoff",
+    "full_filter_info_match": true,
+    "server_ids_match": true,
+    "rejected": 15
+  },
+  {
+    "arm": "C",
+    "method": "fed_mdbscan_g",
+    "full_filter_info_match": true,
+    "server_ids_match": true,
+    "rejected": 18
+  },
+  {
+    "arm": "C",
+    "method": "mdbg_no_snnc_cutoff",
+    "full_filter_info_match": true,
+    "server_ids_match": true,
+    "rejected": 14
+  }
+]

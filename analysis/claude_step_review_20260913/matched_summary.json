@@ -1,0 +1,237 @@
+{
+  "matched_pairs": 108,
+  "unmatched_new_units": [
+    [
+      "har",
+      "3.1",
+      "mdbg_l0_only",
+      "42"
+    ],
+    [
+      "har",
+      "3.1",
+      "mdbg_l0_only",
+      "137"
+    ],
+    [
+      "har",
+      "3.1",
+      "mdbg_l0_only",
+      "2024"
+    ],
+    [
+      "mnist",
+      "3.1",
+      "mdbg_l0_only",
+      "42"
+    ],
+    [
+      "mnist",
+      "3.1",
+      "mdbg_l0_only",
+      "137"
+    ],
+    [
+      "mnist",
+      "3.1",
+      "mdbg_l0_only",
+      "2024"
+    ],
+    [
+      "fashion_mnist",
+      "3.1",
+      "mdbg_l0_only",
+      "42"
+    ],
+    [
+      "fashion_mnist",
+      "3.1",
+      "mdbg_l0_only",
+      "137"
+    ],
+    [
+      "fashion_mnist",
+      "3.1",
+      "mdbg_l0_only",
+      "2024"
+    ]
+  ],
+  "common_three_datasets": [
+    {
+      "scenario": "3.1",
+      "method": "fed_mdbscan_g",
+      "datasets": [
+        "mnist",
+        "fashion_mnist",
+        "har"
+      ],
+      "units_per_arm": 9,
+      "epoch3_fpr": 0.17258230452674897,
+      "steps5_fpr": 0.05411522633744856,
+      "epoch3_accuracy": 0.4869284168457565,
+      "steps5_accuracy": 0.5427511895336123,
+      "epoch3_tpr": 1.0,
+      "steps5_tpr": 1.0
+    },
+    {
+      "scenario": "3.1",
+      "method": "fedavg",
+      "datasets": [
+        "mnist",
+        "fashion_mnist",
+        "har"
+      ],
+      "units_per_arm": 9,
+      "epoch3_fpr": 0.0,
+      "steps5_fpr": 0.0,
+      "epoch3_accuracy": 0.5017050069750782,
+      "steps5_accuracy": 0.43757011273234553,
+      "epoch3_tpr": 0.0,
+      "steps5_tpr": 0.0
+    },
+    {
+      "scenario": "3.1",
+      "method": "flame_hdbscan",
+      "datasets": [
+        "mnist",
+        "fashion_mnist",
+        "har"
+      ],
+      "units_per_arm": 9,
+      "epoch3_fpr": 0.33945473251028807,
+      "steps5_fpr": 0.3241255144032922,
+      "epoch3_accuracy": 0.3515582362477849,
+      "steps5_accuracy": 0.340044704596011,
+      "epoch3_tpr": 1.0,
+      "steps5_tpr": 1.0
+    },
+    {
+      "scenario": "3.1",
+      "method": "fltrust_normalized",
+      "datasets": [
+        "mnist",
+        "fashion_mnist",
+        "har"
+      ],
+      "units_per_arm": 9,
+      "epoch3_fpr": 0.32366255144032924,
+      "steps5_fpr": 0.3282407407407407,
+      "epoch3_accuracy": 0.6160814953059608,
+      "steps5_accuracy": 0.5856750141386721,
+      "epoch3_tpr": 0.497119341563786,
+      "steps5_tpr": 0.501440329218107
+    },
+    {
+      "scenario": "3.1",
+      "method": "krum_bound30",
+      "datasets": [
+        "mnist",
+        "fashion_mnist",
+        "har"
+      ],
+      "units_per_arm": 9,
+      "epoch3_fpr": 0.1527777777777778,
+      "steps5_fpr": 0.1527777777777778,
+      "epoch3_accuracy": 0.5011052935188327,
+      "steps5_accuracy": 0.5092179693096558,
+      "epoch3_tpr": 1.0,
+      "steps5_tpr": 1.0
+    },
+    {
+      "scenario": "6.2",
+      "method": "fed_mdbscan_g",
+      "datasets": [
+        "mnist",
+        "fashion_mnist",
+        "har"
+      ],
+      "units_per_arm": 9,
+      "epoch3_fpr": 0.3520987654320988,
+      "steps5_fpr": 0.1751028806584362,
+      "epoch3_accuracy": 0.31095509557742335,
+      "steps5_accuracy": 0.4018067903329186,
+      "epoch3_tpr": null,
+      "steps5_tpr": null
+    },
+    {
+      "scenario": "6.2",
+      "method": "fedavg",
+      "datasets": [
+        "mnist",
+        "fashion_mnist",
+        "har"
+      ],
+      "units_per_arm": 9,
+      "epoch3_fpr": 0.0,
+      "steps5_fpr": 0.0,
+      "epoch3_accuracy": 0.6826884138295065,
+      "steps5_accuracy": 0.5911218979753421,
+      "epoch3_tpr": null,
+      "steps5_tpr": null
+    },
+    {
+      "scenario": "6.2",
+      "method": "flame_hdbscan",
+      "datasets": [
+        "mnist",
+        "fashion_mnist",
+        "har"
+      ],
+      "units_per_arm": 9,
+      "epoch3_fpr": 0.4602469135802469,
+      "steps5_fpr": 0.4508641975308642,
+      "epoch3_accuracy": 0.26060193040003016,
+      "steps5_accuracy": 0.27204472721788636,
+      "epoch3_tpr": null,
+      "steps5_tpr": null
+    },
+    {
+      "scenario": "6.2",
+      "method": "fltrust_normalized",
+      "datasets": [
+        "mnist",
+        "fashion_mnist",
+        "har"
+      ],
+      "units_per_arm": 9,
+      "epoch3_fpr": 0.3123045267489712,
+      "steps5_fpr": 0.3168724279835391,
+      "epoch3_accuracy": 0.5918982882780983,
+      "steps5_accuracy": 0.5765015156656488,
+      "epoch3_tpr": null,
+      "steps5_tpr": null
+    },
+    {
+      "scenario": "6.2",
+      "method": "krum_bound30",
+      "datasets": [
+        "mnist",
+        "fashion_mnist",
+        "har"
+      ],
+      "units_per_arm": 9,
+      "epoch3_fpr": 0.32222222222222224,
+      "steps5_fpr": 0.32222222222222224,
+      "epoch3_accuracy": 0.3843763073558798,
+      "steps5_accuracy": 0.4001905855295404,
+      "epoch3_tpr": null,
+      "steps5_tpr": null
+    },
+    {
+      "scenario": "6.2",
+      "method": "mdbg_l0_only",
+      "datasets": [
+        "mnist",
+        "fashion_mnist",
+        "har"
+      ],
+      "units_per_arm": 9,
+      "epoch3_fpr": 0.32246913580246916,
+      "steps5_fpr": 0.1649382716049383,
+      "epoch3_accuracy": 0.30697953474343026,
+      "steps5_accuracy": 0.40405123477736304,
+      "epoch3_tpr": null,
+      "steps5_tpr": null
+    }
+  ]
+}

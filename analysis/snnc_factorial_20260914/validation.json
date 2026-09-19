@@ -1,0 +1,19 @@
+{
+  "baseline_exact_matches": 3,
+  "cells": 12,
+  "manifest_files_verified": 54,
+  "floor_boundary_probe": "passed: mean=1, floor2 selects none; no floor selects four singletons",
+  "controlled": "updates, L0, density split, eps estimate, checkpoint history and alarm fixed within each arm",
+  "inputs": {
+    "new_work/results/mechanism_forward_round/forward_20260913_201632/manifest.json": "c13a6780b23cca2aa9724fff961953b135c35ac0e4169f4fed638c8eaddc794a",
+    "new_work/results/mechanism_forward_round/forward_20260913_201632/reference/mnist_2024/checkpoints/round_009.json": "a3ef5b44e00c2e444d2d41752f29265103d66a8177b128bd7ced66e4aa9058b9",
+    "new_work/results/mechanism_forward_round/forward_20260913_201632/configs/mnist_2024_branch.json": "3992080743e1dc3e897e2a57c72b953fab330bb1b42d19c9dc4e17c747d3a31a",
+    "new_work/results/mechanism_cluster_replay/replay_20260914/A.json": "24c5eeeaec63e24f878a5e9e85887e2a398394376e7b40d9f07c81f4a596c48d",
+    "new_work/results/mechanism_cluster_replay/replay_20260914/A_updates.npy": "5c9263e3e91c458665ffa79a504468c1f635e766561a09ffcedd530d3e2f8070",
+    "new_work/results/mechanism_cluster_replay/replay_20260914/B.json": "1a53f8419013693cb7a137616356f9aa13f407ea3f93c1b7e37ec0880fd0f3b4",
+    "new_work/results/mechanism_cluster_replay/replay_20260914/B_updates.npy": "32ca6f41f1dad8b097a1775f0f17ea155a46c82e43dde1340ad70ff405d01cfb",
+    "new_work/results/mechanism_cluster_replay/replay_20260914/C.json": "cb847e28b7d83fb61c2a36c03aff4221e072245e987287703711084fc6976937",
+    "new_work/results/mechanism_cluster_replay/replay_20260914/C_updates.npy": "d33f8f89bbe8df870a34e6411b97fd48cebc6f9d3cdef752aaa3b65f89cbb987"
+  },
+  "script_sha256": "85e5fe20c6656b80d4f17452a53404cccba3566f7a5352fd6142994056785f29"
+}

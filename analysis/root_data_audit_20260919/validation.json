@@ -1,0 +1,9 @@
+{
+  "complete": true,
+  "unique_partitions": 12,
+  "reference_units_matched": 24,
+  "source_files_verified": 41,
+  "script_sha256": "339cc3207feec228f5b0684a42f9dec446f37fee09c5f1eca47449f7ba74e8ca",
+  "dataset_content_identity_verified": true,
+  "scope": "Training-split index disjointness, not image-content deduplication; root does not use test split."
+}

@@ -1,0 +1,69 @@
+def snnc(data, k, eps=None, original_indices=None):
+    """Share Nearest Neighbors-based Clustering (Algorithm 1 in Qian et al.)."""
+    n_points = data.shape[0]
+    if original_indices is None:
+        original_indices = np.arange(n_points)
+    if n_points <= 1:
+        return [], original_indices.tolist() if hasattr(original_indices, 'tolist') else list(original_indices)
+
+    effective_k = min(k, n_points - 1)
+    if effective_k <= 0:
+        return [], list(original_indices)
+
+    nn = NearestNeighbors(n_neighbors=effective_k + 1, metric='euclidean')
+    nn.fit(data)
+    distances, knn_indices = nn.kneighbors(data)
+
+    knn_sets = []
+    for i in range(n_points):
+        valid_neighbors = set()
+        for j_idx, dist in zip(knn_indices[i, 1:], distances[i, 1:]):
+            if eps is None or dist <= eps * 3.0:
+                valid_neighbors.add(int(j_idx))
+        knn_sets.append(valid_neighbors)
+
+    sn = {i: {i} for i in range(n_points)}
+    for i in range(n_points):
+        for j in range(i + 1, n_points):
+            if len(knn_sets[i] & knn_sets[j]) >= 1:
+                sn[i].add(j)
+
+    for _ in range(100):
+        merged = False
+        keys = list(sn.keys())
+        for i_idx in range(len(keys)):
+            i = keys[i_idx]
+            if i not in sn or len(sn[i]) == 0:
+                continue
+            for j_idx in range(i_idx + 1, len(keys)):
+                j = keys[j_idx]
+                if j not in sn or len(sn[j]) == 0:
+                    continue
+                if len(sn[i] & sn[j]) >= 1:
+                    sn[i] = sn[i] | sn[j]
+                    sn[j] = set()
+                    merged = True
+        if not merged:
+            break
+
+    non_empty_sn = {k: v for k, v in sn.items() if len(v) > 0}
+    if len(non_empty_sn) == 0:
+        return [], list(original_indices)
+
+    set_sizes = [len(v) for v in non_empty_sn.values()]
+    mean_size = np.mean(set_sizes)
+    required_size = max(mean_size, 2)
+
+    natural_clusters = []
+    natural_cluster_point_indices = set()
+    for _, point_set in non_empty_sn.items():
+        if len(point_set) >= required_size:
+            cluster_original_indices = [int(original_indices[p]) for p in point_set]
+            natural_clusters.append(cluster_original_indices)
+            natural_cluster_point_indices.update(point_set)
+
+    remaining_local_indices = [
+        i for i in range(n_points) if i not in natural_cluster_point_indices
+    ]
+    remaining_indices = [int(original_indices[i]) for i in remaining_local_indices]
+    return natural_clusters, remaining_indices

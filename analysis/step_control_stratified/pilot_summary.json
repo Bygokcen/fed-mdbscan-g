@@ -1,0 +1,272 @@
+[
+  {
+    "dataset": "mnist",
+    "method": "full",
+    "arm": "A",
+    "seeds": 3,
+    "mean_fpr": 0.07777777777777777,
+    "min_fpr": 0.0,
+    "max_fpr": 0.23333333333333328,
+    "mean_accepted_sample_mass": 0.8528667422986299
+  },
+  {
+    "dataset": "mnist",
+    "method": "full",
+    "arm": "B",
+    "seeds": 3,
+    "mean_fpr": 0.05185185185185185,
+    "min_fpr": 0.0,
+    "max_fpr": 0.15555555555555556,
+    "mean_accepted_sample_mass": 0.908601681356721
+  },
+  {
+    "dataset": "mnist",
+    "method": "full",
+    "arm": "C",
+    "seeds": 3,
+    "mean_fpr": 0.018518518518518528,
+    "min_fpr": 0.0,
+    "max_fpr": 0.05555555555555558,
+    "mean_accepted_sample_mass": 0.9664092270995142
+  },
+  {
+    "dataset": "mnist",
+    "method": "l0",
+    "arm": "A",
+    "seeds": 3,
+    "mean_fpr": 0.07777777777777777,
+    "min_fpr": 0.0,
+    "max_fpr": 0.23333333333333328,
+    "mean_accepted_sample_mass": 0.8528667422986299
+  },
+  {
+    "dataset": "mnist",
+    "method": "l0",
+    "arm": "B",
+    "seeds": 3,
+    "mean_fpr": 0.05185185185185185,
+    "min_fpr": 0.0,
+    "max_fpr": 0.15555555555555556,
+    "mean_accepted_sample_mass": 0.908601681356721
+  },
+  {
+    "dataset": "mnist",
+    "method": "l0",
+    "arm": "C",
+    "seeds": 3,
+    "mean_fpr": 0.018518518518518528,
+    "min_fpr": 0.0,
+    "max_fpr": 0.05555555555555558,
+    "mean_accepted_sample_mass": 0.9664092270995142
+  },
+  {
+    "dataset": "mnist",
+    "method": "uniform",
+    "arm": "A",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  },
+  {
+    "dataset": "mnist",
+    "method": "uniform",
+    "arm": "B",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  },
+  {
+    "dataset": "mnist",
+    "method": "uniform",
+    "arm": "C",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  },
+  {
+    "dataset": "fashion_mnist",
+    "method": "full",
+    "arm": "A",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  },
+  {
+    "dataset": "fashion_mnist",
+    "method": "full",
+    "arm": "B",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  },
+  {
+    "dataset": "fashion_mnist",
+    "method": "full",
+    "arm": "C",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  },
+  {
+    "dataset": "fashion_mnist",
+    "method": "l0",
+    "arm": "A",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  },
+  {
+    "dataset": "fashion_mnist",
+    "method": "l0",
+    "arm": "B",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  },
+  {
+    "dataset": "fashion_mnist",
+    "method": "l0",
+    "arm": "C",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  },
+  {
+    "dataset": "fashion_mnist",
+    "method": "uniform",
+    "arm": "A",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  },
+  {
+    "dataset": "fashion_mnist",
+    "method": "uniform",
+    "arm": "B",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  },
+  {
+    "dataset": "fashion_mnist",
+    "method": "uniform",
+    "arm": "C",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  },
+  {
+    "dataset": "har",
+    "method": "full",
+    "arm": "A",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  },
+  {
+    "dataset": "har",
+    "method": "full",
+    "arm": "B",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  },
+  {
+    "dataset": "har",
+    "method": "full",
+    "arm": "C",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  },
+  {
+    "dataset": "har",
+    "method": "l0",
+    "arm": "A",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  },
+  {
+    "dataset": "har",
+    "method": "l0",
+    "arm": "B",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  },
+  {
+    "dataset": "har",
+    "method": "l0",
+    "arm": "C",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  },
+  {
+    "dataset": "har",
+    "method": "uniform",
+    "arm": "A",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  },
+  {
+    "dataset": "har",
+    "method": "uniform",
+    "arm": "B",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  },
+  {
+    "dataset": "har",
+    "method": "uniform",
+    "arm": "C",
+    "seeds": 3,
+    "mean_fpr": 0.0,
+    "min_fpr": 0.0,
+    "max_fpr": 0.0,
+    "mean_accepted_sample_mass": 1.0
+  }
+]

@@ -1,0 +1,16 @@
+case,n,malicious_n,honest_n,raw_flags,raw_fp,raw_tp,final_fp,final_tp,fallback,zero_n,undefined_scores,input_sha256
+all_identical_honest,90,0,90,90,90,0,0,0,True,0,0,06b3576e84d4c6ecdf13a5f1c580ac31ec6b6f0e892a2c5f6cf14bc1f35ce110
+same_direction_different_norms_honest,90,0,90,90,90,0,0,0,True,0,0,e344b6c2d2fa13d7c52931d6deb21d7b7f10b529c6de8016115ec2ed9ade4857
+honest_coalition_18,90,0,90,18,18,0,18,0,False,0,0,22a6ef43415e7d7f650c17e718667068ee2e51482642bed6d28c0f302c8ae3f9
+near_honest_coalition_18,90,0,90,18,18,0,18,0,False,0,0,f2760f147b3f4cd1ab6848b37a816eb56bc13232fb845d219f6e29019163594b
+two_opposite_honest_groups,90,0,90,90,90,0,0,0,True,0,0,4afcc46c3e399c4934aa7c8d6e113749bd7f5257f10f2958fcd594aaab5857d4
+malicious_label_twin_18,90,18,72,18,0,18,0,18,False,0,0,22a6ef43415e7d7f650c17e718667068ee2e51482642bed6d28c0f302c8ae3f9
+malicious_coalition_1,90,1,89,0,0,0,0,0,False,0,0,ad85043d8c71980d24b131ef745c18b6ae7ee44b595a37ae15f38f06302bdf5a
+malicious_coalition_2,90,2,88,0,0,0,0,0,False,0,0,aaceff24f5a6ae87d317b00301d994456b425d89ca64cca387f85a566cc2b415
+malicious_coalition_3,90,3,87,0,0,0,0,0,False,0,0,45ecbcd590f944921ab1cebab9e60a8af6882fc6dccb081575bd76664e9af809
+malicious_coalition_4,90,4,86,0,0,0,0,0,False,0,0,fe88cb55af72fd5513a1e55a889874d826e1075ec2c369c439a1e4c95699ca70
+malicious_coalition_5,90,5,85,0,0,0,0,0,False,0,0,4c40dcd15ea3705c86d2aca22446a6fcfcd71336735f346b1e7a769e37eec3f2
+malicious_coalition_6,90,6,84,6,0,6,0,6,False,0,0,3e1c0cdf95476c330b4407fe79c80b071bcd7e4969a8845ee1325766b2ddac69
+all_zero,90,0,90,0,0,0,0,0,False,90,90,ba61c36dd3703f9a8cce36675bb7391e9a6b1ab917ea00c4a3ebf2d7c50c4fcb
+one_nonzero,90,0,90,0,0,0,0,0,False,89,90,509662526c62c46c05abd1822d08489213e88d5f128fe8a075bbac72461e6da3
+malicious_18_with_10zeros,90,18,72,18,0,18,0,18,False,10,10,3ab000bb484c45c80b9d76f6b5c54ae6293350fdbe4c4c77a0ceb45c067a078a

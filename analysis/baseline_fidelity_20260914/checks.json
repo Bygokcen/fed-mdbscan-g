@@ -1,0 +1,51 @@
+{
+  "multi_krum": {
+    "n": 90,
+    "f": 27,
+    "m": 61,
+    "formula_match": true,
+    "clean_rejection_fraction": 0.32222222222222224,
+    "server_mean_match": true
+  },
+  "fltrust_normalized": {
+    "update": [
+      1.757359266281128,
+      0.5857864022254944
+    ],
+    "accepted": [
+      0,
+      1
+    ],
+    "paper_normalized_formula_match": true
+  },
+  "fltrust": {
+    "update": [
+      0.702943742275238,
+      0.5857864022254944
+    ],
+    "accepted": [
+      0,
+      1
+    ],
+    "paper_normalized_formula_match": false
+  },
+  "flame": {
+    "accepted": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "median_all_updates": 0.1118033982085893,
+    "noise_sigma": 0.0001118033982085893,
+    "clip_mean_noise_formula_match": true,
+    "contrib_hdbscan_comparison": "not run: package absent; no installation attempted"
+  },
+  "source_hashes": {
+    "new_work/simulation/baselines.py": "f6c0ef8d79164929a5e139255a234bf8dc462bccd3fbe478f5fbba2b0d8c9709",
+    "new_work/simulation/server.py": "f71ce6b883adeaa02a1c5688104bcb2f0d1565e2205607c9a5f73126141c716d",
+    "new_work/simulation/run_experiment.py": "b0f063a40bd1fb85531b9a51483e29573c1e2b264aba7febe725f23838536621"
+  },
+  "script_sha256": "bae8886027ab3a4d97a3b0adb0f441edc88f58b945b910d4bf9eea37bb992300"
+}

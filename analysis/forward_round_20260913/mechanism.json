@@ -1,0 +1,164 @@
+{
+  "run": "new_work/results/mechanism_forward_round/forward_20260913_201632",
+  "arrival_loss": [
+    {
+      "dataset": "mnist",
+      "round": 0,
+      "floor_first_loss": 2.43807053565979,
+      "floor_last_loss": 0.5502919256687164,
+      "above_first_loss": 2.3619385957717896,
+      "above_last_loss": 0.12378474324941635
+    },
+    {
+      "dataset": "mnist",
+      "round": 9,
+      "floor_first_loss": 0.1309719830751419,
+      "floor_last_loss": 0.0537249892950058,
+      "above_first_loss": 2.950345993041992,
+      "above_last_loss": 0.038307731971144676
+    },
+    {
+      "dataset": "mnist",
+      "round": 19,
+      "floor_first_loss": 0.0810859352350235,
+      "floor_last_loss": 0.034839458763599396,
+      "above_first_loss": 3.1057934761047363,
+      "above_last_loss": 0.035854458808898926
+    },
+    {
+      "dataset": "mnist",
+      "round": 29,
+      "floor_first_loss": 0.0706356018781662,
+      "floor_last_loss": 0.026769012212753296,
+      "above_first_loss": 3.291578769683838,
+      "above_last_loss": 0.026477979496121407
+    },
+    {
+      "dataset": "fashion_mnist",
+      "round": 0,
+      "floor_first_loss": 2.427034854888916,
+      "floor_last_loss": 0.07858450710773468,
+      "above_first_loss": 2.372833728790283,
+      "above_last_loss": 0.14729474484920502
+    },
+    {
+      "dataset": "fashion_mnist",
+      "round": 9,
+      "floor_first_loss": 0.24058227241039276,
+      "floor_last_loss": 0.02669675089418888,
+      "above_first_loss": 1.5124041438102722,
+      "above_last_loss": 0.04635239765048027
+    },
+    {
+      "dataset": "fashion_mnist",
+      "round": 19,
+      "floor_first_loss": 0.19535979628562927,
+      "floor_last_loss": 0.014842388220131397,
+      "above_first_loss": 1.2795417308807373,
+      "above_last_loss": 0.03154485300183296
+    },
+    {
+      "dataset": "fashion_mnist",
+      "round": 29,
+      "floor_first_loss": 0.18806962668895721,
+      "floor_last_loss": 0.011477334424853325,
+      "above_first_loss": 1.1928352117538452,
+      "above_last_loss": 0.031416237354278564
+    },
+    {
+      "dataset": "har",
+      "round": 0,
+      "floor_first_loss": 1.8185968399047852,
+      "floor_last_loss": 1.282294511795044,
+      "above_first_loss": 1.7704126834869385,
+      "above_last_loss": 1.324305772781372
+    },
+    {
+      "dataset": "har",
+      "round": 9,
+      "floor_first_loss": 1.035158395767212,
+      "floor_last_loss": 0.037786561995744705,
+      "above_first_loss": 1.9111852645874023,
+      "above_last_loss": 0.0830848291516304
+    },
+    {
+      "dataset": "har",
+      "round": 19,
+      "floor_first_loss": 0.7663116753101349,
+      "floor_last_loss": 0.018219185061752796,
+      "above_first_loss": 1.5662633180618286,
+      "above_last_loss": 0.012484393082559109
+    },
+    {
+      "dataset": "har",
+      "round": 29,
+      "floor_first_loss": 0.5658054947853088,
+      "floor_last_loss": 0.014712997246533632,
+      "above_first_loss": 1.5238632559776306,
+      "above_last_loss": 0.008753816597163677
+    }
+  ],
+  "norm_ratio": [
+    {
+      "dataset": "mnist",
+      "method": "fedavg",
+      "round_0": 1.130404454259017,
+      "round_5": 3.0207028239213245,
+      "round_10": 2.9697632682959783,
+      "round_20": 2.8545947200900357,
+      "round_29": 2.9272270313803554
+    },
+    {
+      "dataset": "mnist",
+      "method": "fed_mdbscan_g",
+      "round_0": 1.130404454259017,
+      "round_5": 6.709536420609284,
+      "round_10": 8.10288267333756,
+      "round_20": 9.807712455232252,
+      "round_29": 9.655694314332054
+    },
+    {
+      "dataset": "fashion_mnist",
+      "method": "fedavg",
+      "round_0": 0.9439086276927499,
+      "round_5": 2.248438418567731,
+      "round_10": 2.167531648160493,
+      "round_20": 1.8021870470614976,
+      "round_29": 1.9390851074547675
+    },
+    {
+      "dataset": "fashion_mnist",
+      "method": "fed_mdbscan_g",
+      "round_0": 0.9439086276927499,
+      "round_5": 2.248438418567731,
+      "round_10": 2.380207730310043,
+      "round_20": 1.8021870470614976,
+      "round_29": 2.0041574962462794
+    },
+    {
+      "dataset": "har",
+      "method": "fedavg",
+      "round_0": 1.0007021946191403,
+      "round_5": 1.546648096937631,
+      "round_10": 1.3647403627983608,
+      "round_20": 1.0334430132414187,
+      "round_29": 2.4819438730533316
+    },
+    {
+      "dataset": "har",
+      "method": "fed_mdbscan_g",
+      "round_0": 1.0007021946191403,
+      "round_5": 1.546648096937631,
+      "round_10": 1.3647403627983608,
+      "round_20": 1.0334430132414187,
+      "round_29": 3.550367497496201
+    }
+  ],
+  "norm_ratio_rounds": [
+    0,
+    5,
+    10,
+    20,
+    29
+  ]
+}

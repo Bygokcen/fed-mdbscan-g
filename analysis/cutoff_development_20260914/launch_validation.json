@@ -1,0 +1,20 @@
+{
+  "checked_utc": "2026-09-14T15:38:56.746692+00:00",
+  "campaign": "/home/gokcen/Fed_MDBSCAN_TIFS/new_work/results/cutoff_development/study_20260914_v1",
+  "manifest_sha256": "713d046abca7eb681d67b4e7670e2d9929f6461b33946b845e321399166d94d2",
+  "snapshot_matches_smoke": true,
+  "environment_matches_smoke": true,
+  "tests_passed": 110,
+  "status_at_check": {
+    "child_pid": 1893846,
+    "complete": true,
+    "expected_units": 144,
+    "job": "cutoff_attacked/fashion_mnist/cut_backdoor",
+    "job_index": 11,
+    "pid": 1824116,
+    "state": "complete",
+    "updated_unix": 1789391010.965433,
+    "valid_units": 144,
+    "written_units": 143
+  }
+}

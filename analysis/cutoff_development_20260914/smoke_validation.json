@@ -1,0 +1,26 @@
+{
+  "campaign": "/home/gokcen/Fed_MDBSCAN_TIFS/new_work/results/cutoff_development/smoke_20260914_v1",
+  "valid_units": 24,
+  "failed_units": 0,
+  "snapshot_files_verified": 41,
+  "cuda": true,
+  "deterministic_backend": true,
+  "checks": [
+    {
+      "scenario": "cut_gaussian",
+      "paired_identity_match": true,
+      "first_round_update_norms_match_across_methods": true
+    },
+    {
+      "scenario": "cut_minmax",
+      "paired_identity_match": true,
+      "first_round_update_norms_match_across_methods": true
+    },
+    {
+      "scenario": "cut_backdoor",
+      "paired_identity_match": true,
+      "first_round_update_norms_match_across_methods": true
+    }
+  ],
+  "limitation": "Smoke verifies one round on MNIST seed42; it does not establish defense performance or full matrix equivalence."
+}

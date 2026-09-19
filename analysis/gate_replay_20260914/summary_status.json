@@ -1,0 +1,14 @@
+{
+  "validated_references": 24,
+  "expected_references": 24,
+  "branches": 288,
+  "complete": true,
+  "source_status": {
+    "state": "complete",
+    "completed_references": 24,
+    "matrices": 72,
+    "branches": 288,
+    "updated": 1789431985.3807793
+  },
+  "campaign": "/home/gokcen/Fed_MDBSCAN_TIFS/new_work/results/mechanism_gate_replay/replay_20260915_v2"
+}
