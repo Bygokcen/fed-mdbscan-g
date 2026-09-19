@@ -36,6 +36,7 @@ _MDBSCAN_G_BASE_PARAMS = {
     "enable_l2": True,
     "enable_momentum": True,
     "enable_safety_valve": True,
+    "enable_snnc_cutoff": True,
 }
 
 # Layer-ablation and trust-region-sweep variants of the proposed method.
@@ -46,6 +47,7 @@ _MDBSCAN_G_BASE_PARAMS = {
 # radius isolates how much of the reported margin comes from the radius
 # rather than from the multi-density machinery.
 MDBSCAN_ABLATION_VARIANTS = {
+    "mdbg_no_snnc_cutoff": {"enable_snnc_cutoff": False},
     "mdbg_l0_only":     {"enable_l2": False},
     "mdbg_no_momentum": {"enable_momentum": False},
     "mdbg_no_valve":    {"enable_safety_valve": False},
@@ -349,7 +351,7 @@ def resolve_experiment_config(config: Mapping[str, Any] | None = None) -> dict[s
             value = fed_g[name]
             if value != "auto":
                 _finite_number(f"{prefix}.{name}", value, minimum=0.0)
-        for name in ("enable_l2", "enable_momentum", "enable_safety_valve"):
+        for name in ("enable_l2", "enable_momentum", "enable_safety_valve", "enable_snnc_cutoff"):
             if not isinstance(fed_g[name], bool):
                 raise ValueError(f"{prefix}.{name} must be a boolean")
     for m in ("flame", "flame_hdbscan"):

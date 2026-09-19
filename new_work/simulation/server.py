@@ -264,6 +264,7 @@ class Server:
                 momentum_window=self.method_params.get('momentum_window', 3),
                 attack_history=self.detected_attack_history,
                 clean_round_streak=self.clean_round_streak,
+                enable_snnc_cutoff=self.method_params.get('enable_snnc_cutoff', True),
                 enable_l2=self.method_params.get('enable_l2', True),
                 enable_momentum=self.method_params.get('enable_momentum', True),
                 enable_safety_valve=self.method_params.get(
