@@ -1,0 +1,30 @@
+{
+  "validated_references": 24,
+  "matched_training_rounds": 720,
+  "matrices": 72,
+  "branches": 288,
+  "gate_unchanged_decisions": 144,
+  "gate_comparisons": 144,
+  "cutoff_changed_checkpoints": [
+    {
+      "reference": "runs/cutoff_clean/fashion_mnist/scenario_cut_minmax/runs/fed_mdbscan_g_seed2024.json",
+      "round": 29,
+      "fp_on": 16,
+      "fp_off": 14
+    },
+    {
+      "reference": "runs/cutoff_clean/mnist/scenario_cut_minmax/runs/fed_mdbscan_g_seed2024.json",
+      "round": 9,
+      "fp_on": 33,
+      "fp_off": 19
+    },
+    {
+      "reference": "runs/cutoff_clean/mnist/scenario_cut_minmax/runs/fed_mdbscan_g_seed2024.json",
+      "round": 29,
+      "fp_on": 23,
+      "fp_off": 21
+    }
+  ],
+  "observer_sha256": "6f7f2a5bb7b99bc352ed6d60206b2da271225928120297773ccdaaa06ede1e50",
+  "scope": "Fixed matrices and reference temporal state; not a trained modified defense."
+}

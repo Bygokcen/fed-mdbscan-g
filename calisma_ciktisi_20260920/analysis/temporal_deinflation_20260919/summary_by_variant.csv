@@ -1,0 +1,7 @@
+method,variant,ratio,runs,trend_auc_median,trend_auc_min,trend_auc_max,damage_median,final_accuracy_median,constraint_violations,gamma_clamped_rounds,attack_rounds
+fedavg,minmax_budget,,6,0.9939,0.7805,1.0,0.4526,0.1755,0,0,180
+fedavg,minmax_flat,1.0,6,0.5854,0.3537,0.8049,0.3376,0.3217,0,9,180
+fedavg,minmax_flat,2.0,6,0.9939,0.7805,1.0,0.4526,0.1755,0,180,180
+fed_mdbscan_g,minmax_budget,,6,0.9939,0.7805,1.0,0.183,0.1755,0,0,180
+fed_mdbscan_g,minmax_flat,1.0,6,0.5854,0.5,0.8049,0.1353,0.2108,0,15,180
+fed_mdbscan_g,minmax_flat,2.0,6,0.9939,0.7805,1.0,0.183,0.1755,0,180,180

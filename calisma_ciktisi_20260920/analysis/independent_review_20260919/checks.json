@@ -1,0 +1,59 @@
+{
+  "provenance": [
+    {
+      "folder": "temporal_deinflation_20260919",
+      "inputs": 48,
+      "mismatches": [],
+      "array_content_hashes": 0
+    },
+    {
+      "folder": "root_direction_deinflation_20260919",
+      "inputs": 60,
+      "mismatches": [],
+      "array_content_hashes": 18
+    },
+    {
+      "folder": "root_signal_20260919",
+      "inputs": 24,
+      "mismatches": [],
+      "array_content_hashes": 0
+    },
+    {
+      "folder": "temporal frozen files",
+      "inputs": 51,
+      "mismatches": []
+    }
+  ],
+  "temporal_counts": {
+    "rounds": 720,
+    "violations": 0,
+    "clamped_fed_mdbscan_g_1.0": 15,
+    "dot_missing": 720,
+    "clamped_fedavg_1.0": 9,
+    "clamped_fed_mdbscan_g_2.0": 180,
+    "clamped_fedavg_2.0": 180
+  },
+  "temporal_cells": 24,
+  "method_summary": [
+    {
+      "method": "fed_mdbscan_g",
+      "auc_median": 0.5853658536585367,
+      "damage_median": 0.13525000000000004,
+      "budget_damage_median": 0.18300000000000005,
+      "ratio_of_medians": 0.7390710382513661,
+      "median_paired_ratio": 0.6622535225322317,
+      "paired_ratio_min": -0.09375000000000284,
+      "paired_ratio_max": 0.9468276393526843
+    },
+    {
+      "method": "fedavg",
+      "auc_median": 0.5853658536585367,
+      "damage_median": 0.3376,
+      "budget_damage_median": 0.4526,
+      "ratio_of_medians": 0.7459125055236412,
+      "median_paired_ratio": 0.887835228258421,
+      "paired_ratio_min": 0.5511577280823274,
+      "paired_ratio_max": 0.9468276393526843
+    }
+  ]
+}
