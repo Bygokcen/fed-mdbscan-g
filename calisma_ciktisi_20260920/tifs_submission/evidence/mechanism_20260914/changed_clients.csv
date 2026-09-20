@@ -1,0 +1,17 @@
+client,samples,dominant_label,A_cluster,A_cluster_accepted,A_l0_accepted,A_final_accepted,C_cluster,C_cluster_accepted,C_l0_accepted,C_final_accepted
+13,20,1,1,False,True,False,,,True,True
+16,208,4,2,False,False,False,,,True,True
+19,959,6,3,False,True,False,,,True,True
+23,1514,4,2,False,False,False,,,True,True
+36,2410,6,3,False,True,False,,,True,True
+43,37,4,2,False,False,False,,,True,True
+44,916,6,3,False,True,False,,,True,True
+46,156,6,3,False,True,False,,,True,True
+57,533,4,2,False,False,False,,,True,True
+66,113,0,5,False,True,False,,,True,True
+88,1103,0,5,False,True,False,,,True,True
+91,20,1,1,False,True,False,,,True,True
+92,515,0,5,False,True,False,,,True,True
+96,2532,0,5,False,True,False,,,True,True
+97,76,4,2,False,False,False,,,True,True
+98,3259,4,2,False,False,False,,,True,True

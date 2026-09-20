@@ -1,0 +1,1208 @@
+[
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/cifar10/scenario_6.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/cifar10/scenario_6.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/cifar10/scenario_6.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/cifar10/scenario_6.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/cifar10/scenario_6.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/cifar10/scenario_6.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/cifar10/scenario_7.1/failures/flame_hdbscan_seed42.json",
+    "rounds": 0,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/cifar10/scenario_7.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/cifar10/scenario_7.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/cifar10/scenario_7.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/cifar10/scenario_7.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/cifar10/scenario_7.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/cifar10/scenario_8.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/cifar10/scenario_8.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/cifar10/scenario_8.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/cifar10/scenario_8.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/cifar10/scenario_8.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/cifar10/scenario_8.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_1.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_1.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_1.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_1.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_1.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_1.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_1.3/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_1.3/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_1.3/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_2.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_2.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_2.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_2.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_2.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_2.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_2.3/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_2.3/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_2.3/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_3.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_3.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_3.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_3.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_3.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_3.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_3.3/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_3.3/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_3.3/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_4.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_4.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_4.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_4.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_4.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_4.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_4.3/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_4.3/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_4.3/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_5.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_5.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_5.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_5.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_5.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_5.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_5.3/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_5.3/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_5.3/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_6.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_6.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_6.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_6.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_6.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_6.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_7.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_7.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_7.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_7.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_7.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_7.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_8.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_8.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_8.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_8.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_8.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/fashion_mnist/scenario_8.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_1.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_1.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_1.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_1.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_1.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_1.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_1.3/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_1.3/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_1.3/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_2.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_2.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_2.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_2.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_2.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_2.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_2.3/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_2.3/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_2.3/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_3.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_3.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_3.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_3.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_3.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_3.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_3.3/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_3.3/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_3.3/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_4.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_4.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_4.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_4.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_4.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_4.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_4.3/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_4.3/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_4.3/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_5.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_5.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_5.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_5.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_5.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_5.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_5.3/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_5.3/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_5.3/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_6.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_6.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_6.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_6.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_6.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_6.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_7.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_7.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_7.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_7.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_7.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/har/scenario_7.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_1.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_1.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_1.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_1.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_1.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_1.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_1.3/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_1.3/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_1.3/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_2.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_2.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_2.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_2.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_2.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_2.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_2.3/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_2.3/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_2.3/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_3.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_3.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_3.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_3.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_3.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_3.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_3.3/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_3.3/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_3.3/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_4.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_4.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_4.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_4.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_4.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_4.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_4.3/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_4.3/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_4.3/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_5.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_5.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_5.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_5.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_5.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_5.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_5.3/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_5.3/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_5.3/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_6.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_6.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_6.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_6.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_6.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_6.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_7.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_7.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_7.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_7.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_7.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_7.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_8.1/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_8.1/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_8.1/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_8.2/runs/flame_hdbscan_seed137.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_8.2/runs/flame_hdbscan_seed2024.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  },
+  {
+    "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/mnist/scenario_8.2/runs/flame_hdbscan_seed42.json",
+    "rounds": 30,
+    "degraded": 0,
+    "outcome": null
+  }
+]

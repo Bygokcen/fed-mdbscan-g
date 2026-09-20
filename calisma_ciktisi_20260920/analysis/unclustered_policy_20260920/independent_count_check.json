@@ -1,0 +1,20 @@
+{
+  "cells_checked": 441,
+  "unique_cells": 441,
+  "all_id_counts_and_csv_match": true,
+  "outputs_hash_match": true,
+  "historical_ten_ids": [
+    13,
+    19,
+    36,
+    44,
+    46,
+    66,
+    88,
+    91,
+    92,
+    96
+  ],
+  "historical_ten_all_fail_C_singleton": true,
+  "scope": "Independent accounting from output IDs, not an independent scientific replication"
+}

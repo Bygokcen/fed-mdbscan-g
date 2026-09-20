@@ -1,0 +1,122 @@
+{
+  "matrices": 6,
+  "edge_cases": [
+    {
+      "case": "ordinary_cohort",
+      "clients": 20,
+      "note": "20 clients, validity satisfied",
+      "requested_f": 6,
+      "f": 6,
+      "f_was_clamped": false,
+      "neighbours_were_clamped": false,
+      "paper_validity_holds": true,
+      "reference_valid": true,
+      "reference_reason": "",
+      "server_selected": 12,
+      "server_operator": "uniform_mean",
+      "server_fallback": "none",
+      "selection_identical": true,
+      "server_error": ""
+    },
+    {
+      "case": "two_clients",
+      "clients": 2,
+      "note": "below the rule, filter short-circuits",
+      "requested_f": 1,
+      "f": 0,
+      "f_was_clamped": true,
+      "neighbours_were_clamped": true,
+      "paper_validity_holds": false,
+      "reference_valid": false,
+      "reference_reason": "no neighbours left",
+      "server_selected": 2,
+      "server_operator": "uniform_mean",
+      "server_fallback": "none",
+      "selection_identical": null,
+      "server_error": ""
+    },
+    {
+      "case": "three_clients",
+      "clients": 3,
+      "note": "smallest cohort the rule admits",
+      "requested_f": 1,
+      "f": 0,
+      "f_was_clamped": true,
+      "neighbours_were_clamped": false,
+      "paper_validity_holds": true,
+      "reference_valid": true,
+      "reference_reason": "",
+      "server_selected": 1,
+      "server_operator": "uniform_mean",
+      "server_fallback": "none",
+      "selection_identical": true,
+      "server_error": ""
+    },
+    {
+      "case": "validity_violated",
+      "clients": 6,
+      "note": "2f + 2 >= n",
+      "requested_f": 3,
+      "f": 3,
+      "f_was_clamped": false,
+      "neighbours_were_clamped": false,
+      "paper_validity_holds": false,
+      "reference_valid": false,
+      "reference_reason": "guarantee needs 2f + 2 < n",
+      "server_selected": 1,
+      "server_operator": "uniform_mean",
+      "server_fallback": "none",
+      "selection_identical": false,
+      "server_error": ""
+    },
+    {
+      "case": "exact_ties",
+      "clients": 8,
+      "note": "duplicate rows produce equal scores",
+      "requested_f": 3,
+      "f": 3,
+      "f_was_clamped": false,
+      "neighbours_were_clamped": false,
+      "paper_validity_holds": false,
+      "reference_valid": false,
+      "reference_reason": "guarantee needs 2f + 2 < n",
+      "server_selected": 3,
+      "server_operator": "uniform_mean",
+      "server_fallback": "none",
+      "selection_identical": false,
+      "server_error": ""
+    },
+    {
+      "case": "neighbour_clamp",
+      "clients": 4,
+      "note": "n - f - 2 would be < 1",
+      "requested_f": 2,
+      "f": 1,
+      "f_was_clamped": true,
+      "neighbours_were_clamped": false,
+      "paper_validity_holds": false,
+      "reference_valid": false,
+      "reference_reason": "guarantee needs 2f + 2 < n",
+      "server_selected": 1,
+      "server_operator": "uniform_mean",
+      "server_fallback": "none",
+      "selection_identical": true,
+      "server_error": ""
+    }
+  ],
+  "canonical": {
+    "runs": 171,
+    "rounds": 5130,
+    "cohort_sizes": [
+      90
+    ],
+    "validity_violations": 0,
+    "rounds_below_three": 0,
+    "degraded_rounds": 0,
+    "fallback_rounds": 0,
+    "selected_counts": [
+      61
+    ]
+  },
+  "all_selections_identical": false
+}

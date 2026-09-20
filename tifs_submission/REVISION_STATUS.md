@@ -103,3 +103,37 @@ yok. Ek belge değişmedi. Özete dokunulmadı.
 Ana makaleye Tablo VI ve keşifsel norm-profili deneyi eklendi. Kök-yön θ=0 medyanları 1,000/0,833; minimumları 0,681/0,167 olarak açıklandı. Patch eşik sonuçları toplulaştırılmış gözlem sayılarından %61,57 dürüst, %70,37 saldırgan işaretlenmesi olarak verildi; eşdeğerlik iddiası kaldırıldı. Brifing ve karar notundaki FedAvg karşılaştırması yuvarlanmış CSV'den ASR yüzde puan farklarına dönüştürüldü.
 
 Ana PDF 8, ek PDF 3 sayfa. İkisi de derlendi; tanımsız atıf/referans ve overfull yok; underfull dizgi uyarıları mevcut. Tablo sayfası görsel incelendi. Simülasyon ve ham/frozen sonuçlar değişmedi; yeni deney yapılmadı. Önceki bilimsel açıklıklar ve baseline sadakati ihtiyacı devam ediyor.
+
+
+## 20 Eylül — FLAME sınırlı sadakat kontrolü
+
+`analysis/flame_fidelity_20260920/REPORT.md` kaynak eşleştirmesi, altı gerçek sunucu yolu kontrolü ve 201 kanonik dosyanın kapsamını içerir. 200 geçerli FLAME koşumunun 6000 turunda kayıtlı fallback veya tümü-kabul yok; bir başarısız koşum korunur. Kırpma/ortalama/gürültü uygulaması küçük girdilerde kontrol edildi; yazar/contrib küme kararları eşdeğerliği ve veri kümesine özel kalibrasyon açık kaldı. Bu ayrım ana metin ve eke işlendi. Yeni eğitim yapılmadı, simülasyon değiştirilmedi.
+
+
+## 20 Eylül — başlık/özet/katkı/sonuç kapsam eşleştirmesi
+
+Başlık yerel filtreleme başarısızlıkları ve karar yollarının ampirik incelemesine odaklandı. Özet 212 kelime (boşluk sayımı). Katkılar kanonik değerlendirme, checkpoint karar-yolu tanısı ve keşifsel skor kontrolleri olarak ayrıldı; hepsine ortak neden atfedilmedi. Kanonik sayılar evidence CSV'lerinden yeniden hesaplandı. İddia–kanıt haritası `CLAIM_EVIDENCE_MAP_20260920.md` içinde. Özgünlük/literatür incelemesi ayrı açık iş; gönderime hazır onayı verilmedi.
+
+
+## 20 Eylül — yakın literatür konumlandırması
+
+Dört birincil kayıt eklendi; Related Work yeni Evaluation Studies and the Scope of Our Contribution alt bölümünü içeriyor. Heterojenlikte dürüst istemci tespiti ve ortak benchmark fikri özgünlük olarak sunulmuyor. Ayrışma adayı yerel karar-yolu analizi; önceki çalışmalarda yokluğu kanıtlanmış değil. Detaylar LITERATURE_POSITIONING_20260920.md. Bu hedefli tarama sistematik alan taraması veya TIFS yeterlilik onayı değildir.
+
+
+## 20 Eylül — kümeleme ve kabul politikasının yakın öncülleri
+
+DeepSight/FLShield/FLAC ile mimari yakınlık metne işlendi; onların noise/singleton kod davranışı incelenmiş gibi sunulmadı. Katkı yerel ek-test kapsamı vakasıyla sınırlandırıldı. CLUSTER_POLICY_POSITIONING_20260920.md inceleme ve önkayıt olmayan müdahale taslağını içerir. Ana PDF9, ek3 sayfa; yeni deney yok.
+
+
+## 20 Eylül — sabit geometride kabul politikası sonuçları metne işlendi
+
+Ana metne P1/P2 müdahalesinin sınırlı sonucu, eke yöntem ve Tablo XI eklendi. Tablo değerleri analysis/unclustered_policy_20260920/summary.csv üzerinden üretildi. 441 offline değerlendirme yeni eğitim koşumu olarak sunulmadı;147 P0 eşleşmesi belirtildi. Orijinal/density-only P1 ek dürüst ret32/77, ek saldırgan ret0. Tarihsel34/25/18 →44/44/44 ve P2 koruma sonrası20/15/14 ayrı anlatıldı. Eşit sayılar eşit kimlik değildir; güvenlik/ASR kazancı iddiası yok. İddia–kanıt haritasına C17–C19 eklendi.
+
+Ana PDF9, ek PDF4 sayfa. İki belge ikişer geçişle derlendi; tanımsız referans/atıf ve overfull yok. Underfull dizgi uyarıları devam ediyor. Yeni tablonun PDF yerleşimi görsel kontrol edildi. Simülasyon ve kanonik arşiv değişmedi; yeni deney/commit/push yok. Sıradaki iş mevcut makalenin son bütünlük ve editoryal denetimi; yeni araştırma hattı veya geniş deney kampanyası açılmıyor.
+
+
+## 20 Eylül — editoryal ve PDF bütünlük kontrolü tamamlandı
+
+EDITORIAL_REVIEW_20260920.md bulgu ve kapsam kaydıdır. İki paragrafın devamını PDF'den düşüren8 kaçışsız yüzde işareti düzeltildi; daha önceki “derleme başarılı” kontrolü bu sessiz metin kaybını yakalamamıştı. Yinelenen DeepSight kaynakça anahtarı kaldırıldı; BibTeX hatasız. Ek tablolar ana VI ile çakışmayı önlemek için S1–S6 oldu (politika tablosu S6). Denklemde yarıçap tabanı, ekte güncel FLTrust kapsamı ve tartışma/sonuçta politika sınırı eşleştirildi.22 atıf anahtarı, çapraz referanslar ve16 kanıt bağlantısı kontrol edildi. Temel kanonik sayılar CSV'den tekrar hesaplandı.
+
+Ana9, ek4 sayfa; tanımsız atıf/referans ve overfull yok, underfull uyarıları sürüyor. Kayıp yüzdeler ve metin PDF çıktısında kontrol edildi. Yeni eğitim/simülasyon değişikliği yok; kanonik veri değişmedi; commit/push/gönderim yok. Sıradaki iş kapsamı büyütmeden gönderim öncesi kanıt paketi ve açık-maddeler listesi hazırlamak.

@@ -1,0 +1,9 @@
+mode,scenario,cutoff,partition_executed,attackers,attackers_in_executed_partitions,attackers_low,attackers_clustered,clusters,clusters_with_attackers,rejected_clusters
+cutoff_attacked,scenario_cut_backdoor,False,17,324,306,285,285,16,16,0
+cutoff_attacked,scenario_cut_backdoor,True,17,324,306,285,239,55,30,0
+cutoff_attacked,scenario_cut_minmax,False,18,324,324,0,0,21,0,0
+cutoff_attacked,scenario_cut_minmax,True,18,324,324,0,0,0,0,0
+cutoff_clean,scenario_cut_backdoor,False,15,0,0,0,0,12,0,0
+cutoff_clean,scenario_cut_backdoor,True,15,0,0,0,0,22,0,0
+cutoff_clean,scenario_cut_minmax,False,16,0,0,0,0,16,0,5
+cutoff_clean,scenario_cut_minmax,True,16,0,0,0,0,44,0,8

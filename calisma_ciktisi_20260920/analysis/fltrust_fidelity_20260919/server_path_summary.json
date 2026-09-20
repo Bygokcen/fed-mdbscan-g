@@ -1,0 +1,157 @@
+{
+  "real_path_cases": 48,
+  "matrices": 6,
+  "summary": [
+    {
+      "method": "fltrust_normalized",
+      "root": "cohort_mean",
+      "cases": 6,
+      "relative_gap_max": 2.3732935973223407e-07,
+      "cosine_min": 0.9999999999999725,
+      "accepted_min": 62,
+      "rejected_max": 28
+    },
+    {
+      "method": "fltrust_normalized",
+      "root": "small",
+      "cases": 6,
+      "relative_gap_max": 2.379875092190158e-07,
+      "cosine_min": 0.9999999999999727,
+      "accepted_min": 62,
+      "rejected_max": 28
+    },
+    {
+      "method": "fltrust_normalized",
+      "root": "large",
+      "cases": 6,
+      "relative_gap_max": 2.389041686115611e-07,
+      "cosine_min": 0.9999999999999725,
+      "accepted_min": 62,
+      "rejected_max": 28
+    },
+    {
+      "method": "fltrust_normalized",
+      "root": "unrelated",
+      "cases": 6,
+      "relative_gap_max": 1.2792496976708479e-07,
+      "cosine_min": 0.9999999999999939,
+      "accepted_min": 37,
+      "rejected_max": 53
+    },
+    {
+      "method": "fltrust",
+      "root": "cohort_mean",
+      "cases": 6,
+      "relative_gap_max": 0.41305902293984537,
+      "cosine_min": 0.930664250499629,
+      "accepted_min": 62,
+      "rejected_max": 28
+    },
+    {
+      "method": "fltrust",
+      "root": "small",
+      "cases": 6,
+      "relative_gap_max": 2.379875092190158e-07,
+      "cosine_min": 0.9999999999999727,
+      "accepted_min": 62,
+      "rejected_max": 28
+    },
+    {
+      "method": "fltrust",
+      "root": "large",
+      "cases": 6,
+      "relative_gap_max": 0.7392997894768778,
+      "cosine_min": 0.9261934751661223,
+      "accepted_min": 62,
+      "rejected_max": 28
+    },
+    {
+      "method": "fltrust",
+      "root": "unrelated",
+      "cases": 6,
+      "relative_gap_max": 0.4432660702143,
+      "cosine_min": 0.9691921797878678,
+      "accepted_min": 37,
+      "rejected_max": 53
+    }
+  ],
+  "edge_cases": [
+    {
+      "case": "all_trust_zero",
+      "reference_aggregate": [
+        0.0,
+        0.0
+      ],
+      "accepted": 2,
+      "rejected": 0,
+      "operator": "fltrust",
+      "fallback_reason": "no_accepted_updates",
+      "degraded": true,
+      "relative_gap": null,
+      "absolute_gap": 1.5,
+      "cosine": null,
+      "applied_norm": 1.5,
+      "reference_norm": 0.0
+    },
+    {
+      "case": "zero_root",
+      "reference_aggregate": [
+        0.0,
+        0.0
+      ],
+      "accepted": 2,
+      "rejected": 0,
+      "operator": "uniform_mean",
+      "fallback_reason": "none",
+      "degraded": false,
+      "relative_gap": null,
+      "absolute_gap": 0.7071067811865476,
+      "cosine": null,
+      "applied_norm": 0.7071067811865476,
+      "reference_norm": 0.0
+    },
+    {
+      "case": "client_norm_at_guard",
+      "reference_aggregate": [
+        0.9990029910209368,
+        0.0
+      ],
+      "accepted": 1,
+      "rejected": 1,
+      "operator": "fltrust",
+      "fallback_reason": "none",
+      "degraded": false,
+      "relative_gap": 0.0009980039980103427,
+      "absolute_gap": 0.0009970089790631853,
+      "cosine": 1.0,
+      "applied_norm": 1.0,
+      "reference_norm": 0.9990029910209368
+    },
+    {
+      "case": "one_trust_exactly_zero",
+      "reference_aggregate": [
+        0.999999998,
+        0.0
+      ],
+      "accepted": 1,
+      "rejected": 1,
+      "operator": "fltrust",
+      "fallback_reason": "none",
+      "degraded": false,
+      "relative_gap": 2.0000000584584397e-09,
+      "absolute_gap": 2.0000000544584395e-09,
+      "cosine": 1.0,
+      "applied_norm": 1.0,
+      "reference_norm": 0.999999998
+    }
+  ],
+  "canonical": {
+    "runs": 183,
+    "rounds": 5490,
+    "empty_accept_rounds": 0,
+    "degraded_rounds": 0,
+    "fallback_rounds": 0,
+    "min_accepted": 14,
+    "max_rejected": 76
+  }
+}
