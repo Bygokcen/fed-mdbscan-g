@@ -1,0 +1,102 @@
+{
+  "cases": [
+    {
+      "case": "majority",
+      "decision_and_previous_info_equal": true,
+      "aggregate_bitwise_equal": true,
+      "telemetry": {
+        "executed": true,
+        "skip_reason": "none",
+        "min_cluster_size": 4,
+        "cluster_sizes": {
+          "0": 5
+        },
+        "noise_count": 2,
+        "selected_count_before_fallback": 5
+      }
+    },
+    {
+      "case": "nonzero_global",
+      "decision_and_previous_info_equal": true,
+      "aggregate_bitwise_equal": true,
+      "telemetry": {
+        "executed": true,
+        "skip_reason": "none",
+        "min_cluster_size": 4,
+        "cluster_sizes": {
+          "0": 4
+        },
+        "noise_count": 3,
+        "selected_count_before_fallback": 4
+      }
+    },
+    {
+      "case": "identical",
+      "decision_and_previous_info_equal": true,
+      "aggregate_bitwise_equal": true,
+      "telemetry": {
+        "executed": false,
+        "skip_reason": "zero_distances",
+        "min_cluster_size": 4,
+        "cluster_sizes": null,
+        "noise_count": null,
+        "selected_count_before_fallback": 7
+      }
+    },
+    {
+      "case": "two_clients",
+      "decision_and_previous_info_equal": true,
+      "aggregate_bitwise_equal": true,
+      "telemetry": {
+        "executed": false,
+        "skip_reason": "small_cohort",
+        "min_cluster_size": 2,
+        "cluster_sizes": null,
+        "noise_count": null,
+        "selected_count_before_fallback": 2
+      }
+    },
+    {
+      "case": "zero_updates",
+      "decision_and_previous_info_equal": true,
+      "aggregate_bitwise_equal": true,
+      "telemetry": {
+        "executed": false,
+        "skip_reason": "zero_distances",
+        "min_cluster_size": 4,
+        "cluster_sizes": null,
+        "noise_count": null,
+        "selected_count_before_fallback": 7
+      }
+    },
+    {
+      "case": "forced_no_majority",
+      "decision_and_previous_info_equal": true,
+      "aggregate_bitwise_equal": true,
+      "telemetry": {
+        "executed": true,
+        "skip_reason": "none",
+        "min_cluster_size": 4,
+        "cluster_sizes": {},
+        "noise_count": 7,
+        "selected_count_before_fallback": 0
+      }
+    }
+  ],
+  "sources_sha256": {
+    "new_work/results/validated/audit-v2/full_20260910/source/new_work/simulation/baselines.py": "f6c0ef8d79164929a5e139255a234bf8dc462bccd3fbe478f5fbba2b0d8c9709",
+    "new_work/simulation/baselines.py": "cb1320f3b0c17ab4c79da6ffa5f8266c92d70ee86c7ce73da78f4d6804f74dc9",
+    "new_work/simulation/server.py": "e554fcf1e3e046a4d2f4742dff263779684299e1806e215c371879ae89f4b56d",
+    "new_work/simulation/run_experiment.py": "c23ec09e88b032d4f20b4058b7c38fd9d70678252e7079d9692a8db7ad579c55",
+    "new_work/tests/test_flame_telemetry.py": "397434bc454f2263d67ec68231e58f9b17f2f9a1544430fb2f9fae6e7effeee6"
+  },
+  "script_sha256": "611a1b177dac79cf104d125c7509f691ca0e89686b753e5061480a45f0b19412",
+  "excluded_fields": [
+    "flame_clustering (new only)",
+    "filter_time",
+    "aggregation_time",
+    "root_training_time",
+    "server_total_time"
+  ],
+  "scope": "Same live server; only frozen versus instrumented selector differs. Six synthetic cases."
+}

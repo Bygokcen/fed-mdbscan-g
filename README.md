@@ -1,68 +1,32 @@
-# Fed-MDBSCAN-G — TIFS araştırma çalışma alanı
+# Fed-MDBSCAN-G — V4 çalışma alanı
 
-Bu klasör, eski karma depodan ayrılmış bağımsız çalışma kopyasıdır. Kaynak kod, testler, güncel makale ve ilgili denetim raporları buradadır. Dosyalar kopyalandı; eski proje silinmedi. Git deposu: https://github.com/Bygokcen/fed-mdbscan-g . Uzak depoda kullanıcı tarafından oluşturulan MIT lisansı korunmuştur.
+Güncel makale: [V4 ana PDF](tifs_submission/v4/manuscript/main.pdf), [ek belge](tifs_submission/v4/manuscript/supplement.pdf), [gönderim dosyaları](tifs_submission/v4/submission_files.zip).
 
-## Başlangıç noktaları
+## Klasörler
 
-| Yol | Amaç |
-|---|---|
-| `tifs_submission/main.pdf` | Güncel İngilizce makale |
-| `tifs_submission/supplement.pdf` | Ek deney analizleri |
-| `tifs_submission/REVISION_STATUS.md` | TIFS gönderimi öncesindeki bilimsel açıklar |
-| `new_work/simulation/` | Çalışılacak simülasyon kaynak kodu |
-| `new_work/tests/` | Protokol, filtreleme ve kurtarma testleri |
-| `new_work/*.py` | Deney yönetimi, kurtarma ve tanı araçları |
-| `new_work/FED-MDBSCAN_Paper/` | Bu çalışmaya ait denetim/karar geçmişi |
-| `tifs_submission/evidence/` | Makale tablolarını destekleyen küçük CSV ve kimlik kayıtları; Git'e dahil |
-| `new_work/results/validated/audit-v2/full_20260910/` | Ham deney arşivi; yerelde mevcut, Git dışında |
-| `new_work/data/` | Veri kümeleri; yerelde mevcut, Git dışında |
-| `environment/audit-v2-pip-freeze.txt` | Tarihsel deney ortamının tam paket kaydı |
-| `MIGRATION.json`, `MIGRATION_VALIDATION.json` | Kopyalama kapsamı ve doğrulama sonuçları |
+- `tifs_submission/v4/`: güncel makale, Türkçe çalışma çevirisi, LaTeX kaynakları, küçük kanıt dosyaları ve paylaşım paketi.
+- `analysis/`: V4 bulgularını üreten veya doğrulayan analizler; [dizin](analysis/README.md).
+- `new_work/simulation/`, `new_work/tests/` ve `new_work/*.py`: simülasyon, koşum ve kurtarma programları ile testler.
+- `new_work/results/`: makaleyi destekleyen kanonik koşumlar, checkpoint'ler ve frozen kaynaklar. Tarihsel yollar korunur.
+- `new_work/data/`, `.venv/`, `environment/`: veri, mevcut Python ortamı ve ortam bilgileri. Python'u yeniden kurmayın.
+- `tifs_submission/evidence/`: önceki kanonik dışa aktarımlar; bazı doğrulama betikleri bu yolları kullanır. Güncel makale kopyaları V4 altındadır.
 
-**Bilimsel durum:** 2.125 geçerli, beş başarısız kanonik koşum. Deterministik CIFAR tanısı ayrı kanıttır. Makale yazar incelemesine hazır taslaktır; henüz gönderime hazır değildir.
-
-`new_work` ve `tifs_submission` adları, mevcut kodun göreli yollarını korumak için bırakıldı. Bu klasörde eski deney serileri, kökteki diğer simülasyon sürümleri ve eski makale grafik arşivleri yoktur.
-
-## Python ortamı — yerel kurulum hazır
-
-Mevcut makinedeki Python 3.12 ortamı paketler yeniden indirilmeden `.venv/` altına bağımsız kopyalandı. Başlatıcı ve etkinleştirme yolları yeni klasöre uyarlandı. Eski projenin sanal ortamına bağlantı kullanılmıyor; sistem Python çalıştırıcısı `/usr/bin/python3` olarak ortak kalıyor. Python veya paketleri yeniden kurmanıza gerek yok.
+## Çalıştırma
 
 ```sh
-cd /home/gokcen/Fed_MDBSCAN_TIFS
-source .venv/bin/activate
-python -m pytest new_work/tests -q
+.venv/bin/python -m pytest new_work/tests -q -p no:cacheprovider
+.venv/bin/python tifs_submission/v4/analysis/build_tables.py --root tifs_submission/v4
+cd tifs_submission/v4/manuscript
+pdflatex main && bibtex main && pdflatex main && pdflatex main
+pdflatex supplement && pdflatex supplement
 ```
 
-VS Code yerel `.vscode/settings.json` içinden `.venv/bin/python` yorumlayıcısını seçer. Daha önce farklı bir yorumlayıcı seçildiyse “Python: Select Interpreter” komutuyla bu yolu seçin. `.venv` ve `.vscode` Git dışında kalır. Taşıma ve doğrulama kaydı: `environment/local_environment_transfer.json`.
+## Bilimsel durum
 
-Başka bir makinedeki temiz Git klonunda `.venv` bulunmaz. Yalnızca o durumda yeni bir ortam oluşturup gereksinimleri kurmak gerekir. Tarihsel GPU paket kaydı `environment/audit-v2-pip-freeze.txt` içindedir; CUDA sürücüsü ayrıca eşleştirilmelidir. Ortam kopyalama kontrolü, kanonik deneylerin başka bir makinede birebir tekrarlandığını kanıtlamaz.
+2.130 planlı birim: 2.125 geçerli, 5 başarısız. Başarısızlıkları tanı koşumlarıyla değiştirmeyin. Makale dürüst istemci dışlaması ve koşullu karar-yolu analizi üzerinedir; genel savunma üstünlüğü veya istatistiksel anlamlılık iddiası yoktur. Güncel açık işler: [V4 gönderim durumu](tifs_submission/v4/SUBMISSION_STATUS.md).
 
-Yeni konuşmada **START_HERE.md** dosyasından devam edin.
+## Ayrılan geçmiş çalışmalar
 
-## Yeni deney oluşturma
+24 Eylül düzenlemesinde eski sürümler, paylaşım kopyaları ve V4 dışında kalan deney hatları silinmeden `/home/gokcen/Fed_MDBSCAN_TIFS_arsiv_20260924/` altına taşındı. Dosya hashleri ve eski yollar `MANIFEST.json` içinde; geri alma açıklaması arşivin `README.md` dosyasındadır. [Yerel düzenleme kaydı](environment/workspace_cleanup_20260924.json).
 
-Önce yukarıdaki testleri çalıştırın. Yeni bir smoke kampanyası için:
-
-```sh
-cd new_work
-python -m simulation.run_audit_campaign --campaign results/validated/audit-v2/smoke_new_workspace --data-dir data --profile smoke
-```
-
-Bu komut gerçekten deney başlatır; hazır sonuç arşivini okumak için gerekli değildir. Aynı isimde mevcut kampanya varsa yeni isim seçin. Tam kapsam için profil `full` olur; uzun süren GPU işidir. Deney yönetimi ve kurtarma araçları arşivi otomatik yeniden başlatacak biçimde çalıştırılmadı.
-
-## Tarihsel arşiv ve yollar
-
-Kanonik JSON'larda, tanı kontrol kopyalarında ve eski raporlarda `/home/gokcen/Fed_MDBSCAN/...` yolları görülebilir. Bunlar özgün koşumun kaydıdır; hashleri korumak için değiştirilmedi. **Kopyalanan eski kampanyayı `--resume` ile çalıştırmayın:** bazı kayıtlar eski veri/çıktı yollarını içerir. Yeni çalışmaları yukarıdaki gibi yeni kampanya adıyla oluşturun. Kaynak dosyaların bu klasörde olması, tarihsel koşum komutlarının otomatik taşınabilir olduğu anlamına gelmez.
-
-Raporlardaki eski süreç numaraları ve çalışma durumları tarihsel olabilir. Son kanonik durumu `report/outcomes.csv` üzerinden okuyun. Kod geliştirmek için `new_work/simulation/` kullanılır; arşiv içindeki `source/` değiştirilmez.
-
-## Git deposu
-
-```sh
-git clone https://github.com/Bygokcen/fed-mdbscan-g.git
-cd fed-mdbscan-g
-```
-
-`.gitignore`, veri kümelerini, ham sonuçları, sanal ortamları ve derleme artıklarını dışarıda tutar. Kaynak kod, makale PDF/LaTeX dosyaları ve küçük kanıt tabloları takip edilir. Proje lisansı `LICENSE` dosyasındadır; üçüncü taraf IEEEtran dosyalarının kendi lisans bildirimleri korunur. MIGRATION kayıtlarındaki Git durumu, kopyalama anının tarihsel durumudur.
-
-**Git klonu tek başına ham deneyleri/verileri içermez.** Başka makineye taşırken `new_work/data/` ve `new_work/results/` için ayrı arşiv/yedek kullanın. Bu iki klasör şu an bu yerel kopyada fiziksel olarak mevcuttur; eski depoya sembolik bağ kurulmadı.
+Git geçmişi, Python ortamı ve IDE ayarları korunmuştur. Ham veriler, sonuç arşivi ve yerel ortam Git'e eklenmez. Depo: https://github.com/Bygokcen/fed-mdbscan-g.

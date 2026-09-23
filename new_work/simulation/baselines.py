@@ -443,13 +443,22 @@ def flame_hdbscan(gradients, global_weights, noise_std=0.001):
     distances = np.maximum(cosine_distances(models), 0.0)
     distances = (distances + distances.T) / 2
     np.fill_diagonal(distances, 0.0)
+    labels = None
     if n <= 2 or np.all(distances == 0):
         accepted = list(range(n))
+        clustering_skip_reason = 'small_cohort' if n <= 2 else 'zero_distances'
     else:
         labels = HDBSCAN(min_cluster_size=n // 2 + 1, min_samples=2,
                          metric='precomputed', allow_single_cluster=True,
                          copy=True).fit_predict(distances)
         accepted = np.flatnonzero(labels >= 0).tolist()
+        clustering_skip_reason = 'none'
+    # Preserve the HDBSCAN output before the server may replace an empty
+    # selection with accept-all. A skipped fit has unknown, not zero, clusters.
+    cluster_sizes = None if labels is None else {
+        str(int(label)): int(np.count_nonzero(labels == label))
+        for label in np.unique(labels) if label >= 0
+    }
     return accepted, sorted(set(range(n)) - set(accepted)), {
         'method': 'flame_hdbscan', 'aggregation_op': 'flame',
         'median_norm': float(np.median(np.linalg.norm(gradients.astype(np.float64), axis=1))),
@@ -457,4 +466,12 @@ def flame_hdbscan(gradients, global_weights, noise_std=0.001):
         'sklearn_min_samples': 2, 'geometry': 'local_model_cosine',
         'fallback_applied': not bool(accepted),
         'fallback_reason': 'no_majority_cluster' if not accepted else 'none',
+        'flame_clustering': {
+            'executed': labels is not None,
+            'skip_reason': clustering_skip_reason,
+            'min_cluster_size': n // 2 + 1,
+            'cluster_sizes': cluster_sizes,
+            'noise_count': None if labels is None else int(np.count_nonzero(labels == -1)),
+            'selected_count_before_fallback': len(accepted),
+        },
     }

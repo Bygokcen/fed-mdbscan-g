@@ -1,0 +1,229 @@
+{
+  "clean_multikrum": [
+    {
+      "dataset": "har",
+      "scenario": "6.2",
+      "tp": "0",
+      "fp": "2610",
+      "tn": "5490",
+      "fn": "0",
+      "fpr_recomputed": 0.32222222222222224
+    },
+    {
+      "dataset": "har",
+      "scenario": "6.1",
+      "tp": "0",
+      "fp": "2610",
+      "tn": "5490",
+      "fn": "0",
+      "fpr_recomputed": 0.32222222222222224
+    },
+    {
+      "dataset": "har",
+      "scenario": "1.1",
+      "tp": "0",
+      "fp": "2610",
+      "tn": "5490",
+      "fn": "0",
+      "fpr_recomputed": 0.32222222222222224
+    },
+    {
+      "dataset": "mnist",
+      "scenario": "6.2",
+      "tp": "0",
+      "fp": "2610",
+      "tn": "5490",
+      "fn": "0",
+      "fpr_recomputed": 0.32222222222222224
+    },
+    {
+      "dataset": "mnist",
+      "scenario": "6.1",
+      "tp": "0",
+      "fp": "2610",
+      "tn": "5490",
+      "fn": "0",
+      "fpr_recomputed": 0.32222222222222224
+    },
+    {
+      "dataset": "mnist",
+      "scenario": "1.1",
+      "tp": "0",
+      "fp": "2610",
+      "tn": "5490",
+      "fn": "0",
+      "fpr_recomputed": 0.32222222222222224
+    },
+    {
+      "dataset": "fashion_mnist",
+      "scenario": "6.2",
+      "tp": "0",
+      "fp": "2610",
+      "tn": "5490",
+      "fn": "0",
+      "fpr_recomputed": 0.32222222222222224
+    },
+    {
+      "dataset": "fashion_mnist",
+      "scenario": "6.1",
+      "tp": "0",
+      "fp": "2610",
+      "tn": "5490",
+      "fn": "0",
+      "fpr_recomputed": 0.32222222222222224
+    },
+    {
+      "dataset": "fashion_mnist",
+      "scenario": "1.1",
+      "tp": "0",
+      "fp": "2610",
+      "tn": "5490",
+      "fn": "0",
+      "fpr_recomputed": 0.32222222222222224
+    }
+  ],
+  "constrained_multikrum": [
+    {
+      "dataset": "har",
+      "scenario": "7.1",
+      "tp": "1407",
+      "fp": "1203",
+      "tn": "4467",
+      "fn": "1023",
+      "fpr_recomputed": 0.21216931216931217
+    },
+    {
+      "dataset": "har",
+      "scenario": "7.2",
+      "tp": "0",
+      "fp": "2610",
+      "tn": "3060",
+      "fn": "2430",
+      "fpr_recomputed": 0.4603174603174603
+    },
+    {
+      "dataset": "mnist",
+      "scenario": "7.1",
+      "tp": "0",
+      "fp": "2610",
+      "tn": "3060",
+      "fn": "2430",
+      "fpr_recomputed": 0.4603174603174603
+    },
+    {
+      "dataset": "mnist",
+      "scenario": "7.2",
+      "tp": "0",
+      "fp": "2610",
+      "tn": "3060",
+      "fn": "2430",
+      "fpr_recomputed": 0.4603174603174603
+    },
+    {
+      "dataset": "fashion_mnist",
+      "scenario": "7.1",
+      "tp": "0",
+      "fp": "2610",
+      "tn": "3060",
+      "fn": "2430",
+      "fpr_recomputed": 0.4603174603174603
+    },
+    {
+      "dataset": "fashion_mnist",
+      "scenario": "7.2",
+      "tp": "0",
+      "fp": "2610",
+      "tn": "3060",
+      "fn": "2430",
+      "fpr_recomputed": 0.4603174603174603
+    }
+  ],
+  "exact_constrained_cells": 5,
+  "clean_datasets": [
+    "fashion_mnist",
+    "har",
+    "mnist"
+  ],
+  "mixed_cluster": {
+    "gamma": 1.0,
+    "tau": 2,
+    "cluster": [
+      1,
+      2
+    ],
+    "b0": [
+      0,
+      1
+    ],
+    "consensus_passed": false,
+    "removed_b0_member": 1,
+    "scope": "actual consensus helper, not full SNNC pipeline"
+  },
+  "monotone_pareto": {
+    "before": [
+      0.0,
+      0.0
+    ],
+    "after": [
+      0.0,
+      1.0
+    ],
+    "order": "FPR,TPR"
+  },
+  "density_threshold": {
+    "densities": [
+      10.0,
+      10.0,
+      0.10101010101010101,
+      0.1
+    ],
+    "threshold": 11,
+    "attacked_ids": [
+      0,
+      1
+    ]
+  },
+  "identical_vector_density": [
+    1.0,
+    1.0,
+    10.0,
+    10.0
+  ],
+  "distance_envelope": {
+    "honest": [
+      -2.0,
+      0.0,
+      0.1,
+      2.0
+    ],
+    "adversary": -1.0,
+    "bound": 4.0,
+    "max_distance": 3.0,
+    "scores": [
+      2.0,
+      0.0,
+      0.1,
+      2.0,
+      1.0
+    ],
+    "rejected_ids": [
+      4,
+      0,
+      3
+    ],
+    "scope": "counterexample to general constraint-to-order inference; not canonical attack rerun"
+  },
+  "abstract_whitespace_words": 333,
+  "evidence_hashes": {
+    "cells.csv": "2c24cab61b6092547e31077d33207a5e97516b3c0b7eeb93c21896eb58ea22e7",
+    "units.csv": "3809360bb583e25df3011f06391f9dcad75033a4a94b7e0b7b83d043b3b94bd3",
+    "outcomes.csv": "ee2be56d48ef0457cb65e0abc1a645c1485f5b5b2ea2d998ebc87fd92930f983"
+  },
+  "inputs_sha256": {
+    "tifs_submission/v3/manuscript/main.tex": "d4afaedca61901fd119c5806dd57e2078a5e182221b58d3669a442ee223ee2b6",
+    "tifs_submission/v3/manuscript/main.pdf": "7d0ba6d191f15d11c356cbfe4cedbaf189536ed4f5b92dc537ededb3aaf2ffb5",
+    "tifs_submission/v3/analysis/measure_gamma.py": "751fb2cb048832e411449c08fdfcff09568e07f57d727e1d89f3368615a6218c",
+    "tifs_submission/v3/analysis/evidence/cells.csv": "2c24cab61b6092547e31077d33207a5e97516b3c0b7eeb93c21896eb58ea22e7",
+    "new_work/results/cutoff_development/study_20260914_v1/source/new_work/simulation/mdbscan.py": "415b436e6e34ce4bb1e185c91ec65cfc20b89576e31209f27fdcb09390860df0"
+  }
+}

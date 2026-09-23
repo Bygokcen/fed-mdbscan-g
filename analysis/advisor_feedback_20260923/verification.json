@@ -1,0 +1,22 @@
+{
+  "valid_runs": 200,
+  "failed_runs": [
+    {
+      "phase": "main",
+      "dataset": "cifar10",
+      "scenario": "7.1",
+      "seed": 42,
+      "path": "new_work/results/validated/audit-v2/full_20260910/runs/main/cifar10/scenario_7.1/failures/flame_hdbscan_seed42.json"
+    }
+  ],
+  "recorded_rounds": 6000,
+  "historical_hdbscan_labels_available": false,
+  "historical_count_source": "len(accepted_ids), checked against n_benign and the frozen non-fallback selection path; not recovered from BER",
+  "old_rounds_with_flame_clustering_field": 0,
+  "cell_count": 67,
+  "clean_cells": 11,
+  "clean_rounds": 990,
+  "canonical_fallback_rounds": 0,
+  "canonical_skip_or_all_accepted_rounds": 0,
+  "clean_rounds_at_minimum": 719
+}

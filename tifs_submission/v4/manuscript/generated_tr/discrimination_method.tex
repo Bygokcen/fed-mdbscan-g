@@ -1,0 +1,36 @@
+\begin{table*}[!tp]
+\centering\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\caption{Kural başına, mevcut hücreler üzerinden saldırı ailesi ortalamaları. FLTrust bu panelde kısıtlı ailede pozitif ortalama $J$ elde eder; sayımları sıfır ağırlıklara ilişkindir. Bu, savunma sınıfları arasında genel bir ayrım kanıtlamaz.}\label{tab:discrimination_method}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrrr}
+\toprule
+Saldırgan ailesi & Kural & Hücre & TPR (\%) & FPR (\%) & $J$ (yp) & Fayda (yp) \\
+\midrule
+Yüksek Gauss gürültüsü ($\sigma=5$) & Multi-Krum & 15 & 100.0 & 10.4 & +89.6 & +16.5 \\
+ & FLTrust (normalize) & 15 & 50.0 & 28.0 & +22.0 & +14.9 \\
+ & FLAME (HDBSCAN) & 15 & 100.0 & 31.5 & +68.5 & +6.2 \\
+ & Fed-MDBSCAN-G (tam) & 15 & 100.0 & 5.8 & +94.2 & +17.1 \\
+\midrule
+Etiket çevirme & Multi-Krum & 9 & 69.1 & 22.4 & +46.7 & -9.5 \\
+ & FLTrust (normalize) & 9 & 79.0 & 26.7 & +52.3 & -4.7 \\
+ & FLAME (HDBSCAN) & 9 & 78.5 & 38.8 & +39.7 & -14.0 \\
+ & Fed-MDBSCAN-G (tam) & 9 & 52.3 & 11.1 & +41.2 & -7.9 \\
+\midrule
+Yama arka kapısı & FLTrust (normalize) & 4 & 31.4 & 27.6 & +3.8 & -7.9 \\
+ & FLAME (HDBSCAN) & 6 & 48.4 & 47.5 & +0.9 & -26.7 \\
+ & Fed-MDBSCAN-G (tam) & 6 & 21.4 & 20.2 & +1.2 & -19.2 \\
+\midrule
+Sınırlı rastgele yön & Multi-Krum & 18 & 33.7 & 31.7 & +2.1 & -23.2 \\
+ & FLTrust (normalize) & 18 & 29.7 & 29.8 & -0.1 & -9.3 \\
+ & FLAME (HDBSCAN) & 18 & 47.5 & 46.7 & +0.9 & -33.0 \\
+ & Fed-MDBSCAN-G (tam) & 18 & 25.3 & 26.7 & -1.4 & -26.3 \\
+\midrule
+Kısıtlı her şeyi bilen & Multi-Krum & 6 & 9.7 & 41.9 & -32.2 & -20.1 \\
+ & FLTrust (normalize) & 6 & 66.3 & 30.7 & +35.6 & +14.1 \\
+ & FLAME (HDBSCAN) & 8 & 13.1 & 57.9 & -44.7 & -19.6 \\
+ & Fed-MDBSCAN-G (tam) & 8 & 6.4 & 20.6 & -14.2 & -12.9 \\
+\bottomrule
+\end{tabular}
+}
+\end{table*}

@@ -1,0 +1,29 @@
+\begin{table*}[!tp]
+\centering\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\caption{Kısıtlı her şeyi bilen saldırgan altında çalışma noktaları (\%30 saldırgan; turda 63 dürüst ve 27 saldırgan katılımcı). Kabul aritmetiği sayısal bir öngörü veren iki kural gösterilmiştir; diğer ikisi Tablo~\ref{tab:discrimination_method} içinde özetlenmiştir. Son sütun, sıfır saldırgan yakalama koşulunda Sonuç~\ref{cor:cardinality}--\ref{cor:majority} ile verilen kardinalite özdeşliğini veya üst sınırı gösterir.}\label{tab:constrained}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllrrrr}
+\toprule
+$\alpha$ & Veri kümesi & Kural & TPR (\%) & FPR (\%) & $J$ (yp) & TPR${}=0$ ise FPR (\%) \\
+\midrule
+0.1 & MNIST & Multi-Krum & 0.00 & 46.03 & -46.03 & 46.03 \\
+0.1 & MNIST & FLAME (HDBSCAN) & 0.00 & 68.11 & -68.11 & $\leq69.84$ \\
+0.1 & Fashion & Multi-Krum & 0.00 & 46.03 & -46.03 & 46.03 \\
+0.1 & Fashion & FLAME (HDBSCAN) & 0.00 & 65.59 & -65.59 & $\leq69.84$ \\
+0.1 & HAR & Multi-Krum & 57.90 & 21.22 & +36.68 & 46.03 \\
+0.1 & HAR & FLAME (HDBSCAN) & 96.67 & 27.25 & +69.42 & $\leq69.84$ \\
+0.1 & CIFAR-10 & FLAME (HDBSCAN) & 8.33 & 62.94 & -54.60 & $\leq69.84$ \\
+0.01 & MNIST & Multi-Krum & 0.00 & 46.03 & -46.03 & 46.03 \\
+0.01 & MNIST & FLAME (HDBSCAN) & 0.00 & 58.82 & -58.82 & $\leq69.84$ \\
+0.01 & Fashion & Multi-Krum & 0.00 & 46.03 & -46.03 & 46.03 \\
+0.01 & Fashion & FLAME (HDBSCAN) & 0.00 & 63.19 & -63.19 & $\leq69.84$ \\
+0.01 & HAR & Multi-Krum & 0.00 & 46.03 & -46.03 & 46.03 \\
+0.01 & HAR & FLAME (HDBSCAN) & 0.00 & 59.47 & -59.47 & $\leq69.84$ \\
+0.01 & CIFAR-10 & FLAME (HDBSCAN) & 0.00 & 57.51 & -57.51 & $\leq69.84$ \\
+\bottomrule
+\end{tabular}
+}
+
+\vspace{2pt}\parbox{\linewidth}{\scriptsize Multi-Krum her turda 90 gönderimin $n-m=29$ tanesini atar. Altı hücrenin 5'inde tam olarak $2\,610=29\times90$ dürüst ret ile $\mathrm{TPR}=0$ kaydeder, yani $\mathrm{FPR}=29/63=46.03\%$: atılan her gönderim dürüsttür. İki tamamlanmış tohum ve bir kayıtlı başarısızlık nedeniyle 60 tur içeren CIFAR-10/FLAME/$\alpha=0.1$ dışında her hücrede 90 kayıtlı tur vardır. Koşullu özdeşlik TPR değeri pozitif olan satırlara uygulanmaz.}
+\end{table*}

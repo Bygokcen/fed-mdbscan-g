@@ -1,0 +1,18 @@
+\begin{table}[!t]
+\centering\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\caption{Radial ratio of the initial acceptance pool on distinct attacked checkpoint matrices. The threshold is $\tau=2$.}\label{tab:gamma}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+Attack & Matrices & $\Gamma\leq2$ & Median & Maximum \\
+\midrule
+Min-Max & 18 & 18 & 1.257480 & 1.622338 \\
+Patch & 18 & 17 & 1.665775 & 2.017225 \\
+All attacked & 36 & 35 & 1.448095 & 2.017225 \\
+\bottomrule
+\end{tabular}
+}
+
+\vspace{2pt}\parbox{\linewidth}{\scriptsize Both gate evaluations reuse each matrix and are counted once. In all 36 matrices, $B_0$ contains all 90 participants. The exception is Fashion, seed 137, patch, round 29.}
+\end{table}

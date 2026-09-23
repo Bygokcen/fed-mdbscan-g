@@ -1,0 +1,68 @@
+{
+  "verified_unique_matrices": 72,
+  "gate_rows": 144,
+  "attacked_unique_matrices": 36,
+  "max_native_vs_promoted_gamma_difference": 5.432861556187163e-07,
+  "precision_changes_tau_classification": 0,
+  "attacked_satisfying": 35,
+  "attacked_gamma_min": 1.1165419335598734,
+  "attacked_gamma_median": 1.448094817650805,
+  "attacked_gamma_max": 2.0172253241679425,
+  "attacked_exceptions": [
+    {
+      "reference": "12",
+      "dataset": "fashion_mnist",
+      "scenario": "scenario_cut_backdoor",
+      "seed": "137",
+      "round": "29",
+      "attacked": true,
+      "gamma": 2.0172253241679425,
+      "b0_equals_all": true
+    }
+  ],
+  "archived_branches_with_clusters_outside_b0": [
+    {
+      "reference": "9",
+      "round": "0",
+      "gate": "original",
+      "groups_not_contained_in_b0": 1,
+      "gamma": 3.453700167226893
+    },
+    {
+      "reference": "9",
+      "round": "0",
+      "gate": "density_only",
+      "groups_not_contained_in_b0": 1,
+      "gamma": 3.453700167226893
+    },
+    {
+      "reference": "9",
+      "round": "9",
+      "gate": "original",
+      "groups_not_contained_in_b0": 1,
+      "gamma": 5.692417920322014
+    },
+    {
+      "reference": "9",
+      "round": "9",
+      "gate": "density_only",
+      "groups_not_contained_in_b0": 1,
+      "gamma": 5.692417920322014
+    },
+    {
+      "reference": "10",
+      "round": "9",
+      "gate": "original",
+      "groups_not_contained_in_b0": 2,
+      "gamma": 4.273905289469634
+    },
+    {
+      "reference": "10",
+      "round": "9",
+      "gate": "density_only",
+      "groups_not_contained_in_b0": 2,
+      "gamma": 4.273905289469634
+    }
+  ],
+  "note": "Independent radius reduction from recorded B0; same frozen geometric-median routine. No independent training replication. Historical ABC not recomputed here."
+}

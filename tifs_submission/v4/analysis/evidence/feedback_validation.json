@@ -1,0 +1,16 @@
+{
+  "test_command": "PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python -m pytest new_work/tests -q -p no:cacheprovider",
+  "exit_code": 0,
+  "passed": 125,
+  "warnings": 18,
+  "elapsed_seconds": 3.68,
+  "result_origin": "Captured pytest output in this session; no full test log archived.",
+  "new_test_cases": 5,
+  "synthetic_server_comparisons": 6,
+  "comparison_scope": "Frozen versus instrumented selector through same live server; timing fields excluded. Not author-code equivalence or a training replay.",
+  "source_sha256": {
+    "new_work/simulation/baselines.py": "cb1320f3b0c17ab4c79da6ffa5f8266c92d70ee86c7ce73da78f4d6804f74dc9",
+    "new_work/simulation/run_experiment.py": "c23ec09e88b032d4f20b4058b7c38fd9d70678252e7079d9692a8db7ad579c55",
+    "new_work/tests/test_flame_telemetry.py": "397434bc454f2263d67ec68231e58f9b17f2f9a1544430fb2f9fae6e7effeee6"
+  }
+}

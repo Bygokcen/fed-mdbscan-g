@@ -1,5 +1,0 @@
-case,accepted,rejected,operator,fallback_reason,degraded,relative_gap,absolute_gap,cosine,applied_norm,reference_norm
-all_trust_zero,2,0,fltrust,no_accepted_updates,True,,1.5,,1.5,0.0
-zero_root,2,0,uniform_mean,none,False,,0.7071067811865476,,0.7071067811865476,0.0
-client_norm_at_guard,1,1,fltrust,none,False,0.0009980039980103427,0.0009970089790631853,1.0,1.0,0.9990029910209368
-one_trust_exactly_zero,1,1,fltrust,none,False,2.0000000584584397e-09,2.0000000544584395e-09,1.0,1.0,0.999999998
