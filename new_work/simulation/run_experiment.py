@@ -364,6 +364,7 @@ def run_single_experiment(config, method, seed=42):
                     'update_ids': [],
                     'accepted_ids': [],
                     'rejected_ids': [],
+                    'flame_clustering': None,
                 },
             )
             continue
@@ -531,6 +532,7 @@ def run_single_experiment(config, method, seed=42):
                 'update_ids': list(result['decision']['update_ids']),
                 'accepted_ids': list(result['decision']['accepted_ids']),
                 'rejected_ids': list(result['decision']['rejected_ids']),
+                'flame_clustering': filter_info.get('flame_clustering'),
             }
         )
 

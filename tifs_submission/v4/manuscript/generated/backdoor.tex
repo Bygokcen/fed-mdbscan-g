@@ -1,0 +1,19 @@
+\begin{table}[!t]
+\centering\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\caption{Patch-backdoor block for the full method with matched attack-disabled controls. Accuracy and triggered non-target attack success are reported together; the low-accuracy $\alpha=0.01$ block should not be read as effective protection.}\label{tab:backdoor}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{llrrrr}
+\toprule
+$\alpha$ & Dataset & Acc. (\%) & ASR (\%) & Control acc. (\%) & Control ASR (\%) \\
+\midrule
+0.1 & MNIST & 93.97 & 99.993 & 94.14 & 0.573 \\
+0.1 & Fashion & 83.34 & 99.930 & 83.42 & 2.630 \\
+0.1 & CIFAR-10 & 49.55 & 96.589 & 49.85 & 5.756 \\
+0.01 & MNIST & 28.20 & 79.848 & 26.01 & 5.517 \\
+0.01 & Fashion & 32.83 & 56.178 & 32.24 & 1.848 \\
+0.01 & CIFAR-10 & 15.47 & 26.856 & 15.83 & 20.796 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}

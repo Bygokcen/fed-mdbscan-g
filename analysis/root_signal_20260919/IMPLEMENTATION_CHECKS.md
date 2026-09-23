@@ -1,3 +1,0 @@
-# Root observer checks
-
-CPU self-test passed: parameter roundtrip, negative gradient direction against central finite difference, zero-delta loss, undefined zero direction, full state/buffer reset, exact repeated baseline loss. Source simulation unchanged. Reference replay must match all30 rounds and3 existing matrix checkpoints before scores are written. Ground-truth labels attached only after scoring. Subprocesses sequential; first reference gates all subsequent references. Full state dict and flat weights are saved. Controller preserves explicit failure and verifies output hashes. Protocol hash and root-index evidence hash are pinned in launch provenance.

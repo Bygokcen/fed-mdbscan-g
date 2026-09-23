@@ -1,0 +1,20 @@
+\begin{table}[!t]
+\centering\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\caption{Client-level discrimination of four rules, by configured attack family. $J=\mathrm{TPR}-\mathrm{FPR}$ is Youden's index: $J>0$ is above the chance diagonal, $J<0$ means honest clients are rejected in preference to attackers. Utility benefit is defense accuracy minus undefended accuracy in the same condition. Each row pools method $\times$ dataset $\times$ condition cells; cells are not independent replicates.}\label{tab:discrimination}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrrrr}
+\toprule
+Attacker family & Cells & TPR (\%) & FPR (\%) & $J$ (pp) & Benefit (pp) \\
+\midrule
+Loud Gaussian ($\sigma=5$) & 60 & 87.5 & 18.9 & +68.6 & +13.7 \\
+Label flipping & 36 & 69.7 & 24.8 & +45.0 & -9.0 \\
+Patch backdoor & 16 & 34.0 & 32.3 & +1.8 & -19.2 \\
+Bounded random direction & 72 & 34.1 & 33.7 & +0.4 & -23.0 \\
+Constrained omniscient & 28 & 21.8 & 38.0 & -16.1 & -10.6 \\
+\bottomrule
+\end{tabular}
+}
+
+\vspace{2pt}\parbox{\linewidth}{\scriptsize Family coverage differs in dataset, concentration and adversary ratio. Radial displacement is not measured by this summary. FLTrust uses zero-weight decisions. These are descriptive averages, not a controlled displacement experiment.}
+\end{table}

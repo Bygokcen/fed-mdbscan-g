@@ -1,0 +1,26 @@
+\begin{table}[!t]
+\centering\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\caption{Seçilen saldırgansız MNIST kontrol noktasında (tohum 2024, tur 9), üç mini-batch rejimi altında bulunan kümeler. Oran, $\tau=2$ ve $R_0$ \eqref{eq:consensus} ile tanımlı olmak üzere $\lVert c_S-m_{B_0}\rVert/(\tau R_0)$ değeridir; oran 1'i aşınca grup reddedilir. Karar sütunu uygulamanın kendi çıktısıdır. Buradaki bütün istemciler dürüsttür.}\label{tab:cluster_ratios}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{llrrrl}
+\toprule
+Kol & Küme & Boyut & $B_0$ içinde & Oran & Karar \\
+\midrule
+A & 0 & 38 & 38 & 0.13 & kabul \\
+A & 1 & 6 & 6 & 1.84 & ret \\
+A & 2 & 6 & 0 & 2.38 & ret \\
+A & 3 & 4 & 4 & 1.90 & ret \\
+A & 4 & 4 & 0 & 2.63 & ret \\
+A & 5 & 4 & 4 & 1.99 & ret \\
+B & 0 & 37 & 37 & 0.13 & kabul \\
+B & 1 & 6 & 6 & 1.70 & ret \\
+B & 2 & 4 & 4 & 1.87 & ret \\
+C & 0 & 34 & 34 & 0.12 & kabul \\
+C & 1 & 4 & 4 & 1.72 & ret \\
+\bottomrule
+\end{tabular}
+}
+
+\vspace{2pt}\parbox{\linewidth}{\scriptsize Çoğunluk kümesi ret yarıçapının $0.12$--$0.13$ katı, her dürüst azınlık kümesi ise $1.70$--$2.63$ katı uzaklıktadır. Ret yarıçapı dolayısıyla dürüst grupları birbirinden ayırmaktadır.}
+\end{table}

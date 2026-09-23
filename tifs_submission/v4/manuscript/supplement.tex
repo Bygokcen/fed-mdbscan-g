@@ -1,0 +1,28 @@
+\documentclass[journal]{IEEEtran}
+\usepackage{amsmath,amssymb,graphicx,booktabs,url}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
+\renewcommand{\thetable}{S\arabic{table}}
+\begin{document}
+\title{Supplement to ``Benign Exclusion and Consensus-Test Limits in Heterogeneous Federated Learning''}
+\author{Sebahattin~G\"ok\c{c}en~\"Ozden and Kadir~Sar{\i}kaya}
+\maketitle
+\section{Paired benign utility measurements}
+Table~\ref{tab:seed_cost} summarizes the individual differences used in the adversary-free utility analysis. A pair matches the dataset, concentration, seed, data partition, initial model, and participation schedule. Differences are uniform-mean accuracy minus rule accuracy. The range spans the available dataset--seed pairs; it is neither a confidence interval nor a claim about statistical significance. The artifact file \texttt{benign\_paired\_seed\_deltas.csv} retains all individual differences.
+\input{generated/benign_seed_summary.tex}
+
+\section{Duplicate-vector density check}
+The deployed density function returns 1 if the sum of effective nearest-neighbour distances is exactly zero. This is distinct from the ideal reciprocal-distance expression at strictly positive sums. With $[0,0,0.1,0.2]$ and $k=1$, it returns $[1,1,10,10]$. Six coincident observations satisfy the zero-sum condition at $k=5$; a duplicated pair with four distinct neighbours need not. Four small inputs were evaluated in the working source and two frozen sources, giving 12 passing checks. The function ASTs agree. These checks verify the local boundary rule, not equivalence to the original MDBSCAN authors' implementation.
+
+\section{FLAME identity counts and subsequent instrumentation}
+All 201 canonical FLAME result files match the hashes recorded in the earlier local audit: 200 completed runs and one retained CIFAR failure. The 6,000 completed rounds each contain 90 participants and between 46 and 89 accepted identities. Participant, accepted and rejected identities form disjoint complete partitions, and their confusion counts agree with the exported cell totals. No recorded round uses fallback or accepts everyone. In the frozen selector, the small-cohort and zero-distance skip paths accept everyone, so those paths are excluded by the recorded decisions. Normal selection keeps indices with nonnegative HDBSCAN labels; its minimum cluster size of 46 permits at most one cluster among 90 participants. This establishes the association between saved acceptance-set size and the retained cluster size for these records. It does not reconstruct missing historical labels.
+
+Subsequent instrumentation records whether clustering executed, its skip reason, the configured minimum cluster size, label-derived cluster sizes, the noise count, and the selection size before any fallback. A skipped fit records unknown sizes; an executed all-noise fit records an empty cluster dictionary. The full simulation test suite passes 125 tests. Six bounded frozen/current selector comparisons through the same server preserve all previous non-timing decision fields and produce identical model weights. These checks do not add research training runs or alter the archived results.
+
+\section{Checkpoint identity and scope}
+The radius check uses 72 distinct recorded matrices and two gate evaluations per matrix. Its 36 attacked matrices contain 18 adversarial clients each. All admit the full cohort at the initial stage. The sufficient consensus condition holds in 35, with maximum ratio 2.017225 at the one exception. Gate rows are deduplicated by reference and round before aggregation. With the neighbourhood cutoff enabled, six of the 144 gate evaluations contain candidate groups with members outside the initial pool. All occur outside the attacked block. The subset hypothesis therefore requires an explicit check. Three additional historical batch-regime rows in the supplied radius CSV are not counted as members of the 36-matrix attacked sample.
+
+\section{Reproduction boundary}
+From the V4 directory, run \texttt{python analysis/build\_tables.py --root .} with the existing project Python environment. It checks the copied report hashes and condition metadata, regenerates the tables and figures, and verifies the direct-count and checkpoint summaries. The main and supplement are compiled with the supplied IEEEtran files. A repository clone suffices for these summary-level checks. Repeating the historical identity-level audit or recapturing training checkpoints requires the separate local raw archive and frozen environment. Hash equality establishes content integrity, not a hypothesis's timing or preregistration.
+
+The five failed canonical units remain failures. Deterministic CIFAR diagnostics are not replacements for the failed unit. No new backdoor improvement, statistical equivalence, or general defense ranking is inferred from the analyses in this supplement.
+\end{document}

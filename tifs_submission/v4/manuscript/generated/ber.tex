@@ -1,0 +1,25 @@
+\begin{table*}[!tp]
+\centering\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\caption{Benign exclusion rate (BER, \%): honest client--round submissions rejected with no adversary present. Three seeds, 30 rounds, 90 participants per round (8{,}100 honest client--rounds per cell). CIFAR-10 has no $\alpha=0.5$ block. Dashes are conditions outside the planned coverage.}\label{tab:ber}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrrrrrrr}
+\toprule
+& \multicolumn{3}{c}{$\alpha=0.5$} & \multicolumn{4}{c}{$\alpha=0.1$} & \multicolumn{4}{c}{$\alpha=0.01$} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-8}\cmidrule(lr){9-12}
+Rule & MNIST & Fashion & HAR & MNIST & Fashion & HAR & CIFAR-10 & MNIST & Fashion & HAR & CIFAR-10 \\
+\midrule
+Uniform mean (undefended) & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 \\
+Sample-weighted mean (undefended) & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & -- & 0.0 & 0.0 & 0.0 & -- \\
+Norm clipping & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & -- & 0.0 & 0.0 & 0.0 & -- \\
+Coordinate-wise median & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & -- & 0.0 & 0.0 & 0.0 & -- \\
+Multi-Krum & 32.2 & 32.2 & 32.2 & 32.2 & 32.2 & 32.2 & -- & 32.2 & 32.2 & 32.2 & -- \\
+FLTrust (normalized) & 33.1 & 31.9 & 11.9 & 25.3 & 27.3 & 19.6 & -- & 30.3 & 32.3 & 31.0 & -- \\
+FLAME (HDBSCAN) & 48.9 & 48.9 & 48.3 & 48.9 & 48.7 & 47.4 & 48.7 & 48.7 & 47.0 & 42.4 & 45.5 \\
+Fed-MDBSCAN-G (full) & 0.3 & 0.4 & 2.1 & 0.2 & 0.5 & 24.1 & 0.1 & 42.6 & 38.7 & 24.4 & 39.9 \\
+\bottomrule
+\end{tabular}
+}
+
+\vspace{2pt}\parbox{\linewidth}{\scriptsize Multi-Krum's BER is $1-m/n=29/90=32.22\%$ in every cell, independent of dataset and of $\alpha$ (Corollary~\ref{cor:cardinality}). FLAME's clean upper bound is $1-(\lfloor n/2\rfloor+1)/n=44/90=48.89\%$ (Corollary~\ref{cor:majority}). FLTrust counts zero-weight submissions, not a separate rejection stage. Norm clipping and the coordinate-wise median emit no per-client rejection, so BER${}=0$ for them by construction and their benign cost appears in Table~\ref{tab:buc} instead.}
+\end{table*}

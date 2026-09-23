@@ -1,0 +1,194 @@
+[
+  {
+    "file": "main.tex",
+    "original": "We measure this cost in a completed evaluation of eight server-side rules on four datasets, three heterogeneity levels (Dirichlet $\\alpha=0.5$, $0.1$, $0.01$), and five attack families, comprising 2,125 completed runs and five recorded failures.",
+    "revised": "We measure this cost by evaluating eight server-side rules on four datasets, three heterogeneity levels (Dirichlet $\\alpha=0.5$, $0.1$, $0.01$), and five attack families. The evaluation includes 2,125 completed runs and five recorded failures.",
+    "reason": "Uzun deney kapsamı cümlesi ikiye ayrıldı; koşum sayılarının neye ait olduğu açıklaştırıldı."
+  },
+  {
+    "file": "main.tex",
+    "original": "at $\\alpha=0.01$; final accuracy falls by up to 65.55 percentage points relative to plain averaging.",
+    "revised": "at $\\alpha=0.01$. Final accuracy falls by up to 65.55 percentage points relative to plain averaging.",
+    "reason": "Özette dışlama ve doğruluk sonuçları ayrı cümlelerde sunuldu."
+  },
+  {
+    "file": "main.tex",
+    "original": "Two consequences follow for evaluation. Defenses should also be measured with no attacker present, and the individual decisions inside a composite defense deserve examination, not only its end-to-end outcome.",
+    "revised": "These findings call for evaluating defenses without attackers and examining how each stage of a composite defense contributes to its final decision.",
+    "reason": "Soyut geçiş ve uzun edilgen anlatım, önceki bulgulara bağlanan tek cümleye indirildi."
+  },
+  {
+    "file": "main.tex",
+    "original": "Our aim is explanatory. We seek to account for the costs and failures observed in this evaluation; we do not present the composite as a generally superior defense, nor do we claim that the findings exhaust what geometric filtering can achieve.",
+    "revised": "Our aim is to explain the costs and failures observed in this evaluation. We do not claim general superiority for the composite or treat these findings as limits on all geometric filtering methods.",
+    "reason": "Aynı amacı yineleyen iki ifade birleştirildi; kapsam sınırı korundu."
+  },
+  {
+    "file": "main.tex",
+    "original": "Our first contribution is an adversary-free comparison at Dirichlet concentrations $\\alpha\\in\\{0.5,0.1,0.01\\}$, with dataset coverage stated explicitly, that separates honest-client exclusion from changes in final accuracy. In this setting, fixed-cardinality selection yields an exact exclusion rate, whereas majority-cluster retention yields only an upper bound whose attainment has to be measured. We measure it by counting the saved FLAME acceptance sets directly rather than inferring their size from rounded rejection rates.",
+    "revised": "Our first contribution is an adversary-free comparison at Dirichlet concentrations $\\alpha\\in\\{0.5,0.1,0.01\\}$. We state the dataset coverage explicitly and measure honest-client exclusion separately from changes in final accuracy. Fixed-cardinality selection gives an exact exclusion rate. Majority-cluster retention gives an upper bound, whose attainment we assess by directly counting the saved FLAME acceptance sets rather than inferring their sizes from rounded rejection rates.",
+    "reason": "Katkı cümlesindeki araya giren nitelemeler ayrıldı; “it” zamirinin belirsiz göndermesi kaldırıldı."
+  },
+  {
+    "file": "main.tex",
+    "original": "A separate score-ordering result characterizes when a rejecting rule has zero attacker recall and positive honest rejection. It rests on an explicit ordering premise, which a distance constraint on the attack does not by itself guarantee for every defense score.",
+    "revised": "A separate score-ordering result states when a rule rejects honest clients but no attackers. This result requires an explicit ordering of scores; a distance constraint on the attack alone does not guarantee that ordering for every defense score.",
+    "reason": "Soyut metrik birleşimi doğrudan karar davranışıyla açıklandı; sıralama varsayımı korundu."
+  },
+  {
+    "file": "main.tex",
+    "original": "The analysis is retrospective and descriptive. Its contribution lies in connecting controlled observations to explicit decision rules and sufficient conditions, not in new universal lower bounds or in prospective confirmation of a theory.",
+    "revised": "This retrospective, descriptive analysis connects controlled observations to explicit decision rules and sufficient conditions. It establishes neither new universal lower bounds nor prospective confirmation of a theory.",
+    "reason": "Üst üste soyut ad öbekleri azaltıldı; retrospektif kapsam açık tutuldu."
+  },
+  {
+    "file": "main.tex",
+    "original": "Because these designs differ in what they observe and how they decide, an algebraic property established for one stage cannot be transferred to the others without checking its assumptions.",
+    "revised": "These designs use different observations and decision rules. Applying an algebraic property of one stage to another therefore requires checking its assumptions.",
+    "reason": "Uzun neden-sonuç cümlesi ikiye ayrıldı."
+  },
+  {
+    "file": "main.tex",
+    "original": "Its use as a filter, its neighbourhood cutoff, and its treatment of unclustered points differ from the original clustering algorithm, and it is this local adaptation that we assess.",
+    "revised": "We assess a local adaptation that differs from the original clustering algorithm in its use as a filter, its neighbourhood cutoff, and its treatment of unclustered points.",
+    "reason": "Gecikmiş özne ve yinelenen “its” yapısı sadeleştirildi."
+  },
+  {
+    "file": "main.tex",
+    "original": "Rates from different studies should not be read as a shared numerical validation.",
+    "revised": "Comparing rates across studies requires attention to their denominators and experimental settings.",
+    "reason": "İzleyen örneğin neden önemli olduğu ilk cümlede belirtildi; sayısal doğrulama sınırı paragraf sonunda korundu."
+  },
+  {
+    "file": "main.tex",
+    "original": "The statements in this section concern a single round and the decision rules just defined. They rely only on set inclusion, cardinality, and convexity, so their empirical relevance depends on whether their hypotheses hold in the implemented path; Section~\\ref{sec:mechanism} checks this on recorded checkpoints.",
+    "revised": "The statements in this section apply to a single round under the decision rules defined above. They use set inclusion, cardinality, and convexity. To explain an observed decision, their assumptions must hold along the implemented path; Section~\\ref{sec:mechanism} checks these assumptions on recorded checkpoints.",
+    "reason": "Uzun teorik geçiş bölündü; “this” göndermesi varsayımlarla değiştirildi."
+  },
+  {
+    "file": "main.tex",
+    "original": "Thus, if a group centroid lies outside a ball, at least one member does as well. The statement concerns the group, not each member. Rejecting a whole group can exclude members that lie inside the ball:",
+    "revised": "If a group centroid lies outside a ball, at least one member must also lie outside. This does not mean that every member lies outside. Rejecting the whole group can therefore exclude members inside the ball:",
+    "reason": "Grup ve tekil üye ayrımı açık bir mantıksal sırayla ifade edildi."
+  },
+  {
+    "file": "main.tex",
+    "original": "All analyses in this paper use these existing results. The conditional arguments of Section~\\ref{sec:theory} and several checkpoint analyses were developed after the results had been inspected. Content hashes identify the evidence files, but they do not establish preregistration or the order in which hypotheses were formed.",
+    "revised": "All analyses use these existing results. We developed the conditional arguments in Section~\\ref{sec:theory} and several checkpoint analyses after inspecting the results. Content hashes identify the evidence files; they establish neither preregistration nor when the hypotheses were formed.",
+    "reason": "Edilgen zaman dizisi etkin anlatımla kısaltıldı; önkayıt sınırı korundu."
+  },
+  {
+    "file": "main.tex",
+    "original": "Separate attack-disabled controls keep the client identities and schedules of the attacked configurations but disable the attack, and serve as controls for the patch-backdoor comparison.",
+    "revised": "For the patch-backdoor comparison, separate attack-disabled controls retain the client identities and schedules of the attacked configurations while disabling the attack.",
+    "reason": "“controls … serve as controls” tekrarı kaldırıldı."
+  },
+  {
+    "file": "main.tex",
+    "original": "A limited FLTrust check compared the local aggregation rule with a transcription of the rule in the authors' demonstration code on 18 recorded matrices and four root constructions; on these inputs the relative discrepancy of the aggregate was below $2.8\\times10^{-7}$.",
+    "revised": "We compared the local FLTrust aggregation rule with a transcription of the rule in the authors' demonstration code, using 18 recorded matrices and four root constructions. On these inputs, the relative discrepancy between aggregated updates was below $2.8\\times10^{-7}$.",
+    "reason": "Karşılaştırmanın girdileri ve sonucu ayrı cümlelere alındı; sınırlı kapsam devam eden paragrafta korundu."
+  },
+  {
+    "file": "main.tex",
+    "original": "The retained set has fewer than 90 members in every one of these rounds; since the frozen skip paths accept every participant, none of these rounds followed them.",
+    "revised": "Every retained set contains fewer than 90 members. Because the frozen skip paths accept all participants, the recorded decisions exclude those paths.",
+    "reason": "Uzun olumsuz yapı ve zamir göndermesi sadeleştirildi."
+  },
+  {
+    "file": "main.tex",
+    "original": "Agreement between an observed count and an algebraic identity does not lift these limits.",
+    "revised": "Matching an algebraic identity does not resolve these implementation limits.",
+    "reason": "Belirsiz “lift these limits” ifadesi uygulama kapsamına bağlandı."
+  },
+  {
+    "file": "main.tex",
+    "original": "Benign utility cost is the final accuracy of the uniform mean minus that of the defense in the same adversary-free condition; under attack, utility benefit reverses the subtraction.",
+    "revised": "Benign utility cost is uniform-mean final accuracy minus defense final accuracy in the same adversary-free condition. Under attack, utility benefit reverses this subtraction: defense accuracy minus uniform-mean accuracy.",
+    "reason": "İki metrik ayrı cümlelerde, çıkarma yönü açık biçimde tanımlandı."
+  },
+  {
+    "file": "main.tex",
+    "original": "The direct FLAME counts in Table~\\ref{tab:flame_sizes} separate the majority-cluster bound from its attainment.",
+    "revised": "The direct FLAME counts in Table~\\ref{tab:flame_sizes} show how often the majority-cluster bound is attained.",
+    "reason": "Soyut “separate … from” yapısı tablonun doğrudan işleviyle değiştirildi."
+  },
+  {
+    "file": "main.tex",
+    "original": "The bound is thus often attained, but it is not a constant exclusion rate, nor does heterogeneity force it.",
+    "revised": "The bound is often attained. It does not imply a constant exclusion rate, and heterogeneity does not guarantee that it is reached.",
+    "reason": "Art arda olumsuz bağlaçlar ayrıldı; sonuçlar korunarak gönderme netleştirildi."
+  },
+  {
+    "file": "main.tex",
+    "original": "These averages combine different dataset coverage; Table~\\ref{tab:buc} gives the individual conditions.",
+    "revised": "Dataset coverage differs across these averages; Table~\\ref{tab:buc} reports the individual conditions.",
+    "reason": "Ortalamanın veri kümesi kapsamıyla ilişkisi doğal sözdizimiyle yazıldı."
+  },
+  {
+    "file": "main.tex",
+    "original": "They show poor specificity in the measured clean blocks; without a deployment prevalence or further attacked-round data, they do not determine the alarm's predictive value.",
+    "revised": "They show poor specificity in the measured clean blocks. Estimating the alarm's predictive value would also require the attack prevalence in deployment and further attacked-round data.",
+    "reason": "“deployment prevalence” ifadesinde eksik olan saldırı göndermesi açıklaştırıldı."
+  },
+  {
+    "file": "main.tex",
+    "original": "Because all constrained attackers submit the same vector, zero recall is also consistent with ties at the selection boundary broken in the attackers' favour; it does not by itself establish the strict ordering premise of Theorem~\\ref{thm:inversion}.",
+    "revised": "All constrained attackers submit the same vector. Zero recall could therefore also arise if ties at the selection boundary are broken in their favour. It does not by itself establish the strict ordering premise of Theorem~\\ref{thm:inversion}.",
+    "reason": "Tek cümledeki neden, alternatif açıklama ve kanıt sınırı üç kısa cümleye ayrıldı."
+  },
+  {
+    "file": "main.tex",
+    "original": "On the 35 matrices that satisfy the condition, no regrouping of members of $B_0$ can move a centroid outside the acceptance ball of radius $2R_0$, which explains why the test stays inactive even when the gate is opened.",
+    "revised": "On the 35 matrices that satisfy the condition, regrouping members of $B_0$ cannot move a centroid outside the acceptance ball of radius $2R_0$. The test therefore rejects no group even when the gate is opened.",
+    "reason": "“inactive” sözcüğünün çalışmayan test ile ret üretmeyen testi karıştırması önlendi."
+  },
+  {
+    "file": "main.tex",
+    "original": "P2 behaves differently in the density-only patch block, with $\\mathrm{TPR}=46/324=14.20\\%$, $\\mathrm{FPR}=142/1296=10.96\\%$, and $J=+3.24$ points; in the matching attack-disabled block, the same policy rejects 82 honest observations.",
+    "revised": "P2 produces a different trade-off in the density-only patch block: $\\mathrm{TPR}=46/324=14.20\\%$, $\\mathrm{FPR}=142/1296=10.96\\%$, and $J=+3.24$ points. In the matching attack-disabled block, it rejects 82 honest observations.",
+    "reason": "Saldırı ve kontrol sonuçları iki cümlede ayrıştırıldı."
+  },
+  {
+    "file": "main.tex",
+    "original": "The negative P1 result limits this particular coverage repair on the recorded geometries. It does not show that every change of coverage or of validation statistic would fail.",
+    "revised": "The P1 result shows that this extension of test coverage adds no attacker rejections on the recorded geometries. This finding does not establish that other changes to test coverage or to the validation statistic would fail.",
+    "reason": "Soyut “coverage repair” ifadesi ölçülen davranışla açıklandı; kapsam sınırı korundu."
+  },
+  {
+    "file": "main.tex",
+    "original": "Of the 16 clients rejected in A but accepted in C, 10 escape because they no longer belong to a testable group, not because a group passes the test; the other six reflect changed initial-filter decisions.",
+    "revised": "Of the 16 clients rejected in A but accepted in C, 10 are no longer part of a group tested by the cluster stage. Their acceptance therefore does not mean that their group passed the test. The other six changes arise from initial-filter decisions.",
+    "reason": "“escape” ve uzun karşıtlık yapısı kaldırılarak iki mekanizma açıklandı."
+  },
+  {
+    "file": "main.tex",
+    "original": "If every candidate group lies in an acceptance pool whose maximum radius is below the centroid-test threshold, no change in grouping can activate that test.",
+    "revised": "If every candidate group lies in an acceptance pool whose maximum radius is below the centroid-test threshold, changing the grouping cannot make the test reject a group.",
+    "reason": "Testin yürütülmesi ve ret üretmesi arasındaki anlam ayrımı korundu."
+  },
+  {
+    "file": "main.tex",
+    "original": "The replays are conditional on recorded trajectories, whereas a modified defense would change subsequent inputs.",
+    "revised": "The replays use recorded trajectories. A modified defense would change subsequent inputs, which these replays do not capture.",
+    "reason": "“conditional on” soyutlaması, yeniden oynatmanın sınırı üzerinden açıklandı."
+  },
+  {
+    "file": "main.tex",
+    "original": "For \\method{}, a checked subset condition and radius ratio explain why centroid validation cannot reject any candidate group on 35 of 36 attacked checkpoint matrices, and testing previously untested singletons does not improve attacker rejection on those replays.",
+    "revised": "For \\method{}, the verified subset condition and measured radius ratio explain why centroid validation cannot reject any candidate group on 35 of 36 attacked checkpoint matrices. Extending the test to previously untested singletons adds no attacker rejections on those replays.",
+    "reason": "Sonuç bölümündeki iki ayrı bulgu bölündü; negatif sonuç doğrudan sayım davranışıyla ifade edildi."
+  },
+  {
+    "file": "supplement.tex",
+    "original": "With the neighbourhood cutoff enabled, six of the 144 gate evaluations, all outside this attacked block, contain candidate groups not fully included in the initial pool; the subset hypothesis therefore requires an explicit check.",
+    "revised": "With the neighbourhood cutoff enabled, six of the 144 gate evaluations contain candidate groups with members outside the initial pool. All occur outside the attacked block. The subset hypothesis therefore requires an explicit check.",
+    "reason": "İç içe kapsam nitelemeleri ayrı cümlelerde korundu."
+  },
+  {
+    "file": "main.tex",
+    "original": "convexity gives a sufficient condition for centroid validation to remain inactive when every candidate group lies inside the initial acceptance pool.",
+    "revised": "convexity gives a sufficient condition under which centroid validation rejects no group when every candidate group lies inside the initial acceptance pool.",
+    "reason": "Girişte de testin çalışması ile ret üretmesi ayrımı açıklaştırıldı."
+  }
+]

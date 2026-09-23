@@ -1,8 +1,0 @@
-{
-  "cases": 15,
-  "invariance_checks": 45,
-  "label_twin_equal": true,
-  "protocol_sha256": "a48c9ca0d64d34494568c8f0ebc4f5d5dd5bf0c0a40deb02f2e181d0ac521bb4",
-  "script_sha256": "72ebb3e04a0ed641d7d22bb42a4f9e1f1eb3dccef146b26640476b4b0bebc860",
-  "complete": true
-}

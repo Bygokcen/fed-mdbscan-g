@@ -1,0 +1,21 @@
+{
+  "date": "2026-09-24",
+  "pytest": {
+    "passed": 125,
+    "warnings": 18,
+    "seconds": 4.22,
+    "note": "Existing NVML, NumPy deprecation and intentional overflow-path warnings; no test failure."
+  },
+  "v4_tables_exact_match": 14,
+  "v4_derived_values_exact_match": true,
+  "main_pages": 12,
+  "supplement_pages": 2,
+  "final_latex_warnings": [],
+  "gamma_input_paths_existing": 322,
+  "gamma_program_help_exit_code": 0,
+  "canonical_stat_entries_preserved": 3077,
+  "simulation_and_test_sources_unchanged": true,
+  "v4_pdfs_unchanged": true,
+  "permanent_deletion": false,
+  "commit_push": false
+}

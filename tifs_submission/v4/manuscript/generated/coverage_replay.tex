@@ -1,0 +1,23 @@
+\begin{table*}[!tp]
+\centering\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\caption{Consensus-test coverage replay on 72 recorded update matrices, with cluster structure, geometry and gate memory held fixed. Entries are honest/attacker rejections as client--checkpoint counts. P0 is the deployed policy (clusters only); P1 additionally submits unclustered low-density updates to the same test as singletons; P2 excludes them outright. Widening coverage adds honest rejections and, except in one block, no attacker rejections.}\label{tab:coverage_replay}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrr}
+\toprule
+Gate / block & P0 (clusters only) & P1 (+singletons) & P2 (exclude) \\
+\midrule
+As deployed, Min-Max attacked & 0/0 & 0/0 & 0/0 \\
+As deployed, Patch attacked & 0/0 & 0/0 & 0/0 \\
+Density-only gate, Min-Max attacked & 0/0 & 0/0 & 0/0 \\
+Density-only gate, Patch attacked & 0/0 & 1/0 & 142/46 \\
+As deployed, Min-Max attack-disabled control & 319/0 & 351/0 & 326/0 \\
+Density-only gate, Min-Max attack-disabled control & 319/0 & 395/0 & 404/0 \\
+As deployed, Patch attack-disabled control & 1/0 & 1/0 & 1/0 \\
+Density-only gate, Patch attack-disabled control & 1/0 & 1/0 & 82/0 \\
+\bottomrule
+\end{tabular}
+}
+
+\vspace{2pt}\parbox{\linewidth}{\scriptsize Each attacked block contains 1{,}296 honest and 324 attacker observations; each attack-disabled block contains 1{,}620 honest observations. The one block that does yield attacker rejections (P2, density-only gate, patch) reaches $\mathrm{TPR}=46/324=14.20\%$ at $\mathrm{FPR}=142/1296=10.96\%$, i.e. $J=+3.2$~pp; its attack-disabled control records 82 honest rejections under the same policy. Counts are after the safety valve: under the density-only gate, P2 would exclude all 1{,}296 honest Min-Max observations, and the valve restores $B_0$ in all 18 of those matrices. These are fixed-matrix decision counts; no accuracy or attack success rate is re-measured.}
+\end{table*}

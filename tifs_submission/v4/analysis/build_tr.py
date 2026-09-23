@@ -1,0 +1,197 @@
+#!/usr/bin/env python3
+"""Turkish working-translation tables and figure for manuscript/main_tr.tex.
+
+Reads the English tables written by build_tables.py (manuscript/generated/*.tex),
+replaces captions, notes, headers and row labels with Turkish text, and writes
+manuscript/generated_tr/*.tex plus figures/ber_vs_alpha_tr.pdf.  Each translated
+table must contain the same multiset of digit groups as its English source, so the
+numbers cannot drift between the two versions.  Run build_tables.py first.
+
+Run:  python3 analysis/build_tr.py --root .
+"""
+from __future__ import annotations
+
+import argparse
+import os
+import re
+import statistics as st
+import sys
+from collections import Counter
+
+# Row labels shared by several tables (longest first where one contains another).
+COMMON = [
+    ("Sample-weighted mean (undefended)", "Örnek ağırlıklı ortalama (savunmasız)"),
+    ("Uniform mean (undefended)", "Düz ortalama (savunmasız)"),
+    ("Coordinate-wise median", "Koordinat bazında medyan"),
+    ("Norm clipping", "Norm kırpma"),
+    ("FLTrust (normalized)", "FLTrust (normalize)"),
+    ("Fed-MDBSCAN-G (full)", "Fed-MDBSCAN-G (tam)"),
+    ("Fed-MDBSCAN-G, stage 1 only", "Fed-MDBSCAN-G, yalnız 1. aşama"),
+    ("Fed-MDBSCAN-G, no gate memory", "Fed-MDBSCAN-G, kapı belleği yok"),
+    ("Fed-MDBSCAN-G, no valve", "Fed-MDBSCAN-G, valf yok"),
+    ("Geometric-median distance control", "Geometrik medyan uzaklık kontrolü"),
+    ("Trust-region multiplier", "Güven bölgesi çarpanı"),
+    (r"Loud Gaussian ($\sigma=5$)", r"Yüksek Gauss gürültüsü ($\sigma=5$)"),
+    ("Label flipping", "Etiket çevirme"),
+    ("Patch backdoor", "Yama arka kapısı"),
+    ("Bounded random direction", "Sınırlı rastgele yön"),
+    ("Constrained omniscient", "Kısıtlı her şeyi bilen"),
+]
+
+HDR_FAMILY = (r"Attacker family & Cells & TPR (\%) & FPR (\%) & $J$ (pp) & Benefit (pp) \\",
+              r"Saldırgan ailesi & Hücre & TPR (\%) & FPR (\%) & $J$ (yp) & Fayda (yp) \\")
+HDR_RULE = ("\nRule & MNIST", "\nKural & MNIST")
+
+TABLES = {
+    "ablation": dict(
+        caption=r"Varyant ile tam yöntem arasındaki son doğruluk farkı (yüzde puan), eşleşen ablasyon bloğunda. Aralıklar koşullar arasındaki değişkenliği gösterir, güven aralığı değildir. 1. aşama kabul bölgesinin üzerindeki bütün katmanları kaldırmak ortalamayı yüzde puanın onda birinden az değiştirir.",
+        notes=r"Hücreler üç tohum üzerinden veri kümesi~$\times$~koşul ortalamalarıdır; küçük bir ortalama farktan eşdeğerlik sonucu çıkarılmamaktadır.",
+        rows=[(r"Variant & Cells & Mean & Min. & Max. \\", r"Varyant & Hücre & Ort. & En az & En çok \\")]),
+    "alarm": dict(
+        caption=r"Tur düzeyinde alarm üreten tek değerlendirilmiş kuralın saldırgansız alarm oranı. Payda saldırgansız turlardır. $\alpha=0.01$ iken her veri kümesinde her tur alarm üretir. Bu sayımlar temiz kontrollerdeki yanlış alarmları ölçer; belirli bir saldırı sıklığındaki öngörü değerini ölçmez.",
+        notes=r"Diğer kurallarda alarm kanalı yoktur. Alarm mekanizmasının yokluğu alarm özgüllüğü anlamına gelmediği için bu kurallara sıfır oran yazılmamıştır.",
+        rows=[(r"$\alpha$ & Dataset & Alarming rounds & Rate (\%) & BER (\%) \\",
+               r"$\alpha$ & Veri kümesi & Alarm veren tur & Oran (\%) & BER (\%) \\")]),
+    "backdoor": dict(
+        caption=r"Tam yöntem için yama arka kapısı bloğu ve eşleşen saldırısı kapatılmış kontroller. Doğruluk ve tetiklenmiş hedef dışı örneklerdeki saldırı başarısı birlikte verilmiştir; düşük doğruluklu $\alpha=0.01$ bloğu etkili koruma olarak okunmamalıdır.",
+        rows=[(r"$\alpha$ & Dataset & Acc. (\%) & ASR (\%) & Control acc. (\%) & Control ASR (\%) \\",
+               r"$\alpha$ & Veri kümesi & Doğr. (\%) & ASR (\%) & Kontrol doğr. (\%) & Kontrol ASR (\%) \\")]),
+    "ber": dict(
+        caption=r"Dürüst istemci dışlama oranı (BER, \%): hiç saldırgan yokken reddedilen dürüst istemci--tur gönderimleri. Üç tohum, 30 tur, turda 90 katılımcı (hücre başına 8\,100 dürüst istemci--tur). CIFAR-10 için $\alpha=0.5$ bloğu yoktur. Tireler planlanan kapsam dışındaki koşullardır.",
+        notes=r"Multi-Krum'un BER değeri her hücrede $1-m/n=29/90=32.22\%$ olup veri kümesinden ve $\alpha$ değerinden bağımsızdır (Sonuç~\ref{cor:cardinality}). FLAME'in temiz üst sınırı $1-(\lfloor n/2\rfloor+1)/n=44/90=48.89\%$ değeridir (Sonuç~\ref{cor:majority}). FLTrust ayrı bir ret aşaması değil, sıfır ağırlıklı gönderimleri sayar. Norm kırpma ve koordinat bazında medyan istemci düzeyinde ret üretmez; bu yüzden onlar için BER${}=0$ tanım gereğidir ve dürüst maliyetleri Tablo~\ref{tab:buc} içinde görülür.",
+        rows=[HDR_RULE]),
+    "buc": dict(
+        caption=r"Dürüst fayda kaybı (BUC, yüzde puan): savunmasız düz ortalamanın son tur doğruluğu eksi savunmanınki; Tablo~\ref{tab:ber} ile aynı saldırgansız koşumlar. Pozitif değerler düz ortalamadan daha düşük son doğruluğu gösterir.",
+        notes=r"Üç tohum üzerinden betimsel ortalamalar. Tohum başına eşleştirilmiş farklar yapıt dosyalarında, özet aralıklar ek belgede verilmiştir. Hiçbir tekil değere anlamlılık iddiası eklenmemiştir.",
+        rows=[HDR_RULE]),
+    "cluster_ratios": dict(
+        caption=r"Seçilen saldırgansız MNIST kontrol noktasında (tohum 2024, tur 9), üç mini-batch rejimi altında bulunan kümeler. Oran, $\tau=2$ ve $R_0$ \eqref{eq:consensus} ile tanımlı olmak üzere $\lVert c_S-m_{B_0}\rVert/(\tau R_0)$ değeridir; oran 1'i aşınca grup reddedilir. Karar sütunu uygulamanın kendi çıktısıdır. Buradaki bütün istemciler dürüsttür.",
+        notes=r"Çoğunluk kümesi ret yarıçapının $0.12$--$0.13$ katı, her dürüst azınlık kümesi ise $1.70$--$2.63$ katı uzaklıktadır. Ret yarıçapı dolayısıyla dürüst grupları birbirinden ayırmaktadır.",
+        rows=[(r"Arm & Cluster & Size & In $B_0$ & Ratio & Decision \\",
+               r"Kol & Küme & Boyut & $B_0$ içinde & Oran & Karar \\"),
+              (r" & accept \\", r" & kabul \\"), (r" & reject \\", r" & ret \\")]),
+    "constrained": dict(
+        caption=r"Kısıtlı her şeyi bilen saldırgan altında çalışma noktaları (\%30 saldırgan; turda 63 dürüst ve 27 saldırgan katılımcı). Kabul aritmetiği sayısal bir öngörü veren iki kural gösterilmiştir; diğer ikisi Tablo~\ref{tab:discrimination_method} içinde özetlenmiştir. Son sütun, sıfır saldırgan yakalama koşulunda Sonuç~\ref{cor:cardinality}--\ref{cor:majority} ile verilen kardinalite özdeşliğini veya üst sınırı gösterir.",
+        notes=r"Multi-Krum her turda 90 gönderimin $n-m=29$ tanesini atar. Altı hücrenin 5'inde tam olarak $2\,610=29\times90$ dürüst ret ile $\mathrm{TPR}=0$ kaydeder, yani $\mathrm{FPR}=29/63=46.03\%$: atılan her gönderim dürüsttür. İki tamamlanmış tohum ve bir kayıtlı başarısızlık nedeniyle 60 tur içeren CIFAR-10/FLAME/$\alpha=0.1$ dışında her hücrede 90 kayıtlı tur vardır. Koşullu özdeşlik TPR değeri pozitif olan satırlara uygulanmaz.",
+        rows=[(r"$\alpha$ & Dataset & Rule & TPR (\%) & FPR (\%) & $J$ (pp) & FPR if TPR${}=0$ (\%) \\",
+               r"$\alpha$ & Veri kümesi & Kural & TPR (\%) & FPR (\%) & $J$ (yp) & TPR${}=0$ ise FPR (\%) \\")]),
+    "coverage": dict(
+        caption=r"Bloklara göre planlanan değerlendirme kapsamı. Bir birim, bir kural--koşul--tohum koşumudur. Planlanan 2130 birimin 2125'i tamamlanmış, 5'i doldurulmak ya da yeni tohumla tekrarlanmak yerine başarısız olarak tutulmuştur. Bloklar dengeli bir tam faktöriyel tasarım oluşturmaz.",
+        rows=[(r"Block & Units \\", r"Blok & Birim \\"),
+              ("Main matrix (attacked and adversary-free)", "Ana matris (saldırılı ve saldırgansız)"),
+              ("Ablation variants", "Ablasyon varyantları"),
+              ("Matched attack-disabled controls", "Eşleşen saldırısı kapatılmış kontroller"),
+              ("Oracle diagnostics", "Kâhin (oracle) tanıları"),
+              ("Alternative partition policy", "Alternatif bölümleme politikası"),
+              ("Fixed local-step control", "Sabit yerel adım kontrolü"),
+              ("Onset/offset timing", "Saldırı başlangıç/bitiş zamanlaması"),
+              ("Total planned", "Planlanan toplam")]),
+    "coverage_replay": dict(
+        caption=r"Uzlaşma testi kapsamının 72 kayıtlı güncelleme matrisi üzerinde yeniden oynatılması; küme yapısı, geometri ve kapı belleği sabit tutulmuştur. Değerler, istemci--kontrol noktası sayımı olarak dürüst/saldırgan retleridir. P0 kullanılan politikadır (yalnız kümeler); P1 kümelenmemiş düşük yoğunluklu güncellemeleri ayrıca tekil olarak aynı teste sokar; P2 bunları doğrudan dışlar. Kapsamı genişletmek dürüst ret ekler ve bir blok dışında saldırgan reddi eklemez.",
+        notes=r"Her saldırılı blok 1\,296 dürüst ve 324 saldırgan gözlemi, her saldırısı kapatılmış blok 1\,620 dürüst gözlemi içerir. Saldırgan reddi üreten tek blok (P2, yalnız yoğunluk kapısı, yama) $\mathrm{FPR}=142/1296=10.96\%$ düzeyinde $\mathrm{TPR}=46/324=14.20\%$ değerine ulaşır, yani $J=+3.2$~yp; aynı politika bu bloğun saldırısı kapatılmış kontrolünde 82 dürüst ret kaydeder. Sayımlar emniyet valfinden sonraki değerlerdir: yalnız yoğunluk kapısında P2, Min-Max bloğundaki 1\,296 dürüst gözlemin hepsini dışlardı ve valf bu matrislerin 18'inin hepsinde $B_0$ kümesini geri yükler. Bunlar sabit matris karar sayımlarıdır; doğruluk ya da saldırı başarı oranı yeniden ölçülmemiştir.",
+        rows=[(r"Gate / block & P0 (clusters only) & P1 (+singletons) & P2 (exclude) \\",
+               r"Kapı / blok & P0 (yalnız kümeler) & P1 (+tekiller) & P2 (dışla) \\"),
+              ("As deployed, ", "Kullanılan kapı, "),
+              ("Density-only gate, ", "Yalnız yoğunluk kapısı, "),
+              ("Min-Max attack-disabled control &", "Min-Max saldırısı kapatılmış kontrol &"),
+              ("Patch attack-disabled control &", "Yama saldırısı kapatılmış kontrol &"),
+              ("Min-Max attacked &", "Min-Max saldırılı &"),
+              ("Patch attacked &", "Yama saldırılı &")]),
+    "discrimination": dict(
+        caption=r"Dört kuralın yapılandırılmış saldırı ailesine göre istemci düzeyinde ayırt etme başarımı. $J=\mathrm{TPR}-\mathrm{FPR}$ Youden indeksidir: $J>0$ şans köşegeninin üstünü, $J<0$ ise dürüst istemcilerin saldırganlardan önce reddedildiğini gösterir. Fayda, aynı koşulda savunmanın doğruluğu eksi savunmasız doğruluktur. Her satır yöntem~$\times$~veri kümesi~$\times$~koşul hücrelerini birleştirir; hücreler bağımsız tekrar değildir.",
+        notes=r"Ailelerin kapsamı veri kümesi, yoğunlaşma parametresi ve saldırgan oranı bakımından farklıdır. Bu özet radyal yer değiştirmeyi ölçmez. FLTrust sıfır ağırlık kararlarını kullanır. Bunlar kontrollü bir yer değiştirme deneyi değil, betimsel ortalamalardır.",
+        rows=[HDR_FAMILY]),
+    "discrimination_method": dict(
+        caption=r"Kural başına, mevcut hücreler üzerinden saldırı ailesi ortalamaları. FLTrust bu panelde kısıtlı ailede pozitif ortalama $J$ elde eder; sayımları sıfır ağırlıklara ilişkindir. Bu, savunma sınıfları arasında genel bir ayrım kanıtlamaz.",
+        rows=[(r"Attacker family & Rule & Cells & TPR (\%) & FPR (\%) & $J$ (pp) & Benefit (pp) \\",
+               r"Saldırgan ailesi & Kural & Hücre & TPR (\%) & FPR (\%) & $J$ (yp) & Fayda (yp) \\")]),
+    "flame_sizes": dict(
+        caption=r"Saldırgansız ana hücrelerde, kaydedilmiş kabul kimliklerinden sayılan FLAME tutulan küme boyutları. Her satır üç tohum ve 90 tur içerir.",
+        notes=r"Dondurulmuş normal yol gürültü olmayan tek bir kümeyi tutar; geçmiş küme etiketleri kaydedilmemiştir. En küçük boyuta 990 turun 719'unda ulaşılır. Sayımlar BER değerinden geri hesaplanmamıştır.",
+        rows=[(r"Dataset & $\alpha$ & Mean size & Range & Size 46 \\",
+               r"Veri kümesi & $\alpha$ & Ort. boyut & Aralık & Boyut 46 \\")]),
+    "gamma": dict(
+        caption=r"Farklı saldırılı kontrol noktası matrislerinde ilk kabul havuzunun radyal oranı. Eşik $\tau=2$ değeridir.",
+        notes=r"İki kapı değerlendirmesi aynı matrisi kullandığından her matris bir kez sayılmıştır. 36 matrisin hepsinde $B_0$ 90 katılımcının tamamını içerir. İstisna Fashion, tohum 137, yama, tur 29'dur.",
+        rows=[(r"Attack & Matrices & $\Gamma\leq2$ & Median & Maximum \\",
+               r"Saldırı & Matris & $\Gamma\leq2$ & Medyan & En büyük \\"),
+              ("\nPatch & ", "\nYama & "), ("\nAll attacked & ", "\nTüm saldırılı & ")]),
+}
+
+CAPTION = re.compile(r"(\\caption\{)(.*?)(\}\\label\{)", re.S)
+NOTES = re.compile(r"(\\parbox\{\\linewidth\}\{\\scriptsize )(.*?)(\}\n\\end\{table\*?\})", re.S)
+
+
+def translate(name, text, spec):
+    out, n = CAPTION.subn(lambda m: m.group(1) + spec["caption"] + m.group(3), text)
+    assert n == 1, (name, "caption")
+    if "notes" in spec:
+        out, n = NOTES.subn(lambda m: m.group(1) + spec["notes"] + m.group(3), out)
+        assert n == 1, (name, "notes")
+    else:
+        assert not NOTES.search(out), (name, "untranslated notes")
+    for en, tr in spec.get("rows", []):
+        assert en in out, (name, en)
+        out = out.replace(en, tr)
+    for en, tr in COMMON:
+        out = out.replace(en, tr)
+    out = re.sub(r"(\d)\{,\}(\d{3})", r"\1\\,\2", out)
+    left = [en for en, _ in COMMON if en in out] + [en for en, _ in spec.get("rows", []) if en in out]
+    assert not left, (name, left)
+    digits = lambda s: Counter(re.findall(r"\d+", s))
+    assert digits(out) == digits(text), (name, digits(text) - digits(out), digits(out) - digits(text))
+    return out
+
+
+def figure(root):
+    sys.path.insert(0, os.path.join(root, "analysis"))
+    import build_tables as bt
+    import matplotlib
+    matplotlib.use("Agg")
+    matplotlib.rcParams.update({"pdf.fonttype": 42, "ps.fonttype": 42})
+    import matplotlib.pyplot as plt
+
+    idx = {(r["phase"], r["scenario"], r["dataset"], r["method"]): r for r in bt.load(root)["cells"]}
+    labels = {"krum_bound30": "Multi-Krum", "fltrust_normalized": "FLTrust (normalize)",
+              "flame_hdbscan": "FLAME (HDBSCAN)", "fed_mdbscan_g": "Fed-MDBSCAN-G"}
+    marks = {"krum_bound30": "o", "fltrust_normalized": "s", "flame_hdbscan": "^", "fed_mdbscan_g": "D"}
+    fig, ax = plt.subplots(figsize=(3.4, 2.5))
+    for m in bt.REJECTORS:
+        xx, ys = [], []
+        for a, sid in zip([0.5, 0.1, 0.01], ["1.1", "6.1", "6.2"]):
+            vals = [bt.pf(idx[("main", sid, d, m)]["fpr_mean"]) for d in bt.DS_ORDER
+                    if ("main", sid, d, m) in idx and bt.pf(idx[("main", sid, d, m)]["fpr_mean"]) is not None]
+            if vals:
+                xx.append(a)
+                ys.append(100 * st.mean(vals))
+        ax.plot(xx, ys, marker=marks[m], ms=4, lw=1.1, label=labels[m])
+    ax.set_xscale("log")
+    ax.invert_xaxis()
+    ax.set_xlabel(r"Dirichlet $\alpha$ (saldırgansız)", fontsize=7)
+    ax.set_ylabel("dürüst istemci dışlama oranı (%)", fontsize=7)
+    ax.tick_params(labelsize=7)
+    ax.legend(fontsize=5.6, frameon=False, loc="lower right")
+    ax.grid(alpha=0.25, lw=0.5)
+    fig.tight_layout(pad=0.3)
+    fig.savefig(os.path.join(root, "manuscript", "figures", "ber_vs_alpha_tr.pdf"), dpi=300)
+    plt.close(fig)
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--root", default=".")
+    root = os.path.abspath(ap.parse_args().root)
+    src = os.path.join(root, "manuscript", "generated")
+    dst = os.path.join(root, "manuscript", "generated_tr")
+    os.makedirs(dst, exist_ok=True)
+    for name, spec in TABLES.items():
+        with open(os.path.join(src, name + ".tex"), encoding="utf-8") as fh:
+            text = fh.read()
+        with open(os.path.join(dst, name + ".tex"), "w", encoding="utf-8") as fh:
+            fh.write(translate(name, text, spec))
+    figure(root)
+    print(f"{len(TABLES)} Turkish tables and 1 figure written; digit groups match the English tables.")
+
+
+if __name__ == "__main__":
+    main()

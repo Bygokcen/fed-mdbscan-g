@@ -1,0 +1,13 @@
+TIFS V4 çalışma çıktısı — 23 Eylül 2026
+
+main.pdf: Ana İngilizce makale (12 sayfa).
+supplement.pdf: Ek materyal (2 sayfa).
+cover_letter.txt: Editöre mektup taslağı.
+latex_source.zip: İngilizce LaTeX kaynakları ve şekiller.
+reproducibility_artifact.zip: Küçük kanıt dosyaları ve tablo/şekil üretim betikleri.
+
+Bu dış ZIP, çalışma dosyalarını paylaşmak içindir. Dergi portalına dosyalar kendi türlerinde ayrı ayrı yüklenir. Türkçe çalışma çevirisi gönderime dahil değildir.
+
+Gönderim henüz yapılmadı. Son V4 için iki yazarın onayı, özgünlük/eşzamanlı değerlendirme beyanları, ORCID alanları tamamlanmalı. Yakın ICCBI 2026 kaynağının birincil içeriği henüz okunamadı; bu literatür kontrolü açık. Ayrıntılar çalışma ağacındaki SUBMISSION_STATUS.md içindedir.
+
+Finansman desteği yoktur; makaledeki yapay zekâ kullanım beyanı korunmuştur.

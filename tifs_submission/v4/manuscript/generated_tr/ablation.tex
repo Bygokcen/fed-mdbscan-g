@@ -1,0 +1,22 @@
+\begin{table}[!t]
+\centering\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\caption{Varyant ile tam yöntem arasındaki son doğruluk farkı (yüzde puan), eşleşen ablasyon bloğunda. Aralıklar koşullar arasındaki değişkenliği gösterir, güven aralığı değildir. 1. aşama kabul bölgesinin üzerindeki bütün katmanları kaldırmak ortalamayı yüzde puanın onda birinden az değiştirir.}\label{tab:ablation}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+Varyant & Hücre & Ort. & En az & En çok \\
+\midrule
+Fed-MDBSCAN-G, yalnız 1. aşama & 12 & -0.081 & -1.50 & +0.84 \\
+Geometrik medyan uzaklık kontrolü & 12 & -0.081 & -1.50 & +0.84 \\
+Fed-MDBSCAN-G, kapı belleği yok & 12 & +0.000 & +0.00 & +0.00 \\
+Fed-MDBSCAN-G, valf yok & 12 & +0.278 & -0.27 & +3.03 \\
+Güven bölgesi çarpanı 1.5 & 12 & -0.916 & -8.42 & +2.90 \\
+Güven bölgesi çarpanı 2.0 & 12 & -0.860 & -3.09 & +2.95 \\
+Güven bölgesi çarpanı 3.0 & 12 & +0.575 & -6.38 & +12.82 \\
+\bottomrule
+\end{tabular}
+}
+
+\vspace{2pt}\parbox{\linewidth}{\scriptsize Hücreler üç tohum üzerinden veri kümesi~$\times$~koşul ortalamalarıdır; küçük bir ortalama farktan eşdeğerlik sonucu çıkarılmamaktadır.}
+\end{table}

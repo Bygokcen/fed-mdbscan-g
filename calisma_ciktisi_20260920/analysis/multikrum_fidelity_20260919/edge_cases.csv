@@ -1,7 +1,0 @@
-case,clients,note,requested_f,f,f_was_clamped,neighbours_were_clamped,paper_validity_holds,reference_valid,reference_reason,server_selected,server_operator,server_fallback,selection_identical,server_error
-ordinary_cohort,20,"20 clients, validity satisfied",6,6,False,False,True,True,,12,uniform_mean,none,True,
-two_clients,2,"below the rule, filter short-circuits",1,0,True,True,False,False,no neighbours left,2,uniform_mean,none,,
-three_clients,3,smallest cohort the rule admits,1,0,True,False,True,True,,1,uniform_mean,none,True,
-validity_violated,6,2f + 2 >= n,3,3,False,False,False,False,guarantee needs 2f + 2 < n,1,uniform_mean,none,False,
-exact_ties,8,duplicate rows produce equal scores,3,3,False,False,False,False,guarantee needs 2f + 2 < n,3,uniform_mean,none,False,
-neighbour_clamp,4,n - f - 2 would be < 1,2,1,True,False,False,False,guarantee needs 2f + 2 < n,1,uniform_mean,none,True,
