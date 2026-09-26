@@ -1,0 +1,19 @@
+\begin{table*}[!tp]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Adversary-Free Final Accuracy at $\alpha=0.01$ With Noise and Selection Controls}\label{tab:review_e3}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrr}
+\toprule
+Dataset & FedAvg & FLAME & FLAME & FLAME & Multi-Krum & Multi-Krum \\
+ &  &  & no noise & random subset &  & random subset \\
+\midrule
+MNIST & 85.65 & 20.10 & 20.08 & 45.53 & 40.71 & 84.36 \\
+Fashion-MNIST & 73.63 & 27.74 & 27.61 & 43.79 & 40.04 & 72.58 \\
+UCI HAR & 45.53 & 30.35 & 30.37 & 36.93 & 34.57 & 50.44 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\par\vspace{3pt}\parbox{\linewidth}{\footnotesize Mean final accuracy (\%) over seeds 42, 137, and 2024. FedAvg, FLAME, and Multi-Krum are the canonical runs. ``No noise'' sets the FLAME noise factor to zero. ``Random subset'' replaces the selected updates in every round with a uniformly random subset of the same size, so clipping, noise, and the number of admitted updates are unchanged. All controls share each seed's data partition, participation schedule, and initial model with the canonical runs.}
+\end{table*}

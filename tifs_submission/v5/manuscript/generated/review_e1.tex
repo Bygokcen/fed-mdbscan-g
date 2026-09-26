@@ -1,0 +1,21 @@
+\begin{table*}[!tp]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Decision-Path Measurements on Canonical Checkpoint Matrices}\label{tab:review_e1}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrrrrrrr}
+\toprule
+Condition & Exact & Matrices & Median & $\Gamma\leq\tau$ & With & Groups & Sufficient & Deployed & Matrices & Removed & Attackers \\
+ & runs &  & $\Gamma$ &  & groups & in $B_0$ & condition & gate ran & with removal & honest/att. & outside $B_0$ \\
+\midrule
+Min-Max, $\alpha=0.1$ & 6/6 & 18 & 1.96 & 10 & 0 & -- & 10 & 0 & 0 & 0/0 & 0/486 \\
+Min-Sum, $\alpha=0.01$ & 6/6 & 18 & 2.43 & 3 & 0 & -- & 3 & 18 & 0 & 0/0 & 0/486 \\
+Patch, $\alpha=0.1$ & 6/6 & 18 & 2.02 & 9 & 18 & 18 & 9 & 0 & 0 & 0/0 & 2/486 \\
+Patch, $\alpha=0.01$ & 6/6 & 18 & 5.52 & 0 & 17 & 13 & 0 & 18 & 7 & 30/13 & 190/486 \\
+Adversary-free, $\alpha=0.01$ & 6/6 & 18 & 5.73 & 0 & 18 & 13 & 0 & 18 & 1 & 4/0 & -- \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\par\vspace{3pt}\parbox{\linewidth}{\footnotesize Canonical Fed-MDBSCAN-G runs on MNIST and Fashion-MNIST, three seeds each, re-executed with the frozen canonical source; ``Exact'' counts runs whose 30 recorded rounds matched the archive in every non-timing field. Matrices are the server inputs of rounds 0, 9, and 29. ``With groups'' counts matrices on which the cluster stage, forced to run by the density-only gate, recovers at least one candidate group; ``Groups in $B_0$'' counts those on which every recovered group lies in $B_0$. ``Sufficient condition'' counts matrices with $\Gamma\leq\tau=2$ on which every recovered group, if any, lies in $B_0$. Removal columns refer to the deployed gate. Attackers outside $B_0$ were excluded by Stage~1.}
+\end{table*}

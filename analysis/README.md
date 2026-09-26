@@ -19,6 +19,7 @@ Bu dizin güncel makalenin kanıt ve doğrulama çalışmalarını içerir. Tari
 | [gate_replay_20260914](gate_replay_20260914/) | Kanonik/ileri tur karar yolu, geliştirme bağımlılığı veya baseline doğrulaması |
 | [mdbscan_source_review_20260914](mdbscan_source_review_20260914/) | Özgün MDBSCAN ile yerel uyarlamanın sınırları |
 | [multikrum_fidelity_20260919](multikrum_fidelity_20260919/) | Kanonik/ileri tur karar yolu, geliştirme bağımlılığı veya baseline doğrulaması |
+| [review_experiments_20260926](review_experiments_20260926/) | Hakem sonrası hedefli deneyler: kanonik matrislerde Γ, kopya yönlendirmesi, FLAME kümeleme sadakati, gürültü ve rastgele seçim kontrolleri ([rapor](review_experiments_20260926/REPORT.md)) |
 | [root_data_audit_20260919](root_data_audit_20260919/) | Güvenilir kök verisinin kapsam denetimi |
 | [scite_originality_20260923](scite_originality_20260923/) | Literatür taramasının kapsamı ve erişim sınırları |
 | [snnc_factorial_20260914](snnc_factorial_20260914/) | Kanonik/ileri tur karar yolu, geliştirme bağımlılığı veya baseline doğrulaması |

@@ -68,13 +68,13 @@ TABLES = {
         rows=[HDR_RULE]),
     "cluster_ratios": dict(
         caption=r"Saldırgansız Bir MNIST Kontrol Noktasında Bulunan Kümeler",
-        notes=r"Tohum 2024, tur 9; bütün istemciler dürüsttür. Mini-batch rejimleri: A, 32 örneklik standart yükleyici; B, her yerel adımda yeni bir 20 örneklik altküme; C, ilk 20 örneklik mini-batch'in beş kez tekrarı. Oran, $\tau=2$ ve $R_0$ \eqref{eq:consensus} ile tanımlı olmak üzere $\lVert c_S-m_{B_0}\rVert/(\tau R_0)$ değeridir; oran 1'i aşınca grup reddedilir.",
+        notes=r"Tohum 2024, tur 9; bütün istemciler dürüsttür. Mini-batch rejimleri: A, 32 örneklik standart yükleyici; B, her yerel adımda yeni bir 20 örneklik altküme; C, ilk 20 örneklik mini-batch'in beş kez tekrarı. Oran, $\tau=2$ ve $R_0$ ana metindeki uzlaşma testindeki gibi tanımlı olmak üzere $\lVert c_S-m_{B_0}\rVert/(\tau R_0)$ değeridir; oran 1'i aşınca grup reddedilir.",
         rows=[(r"Arm & Cluster & Size & In $B_0$ & Ratio & Decision \\",
                r"Kol & Küme & Boyut & $B_0$ içinde & Oran & Karar \\"),
               (r" & accept \\", r" & kabul \\"), (r" & reject \\", r" & ret \\")]),
     "constrained": dict(
         caption=r"Kısıtlı Her Şeyi Bilen Saldırgan Altında Çalışma Noktaları",
-        notes=r"Yüzde otuz saldırgan: turda 63 dürüst ve 27 saldırgan katılımcı. Öngörülen FPR, sıfır saldırgan yakalamadaki ($\mathrm{TPR}=0$) değerdir: Multi-Krum için bir özdeşlik, FLAME için bir üst sınır (Sonuç~\ref{cor:cardinality}--\ref{cor:majority}). FLTrust ve Fed-MDBSCAN-G böyle bir öngörü vermez; bu kurallar Tablo~\ref{tab:discrimination_method} içindedir. CIFAR-10/FLAME/$\alpha=0.1$ (iki tamamlanmış tohumdan 60 tur) dışında her hücrede 90 kayıtlı tur vardır.",
+        notes=r"Yüzde otuz saldırgan: turda 63 dürüst ve 27 saldırgan katılımcı. Öngörülen FPR, sıfır saldırgan yakalamadaki ($\mathrm{TPR}=0$) değerdir: Multi-Krum için bir özdeşlik, FLAME için bir üst sınır (Sonuç~\ref{cor:cardinality}--\ref{cor:majority}). FLTrust ve Fed-MDBSCAN-G böyle bir öngörü vermez; kural bazındaki oranları ek belgededir. CIFAR-10/FLAME/$\alpha=0.1$ (iki tamamlanmış tohumdan 60 tur) dışında her hücrede 90 kayıtlı tur vardır.",
         rows=[(r"Dataset & Rule & TPR & FPR & $J$ & Predicted \\", r"Veri kümesi & Kural & TPR & FPR & $J$ & Öngörülen \\"),
               (r" &  & (\%) & (\%) & (pp) & FPR (\%) \\", r" &  & (\%) & (\%) & (yp) & FPR (\%) \\")]),
     "coverage": dict(
@@ -90,7 +90,7 @@ TABLES = {
               ("Onset/offset timing", "Saldırı başlangıç/bitiş zamanlaması"),
               ("Total planned", "Planlanan toplam")]),
     "coverage_replay": dict(
-        caption=r"72 Kayıtlı Güncelleme Matrisinde Uzlaşma Testi Kapsamının Yeniden Oynatılması",
+        caption=r"72 Beş Adımlı Güncelleme Matrisinde Uzlaşma Testi Kapsamının Yeniden Oynatılması",
         notes=r"Küme yapısı, geometri ve etkinleşme belleği sabit tutulmuştur. Değerler, emniyet valfinden sonraki istemci--kontrol noktası sayımı olarak dürüst/saldırgan retleridir. P0 kullanılan politikadır (yalnız kümeler); P1 kümelenmemiş düşük yoğunluklu güncellemeleri ayrıca tekil olarak aynı teste sokar; P2 bunları doğrudan dışlar. Her saldırılı blok 1{,}296 dürüst ve 324 saldırgan gözlemi, her saldırısı kapatılmış blok 1{,}620 dürüst gözlemi içerir.",
         rows=[(r"Gate & Attack & P0 & P1 & P2 \\", r"Kapı & Saldırı & P0 & P1 & P2 \\"),
               (r"\emph{Attacked matrices}", r"\emph{Saldırılı matrisler}"),
@@ -104,7 +104,7 @@ TABLES = {
         rows=[(r"Attacker family & Cells & TPR & FPR & $J$ & Benefit \\", r"Saldırgan ailesi & Hücre & TPR & FPR & $J$ & Fayda \\"), UNITS6]),
     "discrimination_method": dict(
         caption=r"Kurala ve Saldırı Ailesine Göre Ayırt Etme",
-        notes=r"Mevcut hücreler üzerinden ortalamalar; sütunlar Tablo~\ref{tab:discrimination} ile aynıdır. FLTrust sıfır ağırlık kararlarını sayar.",
+        notes=r"Mevcut hücreler üzerinden ortalamalar; sütunlar ana metindeki Tablo~VII ile aynıdır. FLTrust sıfır ağırlık kararlarını sayar.",
         rows=[(r"Attack family / rule & Cells & TPR & FPR & $J$ & Benefit \\", r"Saldırı ailesi / kural & Hücre & TPR & FPR & $J$ & Fayda \\"), UNITS6]),
     "flame_sizes": dict(
         caption=r"Saldırgansız Koşullarda FLAME'in Tuttuğu Küme Boyutları",
@@ -112,8 +112,8 @@ TABLES = {
         rows=[(r"Dataset & $\alpha$ & Mean size & Range & Size 46 \\",
                r"Veri kümesi & $\alpha$ & Ort. boyut & Aralık & Boyut 46 \\")]),
     "gamma": dict(
-        caption=r"Saldırılı Kontrol Noktalarında İlk Kabul Havuzunun Radyal Oranı",
-        notes=r"Farklı saldırılı kontrol noktası matrisleri; eşik $\tau=2$ değeridir. İki kapı değerlendirmesi aynı matrisi kullandığından her matris bir kez sayılmıştır. 36 matrisin hepsinde $B_0$ 90 katılımcının tamamını içerir. İstisna Fashion, tohum 137, yama, tur 29'dur.",
+        caption=r"Saldırılı Beş Adımlı Kontrol Noktalarında İlk Kabul Havuzunun Radyal Oranı",
+        notes=r"Farklı saldırılı beş adımlı kontrol noktası matrisleri; eşik $\tau=2$ değeridir. İki kapı değerlendirmesi aynı matrisi kullandığından her matris bir kez sayılmıştır. 36 matrisin hepsinde $B_0$ 90 katılımcının tamamını içerir. İstisna Fashion, tohum 137, yama, tur 29'dur.",
         rows=[(r"Attack & Matrices & $\Gamma\leq2$ & Median & Maximum \\",
                r"Saldırı & Matris & $\Gamma\leq2$ & Medyan & En büyük \\"),
               ("\nPatch & ", "\nYama & "), ("\nAll attacked & ", "\nTüm saldırılı & ")]),

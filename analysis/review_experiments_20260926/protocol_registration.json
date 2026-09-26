@@ -1,0 +1,8 @@
+{
+  "protocol": "PROTOCOL.md",
+  "sha256": "cf7dca80719ee40e007d24d3273886b0200a49891d585f92858698f78d9c0cb6",
+  "registered_utc": "2026-09-26T19:08:53+00:00",
+  "registered_unix": 1790449733.9619007,
+  "outcome_runs_started": false,
+  "note": "Registered before any E1-E3 outcome run. Only the HAR reproducibility pilot had completed; an MNIST reproducibility pilot was still running and measures reproduction, not outcomes."
+}

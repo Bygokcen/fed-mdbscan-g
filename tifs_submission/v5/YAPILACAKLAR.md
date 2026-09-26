@@ -40,3 +40,5 @@ Nasıl indirilir: bağlantıyı açın, IEEE Xplore'da "Institutional Sign In" i
 - [ ] (İsteğe bağlı) Ek belgenin Türkçe çevirisi — şu an yalnız İngilizce.
 - [ ] `karsilastirma_makaleleri/` klasörünü depodan kaldırmak. Depo herkese açık; klasör git geçmişinden de silinmeli.
 - [ ] (İsteğe bağlı) İstemci başına tekrar eden dışlama analizi. Kanonik tur kayıtlarındaki `accepted_ids`, `participant_ids` ve `group_confusion` alanları yeterli; yeni eğitim gerekmez.
+- [x] Hakem sonrası hedefli deneyler: kanonik matrislerde Γ, FLAME kümeleme sadakati, gürültüsüz FLAME ve rastgele seçim kontrolleri (27 Eylül 2026; `analysis/review_experiments_20260926/REPORT.md`).
+- [ ] (İsteğe bağlı) FLAME'in kalan kaybını kırpma ve küme büyüklüğü olarak ayırmak için kırpmasız rastgele kontrol.
