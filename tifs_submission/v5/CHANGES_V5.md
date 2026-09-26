@@ -70,7 +70,7 @@ V5, `hocadan gelen/` klasöründeki sürümün (ORCID, kurumsal e-posta, ICCBI 2
 - Önceki hâllerin yedeği: `yedek_notlar_oncesi/`.
 
 ## Değerlendirme sonrası düzeltmeler (26 Eylül 2026)
-Dış değerlendirmedeki satır yorumları ve V5 incelemesinde bulunan sorunlar İngilizce metne ve Türkçe çeviriye aynı biçimde işlendi. Önceki metin git geçmişinde (`e027aa5`) duruyor. Kanıt dosyaları, `derived_values.json`, teori bölümü ve bütün tablolar değişmedi; tablolar kanıt dosyalarından yeniden üretildi ve birebir aynı çıktı.
+Dış değerlendirmedeki satır yorumları ve V5 incelemesinde bulunan sorunlar İngilizce metne ve Türkçe çeviriye aynı biçimde işlendi. Önceki metin git geçmişinde (`12f34b8`) duruyor. Kanıt dosyaları, `derived_values.json`, teori bölümü ve bütün tablolar değişmedi; tablolar kanıt dosyalarından yeniden üretildi ve birebir aynı çıktı.
 
 **Ana metin (`main.tex`, `main_tr.tex`)**
 1. Özet: "savunmalar genellikle yalnızca saldırgan varken değerlendirilir" iddiası, İlgili Çalışmalar bölümüyle çelişmeyecek biçimde "değerlendirmeler sonuçları çoğu zaman yalnızca saldırılı turlar için raporlar" oldu. Kapsamın dengesiz olduğu ve planlanan 2,130 koşumdan 2,125'inin tamamlandığı yazıldı. FLAME için dışlamanın kuraldan "kaynaklandığı" değil, kuralla sınırlandığı yazıldı. Özet 244 kelime (TIFS sınırı 150–250).
