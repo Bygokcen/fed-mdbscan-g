@@ -374,7 +374,7 @@ def main():
         header=["Attack family / rule", "Cells", "TPR", "FPR", r"$J$", "Benefit"],
         units=["", "", r"(\%)", r"(\%)", "(pp)", "(pp)"],
         rows=t4_rows, colspec="lrrrrr",
-        notes=(r"Means over available cells; columns as in Table~VIII of the main text. "
+        notes=(r"Means over available cells; columns as in Table~VII of the main text. "
                r"FLTrust counts zero-weight decisions."))
     open(os.path.join(gen, "discrimination_method.tex"), "w", encoding="utf-8").write(t4)
 
@@ -580,21 +580,34 @@ def main():
         if full is None or pf(full["accuracy_mean"]) is None or pf(r["accuracy_mean"]) is None:
             continue
         diffs[r["method"]].append(100 * (pf(r["accuracy_mean"]) - pf(full["accuracy_mean"])))
-    abl_rows = []
-    for m in abl_order:
-        v = diffs.get(m)
-        if not v:
-            continue
-        abl_rows.append([METHOD_LABEL[m], str(len(v)), f"{st.mean(v):+.3f}",
-                         f"{min(v):+.2f}", f"{max(v):+.2f}"])
+    def abl_rows_for(methods):
+        rows = []
+        for m in methods:
+            v = diffs.get(m)
+            if v:
+                rows.append([METHOD_LABEL[m], str(len(v)), f"{st.mean(v):+.3f}",
+                             f"{min(v):+.2f}", f"{max(v):+.2f}"])
+        return rows
+    abl_note = (r"Variant minus full composite, final accuracy in percentage points; cells are "
+                r"dataset~$\times$~condition means over three seeds in the matched ablation block. "
+                r"Ranges describe heterogeneity across conditions, not confidence intervals.")
+    # Main text: the three variants that remove one later stage; the full table is in the supplement.
     t9 = tex_table(
         caption=r"Endpoint Ablations: Variant Minus Full Final Accuracy (Percentage Points)",
         label="tab:ablation",
-        header=["Variant", "Cells", "Mean", "Min.", "Max."], rows=abl_rows, colspec="lrrrr",
-        notes=(r"Variant minus full composite, final accuracy in percentage points; cells are "
-               r"dataset~$\times$~condition means over three seeds in the matched ablation block. "
-               r"Ranges describe heterogeneity across conditions, not confidence intervals."))
+        header=["Variant", "Cells", "Mean", "Min.", "Max."],
+        rows=abl_rows_for(["mdbg_l0_only", "mdbg_no_momentum", "mdbg_no_valve"]), colspec="lrrrr",
+        notes=abl_note + r" The supplement adds a matched-radius control and the sensitivity to the Stage-1 radius factor.")
     open(os.path.join(gen, "ablation.tex"), "w", encoding="utf-8").write(t9)
+    t9f = tex_table(
+        caption=r"Endpoint Ablations With Control and Sensitivity Rows",
+        label="tab:ablation_full",
+        header=["Variant", "Cells", "Mean", "Min.", "Max."], rows=abl_rows_for(abl_order), colspec="lrrrr",
+        notes=abl_note + (r" The geometric-median distance control is the standalone Stage-1 rule, a "
+                          r"FedG2L filter with threshold factor 2.5; its accuracy, FPR, and TPR equal those "
+                          r"of the stage-1-only variant in all 36 runs. The trust-region rows set the "
+                          r"Stage-1 radius factor of the full composite to 1.5, 2.0, and 3.0 instead of 2.5."))
+    open(os.path.join(gen, "ablation_full.tex"), "w", encoding="utf-8").write(t9f)
     derived["ablation_mean_diff"] = {m: round(st.mean(v), 4) for m, v in diffs.items()}
 
     # ================= coverage table =================

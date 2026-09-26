@@ -44,7 +44,7 @@ HDR_RULE = ("\nRule & MNIST", "\nKural & MNIST")
 TABLES = {
     "ablation": dict(
         caption=r"Uç Nokta Ablasyonları: Varyant ile Tam Yöntem Arasındaki Son Doğruluk Farkı (Yüzde Puan)",
-        notes=r"Varyant eksi tam bileşik yöntem, yüzde puan cinsinden son doğruluk farkı; hücreler eşleşen ablasyon bloğunda üç tohum üzerinden veri kümesi~$\times$~koşul ortalamalarıdır. Aralıklar koşullar arasındaki değişkenliği gösterir, güven aralığı değildir.",
+        notes=r"Varyant eksi tam bileşik yöntem, yüzde puan cinsinden son doğruluk farkı; hücreler eşleşen ablasyon bloğunda üç tohum üzerinden veri kümesi~$\times$~koşul ortalamalarıdır. Aralıklar koşullar arasındaki değişkenliği gösterir, güven aralığı değildir. Ek belge, eşleşmiş yarıçaplı bir kontrolü ve Aşama-1 yarıçap çarpanına duyarlılığı ekler.",
         rows=[(r"Variant & Cells & Mean & Min. & Max. \\", r"Varyant & Hücre & Ort. & En az & En çok \\")]),
     "alarm": dict(
         caption=r"Fed-MDBSCAN-G'nin Saldırgansız Tur Düzeyi Alarm Oranı",
@@ -104,7 +104,7 @@ TABLES = {
         rows=[(r"Attacker family & Cells & TPR & FPR & $J$ & Benefit \\", r"Saldırgan ailesi & Hücre & TPR & FPR & $J$ & Fayda \\"), UNITS6]),
     "discrimination_method": dict(
         caption=r"Kurala ve Saldırı Ailesine Göre Ayırt Etme",
-        notes=r"Mevcut hücreler üzerinden ortalamalar; sütunlar ana metindeki Tablo~VIII ile aynıdır. FLTrust sıfır ağırlık kararlarını sayar.",
+        notes=r"Mevcut hücreler üzerinden ortalamalar; sütunlar ana metindeki Tablo~VII ile aynıdır. FLTrust sıfır ağırlık kararlarını sayar.",
         rows=[(r"Attack family / rule & Cells & TPR & FPR & $J$ & Benefit \\", r"Saldırı ailesi / kural & Hücre & TPR & FPR & $J$ & Fayda \\"), UNITS6]),
     "flame_sizes": dict(
         caption=r"Saldırgansız Koşullarda FLAME'in Tuttuğu Küme Boyutları",

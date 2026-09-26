@@ -147,8 +147,8 @@ def e3_table(summary):
         rows=rows, colspec="lrrrrrrr",
         notes=(r"Mean final accuracy (\%) over seeds 42, 137, and 2024. FedAvg, FLAME, and Multi-Krum are "
                r"the canonical runs. ``No noise'' sets the FLAME noise factor to zero. The random controls "
-               r"replace the selected updates in every round with a uniformly random subset; clipping and "
-               r"noise are unchanged. For Multi-Krum the subset has 61 members in both arms. ``Rule-sized'' "
+               r"replace the selected updates in every round with a uniformly random subset; the clipping "
+               r"and noise rules are kept. For Multi-Krum the subset has 61 members in both arms. ``Rule-sized'' "
                r"uses the size that FLAME selects on the control's own updates, so admitted counts can "
                r"drift from the canonical run. ``Matched'' uses the admitted count that the canonical FLAME "
                r"run recorded in each round, so admitted counts and BER equal those of canonical FLAME. All "
@@ -182,7 +182,7 @@ def main_table(summary, turkish=False):
             units=["", "", "kural", "rastgele", "kural", "rastgele"], rows=rows, colspec="lrrrrr",
             notes=(r"Üç tohum üzerinden ortalamalar. Rastgele altkümeler her turda kuralın seçtiği "
                    r"güncellemelerin yerini alır ve kabul sayısını korur: Multi-Krum için 61, FLAME için "
-                   r"kanonik FLAME koşumunun o turda kaydettiği sayı. Kırpma ve gürültü değişmez; "
+                   r"kanonik FLAME koşumunun o turda kaydettiği sayı. Kırpma ve gürültü kuralları korunur; "
                    r"eşleştirilmiş farklar ek belgededir."))
     return tex_table(
         caption=r"Adversary-Free Final Accuracy (\%) at $\alpha=0.01$: Rules Versus Random Subsets of the Same Size",
@@ -190,7 +190,7 @@ def main_table(summary, turkish=False):
         units=["", "", "rule", "random", "rule", "random"], rows=rows, colspec="lrrrrr",
         notes=(r"Means over three seeds. Random subsets replace a rule's selected updates in every round "
                r"and keep its admitted count: 61 for Multi-Krum and, for FLAME, the count that the "
-               r"canonical FLAME run recorded in that round. Clipping and noise are unchanged; paired "
+               r"canonical FLAME run recorded in that round. The clipping and noise rules are kept; paired "
                r"differences are in the supplement."))
 
 
