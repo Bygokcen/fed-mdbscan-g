@@ -145,3 +145,11 @@ Makalede anlatılmayan deney ayrıntıları kod ve kanonik koşu kayıtlarından
 5. **Sayfa bütçesi.** Bölüm planı paragrafı tek cümleye indi, literatürdeki oran paragrafı kısaldı. Kapsam yeniden oynatma tablosu ek belgeye taşındı ve beş adımlı küme örneği tek cümleye indi. Ana metin tabloları I–XII, ek belge tabloları XIII–XXI. Ek belgedeki elle yazılmış tablo numaraları yeni sıraya göre güncellendi.
 
 **Derleme.** `main.pdf` 11 sayfa ve son sayfası dolu; `supplement.pdf` 6, `main_tr.pdf` 12 sayfa. Taşan satır, tanımsız gönderme ve eksik karakter yok. Özet 250 kelime. İngilizce ve Türkçe metinlerdeki sayı kümeleri eşleşiyor. Mevcut tablo gövdeleri ve `derived_values.json` değişmedi.
+
+## Tablo sadeleştirmesi ve iki ifade düzeltmesi (27 Eylül 2026)
+1. **Alarm tablosu ek belgeye taşındı.** BER sütunu Tablo III'ü tekrarlıyordu ve tablo yalnızca Fed-MDBSCAN-G'yi kapsıyordu. Ana metinde tek cümle kaldı: α=0.01'de bütün temiz turlarda, HAR'da α=0.1'de 90 turun 89'unda yanlış alarm.
+2. **Ablasyon tablosu kısaltıldı.** Ana metinde üç satır kaldı: yalnız ilk aşama, etkinleşme belleği olmadan ve valf olmadan. En küçük ve en büyük sütunları korundu. Tam tablo ek belgeye kondu (`ablation_full.tex`). Oradaki not, geometrik medyan uzaklık kontrolünün tek başına ilk aşama kuralı olduğunu açıklıyor: eşik çarpanı 2.5 olan bir FedG2L filtresi. Bu kontrolün doğruluk, FPR ve TPR değerleri 36 koşunun hepsinde yalnız ilk aşama varyantıyla aynı. Güven bölgesi satırları duyarlılık analizi olarak tanımlandı.
+3. **İfade düzeltmeleri.** Tablo notlarındaki "clipping and noise are unchanged" ifadesi "the clipping and noise rules are kept" oldu; Türkçesi "kırpma ve gürültü kuralları korunur". Özetteki "within 1.3 points" ifadesine "on average" eklendi. Kelime sınırını korumak için özetin ilk cümlesi kısaltıldı; özet 250 kelime.
+4. **Numaralandırma.** Ana metin tabloları I–XI, ek belge tabloları XII–XXII. Ek belgedeki elle yazılmış göndermeler yeniden eşleştirildi.
+
+**Derleme.** `main.pdf` 11 sayfa; son sayfada yaklaşık 20 satır boş. `supplement.pdf` 6, `main_tr.pdf` 12 sayfa. Taşan satır, tanımsız gönderme ve eksik karakter yok. Sayı kümeleri eşleşiyor. `derived_values.json` değişmedi.
