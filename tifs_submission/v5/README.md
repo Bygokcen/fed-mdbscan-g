@@ -6,8 +6,8 @@ Son dosya kontrolü ve açık kalan gönderim işleri: [SUBMISSION_STATUS.md](SU
 
 ## İçerik
 
-- `manuscript/main.tex`, `main.pdf`: ana makale, 12 sayfa, özet 232 kelime.
-- `manuscript/supplement.tex`, `supplement.pdf`: ek belge, 2 sayfa.
+- `manuscript/main.tex`, `main.pdf`: ana makale, 11 sayfa, özet 248 kelime (V5, 26 Eylül 2026; değişiklikler [CHANGES_V5.md](CHANGES_V5.md) içinde).
+- `manuscript/supplement.tex`, `supplement.pdf`: ek belge, 3 sayfa.
 - `COVER_LETTER.md`: editöre mektup taslağı; son yazar onaylarından sonra kullanılacak metin.
 - `manuscript/main_tr.tex`, `main_tr.pdf`: yazarlar için Türkçe çalışma çevirisi, aynı IEEEtran düzeni, 12 sayfa. **Dergiye gönderilmez.** Tablolar `analysis/build_tr.py` ile İngilizce tablolardan üretilir; betik, çevrilen her tablonun İngilizce kaynağıyla aynı sayıları içerdiğini denetler. Sayılar karşılaştırma kolaylığı için ondalık noktayla bırakıldı; binlik ayırıcı ince boşluk. Temel terimlerin Giriş'ten itibaren ilk geçişinde İngilizce karşılığı parantez içinde verilir (85 terim); tanım ve önerme başlıklarında İngilizce başlık "/" ile eklidir. "Robust" için "dayanıklı" kullanılır.
 - `analysis/build_tables.py` + `build_checks.py`: bütün tabloları, iki şekli ve `derived_values.json` dosyasını `analysis/evidence/` altındaki dosyalardan üretir. Eğitim, ağ veya ham arşiv gerekmez.

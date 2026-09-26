@@ -32,9 +32,11 @@ Nasıl indirilir: bağlantıyı açın, IEEE Xplore'da "Institutional Sign In" i
 - [ ] Yapay zekâ beyanı (sona bırakıldı)
 - [ ] Türkçe çeviri `main_tr.tex`
 - [ ] `submission_files/` paketinin V5 için üretilmesi
-- [ ] Son derlemenin kendi makinenizde `pdflatex` ile yapılması
+- [x] Son derlemenin `pdflatex` ile yapılması (26 Eylül 2026, Linux makinede; ana metin 11, ek 3, Türkçe 11 sayfa, uyarı yok)
 
 - [x] Türkçe çeviri (main_tr.tex / main_tr.pdf) — tamamlandı; yerelde pdfLaTeX ile bir kez derleyip kontrol edin.
 
 - [x] Tablo notları kısaltıldı; ayrıntılar ek belgedeki "Extended table notes" bölümüne taşındı (İngilizce ve Türkçe).
 - [ ] (İsteğe bağlı) Ek belgenin Türkçe çevirisi — şu an yalnız İngilizce.
+- [ ] `karsilastirma_makaleleri/` klasörünü depodan kaldırmak. Depo herkese açık; klasör git geçmişinden de silinmeli.
+- [ ] (İsteğe bağlı) İstemci başına tekrar eden dışlama analizi. Kanonik tur kayıtlarındaki `accepted_ids`, `participant_ids` ve `group_confusion` alanları yeterli; yeni eğitim gerekmez.
