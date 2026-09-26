@@ -68,16 +68,24 @@ def build(root, tex_table, derived):
             assert float(row['gamma'])==float(unique[key]['gamma'])
         else:unique[key]=row
     assert len(unique)==36
-    grows=[]
-    for label,suffix in [('Min-Max','scenario_cut_minmax'),('Patch','scenario_cut_backdoor'),('All attacked',None)]:
-        rs=[r for r in unique.values() if suffix is None or r['scenario']==suffix]
+    def gamma_row(label,rs):
         values=[float(r['gamma']) for r in rs]
-        grows.append([label,str(len(rs)),str(sum(x<=2 for x in values)),f'{st.median(values):.3f}',f'{max(values):.3f}'])
+        return [label,str(len(rs)),str(sum(x<=2 for x in values)),f'{st.median(values):.3f}',f'{max(values):.3f}']
+    grows=[r'\multicolumn{5}{l}{\emph{Five-step development runs}} \\']
+    for label,suffix in [(r'Min-Max, $\alpha=0.01$','scenario_cut_minmax'),(r'Patch, $\alpha=0.1$','scenario_cut_backdoor'),('All attacked',None)]:
+        grows.append(gamma_row(label,[r for r in unique.values() if suffix is None or r['scenario']==suffix]))
     assert grows[-1][2]=='35'
+    # Canonical checkpoints re-executed after review (analysis/review_experiments_20260926).
+    with (ev/'review_20260926/e1_matrices.csv').open(newline='') as handle:
+        canon=[r for r in csv.DictReader(handle) if int(r['attackers'])>0]
+    grows+=[None,r'\multicolumn{5}{l}{\emph{Canonical runs}} \\']
+    for label,sc in [(r'Min-Max, $\alpha=0.1$','7.1'),(r'Min-Sum, $\alpha=0.01$','7.2'),(r'Patch, $\alpha=0.1$','8.1'),(r'Patch, $\alpha=0.01$','8.2'),('All attacked',None)]:
+        grows.append(gamma_row(label,[r for r in canon if sc is None or r['scenario']==sc]))
+    assert grows[-1][1]=='72' and grows[-1][2]=='22'
     (gen/'gamma.tex').write_text(tex_table(
-        caption=r'Radial Ratio of the Initial Acceptance Pool on Attacked Five-Step Checkpoints',
+        caption=r'Radial Ratio of the Initial Acceptance Pool on Attacked Checkpoints',
         label='tab:gamma',header=['Attack','Matrices',r'$\Gamma\leq2$','Median','Maximum'],rows=grows,colspec='lrrrr',
-        notes=r'Distinct attacked five-step checkpoint matrices; the threshold is $\tau=2$. Both gate evaluations reuse each matrix and are counted once. In all 36 matrices, $B_0$ contains all 90 participants. The exception is Fashion, seed 137, patch, round 29.'))
+        notes=r'Distinct attacked checkpoint matrices; the threshold is $\tau=2$. Five-step matrices come from the separate cutoff study with 18 of 90 adversaries, canonical ones from re-executed canonical runs with 27 of 90. In every five-step matrix $B_0$ contains all 90 participants; the five-step exception is Fashion, seed 137, patch, round 29.'))
     derived['gamma_unique']={'attacked':36,'satisfying':35,'median':st.median(float(r['gamma']) for r in unique.values()),'maximum':max(float(r['gamma']) for r in unique.values())}
 
     # Per-seed differences use matching identities, not independently pooled means.

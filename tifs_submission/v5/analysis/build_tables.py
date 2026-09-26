@@ -374,7 +374,7 @@ def main():
         header=["Attack family / rule", "Cells", "TPR", "FPR", r"$J$", "Benefit"],
         units=["", "", r"(\%)", r"(\%)", "(pp)", "(pp)"],
         rows=t4_rows, colspec="lrrrrr",
-        notes=(r"Means over available cells; columns as in Table~VII of the main text. "
+        notes=(r"Means over available cells; columns as in Table~VIII of the main text. "
                r"FLTrust counts zero-weight decisions."))
     open(os.path.join(gen, "discrimination_method.tex"), "w", encoding="utf-8").write(t4)
 

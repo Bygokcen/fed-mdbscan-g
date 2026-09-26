@@ -14,7 +14,9 @@
 1. **Ek dökümler.** [analyze_review.py](analyze_review.py) içindeki `x_` önekli sayaçlar planda yoktu ve sonuçlar görüldükten sonra eklendi. Bunlar: aday grup bulunan matris sayısı, grupların hepsinin `B0` içinde olduğu matrisler ve etkisiz retler.
 2. **Yoğunluk yönlendirmesi ölçümü.** [e1b_density_routing.py](e1b_density_routing.py) de planda yoktu. Makalenin kopyalanmış saldırganlar hakkındaki bir iddiasını sınamak için sonradan eklendi.
 
-İki sapma da ek belgede "plan dışı" diye belirtildi.
+3. **Plan eki: eşleşmiş FLAME kontrolü (E3m).** Üçüncü dış değerlendirme, E3'teki FLAME rastgele kontrolünün kabul sayılarını kanonik koşuyla eşleştirmediğini doğru biçimde tespit etti. Ek plan ([PROTOCOL_ADDENDUM.md](PROTOCOL_ADDENDUM.md), SHA-256 `a4733cd4…`, 2026-09-26 21:56 UTC) koşulardan önce kaydedildi. Dokuz koşunun hepsi tamamlandı ([review_runner_addendum.py](review_runner_addendum.py)).
+
+İlk iki sapma ek belgede "plan dışı" diye belirtildi; üçüncüsü plan eki olarak tanımlandı.
 
 ## Sonuçlar
 
@@ -51,11 +53,12 @@
 
 - Gürültünün etkisi en fazla 0.33 puan.
 - Multi-Krum'un kaybı neredeyse tümüyle seçim kimliğinden geliyor. Rastgele 61 güncelleme FedAvg'nin 1.3 puan yakınına çıkıyor, HAR'da FedAvg'yi 4.9 puan geçiyor.
-- FLAME'in seçimi rastgeleden 6.6 ile 25.4 puan kötü. Kalan 8.6 ile 40.1 puanlık fark kırpmadan, daha küçük kabul kümesinden ya da ikisinden geliyor; bu kontrol ikisini ayırmıyor.
+- E3'teki FLAME kontrolünde altküme büyüklüğü kontrolün kendi yörüngesinde belirleniyor. Ortalama kabul sayısı kanonik koşudan 0.07 ile 1.37 güncelleme farklı, yani bu kontrol eşleşmiş iki kollu değil. Bu kontrolde FLAME'in seçimi rastgeleden 6.6 ile 25.4 puan kötü.
+- **E3m, eşleşmiş kontrol:** Her turda büyüklük kanonik kayda sabitlendi. Kabul sayıları ve BER kanonik FLAME ile birebir aynı (%48.70, %46.96, %42.41). Rastgele altküme doğruluğu 44.65, 41.86 ve 37.50. FLAME'in seçimi ortalamada 24.56, 14.12 ve 7.15 puan, her tohum çiftinde kötü. Tekdüze ortalamaya kalan 8.0 ile 41.0 puanlık fark kırpmadan, daha küçük kabul kümesinden ya da ikisinden geliyor; kontroller ikisini ayırmıyor.
 
 ## Makaleye yansıma
 
-V5 ana metin ve Türkçe çeviri: özet, giriş, Bölüm IV, VI, VIII, IX, X ve XI güncellendi. Ek belgeye yeni bir bölüm ve beş tablo eklendi. Ana metni 11 sayfada tutmak için iki ayrıntı tablosu ek belgeye taşındı: kural bazında ayırt etme tablosu ve beş adımlı küme oranları örneği. Ayrıntılar `tifs_submission/v5/CHANGES_V5.md` dosyasında.
+V5 ana metin ve Türkçe çeviri: özet, giriş, Bölüm IV, VI, VIII, IX, X ve XI güncellendi. Ana metne rastgele seçim tablosu (Tablo VI) eklendi ve Γ tablosu (Tablo XI) kanonik satırlarla genişletildi. Ek belgeye yeni bir bölüm ve beş tablo eklendi. Ana metni 11 sayfada tutmak için üç ayrıntı tablosu ek belgeye taşındı: kural bazında ayırt etme, beş adımlı matrislerde kapsam yeniden oynatması ve beş adımlı küme oranları örneği. Ayrıntılar `tifs_submission/v5/CHANGES_V5.md` dosyasında.
 
 ## Yeniden üretim
 
@@ -66,6 +69,8 @@ $PY analysis/review_experiments_20260926/review_runner.py plan      # yeni bir �
 $PY analysis/review_experiments_20260926/review_runner.py run --parallel 8
 $PY analysis/review_experiments_20260926/analyze_review.py
 $PY analysis/review_experiments_20260926/e1b_density_routing.py
+$PY analysis/review_experiments_20260926/review_runner_addendum.py plan   # E3m
+$PY analysis/review_experiments_20260926/review_runner_addendum.py run --parallel 9
 ```
 
 Ham çıktılar Git'te değil, `/home/gokcen/Fed_MDBSCAN_TIFS/new_work/results/review_20260926/` altında. Bunlar koşu kayıtları, 90 kanonik kontrol noktası matrisi (~5 GB) ve günlüklerdir. Küçük özetler `tifs_submission/v5/analysis/evidence/review_20260926/` altına kopyalandı.
