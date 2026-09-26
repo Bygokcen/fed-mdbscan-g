@@ -1,0 +1,23 @@
+\begin{table}[!t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Patch-Backdoor Results of Fed-MDBSCAN-G With Matched Controls}\label{tab:backdoor}
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tabular}{llrrrr}
+\toprule
+& & \multicolumn{2}{c}{Attacked} & \multicolumn{2}{c}{Attack disabled} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+$\alpha$ & Dataset & Acc. (\%) & ASR (\%) & Acc. (\%) & ASR (\%) \\
+\midrule
+0.1 & MNIST & 93.97 & 99.99 & 94.14 & 0.57 \\
+0.1 & Fashion & 83.34 & 99.93 & 83.42 & 2.63 \\
+0.1 & CIFAR-10 & 49.55 & 96.59 & 49.85 & 5.76 \\
+0.01 & MNIST & 28.20 & 79.85 & 26.01 & 5.52 \\
+0.01 & Fashion & 32.83 & 56.18 & 32.24 & 1.85 \\
+0.01 & CIFAR-10 & 15.47 & 26.86 & 15.83 & 20.80 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\par\vspace{3pt}\parbox{\linewidth}{\footnotesize ASR is the triggered non-target attack success rate. Accuracy and ASR are reported together; the low-accuracy $\alpha=0.01$ block should not be read as effective protection.}
+\end{table}

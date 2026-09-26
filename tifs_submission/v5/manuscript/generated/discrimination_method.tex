@@ -1,0 +1,44 @@
+\begin{table}[!t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Discrimination by Rule and Attack Family}\label{tab:discrimination_method}
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tabular}{lrrrrr}
+\toprule
+Attack family / rule & Cells & TPR & FPR & $J$ & Benefit \\
+ &  & (\%) & (\%) & (pp) & (pp) \\
+\midrule
+\multicolumn{6}{l}{\emph{Loud Gaussian ($\sigma=5$)}} \\
+\quad Multi-Krum & 15 & 100.0 & 10.4 & $+$89.6 & $+$16.5 \\
+\quad FLTrust (normalized) & 15 & 50.0 & 28.0 & $+$22.0 & $+$14.9 \\
+\quad FLAME (HDBSCAN) & 15 & 100.0 & 31.5 & $+$68.5 & $+$6.2 \\
+\quad Fed-MDBSCAN-G (full) & 15 & 100.0 & 5.8 & $+$94.2 & $+$17.1 \\
+\addlinespace[3pt]
+\multicolumn{6}{l}{\emph{Label flipping}} \\
+\quad Multi-Krum & 9 & 69.1 & 22.4 & $+$46.7 & $-$9.5 \\
+\quad FLTrust (normalized) & 9 & 79.0 & 26.7 & $+$52.3 & $-$4.7 \\
+\quad FLAME (HDBSCAN) & 9 & 78.5 & 38.8 & $+$39.7 & $-$14.0 \\
+\quad Fed-MDBSCAN-G (full) & 9 & 52.3 & 11.1 & $+$41.2 & $-$7.9 \\
+\addlinespace[3pt]
+\multicolumn{6}{l}{\emph{Patch backdoor}} \\
+\quad FLTrust (normalized) & 4 & 31.4 & 27.6 & $+$3.8 & $-$7.9 \\
+\quad FLAME (HDBSCAN) & 6 & 48.4 & 47.5 & $+$0.9 & $-$26.7 \\
+\quad Fed-MDBSCAN-G (full) & 6 & 21.4 & 20.2 & $+$1.2 & $-$19.2 \\
+\addlinespace[3pt]
+\multicolumn{6}{l}{\emph{Bounded random direction}} \\
+\quad Multi-Krum & 18 & 33.7 & 31.7 & $+$2.1 & $-$23.2 \\
+\quad FLTrust (normalized) & 18 & 29.7 & 29.8 & $-$0.1 & $-$9.3 \\
+\quad FLAME (HDBSCAN) & 18 & 47.5 & 46.7 & $+$0.9 & $-$33.0 \\
+\quad Fed-MDBSCAN-G (full) & 18 & 25.3 & 26.7 & $-$1.4 & $-$26.3 \\
+\addlinespace[3pt]
+\multicolumn{6}{l}{\emph{Constrained omniscient}} \\
+\quad Multi-Krum & 6 & 9.7 & 41.9 & $-$32.2 & $-$20.1 \\
+\quad FLTrust (normalized) & 6 & 66.3 & 30.7 & $+$35.6 & $+$14.1 \\
+\quad FLAME (HDBSCAN) & 8 & 13.1 & 57.9 & $-$44.7 & $-$19.6 \\
+\quad Fed-MDBSCAN-G (full) & 8 & 6.4 & 20.6 & $-$14.2 & $-$12.9 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\par\vspace{3pt}\parbox{\linewidth}{\footnotesize Means over available cells; columns as in Table~\ref{tab:discrimination}. FLTrust counts zero-weight decisions.}
+\end{table}

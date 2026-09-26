@@ -1,0 +1,56 @@
+{
+  "date": "2026-09-23",
+  "scope": "V4 manuscript preparation; no training, no simulation change, no submission or push",
+  "evidence_unchanged": true,
+  "derived_values_unchanged": true,
+  "extracted_artifact_tables_reproduced": true,
+  "extracted_latex_source_compiled": true,
+  "documents": {
+    "main": {
+      "pages": 12,
+      "sha256": "14969537c95cd6bd0f40a5e1683275a6a1c2358a6a8356aa252e8cd0bf957b5a",
+      "latex_warnings": [],
+      "type3_fonts": false
+    },
+    "main_tr": {
+      "pages": 12,
+      "sha256": "6636d27099f8e172cd34543b06152fe6889e69005c52b8f91284b0f4bb90c7ba",
+      "latex_warnings": [],
+      "type3_fonts": false
+    },
+    "supplement": {
+      "pages": 2,
+      "sha256": "752adcccc4c49306cc40896ee3add08d742ef7e81757c39f280ca15a8b844701",
+      "latex_warnings": [],
+      "type3_fonts": false
+    }
+  },
+  "prose_revision": {
+    "passages": 32,
+    "abstract_words": 232,
+    "numbers_unchanged": true,
+    "mathematics_unchanged": true,
+    "formal_statements_and_proofs_unchanged": true,
+    "references_unchanged": true
+  },
+  "evidence_sha256": {
+    "cells.csv": "2c24cab61b6092547e31077d33207a5e97516b3c0b7eeb93c21896eb58ea22e7",
+    "feedback_provenance.json": "aa36914fbd104c9ab27db66b3e23686a0a2fff510822b9ea6e4a844d8089376d",
+    "feedback_validation.json": "05278de69d9be49bfee2f28255424e5e4fca4e060583db613f61c0d9b0dcc842",
+    "feedback_verification.json": "a50dc91144bf8dfba513b2a84dd197a63087f88e696512cd18893e2a0700cf10",
+    "flame_cell_sizes.csv": "61f5e457460884b77e4b35f281c6a7524bbb80de2e526e0296dbccb0761d7856",
+    "flame_clean_sizes.csv": "51b7f099bbd75978e875dd71ecf29c09c7074432f9fa95aee49d9dcca7251e3d",
+    "flame_round_counts.csv": "72e48983504460ee5eee8e0c63ebe94678033b1f1876fbf0f2524275d64fd441",
+    "gamma.csv": "c1dd9f7b23891cee04e0efee852d870c024ac4ecc4f30ac430a30ccebf6f7350",
+    "gamma_verification.json": "ea7a57ee94a9f97613961d7bc58aceab1a34e3b46fb1175faba24176be337ebc",
+    "mechanism_clusters.csv": "4da1dce01e876a1df6c0bed86f617b61a7b73ac7651702a7e45f130b6da1b710",
+    "outcomes.csv": "ee2be56d48ef0457cb65e0abc1a645c1485f5b5b2ea2d998ebc87fd92930f983",
+    "provenance.json": "e9b2546ff3fe963d467d9251d5b58c439b15a98312d56462d2d3edf473c24136",
+    "rd_checks.json": "0de4b8972feb6d9cce62ba1a555cb8e3a83a54a2e35e9c0db6f58cc9b7591a29",
+    "scenario_manifest.json": "c6f51b89110e8b1da0cb71caf4252660e602336b54f313bd16b4fa98f5993fad",
+    "summary.json": "02eda2f1f8e72aa467959598fdf1f4562fb353361f189307d8695c29c1a5ba54",
+    "telemetry_comparison.json": "995048b299c52d07201b08375fc67c17db5aebaf3c83b050014970f7a9ba6883",
+    "unclustered_policy_summary.csv": "925e766625ea792b3e56601afabbba1e4a61c7cdfa3caf801837dea2e0ffd39e",
+    "units.csv": "3809360bb583e25df3011f06391f9dcad75033a4a94b7e0b7b83d043b3b94bd3"
+  }
+}

@@ -1,0 +1,26 @@
+\begin{table}[!t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Benign Round-Level Alarm Rate of Fed-MDBSCAN-G}\label{tab:alarm}
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tabular}{llrrr}
+\toprule
+$\alpha$ & Dataset & Alarming rounds & Rate (\%) & BER (\%) \\
+\midrule
+0.5 & MNIST & 0/90 & 0.0 & 0.27 \\
+0.5 & Fashion & 0/90 & 0.0 & 0.41 \\
+0.5 & HAR & 19/90 & 21.1 & 2.07 \\
+0.1 & MNIST & 0/90 & 0.0 & 0.19 \\
+0.1 & Fashion & 0/90 & 0.0 & 0.53 \\
+0.1 & HAR & 89/90 & 98.9 & 24.06 \\
+0.1 & CIFAR-10 & 0/90 & 0.0 & 0.12 \\
+0.01 & MNIST & 90/90 & 100.0 & 42.57 \\
+0.01 & Fashion & 90/90 & 100.0 & 38.69 \\
+0.01 & HAR & 90/90 & 100.0 & 24.37 \\
+0.01 & CIFAR-10 & 90/90 & 100.0 & 39.94 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\par\vspace{3pt}\parbox{\linewidth}{\footnotesize Fed-MDBSCAN-G is the only evaluated rule that exposes a round-level alarm. The denominator is adversary-free rounds; at $\alpha=0.01$ every round on every dataset raises an alarm. These counts measure false alarms in clean controls, not predictive value at a deployment prevalence. The other rules expose no alarm channel; a rate of zero is therefore not reported for them, because absence of an alarm mechanism is not alarm specificity.}
+\end{table}

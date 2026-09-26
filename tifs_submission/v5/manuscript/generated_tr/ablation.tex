@@ -1,0 +1,22 @@
+\begin{table}[!t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Uç Nokta Ablasyonları: Varyant ile Tam Yöntem Arasındaki Son Doğruluk Farkı (Yüzde Puan)}\label{tab:ablation}
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tabular}{lrrrr}
+\toprule
+Varyant & Hücre & Ort. & En az & En çok \\
+\midrule
+Fed-MDBSCAN-G, yalnız 1. aşama & 12 & $-$0.081 & $-$1.50 & $+$0.84 \\
+Geometrik medyan uzaklık kontrolü & 12 & $-$0.081 & $-$1.50 & $+$0.84 \\
+Fed-MDBSCAN-G, etkinleşme belleği yok & 12 & 0.000 & 0.00 & 0.00 \\
+Fed-MDBSCAN-G, valf yok & 12 & $+$0.278 & $-$0.27 & $+$3.03 \\
+Güven bölgesi çarpanı 1.5 & 12 & $-$0.916 & $-$8.42 & $+$2.90 \\
+Güven bölgesi çarpanı 2.0 & 12 & $-$0.860 & $-$3.09 & $+$2.95 \\
+Güven bölgesi çarpanı 3.0 & 12 & $+$0.575 & $-$6.38 & $+$12.82 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\par\vspace{3pt}\parbox{\linewidth}{\footnotesize Varyant eksi tam bileşik yöntem, yüzde puan cinsinden son doğruluk farkı; hücreler eşleşen ablasyon bloğunda üç tohum üzerinden veri kümesi~$\times$~koşul ortalamalarıdır. Aralıklar koşullar arasındaki değişkenliği gösterir, güven aralığı değildir.}
+\end{table}

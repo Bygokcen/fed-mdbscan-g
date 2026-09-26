@@ -1,0 +1,334 @@
+% V4 Türkçe çalışma çevirisi. Dergiye gönderilecek metin main.tex'tir.
+% Tablolar: ../analysis/build_tables.py, ardından ../analysis/build_tr.py.
+\documentclass[journal]{IEEEtran}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[turkish,shorthands=off]{babel}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx,booktabs}
+\usepackage{url}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\newtheorem{proposition}{Önerme}
+\newtheorem{theorem}{Teorem}
+\newtheorem{corollary}{Sonuç}
+\newtheorem{definition}{Tanım}
+\addto\captionsturkish{\renewcommand{\IEEEkeywordsname}{Anahtar Kelimeler}}
+\renewcommand{\IEEEproofname}{İspat}
+
+\newcommand{\method}{Fed-MDBSCAN-G}
+\newcommand{\rd}{\mathrm{rd}}
+\newcommand{\BER}{\mathrm{BER}}
+\newcommand{\BUC}{\mathrm{BUC}}
+
+\begin{document}
+
+\title{Heterojen Federe Öğrenmede Dürüst İstemci\\Dışlama ve Uzlaşma Testinin Sınırları}
+
+\author{Sebahattin~Gökçen~Özden ve Kadir~Sarıkaya%
+\thanks{Bu belge, İngilizce gönderim sürümünün yazarlar için hazırlanmış Türkçe çalışma çevirisidir; dergiye gönderilecek metin İngilizce sürümdür. Sayılar İngilizce sürümle birebir karşılaştırılabilsin diye ondalık ayırıcı olarak nokta kullanılmıştır.}%
+\thanks{S. G. Özden, Bilgisayar Mühendisliği Bölümü, Mühendislik ve Mimarlık Fakültesi, Tokat Gaziosmanpaşa Üniversitesi, Tokat, Türkiye (e-posta: bygokcen@gmail.com).}%
+\thanks{K. Sarıkaya, Endüstri Mühendisliği Bölümü, Mühendislik ve Mimarlık Fakültesi, Tokat Gaziosmanpaşa Üniversitesi, Tokat, Türkiye.}%
+\thanks{Sorumlu yazar: Sebahattin Gökçen Özden.}}
+
+\markboth{IEEE Transactions on Information Forensics and Security için makale (Türkçe çalışma çevirisi)}{Özden ve Sarıkaya: Dürüst İstemci Dışlama ve Uzlaşma Testinin Sınırları}
+\maketitle
+
+\begin{abstract}
+Federe öğrenmede sunucu tarafı savunmalar, hangi istemci güncellemelerinin kabul edileceğine karar verir. İstemci verileri heterojen olduğunda dürüst güncellemeler de olağan dışı görünebilir; bu yüzden bir savunma, hiç saldırgan yokken bile dürüst istemcileri reddedebilir. Bu maliyeti, sekiz sunucu tarafı kuralın dört veri kümesi, üç heterojenlik düzeyi (Dirichlet $\alpha=0.5$, $0.1$, $0.01$) ve beş saldırı ailesi üzerinde tamamlanmış bir değerlendirmesinde ölçüyoruz; değerlendirme 2\,125 tamamlanmış koşum ve kayda geçmiş beş başarısız koşumdan oluşur. Saldırgan yokken Multi-Krum dokuz temiz koşulun hepsinde dürüst gönderimlerin \%32.2'sini, FLAME \%42.4--48.9'unu, bileşik filtre Fed-MDBSCAN-G ise $\alpha=0.01$ koşulunda \%42.6'ya kadarını dışlar; son doğruluk, düz ortalamaya göre 65.55 yüzde puana kadar düşer. İlk iki kuralda dışlama, kuralın kaç güncelleme tuttuğundan kaynaklanır: Multi-Krum yapılandırmamız her turda 90 güncellemenin 61'ini tutar; FLAME ise 990 temiz turun 719'unda izin verilen en küçük çoğunluğu (90'da 46) tutmuştur. Uzaklık kısıtlı bir saldırı altında Multi-Krum altı koşulun beşinde yalnız dürüst istemcileri reddetmiştir. Fed-MDBSCAN-G için, küme doğrulama aşamasının ilk kabul edilen güncellemelerden oluşan hiçbir grubu reddedemeyeceği basit bir geometrik koşul türetiyoruz. Bu koşul kayıtlı 36 saldırılı kontrol noktasının 35'inde sağlanmıştır; testi daha önce test edilmeyen güncellemelere genişletmek ise dürüst ret eklemiş, saldırgan reddi eklememiştir. Bu bulgular geometrik savunmaların genel olarak değil, değerlendirilen uygulamaların başarısızlıklarını açıklar. Saldırgansız dürüst istemci dışlamasının ve doğruluk kaybının, saldırı tespiti ve saldırı başarısıyla birlikte raporlanmasını öneriyoruz.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Federe öğrenme, zehirleme, dayanıklı birleştirme, veri heterojenliği, yanlış pozitifler, kümeleme tabanlı savunmalar.
+\end{IEEEkeywords}
+\IEEEpeerreviewmaketitle
+
+\section{Giriş}
+\IEEEPARstart{F}{edere} öğrenme, istemcilerin eğitim örneklerini sunucuda toplamadan, yerelde hesaplanan güncellemelerden ortak bir model eğitir~\cite{mcmahan2017}. Aynı ayrım, kötü niyetli istemcilerin zehirlenmiş güncellemeler (poisoned updates) göndermesine ya da manipüle edilmiş verilerle eğitim yapmasına da olanak tanır~\cite{fang2020,bagdasaryan2020,xie2020dba}. Sunucu tarafı savunmalar buna dayanıklı birleştirme (robust aggregation), güncelleme filtreleme (update filtering) veya güvenilir bir referansa (trusted reference) karşı doğrulama ile karşılık verir~\cite{blanchard2017,yin2018,cao2021fltrust,nguyen2022flame}.
+
+Bir filtreleme savunması iki ayrı soruyu yanıtlamak zorundadır: saldırganları dışlıyor mu ve yararlı dürüst katkıları (honest contributions) koruyor mu? İstatistiksel heterojenlik her ikisini de zorlaştırır. Dürüst istemciler turun merkezî eğiliminden uzak güncellemeler üretebilirken, koordineli saldırılar dürüst dağılıma yakın kalabilir~\cite{baruch2019,shejwalkar2021}. Önceki değerlendirmeler bu koşullarda yanlış pozitifleri (false positives), fayda kaybını ve arka kapı (backdoor) açıklarını belgelemiştir~\cite{singh2023fair,ye2025illusion,bellachia2026sok}. Bunun değerlendirme açısından iki sonucu vardır. Savunmalar hiç saldırgan yokken de ölçülmeli, bileşik bir savunmanın yalnız uçtan uca sonucu değil, içindeki tek tek kararlar da incelenmelidir.
+
+Bu soruları, sekiz sunucu tarafı kuralın tamamlanmış bir değerlendirmesi ve \method{} adlı bileşik filtrenin (composite filter) ayrıntılı analiziyle inceliyoruz. \method{}, geometrik medyan tabanlı bir kabul bölgesini (geometric-median acceptance region), göreli yoğunluk bölümlemesini (relative-density partitioning) ve paylaşılan komşu küme doğrulamasını (shared-neighbour cluster validation) birleştirir. Amacımız açıklayıcıdır. Bu değerlendirmede gözlenen maliyetleri ve başarısızlıkları açıklamaya çalışıyoruz; bileşik yöntemi genel olarak üstün bir savunma olarak sunmuyor, bulguların geometrik filtrelemenin başarabileceklerini tükettiğini de iddia etmiyoruz.
+
+İlk katkımız, $\alpha\in\{0.5,0.1,0.01\}$ Dirichlet yoğunlaşma (Dirichlet concentration) değerlerinde yapılan, veri kümesi kapsamı açıkça belirtilmiş ve dürüst istemci dışlamasını (honest-client exclusion) son doğruluktaki değişimden ayıran saldırgansız (adversary-free) bir karşılaştırmadır. Bu ortamda sabit kardinaliteli seçim (fixed-cardinality selection) kesin bir dışlama oranı verir; çoğunluk kümesini tutma (majority-cluster retention) ise yalnızca bir üst sınır verir ve bu sınıra ulaşılıp ulaşılmadığı ölçülmelidir. Bunu, kayıtlı FLAME kabul kümelerini doğrudan sayarak ölçüyoruz; küme boyutlarını yuvarlanmış ret oranlarından geri hesaplamıyoruz.
+
+İkinci olarak, bileşik yöntemin karar yolunun (decision path) koşullu bir analizini veriyoruz. Küme içerme (set containment) ilişkisi, sonraki aşamaların hangi ilk dışlamaları geri alamayacağını belirler. Dışbükeylik (convexity) ise her aday grup ilk kabul havuzunun (initial acceptance pool) içinde kaldığında küme merkezi doğrulamasının (centroid validation) etkisiz kalması için bir yeter koşul (sufficient condition) verir. Bu koşulu kayıtlı kontrol noktalarında (checkpoint) sınıyor ve varsayımlarının nerede sağlandığını raporluyoruz. Ayrı bir skor sıralaması sonucu, ret yapan bir kuralın ne zaman sıfır saldırgan yakalama oranı (recall) ve pozitif dürüst ret oranına sahip olacağını betimler. Bu sonuç açık bir sıralama öncülüne (ordering premise) dayanır; saldırıya getirilen bir uzaklık kısıtı (distance constraint) bu öncülü her savunma skoru için tek başına garanti etmez.
+
+Üçüncü olarak, sabit matrisler üzerindeki yeniden oynatmalar (replay), kümelenmemiş (unclustered) düşük yoğunluklu (low-density) güncellemelerin ele alınışında iki değişikliği sınar. Bu güncellemeleri tekil (singleton) olarak test etmek incelenen matrislerde saldırgan reddi eklemez; doğrudan dışlamak ise bir yama arka kapısı bloğunda farklı bir ödünleşim verir. Yeniden oynatmalar, test kapsamının (test coverage) eksikliğini doğrulama kuralının kendi başarısızlığından ayırır. Bunlar kayıtlı durumlardaki kararlarla ilgilidir; yeniden eğitilmiş varyantların doğruluğu veya saldırı başarısıyla ilgili değildir.
+
+Değerlendirme 2\,130 planlı kural--koşul--tohum biriminden (unit) oluşur ve bunların 2\,125'i tamamlanmıştır; beş başarısız birim hesapta tutulmaktadır. Analiz geriye dönük ve betimseldir. Katkısı, kontrollü gözlemleri açık karar kurallarına ve yeter koşullara bağlamaktır; yeni evrensel alt sınırlar ya da bir kuramın ileriye dönük doğrulanması değildir.
+
+Bölüm~\ref{sec:related} ilgili çalışmaları gözden geçirir, Bölüm~\ref{sec:model} sistem modelini ve değerlendirilen bileşik yöntemi tanımlar. Bölüm~\ref{sec:theory} koşullu analizi geliştirir, Bölüm~\ref{sec:protocol} deney protokolünü açıklar. Bölüm~\ref{sec:benign} ve Bölüm~\ref{sec:attack} saldırgansız ve saldırılı tur sonuçlarını raporlar. Bölüm~\ref{sec:mechanism} kayıtlı kontrol noktalarında karar yollarını analiz eder; Bölüm~\ref{sec:discussion} ve Bölüm~\ref{sec:conclusion} bulguları tartışır ve çalışmayı sonuçlandırır.
+
+\section{İlgili Çalışmalar}\label{sec:related}
+\subsection{Dayanıklı birleştirme ve heterojen veri}
+Komşuluk tabanlı seçim, koordinat bazında kestiriciler, geometrik medyan ile birleştirme ve güven önyüklemesi (trust bootstrapping), zehirlenmiş güncellemelerin etkisini farklı varsayımlar altında sınırlar~\cite{blanchard2017,yin2018,pillutla2022rfa,cao2021fltrust}. Heterojen veri için önceki analizler, belirtilen varsayımlar altında istatistiksel sınırlar ortaya koyar ve dayanıklı birleştirme yapıları önerir~\cite{karimireddy2022bucketing,allouah2023mixing}. Bizim sonuçlarımız farklı bir nicelikle, yani belirli bir turda hangi istemcilerin kabul edildiği ya da dışlandığıyla ilgilidir. Bölüm~\ref{sec:theory} içindeki temel küme ve dışbükeylik argümanları optimizasyon hatası sınırlarının yerini tutmaz ve model doğruluğu için bir sınır da ima etmez.
+
+FLAME kümeleme, kırpma ve gürültüyü birleştirir~\cite{nguyen2022flame}. DeepSight model davranışını inceler ve kümelemeyi şüphe tahminleriyle birleştirir~\cite{rieger2022deepsight}; FLShield istemci tarafı doğrulamaya dayanır~\cite{kabir2023flshield}; CrowdGuard ve MESAS birden fazla aşama veya istatistik kullanır~\cite{rieger2024crowdguard,krauss2023mesas}; Fedward ve FLAC ise kümeleme tabanlı savunmaları daha da geliştirir~\cite{chen2023fedward,yuan2025flac}. Bu tasarımlar neyi gözlemledikleri ve nasıl karar verdikleri bakımından farklı olduğundan, bir aşama için kanıtlanan cebirsel bir özellik varsayımları denetlenmeden diğerlerine aktarılamaz.
+
+Burada incelenen bileşik yöntem, göreli yoğunluk bölümlemesini ve paylaşılan komşu kümelemesini MDBSCAN algoritmasından uyarlar~\cite{qian2024mdbscan}. Filtre olarak kullanımı, komşuluk kesmesi (neighbourhood cutoff) ve kümelenmemiş noktaları ele alışı özgün kümeleme algoritmasından farklıdır; değerlendirdiğimiz şey bu yerel uyarlamadır. Kabul kümesi içerme argümanı, birleşik (conjunctive) kaskadların (cascade) bilinen bir özelliğidir~\cite{viola2004cascade}; burada önemli olan, kullanılan geri dönüş (fallback) mekanizmasının ilk havuza içerilmeyi koruyup korumadığıdır. Saldırı altında merkez tabanlı anomali tespiti üzerine yapılan çalışmalar, kabul bölgeleri ile saldırgan girdiler arasındaki etkileşim için ilgili bir bağlam sunar~\cite{kloft2012centroid}.
+
+\subsection{Yanlış pozitifler ve önceki değerlendirmeler}
+Adalet (fairness) çalışmaları, savunmaların istatistiksel olarak sıra dışı dürüst istemcileri nasıl dışladığını incelemiştir~\cite{singh2023fair,touat2023bias,ajibuwa2025fairness}. IID olmayan veri altında federe öğrenmeye ilişkin yakın tarihli değerlendirmeler de savunma başarımının kötüleştiğini belgeler~\cite{li2025heterogeneity,ye2025illusion,zhang2025flpoison}. Bellachia vd., saldırganların dağınık bir dürüst popülasyon içinde gizlenmesini açıkça betimler~\cite{bellachia2026sok}; bu mekanizmayı onların çalışmasına atfediyoruz.
+
+Şans köşegeninin (chance diagonal) altındaki çalışma noktaları (operating point) önceki çalışmalarda da görülür. Bellachia vd.'nin Tablo~8'i, IID olmayan bir IBA koşulunda FLAME için $\mathrm{TPR}=0$ ve $\mathrm{FPR}=0.45$ raporlar~\cite{bellachia2026sok}. Ye vd.'nin Tablo~V'inde $\mathrm{Dir}(0.1)$ için verilen TPR/TNR çiftleri, FoolsGold ve CrowdGuard için sırasıyla $J=-4.15$ ve $-6.8$ yüzde puan anlamına gelir~\cite{ye2025illusion}. Dolayısıyla negatif $J$, burada değerlendirilen uzaklık kısıtlı yoklamalara (probes) özgü değildir.
+
+Farklı çalışmalardan gelen oranlar ortak bir sayısal doğrulama olarak okunmamalıdır. Örneğin Ye vd., FLAME için $\mathrm{Dir}(0.5)$ koşulunda \%73.29, $\mathrm{Dir}(0.1)$ koşulunda \%54.87 TNR raporlar; bunlar \%26.71 ve \%45.13 FPR değerlerine karşılık gelir. Bu saldırılı tur oranları, bizim saldırgansız sonuçlarımızdan farklı kohort boyutlarına ve paydalara dayanır; bu nedenle yapılandırmamızın \%48.89'luk üst sınırını ne doğrular ne de çürütür.
+
+Değerlendirme yöntemi başlı başına bir araştırma konusudur. Shejwalkar vd. zehirleme tehdit modellerinin ne kadar gerçekçi olduğunu inceler~\cite{shejwalkar2022drawing}; Abad vd. ise arka kapı içermeyen kontrollerin rolünü tartışır~\cite{abad2025evaluation}. Heterojenliği gözeten yakın tarihli bir tarama da savunma değerlendirmelerinin dürüst non-IID istemcilere karşı yanlış pozitifleri ve dürüst istemci dışlamasını raporlaması gerektiğini savunur~\cite{djemaa2026heterogeneity}. Bizim katkımız saldırgansız kontrollerin, karar yolu ölçümlerinin ve tek bir bileşik yöntemin koşullu analizinin yeniden üretilebilir bir birleşimidir. Ne dürüst kontroller ne de negatif $J$ gözlemi için öncelik iddia ediyoruz.
+
+\section{Sistem Modeli ve Karar Kuralları}\label{sec:model}
+\subsection{Protokol ve tehdit modeli}
+$r$ turunda $i$ istemcisi $w_r$ modelini alır ve yerel model farkı (local model delta) $u_{r,i}=w^{\mathrm{local}}_{r,i}-w_r$ güncellemesini gönderir. $B_r$ indekslerini kabul eden düz ortalama (uniform mean) filtresi $w_{r+1}=w_r+|B_r|^{-1}\sum_{i\in B_r}u_{r,i}$ güncellemesini uygular. Paneldeki diğer kurallar kendi ağırlıklandırma, kırpma veya koordinat bazında birleştirme yöntemlerini kullanır; düz ve örnek ağırlıklı ortalama (sample-weighted mean) ayrı referans yöntemler olarak yer alır.
+
+Sunucu güvenilirdir ve istemci kimlikleri sabittir. Saldırganlar kendi eğitim verilerini veya gönderdikleri güncellemeleri kontrol eder. Min-Max ve Min-Sum yoklamaları her şeyi bilen (omniscient) türdendir: mevcut dürüst güncellemeleri de gözlemler ve ilgili uzaklık sınırına uyan ortak bir kötü niyetli vektör oluştururlar. Gerçek kötü niyetli kimlikler bu saldırıları oluşturmak ve kararları puanlamak için kullanılır; savunmaya hiçbir zaman girdi olarak verilmez.
+
+$U=\{1,\ldots,n\}$ gönderimleri (submission) indekslesin; $H$ ve $A$ da $U$ kümesini dürüst ve saldırgan katılımcılara ayırsın. $|H|>0$ olsun. Kabul edilen $B$ indeksleri için $\mathrm{FPR}=|H\setminus B|/|H|$ ve $|A|>0$ olduğunda $\mathrm{TPR}=|A\setminus B|/|A|$ tanımlanır. Bunların farkı Youden indeksi (Youden's index) $J=\mathrm{TPR}-\mathrm{FPR}$ ile verilir. Saldırgansız turlarda $\mathrm{FPR}$ değerine dürüst istemci dışlama oranı (benign exclusion rate, $\BER$) diyoruz. Bu nicelikler katılım kararlarını betimler; doğruluğu veya arka kapı başarısını betimlemez.
+
+\begin{definition}[Skor sıralı kural / Score-order rule]\label{def:dispersion}
+Gerçel $s_i$ skorları verildiğinde, skor sıralı bir kural en yüksek skorlu $k$ gönderimi veya belirli bir eşik için $s_i>\rho$ olanları atar. Eşit skorlar için belirli bir seçim kuralı tanımlanmalıdır.
+\end{definition}
+Radyal uzaklık ve en yakın komşu (nearest neighbour) uzaklık toplamları bu tür skorlara örnektir. Bölüm~\ref{sec:theory} içindeki teorem, farklı skorların aynı sıralamayı ürettiğini varsaymaz. Küme üyeliği ikili bir skor olarak kodlanabilir; ancak bu kodlama, skorun uzaklık kısıtlı bir saldırıyla ilişkisi hakkında ek bir şey söylemez.
+
+\begin{definition}[Monoton kaskad / Monotone cascade]\label{def:cascade}
+Her ara kabul kümesi bir öncekinin altkümesiyse kaskad monotondur. Daha önce çıkarılmış indeksleri geri kabul eden bir geri dönüş mekanizması bu özelliği bozabilir.
+\end{definition}
+
+\subsection{Değerlendirilen bileşik yöntem}
+\method{} yönteminin ilk filtresi (initial filter) şu kümeyi kabul eder:
+\begin{equation}
+B_0=\{i:\|u_i-m\|_2\leq\rho\operatorname{median}_j\|u_j-m\|_2\},\quad\rho=2.5,
+\label{eq:l0}
+\end{equation}
+burada $m$, geometrik medyanın Weiszfeld yaklaşımıdır. Gönderimlerin yarısından azı kalırsa ilk havuz $U$ olarak sıfırlanır.
+
+$k'=\min(5,n-1)$ için yoğunluk, $k'$ en yakın komşuya olan uzaklıkların toplamı $d_i$ üzerinden hesaplanır. Yerel uygulama $d_i>0$ olduğunda $k'/\max(d_i,10^{-15})$, $d_i=0$ olduğunda $1$ döndürür; tek elemanlı girdi de $1$ döndürür. Kullanılan kapı (deployed gate), boşluk eşiği 10 olan bir yoğunluk boşluğu göstergesi (density-gap indicator) en az $\max(2,\lceil0.05n\rceil)$ ilk retle birlikte gerçekleştiğinde açılır. Üç turluk bir bellek, daha önceki bir etkinleşmeden sonra küme aşamasını (cluster stage) temiz turlarda sönümlenmek kaydıyla etkin tutabilir.
+
+Küme aşaması etkin olduğunda bütün gönderim kümesini yoğunluğa göre bölümler ve düşük yoğunluklu $L$ altkümesi üzerinde paylaşılan komşu kümelemesi çalıştırır. Bulunan her $S$ grubu şu koşulda reddedilir:
+\begin{equation}
+\begin{gathered}
+\|c_S-m_{B_0}\|_2>\tau R_0,\\
+R_0=\max\!\left(10^{-10},\operatorname{median}_{j\in B_0}\|u_j-m_{B_0}\|_2\right),
+\end{gathered}
+\label{eq:consensus}
+\end{equation}
+burada $c_S$ grubun aritmetik merkezi (arithmetic centroid), $m_{B_0}$ ise $B_0$ kümesinin geometrik medyanıdır ve $\tau=2$ alınır. Bulunan bir gruba atanmamış noktalar bu aşamada test edilmez. Aday gruplar $L\cap B_0$ kümesinden değil $L$ kümesinden oluşturulduğu için $B_0$ dışındaki indeksleri içerebilir.
+
+Birleşik küme, reddedilen grupların üyelerini $B_0$ kümesinden çıkarır. Ardından gönderimlerin yarısından azı kalırsa bir valf (safety valve) $B_0$ kümesini geri yükler. Bu nedenle tam yol monoton bir kaskad olmak zorunda değildir; ancak son çıktı her zaman $B\subseteq B_0$ koşulunu sağlar ve aşağıdaki ilk dışlama sonucunun gerektirdiği yalnızca budur.
+
+\section{Koşullu Analiz}\label{sec:theory}
+Bu bölümdeki önermeler tek bir tura ve az önce tanımlanan karar kurallarına ilişkindir. Yalnızca küme içerme, kardinalite ve dışbükeyliğe dayandıkları için ampirik geçerlilikleri, varsayımlarının uygulanan yolda sağlanıp sağlanmadığına bağlıdır; Bölüm~\ref{sec:mechanism} bunu kayıtlı kontrol noktalarında denetler.
+
+\subsection{Kabul kümesi içerme ve kardinalite}
+\begin{proposition}[İlk dışlama tabanı / Initial exclusion floor]\label{prop:floor}
+$B\subseteq B_0$ ise $\mathrm{FPR}(B)\geq\mathrm{FPR}(B_0)$ olur ve $|A|>0$ için $\mathrm{TPR}(B)\geq\mathrm{TPR}(B_0)$ sağlanır. Bu, monoton bir kaskad ve en fazla $B_0$ kümesini geri yükleyen bir geri dönüş mekanizması için geçerlidir.
+\end{proposition}
+\begin{IEEEproof}
+$H\setminus B_0\subseteq H\setminus B$ ve $A\setminus B_0\subseteq A\setminus B$ içermeleri, ilgili popülasyon boyutlarına bölündükten sonra eşitsizlikleri verir.
+\end{IEEEproof}
+Dolayısıyla sonraki aşamalar, ilk filtrenin dışladığı dürüst bir istemciyi geri kabul edemez. Yine de çalışma noktasını iyileştirebilirler; örneğin ek dürüst istemci reddetmeden ek saldırganları reddedebilirler. Bu yüzden önerme bir Pareto iyileşmesini dışlamaz.
+
+\begin{corollary}[Sabit kardinaliteli seçim / Fixed-cardinality selection]\label{cor:cardinality}
+$n$ gönderimin tam olarak $m$ tanesi kabul ediliyorsa saldırgansız bir turda $\BER=1-m/n$ olur. $a$ saldırgan ve reddedilen $t$ saldırgan varken, $n>a$ koşuluyla $\mathrm{FPR}=(n-m-t)/(n-a)$ olur.
+\end{corollary}
+\begin{IEEEproof}
+Toplam $n-m$ ret vardır; bunların $t$ tanesi saldırgan, $n-m-t$ tanesi dürüsttür.
+\end{IEEEproof}
+Multi-Krum yapılandırmamız $f=\lceil0.3n\rceil$ ve $m=n-f-2$ kullanır. $n=90$ iken 61 güncelleme tutar; bu yüzden temiz $\BER$ değeri $29/90$ olur. $a=27$ ve $t=0$ iken saldırılı turdaki $\mathrm{FPR}$ değeri $29/63$ olur. Bu özdeşliklerle uyum yalnızca seçim kardinalitesini doğrular (Bölüm~\ref{sec:fidelity}).
+
+\begin{corollary}[Çoğunluk kümesini tutma / Majority-cluster retention]\label{cor:majority}
+Saldırgansız bir turda, boyutu $c\geq c_{\min}$ olan tek bir kümeyi tutan kural için $\BER=(n-c)/n\leq(n-c_{\min})/n$ olur. Eşitlik ancak ve ancak $c=c_{\min}$ olduğunda sağlanır. $a$ saldırgan ve $t$ saldırgan reddiyle $\mathrm{FPR}=(n-c-t)/(n-a)$ olur.
+\end{corollary}
+\begin{IEEEproof}
+Küme dışında kalan reddedilmiş indeksleri sayın ve saldırgan retlerini çıkarın.
+\end{IEEEproof}
+Yerel FLAME yolu $n=90$ iken $c_{\min}=\lfloor n/2\rfloor+1=46$ kullanır; bu da $44/90$ değerinde temiz bir üst sınır verir. Heterojenlik tek başına eşitliği zorunlu kılmaz. Kümelemenin başarısız olduğu veya geri dönüş mekanizmasının devreye girdiği turlar, fiilen yürütülen yola göre ele alınmalıdır.
+
+\subsection{Küme merkezi doğrulaması}
+\begin{proposition}[Dışbükey zarf yarıçap sınırı / Convex-hull radius bound]\label{prop:contraction}
+Boş olmayan bir $S$ grubu, güncellemelerinin herhangi bir dışbükey birleşimi (convex combination) $g(S)$ ve herhangi bir $m_0$ referansı için
+\[
+\|g(S)-m_0\|\leq\max_{i\in S}\|u_i-m_0\|
+\]
+sağlanır. $s$ üyenin düz ortalaması için, bir üyenin yarıçapı en fazla $r_a$, diğerlerininki en fazla $r_b$ ise
+\[
+\|c_S-m_0\|\leq\frac{r_a+(s-1)r_b}{s}
+\]
+olur.
+\end{proposition}
+\begin{IEEEproof}
+$g(S)-m_0$ ifadesini $u_i-m_0$ vektörlerinin dışbükey birleşimi olarak yazın ve üçgen eşitsizliğini uygulayın. İkinci ifade $1/s$ ağırlıklarını kullanır.
+\end{IEEEproof}
+Buna göre bir grup merkezi bir topun dışındaysa en az bir üye de dışındadır. Bu ifade tek tek üyelere değil gruba ilişkindir. Bütün bir grubu reddetmek topun içindeki üyeleri de dışlayabilir: gerçel doğru üzerinde merkez 0 ve yarıçap 2 iken $\{1,5\}$ grubunun merkezi 3'tür; üyesi 1 topun içinde olduğu hâlde grup reddedilir. Tersine, sapmalar birbirini götürerek bir üye dışarıdayken merkezi topun içine yerleştirebilir. İlk filtre ve uzlaşma filtresi (consensus filter) de farklı referans noktaları ve yarıçaplar kullanır; bu nedenle sınır, bu iki filtrenin istemci düzeyindeki kararlarını sıralamaz.
+
+\begin{proposition}[Küme merkezi doğrulamasının etkisiz kalması için yeter koşul / Sufficient condition for inactive centroid validation]\label{prop:vacuity}
+Boş olmayan $B_0$ için
+\[
+\Gamma(B_0)=\frac{\max_{i\in B_0}\|u_i-m_{B_0}\|_2}{R_0}
+\]
+tanımlansın; burada $R_0$, \eqref{eq:consensus} içindeki tabanlı yarıçaptır (floored radius). $\Gamma(B_0)\leq\tau$ ise boş olmayan hiçbir $S\subseteq B_0$ grubu \eqref{eq:consensus} ile reddedilmez. Test edilen her grup böyle bir altkümeyse ve başka hiçbir aşama üye çıkarmıyorsa son kabul kümesi $B=B_0$ olur.
+\end{proposition}
+\begin{IEEEproof}
+$B_0$ kümesinin her üyesi $m_{B_0}$ merkezli, $\tau R_0$ yarıçaplı kapalı topun içindedir. Top dışbükey olduğundan bir $S\subseteq B_0$ altkümesinin üyelerinin her dışbükey birleşimi topun içindedir ve kesin ret eşitsizliği sağlanamaz.
+\end{IEEEproof}
+Koşul yeterlidir ama gerekli değildir. Ayrıca aday grupları $B_0$ dışındaki üyeleri içerebilen bileşik yöntemimiz için genel olarak geçerli değildir. Örneğin $B_0=\{-1,1\}$ için $\Gamma=1$ olur; ama $\{1,10\}$ grubunun merkezi $5.5$ olduğundan grup yarıçap-2 testini geçemez. Bu yüzden önermeyi kayıtlı matrislere uygulamadan önce altküme koşulunu doğruluyoruz.
+
+\subsection{Yoğunluk sıralaması ve uygulama sınırı}
+\begin{proposition}[Ayırıcı eşikle yoğunluk ayrımı / Density separation with a separating threshold]\label{prop:density}
+Uzaklık toplamlarının kesinlikle pozitif olduğu ideal $\rd(i)=k'/d_i$ skorunu ele alalım. $|A|\geq k'+1$ olsun; bütün saldırgan çiftleri arasındaki uzaklıklar en fazla $\delta_A>0$ ve her dürüst noktanın ortalama $k'$-en yakın komşu uzaklığı en az $\delta_H>\delta_A$ olsun. O zaman
+\[
+\min_{a\in A}\rd(a)\geq1/\delta_A>1/\delta_H\geq\max_{i\in H}\rd(i)
+\]
+olur. $\max_{i\in H}\rd(i)<t\leq\min_{a\in A}\rd(a)$ koşulunu sağlayan bir eşik için $L=\{i:\rd(i)<t\}$ kümesi bütün dürüst noktaları içerir ve hiçbir saldırgan noktayı içermez.
+\end{proposition}
+\begin{IEEEproof}
+Her saldırganın $\delta_A$ uzaklık içinde $k'$ başka saldırganı vardır; bu nedenle en yakın komşu uzaklık toplamı en fazla $k'\delta_A$ olur. Varsayılan dürüst ortalama uzaklık $d_i\geq k'\delta_H$ verir. Terslerini almak sıralamayı, eşik koşulu da seçilen kümeyi verir.
+\end{IEEEproof}
+Eşik kısıtı zorunludur, çünkü bütün skorların üzerindeki bir eşik saldırganları da seçer. Önerme, yerel uygulamadaki tam kopyalara (exact duplicates) da doğrudan uygulanmaz. Etkin en yakın komşu uzaklıklarının toplamı sıfır olduğunda kod $\rd=1$ döndürür; $k'=1$ ile tek boyutlu $[0,0,0.1,0.2]$ girdisi için gerçek çıktı $[1,1,10,10]$ olur. Bu davranışı çalışma kaynağında ve iki dondurulmuş (frozen) kopyada yeniden ürettik. Dolayısıyla tam kopyalama tek başına Önerme~\ref{prop:density} içindeki yüksek yoğunluk sıralamasını üretmez. Kümeleme sezgisi önceki gözlemlerle uyumludur~\cite{bellachia2026sok}; ancak belirli bir koşumu (run) açıklamak, o koşumda hesaplanan skorları ve yönlendirme (routing) kararlarını gerektirir.
+
+\subsection{Koşullu bir skor sıralaması sonucu}
+\begin{theorem}[Yalnız dürüst ret / Honest-only rejection]\label{thm:inversion}
+$H$ ve $A$ boş olmasın ve $1\leq k\leq|H|$ olsun. Bir kural en yüksek $k$ skoru atıyorsa ve $s^H_{(k)}$ en büyük $k$'ıncı dürüst skor olmak üzere $\max_{a\in A}s_a<s^H_{(k)}$ ise
+\[
+\mathrm{TPR}=0,\quad\mathrm{FPR}=k/|H|,\quad J=-k/|H|
+\]
+olur. Eşik kuralı için, $\rho\geq\max_{a\in A}s_a$ ise aynı sonuç $k=|\{i\in H:s_i>\rho\}|>0$ ile geçerlidir.
+\end{theorem}
+\begin{IEEEproof}
+Kesin sıralama, atılan $k$ indeksin hepsini $H$ içine yerleştirir. Eşik durumunda hiçbir saldırgan eşiği aşmaz. Dürüst ve saldırgan retlerini sayın.
+\end{IEEEproof}
+Teorem koşullu bir sayma sonucudur. Min-Max ve Min-Sum uzaklıkları kısıtlar~\cite{shejwalkar2021}, ancak bu kısıtlar teoremin sıralama öncülünü her skor için sağlamaz. Örneğin $\{-2,0,0.1,2\}$ dürüst noktalarının en büyük ikili uzaklığı 4'tür ve $-1$ noktası her birine en fazla 3 uzaklıktadır; yine de dürüst geometrik medyana en uzak üç noktayı reddeden bir kural, $-2$ ve $2$ ile birlikte $-1$ noktasını da reddeder. Negatif $J$ ayrıca model doğruluğu veya saldırı başarısı hakkında doğrudan bir şey söylemez. Ret bütçesini büyütmek $J$ değerini ancak yalnız dürüst sıralaması korunduğu sürece daha negatif yapar.
+
+Ne içerme ne de dışbükeylik sonucu referans noktasının nasıl elde edildiğine bağlıdır; bu nedenle ikisi de güvenilir sunucu verisi kullanan kurallara uygulanır. FLTrust'ın Bölüm~\ref{sec:attack} içinde elde ettiği pozitif aile ortalaması $J$ ampirik bir gözlemdir; dış bir referansın dayanıklılık (robustness) için gerekli ya da yeterli olduğunu göstermez.
+
+\section{Deney Protokolü}\label{sec:protocol}
+\input{generated_tr/coverage.tex}
+
+\subsection{Veri, eğitim ve kapsam}
+Arşivlenmiş matris 149 iş ve MNIST~\cite{lecun1998}, Fashion-MNIST~\cite{xiao2017fmnist}, UCI HAR~\cite{anguita2013har} ve CIFAR-10~\cite{krizhevsky2009} üzerinde 2\,130 planlı kural--koşul--tohum biriminden oluşur. MNIST ve Fashion için 784--200--10 çok katmanlı algılayıcı kullanılır; HAR için genişlikler 561--128--64--6'dır ve $0.2$ dropout uygulanır; CIFAR için 32 ve 64 kanallı iki evrişim katmanının ardından 256 ve 10 genişliğinde tam bağlantılı katmanlar kullanılır. Ana yapılandırmalarda 100 istemci, turda 90 katılımcı, 30 tur, 42, 137 ve 2024 rastgelelik tohumları (seed), 32 batch boyutu, üç yerel epok, $0.01$ öğrenme oranı ve $0.9$ momentum kullanılır.
+
+Dirichlet yoğunlaşma parametresi $0.5$, $0.1$ ve $0.01$ değerlerini alır~\cite{hsu2019}. En az örnek sayısı onarımı (minimum-count repair) her istemciye en az 20 örnek ayırır; bu nedenle son bölümleme dokunulmamış bir Dirichlet çekilişi değildir. Üç veri kümesi 17 koşullu ortak bir ana bloğu paylaşır, CIFAR'ın kapsamı ise daha dardır; kalan bloklar Tablo~\ref{tab:coverage} içinde listelenmiştir. Dört örnek ağırlıklı HAR koşumu ve Min-Max altında bir CIFAR FLAME koşumu başarısız olmuştur. Bunlar başarısız olarak tutulmuş; ne doldurulmuş ne de tanılama amaçlı yeniden koşumlarla değiştirilmiştir.
+
+Bu makaledeki bütün analizler mevcut sonuçları kullanır. Bölüm~\ref{sec:theory} içindeki koşullu argümanlar ve birkaç kontrol noktası analizi, sonuçlar incelendikten sonra geliştirilmiştir. İçerik özetleri (hash) kanıt dosyalarını tanımlar; ancak önkaydı veya hipotezlerin hangi sırayla kurulduğunu kanıtlamaz.
+
+\subsection{Kontrol blokları ve saldırılar}
+Saldırgansız ana koşullar, üç yoğunlaşma değerinin her birinde sıfır kötü niyetli istemciyle yapılandırılmıştır; CIFAR için $\alpha=0.5$ kontrol hücresi (cell) yoktur. Ayrı saldırısı kapatılmış kontroller (attack-disabled controls), saldırılı yapılandırmaların istemci kimliklerini ve takvimlerini korur ama saldırıyı devre dışı bırakır; yama arka kapısı karşılaştırmasında kontrol işlevi görür.
+
+Saldırı aileleri şunlardır: yüksek Gauss gürültüsü (koordinat standart sapması 5), etiket çevirme (label flipping), sağ alt köşede $3\times3$ beyaz yama arka kapısı (hedef sınıf 0, zehirleme oranı $0.2$), sınırlı rastgele pertürbasyonlar (bounded random perturbations) ve kısıtlı her şeyi bilen yoklamalar (constrained omniscient probes). Sınırlı aile, $0.005$ göreli ölçekli bir yön yoklamasını ve $0.3$ göreli ölçekli, eski \texttt{adaptive\_gaussian} tanımlayıcısını içerir; adına rağmen ikincisi optimize edilmiş, savunmaya uyarlanmış bir saldırı değil, sınırlı rastgele gürültüdür. Kısıtlı yoklamalar dürüst ortalamanın tersi yönünde ortak bir doğrultu kullanır ve bunu bir Min-Max veya Min-Sum sınırını sağlayacak biçimde ölçekler. Bunlar tanımlanmış yapılardır, kapsamlı bir saldırı araması değildir. Aile etiketleri ölçülmüş bir radyal yer değiştirmeyi kodlamaz ve koşul kapsamı aileler arasında farklıdır.
+
+\subsection{Uygulamalar ve sadakat sınırları}\label{sec:fidelity}
+Panel şunlardan oluşur: düz ortalama, örnek ağırlıklı ortalama, norm kırpma, koordinat bazında medyan, $f=\lceil0.3n\rceil$ ve $m=n-f-2$ ile Multi-Krum, 100 kök örnekli (root examples) normalize FLTrust, $0.001$ gürültü düzeyli yerel HDBSCAN tabanlı FLAME ve \method{}. Yedi ablasyon (ablation) varyantı ayrıca değerlendirilir. Multi-Krum parametreleri ve her yöntemin eğitim protokolü yerel uygulama tercihleridir ve bu şekilde raporlanır.
+
+Sınırlı bir FLTrust kontrolü, yerel birleştirme kuralını yazarların tanıtım kodundaki kuralın bir aktarımıyla 18 kayıtlı matris ve dört kök yapısı üzerinde karşılaştırmıştır; bu girdilerde birleşik güncellemenin göreli farkı $2.8\times10^{-7}$ değerinin altındadır. Dejenere kök ve sıfır güven yolları ayrışır. 5\,490 kanonik turda kök normları (root norms) kaydedilmemiştir; bu nedenle bütün gönderimlerin kabul edildiği 135 turda işaretlenmemiş bir dejenere kök yolu dışlanamaz. Kök ve istemci yerel iterasyon sayıları da farklıdır. Bu nedenle kontrol, tam eğitim protokolünün sadakatini (fidelity) kanıtlamaz.
+
+Altı küçük FLAME kontrolü, sunucunun birleştirme yolu üzerinden kırpma, ortalama alma ve gürültü ölçeklemeyi sınar. HDBSCAN kümelemesinin yazarların uygulamasıyla eşdeğerliği ve özgün gürültü kalibrasyonu doğrulanmamıştır. Tamamlanmış 200 FLAME koşumu, işaretlenmiş hiçbir geri dönüş içermeyen 6\,000 tur kapsar. Bu analiz için kaydedilmiş kabul kimliklerini saydık ve katılımcı kimlikleri, karışıklık sayımları (confusion counts) ve dondurulmuş seçim koduyla karşılaştırdık. Tutulan küme bu turların her birinde 90'dan az üyeye sahiptir; dondurulmuş atlama yolları her katılımcıyı kabul ettiği için bu turların hiçbiri o yolları izlememiştir. Geçmiş HDBSCAN etiketleri kaydedilmemiştir. Yeni ölçüm kodu gelecekteki koşumlar için etiketlerden türetilen küme boyutlarını kaydeder; ancak kanonik arşive geriye dönük olarak etiket ekleyemez.
+
+Gözlenen bir sayımın cebirsel bir özdeşlikle uyuşması bu sınırları ortadan kaldırmaz. Yanlış 61 güncellemeyi tutan bir kural da temiz bir turda $\BER=29/90$ verir; bu yüzden kardinalite uyumu, skorların veya seçilen kimliklerin özgün uygulamayı yeniden ürettiğinin kanıtı değildir.
+
+\subsection{Ölçütler ve raporlama}
+Dürüst fayda kaybı (benign utility cost), aynı saldırgansız koşulda düz ortalamanın son doğruluğundan savunmanın son doğruluğunun çıkarılmasıyla bulunur; saldırı altında fayda kazancı (utility benefit) bu çıkarmayı tersine çevirir. Farklar yüzde puan (yp) olarak verilir. Doğruluk karşılaştırmaları mevcut tamamlanmış tohumları kullanır; bu nedenle eksik bir hücre tam eşleştirilmiş üç tohumlu bir karşılaştırma değildir. Ayrıca saldırgan yakalama oranını, dürüst reddi, $J$ değerini ve tetiklenmiş hedef dışı örneklerdeki (triggered non-target examples) saldırı başarı oranını (attack success rate, ASR) raporluyoruz. FLTrust güveni pozitif olmayan gönderimlere sıfır ağırlık atar ve yerel kayıtlar bunları ret olarak sayar. Bu yüzden FLTrust'ın BER, FPR ve TPR sütunları, Multi-Krum veya FLAME'dekine benzer açık bir ret aşamasını değil, sıfır ağırlık kararlarını ölçer.
+
+Bütün sonuçlar betimseldir. İstemci--tur gözlemleri birbiriyle ilişkilidir ve bağımsız deney tekrarları değildir. Üç tohum ve eşit olmayan kapsam nedeniyle hiçbir savunma için istatistiksel anlamlılık, eşdeğerlik veya genel üstünlük iddiasında bulunmuyoruz. Alarm özgüllüğü (specificity) yalnızca bileşik yöntem, yani panelde tur düzeyinde alarm üreten tek kural için raporlanır.
+
+\section{Saldırgansız Dışlama ve Fayda}\label{sec:benign}
+\input{generated_tr/ber.tex}
+\input{generated_tr/buc.tex}
+\input{generated_tr/flame_sizes.tex}
+
+Tablo~\ref{tab:ber}, her tamamlanmış temiz hücre için 8\,100 dürüst istemci--tur gönderimine dayanır. Multi-Krum, mevcut dokuz hücrenin hepsinde (üç veri kümesi ve üç yoğunlaşma değeri; CIFAR hücresi yok) Sonuç~\ref{cor:cardinality} gereği $\BER=32.22\%$ verir.
+
+Tablo~\ref{tab:flame_sizes} içindeki doğrudan FLAME sayımları, çoğunluk kümesi sınırını bu sınıra ulaşılıp ulaşılmamasından ayırır. 11 temiz hücre ve 990 turda tutulan küme 719 turda (\%72.63) tam olarak 46 üyelidir. En küçük boyuta MNIST ve Fashion için $\alpha=0.5$ koşulunda 90 turun 89'unda ulaşılırken, Fashion için $\alpha=0.01$ ve HAR için $\alpha=0.1$ ile $0.01$ koşullarında turların yarısından azında ulaşılır. HAR için $\alpha=0.01$ koşulunda yalnızca 9 turda ulaşılır ve ortalama tutulan boyut 51.83'tür. Sınıra çoğu zaman ulaşılır; ancak bu sabit bir dışlama oranı değildir ve heterojenlik onu zorunlu kılmaz.
+
+Bileşik yöntemin temiz BER değeri $\alpha=0.5$ koşulunda \%0.27--2.07 ile $\alpha=0.01$ koşulunda \%24.37--42.57 arasında değişir. İlk eşik her turun medyan yarıçapıyla ölçeklendiği için kabul edilen oran bu dağılımın biçimini izler; temiz hücre değerleri de başka, saldırılı turlardaki FPR değerini sınırlamaz.
+
+Dışlama, fayda kaybının kaynaklarından yalnızca biridir. Norm kırpma ve koordinat bazında medyan hiçbir istemciyi reddetmez; yine de MNIST'te $\alpha=0.01$ iken son doğrulukları düz ortalamanın 22.5 ve 64.4 yüzde puan altındadır. Raporlanan savunma hücreleri üzerinden ortalama maliyet üç yoğunlaşma değerinde 3.3, 10.9 ve 27.5 puandır; en büyük değer 65.55 puandır (MNIST'te $\alpha=0.01$ iken FLAME). Bu ortalamalar farklı veri kümesi kapsamlarını birleştirir; tek tek koşullar Tablo~\ref{tab:buc} içinde verilmiştir. Dolayısıyla yalnız kabul oranları dürüst faydayı değerlendirmek için yetersizdir.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/ber_vs_alpha_tr.pdf}
+\caption{Saldırgansız dışlama, mevcut veri kümesi hücreleri üzerinden ortalanmıştır. Kapsam yoğunlaşma değerine ve yönteme göre değişir. FLTrust sıfır ağırlıklı gönderimleri sayar. FLAME sınırına her turda ulaşılması gerekmez; doğrudan boyutlar Tablo~\ref{tab:flame_sizes} içindedir.}\label{fig:ber}
+\end{figure}
+
+\input{generated_tr/alarm.tex}
+$\alpha=0.01$ iken bileşik yöntem her veri kümesinde 90 saldırgansız turun hepsinde alarm üretir (Tablo~\ref{tab:alarm}). $\alpha=0.1$ iken oran üç veri kümesinde sıfır, HAR'da \%98.9'dur. Bunların hepsi yanlış alarmdır (false alarm). Ölçülen temiz bloklarda düşük özgüllüğe işaret ederler; bir kullanım sıklığı veya ek saldırılı tur verisi olmadan alarmın öngörü değerini (predictive value) belirlemezler.
+
+\section{Saldırı Altında Ayırt Etme}\label{sec:attack}
+\input{generated_tr/discrimination.tex}
+\input{generated_tr/discrimination_method.tex}
+\input{generated_tr/constrained.tex}
+
+Aile ortalaması $J$, yüksek Gauss gürültüsü için $+68.6$ yüzde puandan kısıtlı yoklamalar için $-16.1$ yüzde puana kadar uzanır (Tablo~\ref{tab:discrimination}); aradaki değerler etiket çevirme için $+45.0$, yama arka kapıları için $+1.8$ ve sınırlı pertürbasyonlar için $+0.4$'tür. Aileler saldırı yapısı, saldırgan oranı, yoğunlaşma değeri ve veri kümesi kapsamı bakımından farklıdır; bu nedenle bu sıralama ölçülmüş bir yer değiştirme bağımlılığı değil, betimsel bir karşılaştırmadır.
+
+Kısıtlı yoklama altındaki altı Multi-Krum hücresinin beşinde sayımlar $\mathrm{TP}=0$, $\mathrm{FP}=2\,610$, $\mathrm{TN}=3\,060$ ve $\mathrm{FN}=2\,430$ şeklindedir. Tam olarak $29\times90$ gönderim reddedilir ve hepsi dürüsttür; bu da $\mathrm{FPR}=29/63=46.03\%$ verir. Bu, Sonuç~\ref{cor:cardinality} ile sıfır saldırgan yakalamada elde edilen değerdir. $\alpha=0.1$ koşulundaki HAR hücresinde saldırgan yakalama oranı pozitiftir ve $J=+36.68$ puandır; dolayısıyla orada yalnız dürüst ret koşulu sağlanmaz. Kısıtlı saldırganların hepsi aynı vektörü gönderdiği için sıfır yakalama, seçim sınırındaki eşitliklerin saldırganlar lehine bozulmasıyla da tutarlıdır; tek başına Teorem~\ref{thm:inversion} içindeki kesin sıralama öncülünü kanıtlamaz.
+
+FLAME, kısıtlı yoklama altındaki sekiz hücrenin altısında sıfır saldırgan yakalama oranına sahiptir ve FPR değeri \%57.51 ile \%68.11 arasındadır. 63 dürüst katılımcı varken 90 gönderimden en az 46'sını tutmak, hiçbir saldırgan reddedilmediğinde FPR değerini $44/63=69.84\%$ ile sınırlar. $\alpha=0.1$ koşulundaki CIFAR hücresi, üçüncü koşumu başarısız olduğu için iki tamamlanmış tohuma dayanır. Bileşik yöntemin de birkaç hücrede saldırgan yakalama oranı düşük veya sıfırdır; valf dalının ilgili koşumlarda çalıştığını doğrulamadığımız için bu toplam oranları valfe bağlamıyoruz.
+
+FLTrust'ın kısıtlı aile ortalaması $J$ pozitiftir ($+35.6$ puan); diğer üç karar kuralının ortalamaları ise negatiftir. Bu, güvenilir veri sinyallerinin daha fazla incelenmesini gerekçelendirir; ancak tek bir kök kümesi uygulaması bu sinyallerin gerekli ya da genel olarak üstün olduğunu gösteremez. FLTrust ayrıca temiz turlarda dürüst gönderimlerin \%11.9--33.1'ine sıfır ağırlık atar ve Bölüm~\ref{sec:fidelity} içindeki sadakat sınırlarına tabidir.
+
+\input{generated_tr/backdoor.tex}
+Tablo~\ref{tab:backdoor}, bileşik yöntemin yama arka kapısı sonuçlarını saldırısı kapatılmış kontrollerle eşleştirir. MNIST'te $\alpha=0.1$ iken saldırı altındaki doğruluk \%93.97, kontrolde \%94.14'tür; saldırı başarısı ise \%99.99'a ulaşır. Aynı yoğunlaşma değerinde Fashion ve CIFAR için saldırı başarısı \%99.93 ve \%96.59'a ulaşır. $\alpha=0.01$ koşulunda saldırı başarısı daha düşüktür; ancak ana görev doğruluğu yalnızca \%15.5--32.8'dir ve zehirlenmemiş kontrol bile bazı yamalı örnekleri hedef etikete atar (CIFAR'da \%20.8). Bu yüzden doğruluk, saldırılı ASR, kontrol ASR'si ve aralarındaki fark birlikte okunmalıdır; tek başına düşük bir ASR koruma sağlandığını göstermez.
+
+\section{Karar Yolu Analizi}\label{sec:mechanism}
+Yeniden oynatma, MNIST ve Fashion'dan 72 kayıtlı güncelleme matrisi kullanır. Matrisler üç tohumu, 0, 9 ve 29. turları ve her biri 18 matrislik dört bloğu kapsar: Min-Max ve yama saldırıları ile bunların saldırısı kapatılmış kontrolleri. Saldırılı matrislerde 90 katılımcının 18'i saldırgandır; bu, yukarıdaki 27 saldırganlı kanonik kısıtlı yoklama hücrelerinden farklıdır. Her matris iki kapı ayarı ve iki komşuluk kesmesi seçeneği altında değerlendirilir. Matrisler yeniden kullanılan kontrol noktalarıdır, bağımsız eğitim tekrarları değildir.
+
+\subsection{Kapı çalışması ve ölçülen yarıçap koşulu}
+Kullanılan kapı altında küme aşaması 72 kontrol noktasının 10'unda çalışır; 36 saldırılı kontrol noktasının hiçbirinde çalışmaz. Yalnız yoğunluk kapısı (density-only gate), destekleyici ilk ret şartını kaldırır. İki komşuluk kesmesi ayarında da bu değişiklik 144 karşılaştırmanın hepsinde kabul kümesini değiştirmez.
+
+\input{generated_tr/gamma.tex}
+$\Gamma(B_0)$ değerini arşivlenmiş matrislerde \eqref{eq:consensus} içindeki tabanlı yarıçapla hesapladık. Her saldırılı matriste $B_0$ 90 güncellemenin tamamını içerir; dolayısıyla her aday grup $S\subseteq B_0$ koşulunu sağlar. Yeter koşul \textbf{36 farklı saldırılı matrisin 35'inde} sağlanır: 18 Min-Max matrisinin 18'inde ve 18 yama matrisinin 17'sinde (Tablo~\ref{tab:gamma}). Medyan 1.448095, en büyük değer 2.017225'tir. İstisna Fashion, tohum 137, yama, tur 29'dur. İki kapıyı değerlendirmek aynı 36 matristen 72 satır üretir; bu, örneklem büyüklüğünü iki katına çıkarmaz.
+
+Koşulu sağlayan 35 matriste $B_0$ üyelerinin hiçbir yeniden gruplanması, bir merkezi $2R_0$ yarıçaplı kabul topunun dışına taşıyamaz; bu da kapı açıldığında bile testin neden etkisiz kaldığını açıklar. Kalan matriste yeter koşul sağlanmaz ama bulunan gruplar yine de kabul edilir; bu durum önermeyle çelişmez, nedenin seyrelme (dilution) olduğunu da göstermez. float64'e yükseltme, $\Gamma$ değerini yerel hesaba göre en fazla $5.43\times10^{-7}$ değiştirir ve hiçbir eşik sınıflamasını değiştirmez.
+
+Altküme kısıtı bu saldırılı bloğun dışında önemlidir. Komşuluk kesmesi etkin olan 144 kapı değerlendirmesinin altısında $B_0$ dışında üyeleri olan gruplar vardır ve yalnız $B_0$ kümesinin yarıçap oranı bu grupları onaylayamaz. Bu nedenle kontrol noktasına özgü açıklama, algoritmanın bütününe genişletilemez.
+
+\subsection{Yönlendirme ve doğrulama farklı olaylardır}
+Yalnız yoğunluk kapısı altında yama işleme, 18 saldırılı kontrol noktasının 17'sinde açılır. İşlenen bölümlemelerdeki 306 saldırgan gözleminin 285'i düşük yoğunlukludur; kesme etkinken bunların 239'u bulunan gruplara girer ve 55 grubun 30'u saldırgan içerir. Bu grupların hiçbiri reddedilmez. Yani yama saldırganları grup testine ulaşır ve testi geçer; kullanılan kapı altında ise bu saldırılı kontrol noktalarında o aşamaya hiç ulaşmazlar.
+
+Kısıtlı yoklama için de kayıtlı yönlendirme reddedilmiş bir saldırgan grubu üretmez. Uygulama sıfır uzaklık toplamında ideal ters uzaklık ifadesini izlemek yerine 1 döndürdüğü için tam kopyalara keyfî büyüklükte yoğunluk atanmaz. Bu nedenle gözlenen yönlendirmeyi ve bağımsız olarak denetlenen yarıçap koşulunu raporluyoruz; kopyalanmış vektör saldırısını Önerme~\ref{prop:density} ile koşulsuz olarak açıklamıyoruz.
+
+\subsection{Kümelenmemiş güncellemelere müdahaleler}
+\input{generated_tr/coverage_replay.tex}
+P0 politikası yalnız bulunan grupları test eder. P1 ayrıca kümelenmemiş düşük yoğunluklu noktaları tekil olarak test eder, P2 ise bu noktaları doğrudan dışlar. Her karşılaştırmada geometri, kayıtlı geçmiş ve bulunan grup üyeliği sabit tutulur.
+
+P1 iki kapı altında da saldırgan reddi eklemez; buna karşılık kullanılan kapı altında 32, yalnız yoğunluk kapısı altında 77 dürüst ret ekler (Tablo~\ref{tab:coverage_replay}). P2, yalnız yoğunluk kapısının yama bloğunda farklı davranır: $\mathrm{TPR}=46/324=14.20\%$, $\mathrm{FPR}=142/1296=10.96\%$ ve $J=+3.24$ puan. Eşleşen saldırısı kapatılmış blokta aynı politika 82 dürüst gözlemi reddeder. Yalnız yoğunluk kapısı altında Min-Max saldırılı matrislerde P2 bütün dürüst gözlemleri dışlardı; valf bu matrislerin 18'inin hepsinde $B_0$ kümesini geri yükler. Bunlar kontrol noktası sayımlarıdır; yeniden oynatma son doğruluğu veya saldırı başarısını yeniden ölçmez.
+
+Olumsuz P1 sonucu, bu özel kapsam onarımının kayıtlı geometrilerdeki sınırını gösterir. Kapsamdaki veya doğrulama istatistiğindeki her değişikliğin başarısız olacağını göstermez. Özellikle ilk test ve uzlaşma testi (consensus test) farklı merkezler ve yarıçaplar kullanır; bu nedenle dışbükey zarf sınırı tek başına bu testlerin istemci düzeyindeki kararlarını sıralamaz.
+
+\input{generated_tr/cluster_ratios.tex}
+Başka bir temiz MNIST kontrol noktası, aynı testin dürüst gruplara nasıl davrandığını gösterir (Tablo~\ref{tab:cluster_ratios}). Bu nokta $\alpha=0.01$ ve beş sabit yerel adımlı ayrı bir koşumdan alınmış ve üç yerel mini-batch rejimi altında yeniden oynatılmıştır: 32 batch boyutlu standart yükleyici (A), her adımda yeni bir 20 örneklik altküme (B) ve beş kez tekrarlanan ilk 20 örneklik batch (C). Her rejimde bulunan en büyük grup ret yarıçapı $\tau R_0$'ın $0.12$--$0.13$ katı uzaklıktadır; daha küçük her grup ise bu yarıçapın $1.70$--$2.63$ katı uzaklıktadır ve bütün katılımcılar dürüst olduğu hâlde reddedilir. A rejiminde reddedilen grupların ikisi tamamen $B_0$ dışındadır. Son ret sayısı A rejimindeki 34'ten B ve C rejimlerinde 25 ve 18'e düşer. A'da reddedilip C'de kabul edilen 16 istemcinin 10'u, bir grup testi geçtiği için değil, artık test edilebilir bir gruba ait olmadığı için retten kurtulur; diğer altısı ilk filtre kararlarındaki değişimi yansıtır. P1 altında üç rejimin hepsi 44 istemci reddeder; ancak C rejiminde bir kimlik çifti farklıdır. Bu örnek tek bir kayıtlı durumdaki grup oluşumu ve kapsamla ilgilidir; istemci popülasyonunun büyüklüğü ile kötü niyet arasında genel bir ilişkiyi göstermez.
+
+\subsection{Uç nokta ablasyonları}
+\input{generated_tr/ablation.tex}
+Eşleşen 12 veri kümesi--koşul hücresi ve 36 uç nokta (endpoint) koşumunda, yalnız 1. aşama varyantı ortalama son doğrulukta tam bileşik yöntemden $-0.081$ yüzde puan farklıdır. Valfi kaldırmak ortalamayı $+0.278$ puan değiştirir; kapı belleği (gate memory) olmayan varyant ise 36 uç noktanın hepsiyle eşleşir. Etkiler koşula göre değişir. Bu kadar küçük ortalama farklar varyantlar arasında eşdeğerlik kanıtlamaz ya da ek doğrulama olmadan birinin seçilmesini gerekçelendirmez.
+
+\section{Tartışma}\label{sec:discussion}
+Ana ampirik bulgu, dürüst istemcilere çıkan maliyetin birkaç yapılandırmada hiç saldırgan yokken bile önemli düzeyde kalmasıdır. Sabit kardinaliteli seçimde bu dışlama, seçilen sayıyla belirlenir. Küme tutma ise bir sınır getirir; doğrudan sayımlar bu sınıra ne sıklıkta ulaşıldığını gösterir. İki dışlama ölçütü de fayda ölçümünün yerini tutmaz: birleştirme hiçbir istemciyi reddetmeden doğruluğu düşürebilir, bir model de doğruluğunu korurken bir arka kapıyı öğrenebilir.
+
+Bileşik yöntem için ölçülen yarıçap koşulu belirli bir tasarım teşhisi sağlar. Her aday grup, en büyük yarıçapı merkez testi eşiğinin altında kalan bir kabul havuzunun içindeyse, gruplamadaki hiçbir değişiklik bu testi etkinleştiremez. Bu yüzden kümeleme karmaşıklığı eklenmeden önce geometrik kapsamın denetlenmesi yararlıdır. Bu teşhis farklı bir grup istatistiğini, referans noktasını, eşiği veya eğitim protokolünü dışlamaz. Benzer biçimde yoğunluk argümanı pozitif uzaklık toplamları ve ayırıcı bir eşik gerektirir; kopyaların nasıl ele alındığı da uygulanan kuralın raporlanması gereken bir parçasıdır.
+
+Yararlı bir değerlendirme; hedeflenen heterojenlik düzeylerinde temiz dışlamayı ve faydayı, tam kabul ve geri dönüş kurallarını ve eşleşen kontrollerle birlikte saldırı tarafındaki TPR, FPR, doğruluk ve ASR değerlerini raporlamalıdır. Birlikte raporlandıklarında bu nicelikler, herhangi birinin tek başına gizleyebileceği başarısızlıkları ortaya çıkarır. Tek bir turda dışlanma, istemcinin kalıcı olarak çıkarılması veya modele verilen zararın doğrudan ölçüsü olarak betimlenmemelidir.
+
+Bazı sınırlılıklar sürmektedir. Sonuçlar üç tohuma, kısa eğitim ufuklarına, küçük modellere ve eşit olmayan kapsama dayanır; bölümleme onarımı da örneklenen heterojenliği değiştirir. Yerel referans yöntem uygulamalarının yazar kodlarına ve eğitim protokollerine sadakati yalnızca kısmen denetlenmiştir. CIFAR tekrarlanabilirliği tüm matris için değil, tek bir tanı koşulu için deterministik bir profil altında gösterilmiştir. Yeniden oynatmalar kayıtlı yörüngelere koşulludur; değiştirilmiş bir savunma ise sonraki girdileri değiştirirdi. Son olarak analiz geriye dönük olarak geliştirilmiştir ve yeni bir kuramın bağımsız doğrulamasını sağlamaz; temel özdeşlikler genel imkânsızlık teoremleri olarak değil, bu karar yollarının açıklamaları olarak okunmalıdır.
+
+Güvenilir veri, zamansal bilgi, alternatif güncelleme temsilleri ve istemci tarafı doğrulama ek bilginin doğal kaynaklarıdır; ancak bu çalışma bunlardan herhangi birinin gerekli ya da yeterli olduğunu göstermez. Sonuçlar değerlendirilen kurallar ve koşullarla sınırlıdır; filtreleme kurallarının kendilerini iyileştirmek açık bir sorun olarak kalmaktadır.
+
+\section{Sonuç}\label{sec:conclusion}
+Saldırgansız dışlamayı ve saldırı altındaki kararları, 2\,125 tamamlanmış koşum ve beş kayıtlı başarısızlık içeren bir federe öğrenme değerlendirmesinde sekiz sunucu tarafı kuralın seçim davranışıyla ilişkilendirdik. Multi-Krum'un temiz dışlaması sabit kardinalitesinden kaynaklanır; doğrudan FLAME sayımları ise küme boyutu sınırına ne zaman ulaşıldığını gösterir. \method{} için denetlenmiş bir altküme koşulu ve yarıçap oranı, küme merkezi doğrulamasının 36 saldırılı kontrol noktası matrisinin 35'inde neden hiçbir aday grubu reddedemediğini açıklar. Daha önce test edilmeyen tekil güncellemeleri test etmek bu yeniden oynatmalarda saldırgan reddini iyileştirmez. Bu bulgular dürüst maliyetin, saldırı tespitinin ve saldırı başarısının, uygulama sınırları ve koşullu argümanlar açıkça belirtilerek birlikte raporlanmasını destekler.
+
+\section*{Veri ve Kod Erişilebilirliği}
+Ek yapıt; hücre ve birim düzeyindeki sonuçları, başarısızlık muhasebesini, kontrol noktası özetlerini ve makaledeki tabloları ve şekilleri yeniden üreten betikleri içerir. Proje deposu \url{https://github.com/Bygokcen/fed-mdbscan-g} adresindedir. Ham eğitim çıktıları ve dondurulmuş kaynaklar yerel araştırma arşivinde tutulur ve depo klonuna dahil değildir. Sağlanan özetler raporlanan aritmetiğin denetlenmesine olanak tanır; geçmiş kimlik ve kontrol noktası denetimlerini yeniden üretmek için ise bu arşiv de gereklidir.
+
+\section*{Teşekkür}
+Bu araştırma, kamu, ticari veya kâr amacı gütmeyen sektörlerdeki herhangi bir fon kuruluşundan özel bir destek almamıştır.
+
+OpenAI ChatGPT/Codex ve Anthropic Claude; dil bilgisi düzeltmelerine, metnin hazırlanmasına ve gözden geçirilmesine (özet ve Bölüm I--X), analiz ve simülasyon kodunun geliştirilmesine ve iyileştirilmesine, matematiksel argümanların ve sayısal raporların denetlenmesine yardımcı olmuştur. Deneysel sonuçlar arşivlenmiş koşum kayıtlarından ve analiz betiklerinden türetilmiştir. Son içerikten yazarlar sorumludur.
+
+\section*{Yazar Katkıları}
+S. G. Özden: yöntem, yazılım, doğrulama, biçimsel analiz, araştırma, veri düzenleme, görselleştirme, özgün taslağın yazımı. K. Sarıkaya: kavramsallaştırma, danışmanlık, gözden geçirme ve düzenleme.
+
+\section*{Çıkar Çatışması Beyanı}
+Yazarlar, bu makalede raporlanan çalışmayı etkilemiş gibi görünebilecek bilinen hiçbir finansal çıkar çatışması veya kişisel ilişkileri bulunmadığını beyan eder.
+
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+\end{document}

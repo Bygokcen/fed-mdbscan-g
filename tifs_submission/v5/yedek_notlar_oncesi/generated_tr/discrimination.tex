@@ -1,0 +1,21 @@
+\begin{table}[!t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Saldırı Ailesine Göre İstemci Düzeyinde Ayırt Etme}\label{tab:discrimination}
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tabular}{lrrrrr}
+\toprule
+Saldırgan ailesi & Hücre & TPR & FPR & $J$ & Fayda \\
+ &  & (\%) & (\%) & (yp) & (yp) \\
+\midrule
+Yüksek Gauss gürültüsü ($\sigma=5$) & 60 & 87.5 & 18.9 & $+$68.6 & $+$13.7 \\
+Etiket çevirme & 36 & 69.7 & 24.8 & $+$45.0 & $-$9.0 \\
+Yama arka kapısı & 16 & 34.0 & 32.3 & $+$1.8 & $-$19.2 \\
+Sınırlı rastgele yön & 72 & 34.1 & 33.7 & $+$0.4 & $-$23.0 \\
+Kısıtlı her şeyi bilen & 28 & 21.8 & 38.0 & $-$16.1 & $-$10.6 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\par\vspace{3pt}\parbox{\linewidth}{\footnotesize $J=\mathrm{TPR}-\mathrm{FPR}$ Youden indeksidir: $J>0$ şans köşegeninin üstünü, $J<0$ ise dürüst istemcilerin saldırganlardan önce reddedildiğini gösterir. Fayda, aynı koşulda savunmanın doğruluğu eksi savunmasız doğruluktur. Her satır, ret yapan dört kuralın kural~$\times$~veri kümesi~$\times$~koşul hücrelerini birleştirir; hücreler bağımsız tekrar değildir. Ailelerin kapsamı veri kümesi, yoğunlaşma parametresi ve saldırgan oranı bakımından farklıdır. Bu özet radyal yer değiştirmeyi ölçmez. FLTrust sıfır ağırlık kararlarını kullanır. Bunlar kontrollü bir yer değiştirme deneyi değil, betimsel ortalamalardır.}
+\end{table}

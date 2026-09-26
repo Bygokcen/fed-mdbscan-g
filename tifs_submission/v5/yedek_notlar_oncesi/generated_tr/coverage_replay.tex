@@ -1,0 +1,26 @@
+\begin{table}[!t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{72 Kayıtlı Güncelleme Matrisinde Uzlaşma Testi Kapsamının Yeniden Oynatılması}\label{tab:coverage_replay}
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tabular}{llrrr}
+\toprule
+Kapı & Saldırı & P0 & P1 & P2 \\
+\midrule
+\multicolumn{5}{l}{\emph{Saldırılı matrisler}} \\
+\quad Kullanılan kapı & Min-Max & 0/0 & 0/0 & 0/0 \\
+\quad Kullanılan kapı & Yama & 0/0 & 0/0 & 0/0 \\
+\quad Yalnız yoğunluk & Min-Max & 0/0 & 0/0 & 0/0 \\
+\quad Yalnız yoğunluk & Yama & 0/0 & 1/0 & 142/46 \\
+\addlinespace[3pt]
+\multicolumn{5}{l}{\emph{Saldırısı kapatılmış kontroller}} \\
+\quad Kullanılan kapı & Min-Max & 319/0 & 351/0 & 326/0 \\
+\quad Yalnız yoğunluk & Min-Max & 319/0 & 395/0 & 404/0 \\
+\quad Kullanılan kapı & Yama & 1/0 & 1/0 & 1/0 \\
+\quad Yalnız yoğunluk & Yama & 1/0 & 1/0 & 82/0 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\par\vspace{3pt}\parbox{\linewidth}{\footnotesize Küme yapısı, geometri ve etkinleşme belleği sabit tutulmuştur. Değerler, istemci--kontrol noktası sayımı olarak dürüst/saldırgan retleridir. P0 kullanılan politikadır (yalnız kümeler); P1 kümelenmemiş düşük yoğunluklu güncellemeleri ayrıca tekil olarak aynı teste sokar; P2 bunları doğrudan dışlar. Kapsamı genişletmek dürüst ret ekler ve bir blok dışında saldırgan reddi eklemez. Her saldırılı blok 1\,296 dürüst ve 324 saldırgan gözlemi, her saldırısı kapatılmış blok 1\,620 dürüst gözlemi içerir. Saldırgan reddi üreten tek blok (P2, yalnız yoğunluk kapısı, yama) $\mathrm{FPR}=142/1296=10.96\%$ düzeyinde $\mathrm{TPR}=46/324=14.20\%$ değerine ulaşır, yani $J=+3.2$~yp; aynı politika bu bloğun saldırısı kapatılmış kontrolünde 82 dürüst ret kaydeder. Sayımlar emniyet valfinden sonraki değerlerdir: yalnız yoğunluk kapısında P2, Min-Max bloğundaki 1\,296 dürüst gözlemin hepsini dışlardı ve valf bu matrislerin 18'inin hepsinde $B_0$ kümesini geri yükler. Bunlar sabit matris karar sayımlarıdır; doğruluk ya da saldırı başarı oranı yeniden ölçülmemiştir.}
+\end{table}

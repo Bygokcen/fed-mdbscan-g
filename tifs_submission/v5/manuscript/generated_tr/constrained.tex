@@ -1,0 +1,33 @@
+\begin{table}[!t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Kısıtlı Her Şeyi Bilen Saldırgan Altında Çalışma Noktaları}\label{tab:constrained}
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tabular}{llrrrr}
+\toprule
+Veri kümesi & Kural & TPR & FPR & $J$ & Öngörülen \\
+ &  & (\%) & (\%) & (yp) & FPR (\%) \\
+\midrule
+\multicolumn{6}{l}{\emph{$\alpha=0.1$}} \\
+\quad MNIST & Multi-Krum & 0.00 & 46.03 & $-$46.03 & 46.03 \\
+\quad MNIST & FLAME (HDBSCAN) & 0.00 & 68.11 & $-$68.11 & $\leq69.84$ \\
+\quad Fashion & Multi-Krum & 0.00 & 46.03 & $-$46.03 & 46.03 \\
+\quad Fashion & FLAME (HDBSCAN) & 0.00 & 65.59 & $-$65.59 & $\leq69.84$ \\
+\quad HAR & Multi-Krum & 57.90 & 21.22 & $+$36.68 & 46.03 \\
+\quad HAR & FLAME (HDBSCAN) & 96.67 & 27.25 & $+$69.42 & $\leq69.84$ \\
+\quad CIFAR-10 & FLAME (HDBSCAN) & 8.33 & 62.94 & $-$54.60 & $\leq69.84$ \\
+\addlinespace[3pt]
+\multicolumn{6}{l}{\emph{$\alpha=0.01$}} \\
+\quad MNIST & Multi-Krum & 0.00 & 46.03 & $-$46.03 & 46.03 \\
+\quad MNIST & FLAME (HDBSCAN) & 0.00 & 58.82 & $-$58.82 & $\leq69.84$ \\
+\quad Fashion & Multi-Krum & 0.00 & 46.03 & $-$46.03 & 46.03 \\
+\quad Fashion & FLAME (HDBSCAN) & 0.00 & 63.19 & $-$63.19 & $\leq69.84$ \\
+\quad HAR & Multi-Krum & 0.00 & 46.03 & $-$46.03 & 46.03 \\
+\quad HAR & FLAME (HDBSCAN) & 0.00 & 59.47 & $-$59.47 & $\leq69.84$ \\
+\quad CIFAR-10 & FLAME (HDBSCAN) & 0.00 & 57.51 & $-$57.51 & $\leq69.84$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\par\vspace{3pt}\parbox{\linewidth}{\footnotesize Yüzde otuz saldırgan: turda 63 dürüst ve 27 saldırgan katılımcı. Öngörülen FPR, sıfır saldırgan yakalamadaki ($\mathrm{TPR}=0$) değerdir: Multi-Krum için bir özdeşlik, FLAME için bir üst sınır (Sonuç~\ref{cor:cardinality}--\ref{cor:majority}). FLTrust ve Fed-MDBSCAN-G böyle bir öngörü vermez; bu kurallar Tablo~\ref{tab:discrimination_method} içindedir. CIFAR-10/FLAME/$\alpha=0.1$ (iki tamamlanmış tohumdan 60 tur) dışında her hücrede 90 kayıtlı tur vardır.}
+\end{table}
