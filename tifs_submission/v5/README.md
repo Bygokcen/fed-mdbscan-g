@@ -1,8 +1,6 @@
-# TIFS V4 gönderim sürümü — 23 Eylül 2026
+# TIFS V5 gönderim sürümü — 27 Eylül 2026
 
-V4 güncel sürümdür. V3 silinmeden `/home/gokcen/Fed_MDBSCAN_TIFS_arsiv_20260924/files/tifs_submission/v3/` konumuna ayrıldı. Kaynak V3 `main.tex` SHA-256 değeri `analysis/source_revision.json` içinde korunur; tarihsel provenance yolları yeniden yazılmadı. Gamma ölçüm programının birebir kopyası artık `../../analysis/v3_review_20260921/measure_gamma.py` yolundadır.
-
-Son dosya kontrolü ve açık kalan gönderim işleri: [SUBMISSION_STATUS.md](SUBMISSION_STATUS.md). Paylaşılacak dosyalar: `submission_files.zip`.
+V5 güncel sürümdür. V4, `tifs_submission/v4/` altında olduğu gibi korunur. V5'teki bütün değişiklikler [CHANGES_V5.md](CHANGES_V5.md), hakem sonrası deneyler [analysis/review_experiments_20260926/REPORT.md](../../analysis/review_experiments_20260926/REPORT.md) içindedir. Açık işler [YAPILACAKLAR.md](YAPILACAKLAR.md) dosyasındadır. V5 için gönderim paketi (`submission_files/`) henüz üretilmedi. [SUBMISSION_STATUS.md](SUBMISSION_STATUS.md) V4 dönemine ait tarihsel bir kayıttır.
 
 ## İçerik
 
@@ -11,15 +9,22 @@ Son dosya kontrolü ve açık kalan gönderim işleri: [SUBMISSION_STATUS.md](SU
 - `COVER_LETTER.md`: editöre mektup taslağı; son yazar onaylarından sonra kullanılacak metin.
 - `manuscript/main_tr.tex`, `main_tr.pdf`: yazarlar için Türkçe çalışma çevirisi, aynı IEEEtran düzeni, 12 sayfa. **Dergiye gönderilmez.** Tablolar `analysis/build_tr.py` ile İngilizce tablolardan üretilir; betik, çevrilen her tablonun İngilizce kaynağıyla aynı sayıları içerdiğini denetler. Sayılar karşılaştırma kolaylığı için ondalık noktayla bırakıldı; binlik ayırıcı ince boşluk. Temel terimlerin Giriş'ten itibaren ilk geçişinde İngilizce karşılığı parantez içinde verilir (85 terim); tanım ve önerme başlıklarında İngilizce başlık "/" ile eklidir. "Robust" için "dayanıklı" kullanılır.
 - `analysis/build_tables.py` + `build_checks.py`: bütün tabloları, iki şekli ve `derived_values.json` dosyasını `analysis/evidence/` altındaki dosyalardan üretir. Eğitim, ağ veya ham arşiv gerekmez.
+- `analysis/build_review_tables.py`: hakem sonrası deneylerin tablolarını (`generated/review_*.tex`, `generated_tr/review_main.tex`) `analysis/evidence/review_20260926/` altındaki özetlerden üretir.
+- `analysis/make_fig_pipeline.py`, `make_fig_pipeline_tr.py`: Şekil 1'i depodaki `new_work/` kaynağıyla üretir.
 
 Yeniden üretim (bu klasörden):
 
 ```sh
 ../../.venv/bin/python analysis/build_tables.py --root .
 ../../.venv/bin/python analysis/build_tr.py --root .     # Türkçe çeviri için
+../../.venv/bin/python analysis/build_review_tables.py --root .   # hakem sonrası tablolar
 cd manuscript && pdflatex main && bibtex main && pdflatex main && pdflatex main && pdflatex supplement && pdflatex supplement
 # Türkçe: pdflatex main_tr && bibtex main_tr && pdflatex main_tr && pdflatex main_tr
 ```
+
+Python ortamı depo dışındadır (`/home/gokcen/Fed_MDBSCAN_TIFS/.venv`); `../../.venv` yolu o çalışma alanı içinden çalıştırıldığını varsayar.
+
+Aşağıdaki bölümler V4 dönemine aittir ve tarihçe olarak korunmuştur.
 
 ## Son akıcılık düzenlemesi
 

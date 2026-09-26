@@ -131,7 +131,7 @@ def span(d):
     return f"{signed(d['mean'])} [{signed(d['min'])}, {signed(d['max'])}]"
 
 
-NAME = {'mnist': 'MNIST', 'fashion_mnist': 'Fashion-MNIST', 'har': 'UCI HAR'}
+NAME = {'mnist': 'MNIST', 'fashion_mnist': 'Fashion', 'har': 'HAR'}
 
 
 def e3_table(summary):
@@ -145,7 +145,7 @@ def e3_table(summary):
         header=["Dataset", "FedAvg", "FLAME", "FLAME", "FLAME random", "FLAME random", "Multi-Krum", "Multi-Krum"],
         units=["", "", "", "no noise", "rule-sized", "matched", "", "random"],
         rows=rows, colspec="lrrrrrrr",
-        notes=(r"Mean final accuracy (\%) over seeds 42, 137, and 2024. FedAvg, FLAME, and Multi-Krum are "
+        notes=(r"Mean final accuracy (\%) over seeds 42, 137, and 2024; Fashion denotes Fashion-MNIST. FedAvg, FLAME, and Multi-Krum are "
                r"the canonical runs. ``No noise'' sets the FLAME noise factor to zero. The random controls "
                r"replace the selected updates in every round with a uniformly random subset; the clipping "
                r"and noise rules are kept. For Multi-Krum the subset has 61 members in both arms. ``Rule-sized'' "
@@ -180,15 +180,15 @@ def main_table(summary, turkish=False):
             caption=r"$\alpha=0.01$'de Saldırgansız Son Doğruluk (\%): Kurallar ve Aynı Büyüklükte Rastgele Altkümeler",
             label="tab:random", header=["Veri kümesi", "FedAvg", "Multi-Krum", "Multi-Krum", "FLAME", "FLAME"],
             units=["", "", "kural", "rastgele", "kural", "rastgele"], rows=rows, colspec="lrrrrr",
-            notes=(r"Üç tohum üzerinden ortalamalar. Rastgele altkümeler her turda kuralın seçtiği "
-                   r"güncellemelerin yerini alır ve kabul sayısını korur: Multi-Krum için 61, FLAME için "
-                   r"kanonik FLAME koşumunun o turda kaydettiği sayı. Kırpma ve gürültü kuralları korunur; "
-                   r"eşleştirilmiş farklar ek belgededir."))
+            notes=(r"Üç tohum üzerinden ortalamalar; Fashion, Fashion-MNIST demektir. Rastgele altkümeler her turda "
+                   r"kuralın seçtiklerinin yerini alır ve kabul sayısını korur: Multi-Krum için 61, FLAME için "
+                   r"kanonik koşumun o turdaki sayısı. Kırpma ve gürültü kuralları korunur; eşleştirilmiş farklar "
+                   r"ek belgededir."))
     return tex_table(
         caption=r"Adversary-Free Final Accuracy (\%) at $\alpha=0.01$: Rules Versus Random Subsets of the Same Size",
         label="tab:random", header=["Dataset", "FedAvg", "Multi-Krum", "Multi-Krum", "FLAME", "FLAME"],
         units=["", "", "rule", "random", "rule", "random"], rows=rows, colspec="lrrrrr",
-        notes=(r"Means over three seeds. Random subsets replace a rule's selected updates in every round "
+        notes=(r"Means over three seeds; Fashion denotes Fashion-MNIST. Random subsets replace a rule's selected updates in every round "
                r"and keep its admitted count: 61 for Multi-Krum and, for FLAME, the count that the "
                r"canonical FLAME run recorded in that round. The clipping and noise rules are kept; paired "
                r"differences are in the supplement."))

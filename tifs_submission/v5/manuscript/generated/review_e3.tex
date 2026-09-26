@@ -9,11 +9,11 @@ Dataset & FedAvg & FLAME & FLAME & FLAME random & FLAME random & Multi-Krum & Mu
  &  &  & no noise & rule-sized & matched &  & random \\
 \midrule
 MNIST & 85.65 & 20.10 & 20.08 & 45.53 & 44.65 & 40.71 & 84.36 \\
-Fashion-MNIST & 73.63 & 27.74 & 27.61 & 43.79 & 41.86 & 40.04 & 72.58 \\
-UCI HAR & 45.53 & 30.35 & 30.37 & 36.93 & 37.50 & 34.57 & 50.44 \\
+Fashion & 73.63 & 27.74 & 27.61 & 43.79 & 41.86 & 40.04 & 72.58 \\
+HAR & 45.53 & 30.35 & 30.37 & 36.93 & 37.50 & 34.57 & 50.44 \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
 
-\par\vspace{3pt}\parbox{\linewidth}{\footnotesize Mean final accuracy (\%) over seeds 42, 137, and 2024. FedAvg, FLAME, and Multi-Krum are the canonical runs. ``No noise'' sets the FLAME noise factor to zero. The random controls replace the selected updates in every round with a uniformly random subset; the clipping and noise rules are kept. For Multi-Krum the subset has 61 members in both arms. ``Rule-sized'' uses the size that FLAME selects on the control's own updates, so admitted counts can drift from the canonical run. ``Matched'' uses the admitted count that the canonical FLAME run recorded in each round, so admitted counts and BER equal those of canonical FLAME. All controls share each seed's data partition, participation schedule, and initial model with the canonical runs.}
+\par\vspace{3pt}\parbox{\linewidth}{\footnotesize Mean final accuracy (\%) over seeds 42, 137, and 2024; Fashion denotes Fashion-MNIST. FedAvg, FLAME, and Multi-Krum are the canonical runs. ``No noise'' sets the FLAME noise factor to zero. The random controls replace the selected updates in every round with a uniformly random subset; the clipping and noise rules are kept. For Multi-Krum the subset has 61 members in both arms. ``Rule-sized'' uses the size that FLAME selects on the control's own updates, so admitted counts can drift from the canonical run. ``Matched'' uses the admitted count that the canonical FLAME run recorded in each round, so admitted counts and BER equal those of canonical FLAME. All controls share each seed's data partition, participation schedule, and initial model with the canonical runs.}
 \end{table*}
