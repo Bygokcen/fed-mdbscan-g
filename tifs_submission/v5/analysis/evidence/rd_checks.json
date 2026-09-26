@@ -1,0 +1,464 @@
+{
+  "function_ast_equal": true,
+  "cases": [
+    {
+      "source": "new_work/simulation/mdbscan.py",
+      "case": "two_duplicates_k1",
+      "k": 1,
+      "input": [
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.1
+        ],
+        [
+          0.2
+        ]
+      ],
+      "zero_sum_rows": [
+        0,
+        1
+      ],
+      "density": [
+        1.0,
+        1.0,
+        10.0,
+        10.0
+      ]
+    },
+    {
+      "source": "new_work/simulation/mdbscan.py",
+      "case": "six_duplicates_k5",
+      "k": 5,
+      "input": [
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.1
+        ],
+        [
+          0.2
+        ]
+      ],
+      "zero_sum_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "density": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        10.0,
+        5.555555555555556
+      ]
+    },
+    {
+      "source": "new_work/simulation/mdbscan.py",
+      "case": "all_duplicates_k5",
+      "k": 5,
+      "input": [
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ]
+      ],
+      "zero_sum_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "density": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "source": "new_work/simulation/mdbscan.py",
+      "case": "two_duplicates_not_enough_k5",
+      "k": 5,
+      "input": [
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.1
+        ],
+        [
+          0.2
+        ],
+        [
+          0.3
+        ],
+        [
+          0.4
+        ]
+      ],
+      "zero_sum_rows": [],
+      "density": [
+        5.0,
+        5.0,
+        6.25,
+        6.25,
+        4.999999999999999,
+        3.5714285714285707
+      ]
+    },
+    {
+      "source": "new_work/results/validated/audit-v2/full_20260910/source/new_work/simulation/mdbscan.py",
+      "case": "two_duplicates_k1",
+      "k": 1,
+      "input": [
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.1
+        ],
+        [
+          0.2
+        ]
+      ],
+      "zero_sum_rows": [
+        0,
+        1
+      ],
+      "density": [
+        1.0,
+        1.0,
+        10.0,
+        10.0
+      ]
+    },
+    {
+      "source": "new_work/results/validated/audit-v2/full_20260910/source/new_work/simulation/mdbscan.py",
+      "case": "six_duplicates_k5",
+      "k": 5,
+      "input": [
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.1
+        ],
+        [
+          0.2
+        ]
+      ],
+      "zero_sum_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "density": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        10.0,
+        5.555555555555556
+      ]
+    },
+    {
+      "source": "new_work/results/validated/audit-v2/full_20260910/source/new_work/simulation/mdbscan.py",
+      "case": "all_duplicates_k5",
+      "k": 5,
+      "input": [
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ]
+      ],
+      "zero_sum_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "density": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "source": "new_work/results/validated/audit-v2/full_20260910/source/new_work/simulation/mdbscan.py",
+      "case": "two_duplicates_not_enough_k5",
+      "k": 5,
+      "input": [
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.1
+        ],
+        [
+          0.2
+        ],
+        [
+          0.3
+        ],
+        [
+          0.4
+        ]
+      ],
+      "zero_sum_rows": [],
+      "density": [
+        5.0,
+        5.0,
+        6.25,
+        6.25,
+        4.999999999999999,
+        3.5714285714285707
+      ]
+    },
+    {
+      "source": "new_work/results/cutoff_development/study_20260914_v1/source/new_work/simulation/mdbscan.py",
+      "case": "two_duplicates_k1",
+      "k": 1,
+      "input": [
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.1
+        ],
+        [
+          0.2
+        ]
+      ],
+      "zero_sum_rows": [
+        0,
+        1
+      ],
+      "density": [
+        1.0,
+        1.0,
+        10.0,
+        10.0
+      ]
+    },
+    {
+      "source": "new_work/results/cutoff_development/study_20260914_v1/source/new_work/simulation/mdbscan.py",
+      "case": "six_duplicates_k5",
+      "k": 5,
+      "input": [
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.1
+        ],
+        [
+          0.2
+        ]
+      ],
+      "zero_sum_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "density": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        10.0,
+        5.555555555555556
+      ]
+    },
+    {
+      "source": "new_work/results/cutoff_development/study_20260914_v1/source/new_work/simulation/mdbscan.py",
+      "case": "all_duplicates_k5",
+      "k": 5,
+      "input": [
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ]
+      ],
+      "zero_sum_rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "density": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "source": "new_work/results/cutoff_development/study_20260914_v1/source/new_work/simulation/mdbscan.py",
+      "case": "two_duplicates_not_enough_k5",
+      "k": 5,
+      "input": [
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.1
+        ],
+        [
+          0.2
+        ],
+        [
+          0.3
+        ],
+        [
+          0.4
+        ]
+      ],
+      "zero_sum_rows": [],
+      "density": [
+        5.0,
+        5.0,
+        6.25,
+        6.25,
+        4.999999999999999,
+        3.5714285714285707
+      ]
+    }
+  ]
+}

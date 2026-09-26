@@ -1,0 +1,26 @@
+\begin{table}[!t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Recovered Clusters at an Adversary-Free MNIST Checkpoint}\label{tab:cluster_ratios}
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tabular}{llrrrl}
+\toprule
+Arm & Cluster & Size & In $B_0$ & Ratio & Decision \\
+\midrule
+A & 0 & 38 & 38 & 0.13 & accept \\
+A & 1 & 6 & 6 & 1.84 & reject \\
+A & 2 & 6 & 0 & 2.38 & reject \\
+A & 3 & 4 & 4 & 1.90 & reject \\
+A & 4 & 4 & 0 & 2.63 & reject \\
+A & 5 & 4 & 4 & 1.99 & reject \\
+B & 0 & 37 & 37 & 0.13 & accept \\
+B & 1 & 6 & 6 & 1.70 & reject \\
+B & 2 & 4 & 4 & 1.87 & reject \\
+C & 0 & 34 & 34 & 0.12 & accept \\
+C & 1 & 4 & 4 & 1.72 & reject \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\par\vspace{3pt}\parbox{\linewidth}{\footnotesize Seed 2024, round 9. Mini-batch regimes: A, standard loader with batch size 32; B, a fresh 20-example subset at each local step; C, the first 20-example batch repeated five times. Ratio is $\lVert c_S-m_{B_0}\rVert/(\tau R_0)$ with $\tau=2$ and $R_0$ from \eqref{eq:consensus}, so a group is rejected when the ratio exceeds 1; the decision column is the implementation's own output. Every client is honest. The majority cluster lies at $0.12$--$0.13$ of the rejection radius and every honest minority cluster at $1.70$--$2.63$ times it. The rejection radius therefore separates honest groups from one another.}
+\end{table}

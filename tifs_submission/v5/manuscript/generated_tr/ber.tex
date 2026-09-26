@@ -1,0 +1,25 @@
+\begin{table*}[!tp]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Saldırgansız Dürüst İstemci Dışlama Oranı (BER, \%)}\label{tab:ber}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrrrrrrr}
+\toprule
+& \multicolumn{3}{c}{$\alpha=0.5$} & \multicolumn{4}{c}{$\alpha=0.1$} & \multicolumn{4}{c}{$\alpha=0.01$} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-8}\cmidrule(lr){9-12}
+Kural & MNIST & Fashion & HAR & MNIST & Fashion & HAR & CIFAR-10 & MNIST & Fashion & HAR & CIFAR-10 \\
+\midrule
+Düz ortalama (savunmasız) & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 \\
+Örnek ağırlıklı ortalama (savunmasız) & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & -- & 0.0 & 0.0 & 0.0 & -- \\
+Norm kırpma & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & -- & 0.0 & 0.0 & 0.0 & -- \\
+Koordinat bazında medyan & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & -- & 0.0 & 0.0 & 0.0 & -- \\
+Multi-Krum & 32.2 & 32.2 & 32.2 & 32.2 & 32.2 & 32.2 & -- & 32.2 & 32.2 & 32.2 & -- \\
+FLTrust (normalize) & 33.1 & 31.9 & 11.9 & 25.3 & 27.3 & 19.6 & -- & 30.3 & 32.3 & 31.0 & -- \\
+FLAME (HDBSCAN) & 48.9 & 48.9 & 48.3 & 48.9 & 48.7 & 47.4 & 48.7 & 48.7 & 47.0 & 42.4 & 45.5 \\
+Fed-MDBSCAN-G (tam) & 0.3 & 0.4 & 2.1 & 0.2 & 0.5 & 24.1 & 0.1 & 42.6 & 38.7 & 24.4 & 39.9 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\par\vspace{3pt}\parbox{\linewidth}{\footnotesize Hiç saldırgan yokken reddedilen dürüst istemci--tur gönderimleri; üç tohum, 30 tur ve turda 90 katılımcı (hücre başına 8\,100 dürüst istemci--tur). Fashion, Fashion-MNIST anlamına gelir; tireler planlanan kapsam dışındaki koşullardır. FLTrust sıfır ağırlıklı gönderimleri sayar. Norm kırpma ve koordinat bazında medyan hiçbir istemciyi reddetmez; bu yüzden BER değerleri tanım gereği sıfırdır ve dürüst maliyetleri Tablo~\ref{tab:buc} içinde görülür.}
+\end{table*}

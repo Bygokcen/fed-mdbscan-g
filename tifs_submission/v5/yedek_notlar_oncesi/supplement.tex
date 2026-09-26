@@ -1,0 +1,41 @@
+\documentclass[journal]{IEEEtran}
+\usepackage{amsmath,amssymb,graphicx,booktabs,url,adjustbox}
+\usepackage[hidelinks]{hyperref}
+% Tables continue the main-manuscript numbering (main text ends at Table XIV).
+\setcounter{table}{14}
+\begin{document}
+\title{Supplement to ``Benign Exclusion and Consensus-Test Limits in Heterogeneous Federated Learning''}
+\author{Sebahattin~G\"ok\c{c}en~\"Ozden and Kadir~Sar{\i}kaya}
+\maketitle
+\section{Paired benign utility measurements}
+Table~\ref{tab:seed_cost} summarizes the individual differences used in the adversary-free utility analysis. A pair matches the dataset, concentration, seed, data partition, initial model, and participation schedule. Differences are uniform-mean accuracy minus rule accuracy. The range spans the available dataset--seed pairs; it is neither a confidence interval nor a claim about statistical significance. The artifact file \texttt{benign\_paired\_seed\_deltas.csv} retains all individual differences.
+\input{generated/benign_seed_summary.tex}
+
+\section{Duplicate-vector density check}
+The deployed density function returns 1 if the sum of effective nearest-neighbour distances is exactly zero. This is distinct from the ideal reciprocal-distance expression at strictly positive sums. With $[0,0,0.1,0.2]$ and $k=1$, it returns $[1,1,10,10]$. Six coincident observations satisfy the zero-sum condition at $k=5$; a duplicated pair with four distinct neighbours need not. Four small inputs were evaluated in the working source and two frozen sources, giving 12 passing checks. The function ASTs agree. These checks verify the local boundary rule, not equivalence to the original MDBSCAN authors' implementation.
+
+\section{FLAME identity counts and subsequent instrumentation}
+All 201 canonical FLAME result files match the hashes recorded in the earlier local audit: 200 completed runs and one retained CIFAR failure. The 6,000 completed rounds each contain 90 participants and between 46 and 89 accepted identities. Participant, accepted and rejected identities form disjoint complete partitions, and their confusion counts agree with the exported cell totals. No recorded round uses fallback or accepts everyone. In the frozen selector, the small-cohort and zero-distance skip paths accept everyone, so those paths are excluded by the recorded decisions. Normal selection keeps indices with nonnegative HDBSCAN labels; its minimum cluster size of 46 permits at most one cluster among 90 participants. This establishes the association between saved acceptance-set size and the retained cluster size for these records. It does not reconstruct missing historical labels.
+
+Subsequent instrumentation records whether clustering executed, its skip reason, the configured minimum cluster size, label-derived cluster sizes, the noise count, and the selection size before any fallback. A skipped fit records unknown sizes; an executed all-noise fit records an empty cluster dictionary. The full simulation test suite passes 125 tests. Six bounded frozen/current selector comparisons through the same server preserve all previous non-timing decision fields and produce identical model weights. These checks do not add research training runs or alter the archived results.
+
+\section{Checkpoint identity and scope}
+The radius check uses 72 distinct recorded matrices and two gate evaluations per matrix. Its 36 attacked matrices contain 18 adversarial clients each. All admit the full cohort at the initial stage. The sufficient consensus condition holds in 35, with maximum ratio 2.017225 at the one exception. Gate rows are deduplicated by reference and round before aggregation. With the neighbourhood cutoff enabled, six of the 144 gate evaluations contain candidate groups with members outside the initial pool. All occur outside the attacked block. The subset hypothesis therefore requires an explicit check. Three additional historical batch-regime rows in the supplied radius CSV are not counted as members of the 36-matrix attacked sample.
+
+\section{Implementation checks moved from the main text}
+\emph{FLTrust.} The local aggregation rule was compared with a transcription of the rule in the authors' demonstration code on 18 recorded matrices and four root constructions; the relative discrepancy between aggregated updates was below $2.8\times10^{-7}$. Degenerate-root and zero-trust paths diverge. Root norms were not recorded in the 5{,}490 canonical rounds, so an unflagged degenerate-root path cannot be excluded in the 135 rounds that accepted every submission. Root and client local-iteration counts also differ, so the check does not establish fidelity of the full training protocol.
+
+\emph{FLAME.} Six small checks exercise clipping, averaging, and noise scaling through the server's aggregation path. Equivalence of the HDBSCAN clustering with the authors' implementation, and the original noise calibration, remain unverified.
+
+\emph{Cardinality identities.} A rule that retained the wrong 61 updates would still have $\mathrm{BER}=29/90$ in a clean round, so agreement with a cardinality identity is no evidence that its scores or selected identities reproduce the original implementation.
+
+\emph{Multi-Krum under the constrained probe.} In five of the six cells the confusion counts are $\mathrm{TP}=0$, $\mathrm{FP}=2{,}610$, $\mathrm{TN}=3{,}060$, and $\mathrm{FN}=2{,}430$.
+
+\section{Checkpoint details moved from the main text}
+The median radial ratio over the 36 attacked matrices is 1.448095 and the maximum is 2.017225, at Fashion-MNIST, seed 137, patch, round 29. Promotion to float64 changes $\Gamma$ by at most $5.43\times10^{-7}$ relative to the native computation and does not alter any threshold classification. Evaluating two gates yields 72 rows from the same 36 matrices, which does not double the sample size. Because the initial and consensus tests use different centres and radii, the convex-hull bound alone does not order their client-level decisions. The 72 replay matrices cover three seeds and rounds 0, 9, and 29. At the clean MNIST checkpoint of the batch-regime example, final rejections are 34, 25, and 18 in regimes A, B, and C; of the 16 clients rejected in A but accepted in C, 10 no longer belong to a tested group and six change at Stage~1. Policy P1 rejects 44 clients in all three regimes, although one pair of identities differs in regime C.
+
+\section{Reproduction boundary}
+From the V4 directory, run \texttt{python analysis/build\_tables.py --root .} with the existing project Python environment. It checks the copied report hashes and condition metadata, regenerates the tables and figures, and verifies the direct-count and checkpoint summaries. The main and supplement are compiled with the supplied IEEEtran files. A repository clone suffices for these summary-level checks. Repeating the historical identity-level audit or recapturing training checkpoints requires the separate local raw archive and frozen environment. Hash equality establishes content integrity, not a hypothesis's timing or preregistration.
+
+The five failed canonical units remain failures. Deterministic CIFAR diagnostics are not replacements for the failed unit. No new backdoor improvement, statistical equivalence, or general defense ranking is inferred from the analyses in this supplement.
+\end{document}

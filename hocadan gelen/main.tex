@@ -1,0 +1,329 @@
+% V4: audit-v2 results plus archived checkpoint and direct acceptance-count evidence.
+% Build tables with ../analysis/build_tables.py; supplementary checks in supplement.tex.
+\documentclass[journal]{IEEEtran}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx,booktabs}
+\usepackage{algorithm,algorithmic}
+\usepackage{url}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+
+\newcommand{\method}{Fed-MDBSCAN-G}
+\newcommand{\rd}{\mathrm{rd}}
+\newcommand{\BER}{\mathrm{BER}}
+\newcommand{\BUC}{\mathrm{BUC}}
+
+\begin{document}
+
+\title{Benign Exclusion and Consensus-Test Limits in\\Heterogeneous Federated Learning}
+
+\author{Sebahattin~G\"ok\c{c}en~\"Ozden and Kadir~Sar{\i}kaya%
+\thanks{S. G. \"Ozden is with the Department of Computer Engineering, Faculty of Engineering and Architecture, Tokat Gaziosmanpa\c{s}a University, Tokat, T\"urkiye (e-mail: sebahattin.ozden0025@gop.edu.tr; ORCID: \mbox{0009-0008-9280-444X}).}%
+\thanks{K. Sar{\i}kaya is with the Department of Industrial Engineering, Faculty of Engineering and Architecture, Tokat Gaziosmanpa\c{s}a University, Tokat, T\"urkiye (ORCID: \mbox{0000-0001-9015-6209}).}%
+\thanks{Corresponding author: Sebahattin G\"ok\c{c}en \"Ozden.}}
+
+\markboth{Manuscript for IEEE Transactions on Information Forensics and Security}{\"Ozden and Sar{\i}kaya: Benign Exclusion and Consensus-Test Limits}
+\maketitle
+
+\begin{abstract}
+Server-side defenses in federated learning decide which client updates to accept. When client data are heterogeneous, honest updates can look unusual, so a defense may reject honest clients even when no attacker is present. We measure this cost by evaluating eight server-side rules on four datasets, three heterogeneity levels (Dirichlet $\alpha=0.5$, $0.1$, $0.01$), and five attack families. The evaluation includes 2,125 completed runs and five recorded failures. With no attacker, Multi-Krum excludes 32.2\% of honest submissions in all nine clean conditions, FLAME 42.4--48.9\%, and the composite filter Fed-MDBSCAN-G up to 42.6\% at $\alpha=0.01$. Final accuracy falls by up to 65.55 percentage points relative to plain averaging. For the first two rules, exclusion follows from how many updates they keep: our Multi-Krum configuration always keeps 61 of 90, and FLAME kept the smallest admissible majority (46 of 90) in 719 of 990 clean rounds. Under a distance-constrained attack, Multi-Krum rejected only honest clients in five of six conditions. For Fed-MDBSCAN-G, we derive a simple geometric condition under which its cluster-validation stage cannot reject any group of initially accepted updates. The condition held on 35 of 36 recorded attacked checkpoints, and extending the test to previously untested updates added honest but no attacker rejections. These findings explain failures of the evaluated implementations, not of geometric defenses in general. We recommend reporting honest-client exclusion and accuracy loss without attackers alongside attack detection and attack success.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Federated learning, poisoning, robust aggregation, data heterogeneity, false positives, clustering defenses.
+\end{IEEEkeywords}
+\IEEEpeerreviewmaketitle
+
+\section{Introduction}
+\IEEEPARstart{F}{ederated} learning trains a shared model from locally computed updates without collecting clients' training examples at the server~\cite{mcmahan2017}. The same separation allows malicious clients to submit poisoned updates or to train on manipulated data~\cite{fang2020,bagdasaryan2020,xie2020dba}. Server-side defenses respond with robust aggregation, update filtering, or validation against a trusted reference~\cite{blanchard2017,yin2018,cao2021fltrust,nguyen2022flame}.
+
+A filtering defense must answer two separate questions: does it exclude attackers, and does it preserve useful honest contributions? Statistical heterogeneity makes both harder. Honest clients can produce updates far from a round's central tendency, while coordinated attacks can stay close to the benign distribution~\cite{baruch2019,shejwalkar2021}. Prior evaluations have documented false positives, degraded utility, and backdoor vulnerability under these conditions~\cite{singh2023fair,ye2025illusion,bellachia2026sok}. These findings call for evaluating defenses without attackers and examining how each stage of a composite defense contributes to its final decision.
+
+We study these questions using a completed evaluation of eight server-side rules and a detailed analysis of \method{}, a composite filter that combines a geometric-median acceptance region, relative-density partitioning, and shared-neighbour cluster validation. Our aim is to explain the costs and failures observed in this evaluation. We do not claim general superiority for the composite or treat these findings as limits on all geometric filtering methods.
+
+Our first contribution is an adversary-free comparison at Dirichlet concentrations $\alpha\in\{0.5,0.1,0.01\}$. We state the dataset coverage explicitly and measure honest-client exclusion separately from changes in final accuracy. Fixed-cardinality selection gives an exact exclusion rate. Majority-cluster retention gives an upper bound, whose attainment we assess by directly counting the saved FLAME acceptance sets rather than inferring their sizes from rounded rejection rates.
+
+Second, we give a conditional analysis of the composite's decision path. Set containment identifies which initial exclusions later stages cannot undo, and convexity gives a sufficient condition under which centroid validation rejects no group when every candidate group lies inside the initial acceptance pool. We check that condition on recorded checkpoints and report where its assumptions hold. A separate score-ordering result states when a rule rejects honest clients but no attackers. This result requires an explicit ordering of scores; a distance constraint on the attack alone does not guarantee that ordering for every defense score.
+
+Third, fixed-matrix replays test two changes to the treatment of unclustered low-density updates. Testing them as singletons adds no attacker rejections on the examined matrices, whereas excluding them outright gives a different trade-off in one patch-backdoor block. The replays separate a lack of test coverage from a failure of the validation rule itself. They concern decisions at recorded states, not the accuracy or attack success of retrained variants.
+
+The evaluation comprises 2{,}130 planned rule--condition--seed units, of which 2{,}125 completed; the five failures remain in the accounting. This retrospective, descriptive analysis connects controlled observations to explicit decision rules and sufficient conditions. It establishes neither new universal lower bounds nor prospective confirmation of a theory.
+
+Section~\ref{sec:related} reviews related work, and Section~\ref{sec:model} defines the system model and the evaluated composite. Section~\ref{sec:theory} develops the conditional analysis and Section~\ref{sec:protocol} describes the experimental protocol. Sections~\ref{sec:benign} and~\ref{sec:attack} report adversary-free and attacked-round results, Section~\ref{sec:mechanism} analyses decision paths on recorded checkpoints, and Sections~\ref{sec:discussion} and~\ref{sec:conclusion} discuss the findings and conclude.
+
+\section{Related Work}\label{sec:related}
+\subsection{Robust aggregation and heterogeneous data}
+Neighbour-based selection, coordinate-wise estimators, geometric-median aggregation, and trust bootstrapping limit the influence of poisoned updates under different assumptions~\cite{blanchard2017,yin2018,pillutla2022rfa,cao2021fltrust}. For heterogeneous data, prior analyses establish statistical limits and give robust aggregation constructions under stated assumptions~\cite{karimireddy2022bucketing,allouah2023mixing}. Our results concern a different quantity, namely which clients are admitted or excluded in a given round. The elementary set and convexity arguments of Section~\ref{sec:theory} neither replace bounds on optimization error nor imply a bound on model accuracy.
+
+FLAME combines clustering, clipping, and noise~\cite{nguyen2022flame}. DeepSight inspects model behaviour and combines clustering with suspicion estimates~\cite{rieger2022deepsight}; FLShield relies on client-side validation~\cite{kabir2023flshield}; CrowdGuard and MESAS use multiple stages or statistics~\cite{rieger2024crowdguard,krauss2023mesas}; and Fedward and FLAC develop clustering-based defenses further~\cite{chen2023fedward,yuan2025flac}. Density-based filtering is still being developed: Venkata Ramana \emph{et al.} combine adaptive neighbourhood selection, multi-metric density estimation, and median-absolute-deviation thresholding, and report a lower false-positive rate than a fixed-bandwidth local-density baseline~\cite{ramana2026alldd}. That comparison, like the others cited here, is measured with adversaries present. These designs use different observations and decision rules. Applying an algebraic property of one stage to another therefore requires checking its assumptions.
+
+The composite studied here adapts relative-density partitioning and shared-neighbour clustering from MDBSCAN~\cite{qian2024mdbscan}. We assess a local adaptation that differs from the original clustering algorithm in its use as a filter, its neighbourhood cutoff, and its treatment of unclustered points. The accepted-set inclusion argument is a familiar property of conjunctive cascades~\cite{viola2004cascade}; what matters here is whether the deployed fallback preserves inclusion in the initial pool. Work on centroid anomaly detection under attack provides related context for the interaction between acceptance regions and adversarial inputs~\cite{kloft2012centroid}.
+
+\subsection{False positives and prior evaluations}
+Fairness studies have examined how defenses exclude statistically unusual honest clients~\cite{singh2023fair,touat2023bias,ajibuwa2025fairness}. Recent evaluations of federated learning under non-IID data likewise document deteriorating defense performance~\cite{li2025heterogeneity,ye2025illusion,zhang2025flpoison}. Bellachia \emph{et al.} explicitly describe attackers hidden within a dispersed honest population~\cite{bellachia2026sok}, and we attribute that mechanism to their work.
+
+Operating points below the chance diagonal also appear in earlier studies. Table~8 of Bellachia \emph{et al.} reports $\mathrm{TPR}=0$ and $\mathrm{FPR}=0.45$ for FLAME under a non-IID IBA condition~\cite{bellachia2026sok}. In Table~V of Ye \emph{et al.}, the reported TPR/TNR pairs at $\mathrm{Dir}(0.1)$ imply $J=-4.15$ and $-6.8$ percentage points for FoolsGold and CrowdGuard, respectively~\cite{ye2025illusion}. Negative $J$ is therefore not specific to the distance-constrained probes evaluated here.
+
+Comparing rates across studies requires attention to their denominators and experimental settings. Ye \emph{et al.}, for example, report FLAME TNR values of $73.29\%$ at $\mathrm{Dir}(0.5)$ and $54.87\%$ at $\mathrm{Dir}(0.1)$, that is, FPR values of $26.71\%$ and $45.13\%$. These attacked-round rates rest on cohort sizes and denominators that differ from those of our adversary-free results, so they neither confirm nor contradict the $48.89\%$ upper bound of our configuration.
+
+Evaluation methodology is itself a subject of study. Shejwalkar \emph{et al.} examine how realistic poisoning threat models are~\cite{shejwalkar2022drawing}, and Abad \emph{et al.} discuss the role of controls without a backdoor~\cite{abad2025evaluation}. A recent heterogeneity-aware survey likewise argues that defense evaluations should report false positives against benign non-IID clients and benign-client exclusion~\cite{djemaa2026heterogeneity}. Our contribution is a reproducible combination of adversary-free controls, decision-path measurements, and conditional analysis of one composite. We claim priority neither for benign controls nor for the observation of negative $J$.
+
+\section{System Model and Decision Rules}\label{sec:model}
+\subsection{Protocol and threat model}
+At round $r$, client $i$ receives $w_r$ and submits the local model delta $u_{r,i}=w^{\mathrm{local}}_{r,i}-w_r$. A uniform-mean filter that accepts the indices $B_r$ applies $w_{r+1}=w_r+|B_r|^{-1}\sum_{i\in B_r}u_{r,i}$. The other rules in the panel use their own weighting, clipping, or coordinate-wise aggregation; uniform and sample-weighted averaging are included as separate baselines.
+
+The server is trusted and client identities are fixed. Adversaries control their own training data or submitted updates. The Min-Max and Min-Sum probes are omniscient: they also observe the current benign updates and construct a common malicious vector subject to the respective distance bound. Ground-truth malicious identities are used to construct these attacks and to score decisions; they are never an input to the defense.
+
+Let $U=\{1,\ldots,n\}$ index the submissions, and let $H$ and $A$ partition $U$ into honest and adversarial participants. Assume $|H|>0$. For accepted indices $B$, define $\mathrm{FPR}=|H\setminus B|/|H|$ and, when $|A|>0$, $\mathrm{TPR}=|A\setminus B|/|A|$. Their difference is Youden's index $J=\mathrm{TPR}-\mathrm{FPR}$. In adversary-free rounds we call $\mathrm{FPR}$ the benign exclusion rate, $\BER$. These quantities describe participation decisions, not accuracy or backdoor success.
+
+\begin{definition}[Score-order rule]\label{def:dispersion}
+Given real scores $s_i$, a score-order rule discards the $k$ highest-scoring submissions or those with $s_i>\rho$ for a specified threshold. Ties require a specified selection convention.
+\end{definition}
+Radial distance and nearest-neighbour distance sums are examples of such scores. The theorem in Section~\ref{sec:theory} does not assume that different scores induce the same ordering. Cluster membership can be encoded as a binary score, but that encoding says nothing further about how the score relates to a distance-constrained attack.
+
+\begin{definition}[Monotone cascade]\label{def:cascade}
+A cascade is monotone if each intermediate accepted set is a subset of its predecessor. A fallback that readmits previously removed indices can violate this property.
+\end{definition}
+
+\subsection{The evaluated composite}
+The initial filter of \method{} accepts
+\begin{equation}
+B_0=\{i:\|u_i-m\|_2\leq\rho\operatorname{median}_j\|u_j-m\|_2\},\quad\rho=2.5,
+\label{eq:l0}
+\end{equation}
+where $m$ is a Weiszfeld approximation to the geometric median. If fewer than half of the submissions survive, the initial pool is reset to $U$.
+
+For $k'=\min(5,n-1)$, density is computed from the sum $d_i$ of distances to the $k'$ nearest neighbours. The local implementation returns $k'/\max(d_i,10^{-15})$ when $d_i>0$ and $1$ when $d_i=0$; a singleton input also returns $1$. The deployed gate opens when a density-gap indicator, with gap threshold 10, coincides with at least $\max(2,\lceil0.05n\rceil)$ initial rejections. A three-round memory can keep the cluster stage active after an earlier activation, subject to decay over clean rounds.
+
+When active, the cluster stage partitions the full submission set by density and runs shared-neighbour clustering on the low-density subset $L$. Each recovered group $S$ is rejected if
+\begin{equation}
+\begin{gathered}
+\|c_S-m_{B_0}\|_2>\tau R_0,\\
+R_0=\max\!\left(10^{-10},\operatorname{median}_{j\in B_0}\|u_j-m_{B_0}\|_2\right),
+\end{gathered}
+\label{eq:consensus}
+\end{equation}
+where $c_S$ is the arithmetic centroid of the group, $m_{B_0}$ is the geometric median of $B_0$, and $\tau=2$. Points that are not assigned to a recovered group are not tested at this stage. Because candidate groups are formed from $L$ rather than from $L\cap B_0$, they can contain indices outside $B_0$.
+
+The combined set removes the members of rejected groups from $B_0$. If fewer than half of the submissions then remain, a valve restores $B_0$. The complete path is therefore not necessarily a monotone cascade, but its final output always satisfies $B\subseteq B_0$, which is all that the initial-exclusion result below requires.
+
+\section{Conditional Analysis}\label{sec:theory}
+The statements in this section apply to a single round under the decision rules defined above. They use set inclusion, cardinality, and convexity. To explain an observed decision, their assumptions must hold along the implemented path; Section~\ref{sec:mechanism} checks these assumptions on recorded checkpoints.
+
+\subsection{Accepted-set containment and cardinality}
+\begin{proposition}[Initial exclusion floor]\label{prop:floor}
+If $B\subseteq B_0$, then $\mathrm{FPR}(B)\geq\mathrm{FPR}(B_0)$ and, for $|A|>0$, $\mathrm{TPR}(B)\geq\mathrm{TPR}(B_0)$. This holds for a monotone cascade and for a fallback that restores at most $B_0$.
+\end{proposition}
+\begin{IEEEproof}
+The inclusions $H\setminus B_0\subseteq H\setminus B$ and $A\setminus B_0\subseteq A\setminus B$ give the inequalities after division by the corresponding population sizes.
+\end{IEEEproof}
+Later stages therefore cannot readmit an honest client that the initial filter excluded. They can still improve the operating point, for instance by rejecting additional attackers without rejecting additional honest clients, so the proposition does not rule out a Pareto improvement.
+
+\begin{corollary}[Fixed-cardinality selection]\label{cor:cardinality}
+If exactly $m$ of $n$ submissions are admitted, then $\BER=1-m/n$ in an adversary-free round. With $a$ adversaries and $t$ rejected adversaries, $\mathrm{FPR}=(n-m-t)/(n-a)$, provided $n>a$.
+\end{corollary}
+\begin{IEEEproof}
+There are $n-m$ rejections, of which $t$ are adversarial and $n-m-t$ are honest.
+\end{IEEEproof}
+Our Multi-Krum configuration uses $f=\lceil0.3n\rceil$ and $m=n-f-2$. At $n=90$ it retains 61 updates, so its clean $\BER$ is $29/90$; with $a=27$ and $t=0$, its attacked-round $\mathrm{FPR}$ is $29/63$. Agreement with these identities verifies selection cardinality only (Section~\ref{sec:fidelity}).
+
+\begin{corollary}[Majority-cluster retention]\label{cor:majority}
+In an adversary-free round, a rule retaining exactly one cluster of size $c\geq c_{\min}$ has $\BER=(n-c)/n\leq(n-c_{\min})/n$. Equality holds precisely when $c=c_{\min}$. With $a$ adversaries and $t$ adversarial rejections, $\mathrm{FPR}=(n-c-t)/(n-a)$.
+\end{corollary}
+\begin{IEEEproof}
+Count the rejected indices outside the cluster and subtract the adversarial rejections.
+\end{IEEEproof}
+The local FLAME path uses $c_{\min}=\lfloor n/2\rfloor+1=46$ at $n=90$, which gives a clean upper bound of $44/90$. Heterogeneity alone does not force equality, and rounds in which clustering fails or a fallback fires must be treated according to the path actually executed.
+
+\subsection{Centroid validation}
+\begin{proposition}[Convex-hull radius bound]\label{prop:contraction}
+For a nonempty group $S$, any convex combination $g(S)$ of its updates, and any reference $m_0$,
+\[
+\|g(S)-m_0\|\leq\max_{i\in S}\|u_i-m_0\|.
+\]
+For the uniform mean of $s$ members, if one member has radius at most $r_a$ and the others at most $r_b$, then
+\[
+\|c_S-m_0\|\leq\frac{r_a+(s-1)r_b}{s}.
+\]
+\end{proposition}
+\begin{IEEEproof}
+Write $g(S)-m_0$ as a convex combination of the vectors $u_i-m_0$ and apply the triangle inequality. The second expression uses weights $1/s$.
+\end{IEEEproof}
+If a group centroid lies outside a ball, at least one member must also lie outside. This does not mean that every member lies outside. Rejecting the whole group can therefore exclude members inside the ball: on the real line, with centre 0 and radius 2, the group $\{1,5\}$ has centroid 3 and is rejected although its member 1 lies inside. Conversely, cancellation can place a centroid inside the ball even when a member lies outside. The initial and consensus filters also use different reference points and radii, so the bound does not order their client-level decisions.
+
+\begin{proposition}[Sufficient condition for inactive centroid validation]\label{prop:vacuity}
+For nonempty $B_0$, define
+\[
+\Gamma(B_0)=\frac{\max_{i\in B_0}\|u_i-m_{B_0}\|_2}{R_0},
+\]
+where $R_0$ is the floored radius in \eqref{eq:consensus}. If $\Gamma(B_0)\leq\tau$, then no nonempty group $S\subseteq B_0$ is rejected by \eqref{eq:consensus}. If every tested group is such a subset and no other stage removes members, the final accepted set is $B=B_0$.
+\end{proposition}
+\begin{IEEEproof}
+Every member of $B_0$ lies in the closed ball of radius $\tau R_0$ about $m_{B_0}$. The ball is convex, so every convex combination of members of a subset $S\subseteq B_0$ lies in it, and the strict rejection inequality cannot hold.
+\end{IEEEproof}
+The condition is sufficient but not necessary, and it does not hold in general for our composite, whose candidate groups can include members outside $B_0$. For example, $B_0=\{-1,1\}$ has $\Gamma=1$, yet the group $\{1,10\}$ has centroid $5.5$ and fails the radius-2 test. Before applying the proposition to recorded matrices, we therefore verify the subset condition.
+
+\subsection{Density ordering and its implementation boundary}
+\begin{proposition}[Density separation with a separating threshold]\label{prop:density}
+Consider the ideal score $\rd(i)=k'/d_i$ with strictly positive distance sums. Suppose $|A|\geq k'+1$, all adversarial pairwise distances are at most $\delta_A>0$, and each honest point has mean $k'$-nearest-neighbour distance at least $\delta_H>\delta_A$. Then
+\[
+\min_{a\in A}\rd(a)\geq1/\delta_A>1/\delta_H\geq\max_{i\in H}\rd(i).
+\]
+For a threshold satisfying $\max_{i\in H}\rd(i)<t\leq\min_{a\in A}\rd(a)$, the set $L=\{i:\rd(i)<t\}$ contains every honest point and no adversarial point.
+\end{proposition}
+\begin{IEEEproof}
+Each attacker has $k'$ other attackers within $\delta_A$, so its nearest-neighbour distance sum is at most $k'\delta_A$. The assumed honest mean distance gives $d_i\geq k'\delta_H$. Taking reciprocals yields the ordering, and the threshold condition gives the selected set.
+\end{IEEEproof}
+The restriction on the threshold is essential, because a threshold above every score selects attackers as well. The proposition also does not apply directly to exact duplicates in the local implementation. When the effective nearest-neighbour distances sum to zero, the code returns $\rd=1$; for the one-dimensional input $[0,0,0.1,0.2]$ with $k'=1$, the actual output is $[1,1,10,10]$. We reproduced this behaviour in the working source and in two frozen copies. Exact duplication alone therefore does not produce the high-density ordering of Proposition~\ref{prop:density}. The clustering intuition agrees with earlier observations~\cite{bellachia2026sok}, but explaining a particular run requires its computed scores and routing decisions.
+
+\subsection{A conditional score-ordering result}
+\begin{theorem}[Honest-only rejection]\label{thm:inversion}
+Let $H,A$ both be nonempty and $1\leq k\leq|H|$. If a rule discards the $k$ highest scores and $\max_{a\in A}s_a<s^H_{(k)}$, where $s^H_{(k)}$ is the $k$th largest honest score, then
+\[
+\mathrm{TPR}=0,\quad\mathrm{FPR}=k/|H|,\quad J=-k/|H|.
+\]
+For a threshold rule, the same conclusion holds with $k=|\{i\in H:s_i>\rho\}|>0$ if $\rho\geq\max_{a\in A}s_a$.
+\end{theorem}
+\begin{IEEEproof}
+The strict ordering places all $k$ discarded indices in $H$. In the threshold case, no attacker exceeds the threshold. Count honest and adversarial rejections.
+\end{IEEEproof}
+The theorem is a conditional counting result. Min-Max and Min-Sum constrain distances~\cite{shejwalkar2021}, but those constraints do not establish its ordering premise for every score. For instance, the honest points $\{-2,0,0.1,2\}$ have maximum pairwise distance 4, and the point $-1$ lies within distance 3 of each of them; yet a rule that rejects the three points farthest from the honest geometric median rejects $-1$ together with $-2$ and $2$. Negative $J$ also says nothing directly about model accuracy or attack success, and a larger rejection budget makes $J$ more negative only while the honest-only ordering continues to hold.
+
+Neither the containment nor the convexity result depends on how the reference point is obtained, so both also apply to rules that use trusted server data. The positive family-average $J$ that FLTrust attains in Section~\ref{sec:attack} is an empirical observation; it does not show that an external reference is necessary or sufficient for robustness.
+
+\section{Experimental Protocol}\label{sec:protocol}
+\input{generated/coverage.tex}
+
+\subsection{Data, training, and coverage}
+The archived matrix comprises 149 jobs and 2{,}130 planned rule--condition--seed units over MNIST~\cite{lecun1998}, Fashion-MNIST~\cite{xiao2017fmnist}, UCI HAR~\cite{anguita2013har}, and CIFAR-10~\cite{krizhevsky2009}. MNIST and Fashion use a 784--200--10 multilayer perceptron; HAR uses widths 561--128--64--6 with dropout $0.2$; and CIFAR uses two convolutional layers with 32 and 64 channels followed by fully connected layers of widths 256 and 10. Main configurations use 100 clients, 90 participants per round, 30 rounds, seeds 42, 137, and 2024, batch size 32, three local epochs, learning rate $0.01$, and momentum $0.9$.
+
+The Dirichlet concentration takes the values $0.5$, $0.1$, and $0.01$~\cite{hsu2019}. A minimum-count repair allocates at least 20 examples to each client, so the final partition is not an untouched Dirichlet draw. Three datasets share a 17-condition main block, whereas CIFAR has smaller coverage; Table~\ref{tab:coverage} lists the remaining blocks. Four sample-weighted HAR runs and one CIFAR FLAME run under Min-Max failed. They are retained as failures and are neither imputed nor replaced by diagnostic reruns.
+
+All analyses use these existing results. We developed the conditional arguments in Section~\ref{sec:theory} and several checkpoint analyses after inspecting the results. Content hashes identify the evidence files; they establish neither preregistration nor when the hypotheses were formed.
+
+\subsection{Control blocks and attacks}
+The adversary-free main conditions configure zero malicious clients at each of the three concentrations; CIFAR has no $\alpha=0.5$ control cell. For the patch-backdoor comparison, separate attack-disabled controls retain the client identities and schedules of the attacked configurations while disabling the attack.
+
+The attack families are loud Gaussian noise (coordinate standard deviation 5), label flipping, a bottom-right $3\times3$ white-patch backdoor (target class 0, poisoning fraction $0.2$), bounded random perturbations, and constrained omniscient probes. The bounded family includes a direction probe at relative scale $0.005$ and the legacy identifier \texttt{adaptive\_gaussian} at relative scale $0.3$; despite its name, the latter is bounded random noise, not an optimized defense-adaptive attack. The constrained probes use a common direction opposite the benign mean, scaled to satisfy a Min-Max or Min-Sum bound. These are the specified constructions, not an exhaustive attack search. The family labels do not encode a measured radial displacement, and condition coverage differs between families.
+
+\subsection{Implementations and fidelity limits}\label{sec:fidelity}
+The panel comprises the uniform mean, the sample-weighted mean, norm clipping, the coordinate-wise median, Multi-Krum with $f=\lceil0.3n\rceil$ and $m=n-f-2$, normalized FLTrust with 100 root examples, a local HDBSCAN-based FLAME with noise level $0.001$, and \method{}. Seven ablation variants are evaluated separately. The Multi-Krum parameterization and each method's training protocol are local implementation choices and are reported as such.
+
+We compared the local FLTrust aggregation rule with a transcription of the rule in the authors' demonstration code, using 18 recorded matrices and four root constructions. On these inputs, the relative discrepancy between aggregated updates was below $2.8\times10^{-7}$. Degenerate-root and zero-trust paths diverge. Root norms were not recorded in the 5{,}490 canonical rounds; an unflagged degenerate-root path therefore cannot be excluded in the 135 rounds that accepted every submission. Root and client local-iteration counts also differ. The check therefore does not establish fidelity of the full training protocol.
+
+Six small FLAME checks exercise clipping, averaging, and noise scaling through the server's aggregation path. Equivalence of the HDBSCAN clustering with the authors' implementation, and the original noise calibration, remain unverified. The 200 completed FLAME runs contain 6{,}000 rounds with no flagged fallback. For this analysis we counted the saved accepted identities and checked them against the participant identities, the confusion counts, and the frozen selection code. Every retained set contains fewer than 90 members. Because the frozen skip paths accept all participants, the recorded decisions exclude those paths. Historical HDBSCAN labels were not saved. New instrumentation records label-derived cluster sizes for future runs, but it cannot add labels to the canonical archive retroactively.
+
+Matching an algebraic identity does not resolve these implementation limits. A rule that retained the wrong 61 updates would still have $\BER=29/90$ in a clean round, so cardinality agreement is no evidence that its scores or selected identities reproduce the original implementation.
+
+\subsection{Metrics and reporting}
+Benign utility cost is uniform-mean final accuracy minus defense final accuracy in the same adversary-free condition. Under attack, utility benefit reverses this subtraction: defense accuracy minus uniform-mean accuracy. Accuracy comparisons use the available completed seeds, so an incomplete cell is not a fully paired three-seed comparison. We also report attacker recall, honest rejection, $J$, and the attack success rate (ASR) on triggered non-target examples. FLTrust assigns zero weight to submissions with non-positive trust, and the local logs count these as rejections. Its BER, FPR, and TPR columns therefore measure zero-weight decisions rather than an explicit rejection stage of the kind used by Multi-Krum or FLAME.
+
+All results are descriptive. Client--rounds are correlated and are not independent experimental replicates. With three seeds and uneven coverage, we make no claim of statistical significance, equivalence, or general superiority for any defense. Alarm specificity is reported only for the composite, the one rule in the panel that exposes a round-level alarm.
+
+\section{Adversary-Free Exclusion and Utility}\label{sec:benign}
+\input{generated/ber.tex}
+\input{generated/buc.tex}
+\input{generated/flame_sizes.tex}
+
+Table~\ref{tab:ber} is based on 8{,}100 honest client--round submissions per completed clean cell. Multi-Krum has $\BER=32.22\%$ in all nine available cells (three datasets at three concentrations; there is no CIFAR cell), as Corollary~\ref{cor:cardinality} requires.
+
+The direct FLAME counts in Table~\ref{tab:flame_sizes} show how often the majority-cluster bound is attained. Over 11 clean cells and 990 rounds, the retained cluster has exactly 46 members in 719 rounds ($72.63\%$). The minimum is reached in 89 of 90 rounds for MNIST and Fashion at $\alpha=0.5$, but in fewer than half of the rounds for Fashion at $\alpha=0.01$ and for HAR at $\alpha=0.1$ and $0.01$. For HAR at $\alpha=0.01$ it is reached in only 9 rounds, and the mean retained size is 51.83. The bound is often attained. It does not imply a constant exclusion rate, and heterogeneity does not guarantee that it is reached.
+
+The composite's clean BER ranges from $0.27$--$2.07\%$ at $\alpha=0.5$ to $24.37$--$42.57\%$ at $\alpha=0.01$. Because its initial threshold scales with each round's median radius, the accepted fraction follows the shape of that distribution, and the clean-cell values do not bound its FPR in other, attacked rounds.
+
+Exclusion is only one source of utility loss. Norm clipping and the coordinate-wise median reject no client, yet on MNIST at $\alpha=0.01$ their final accuracies are 22.5 and 64.4 percentage points below uniform averaging. Averaged over the reported defense cells, the cost is 3.3, 10.9, and 27.5 points at the three concentrations, with a maximum of 65.55 points (FLAME on MNIST at $\alpha=0.01$). Dataset coverage differs across these averages; Table~\ref{tab:buc} reports the individual conditions. Admission rates alone are therefore insufficient to judge benign utility.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/ber_vs_alpha.pdf}
+\caption{Adversary-free exclusion, averaged over available dataset cells. Coverage varies by concentration and method. FLTrust counts zero-weight submissions. The FLAME bound need not be attained in every round; direct sizes appear in Table~\ref{tab:flame_sizes}.}\label{fig:ber}
+\end{figure}
+
+\input{generated/alarm.tex}
+At $\alpha=0.01$ the composite raises an alarm in all 90 adversary-free rounds on every dataset (Table~\ref{tab:alarm}). At $\alpha=0.1$ the rate is zero on three datasets and $98.9\%$ on HAR. All of these are false alarms. They show poor specificity in the measured clean blocks. Estimating the alarm's predictive value would also require the attack prevalence in deployment and further attacked-round data.
+
+\section{Discrimination Under Attack}\label{sec:attack}
+\input{generated/discrimination.tex}
+\input{generated/discrimination_method.tex}
+\input{generated/constrained.tex}
+
+Family-average $J$ ranges from $+68.6$ percentage points for loud Gaussian noise to $-16.1$ for the constrained probes (Table~\ref{tab:discrimination}), with $+45.0$ for label flipping, $+1.8$ for patch backdoors, and $+0.4$ for bounded perturbations in between. The families differ in attack construction, adversary ratio, concentration, and dataset coverage, so this ordering is a descriptive comparison rather than a measured dependence on displacement.
+
+In five of the six Multi-Krum constrained-probe cells, the counts are $\mathrm{TP}=0$, $\mathrm{FP}=2{,}610$, $\mathrm{TN}=3{,}060$, and $\mathrm{FN}=2{,}430$. Exactly $29\times90$ submissions are rejected and all of them are honest, giving $\mathrm{FPR}=29/63=46.03\%$, the value that Corollary~\ref{cor:cardinality} gives at zero attacker recall. In the HAR cell at $\alpha=0.1$, attacker recall is positive and $J=+36.68$ points, so the honest-only condition fails there. All constrained attackers submit the same vector. Zero recall could therefore also arise if ties at the selection boundary are broken in their favour. It does not by itself establish the strict ordering premise of Theorem~\ref{thm:inversion}.
+
+FLAME has zero attacker recall in six of the eight constrained-probe cells, with FPR between $57.51\%$ and $68.11\%$. With 63 honest participants, retaining at least 46 of 90 limits the FPR to $44/63=69.84\%$ when no adversary is rejected. The CIFAR cell at $\alpha=0.1$ rests on two completed seeds because its third run failed. The composite also has low or zero attacker recall in several cells; we do not attribute its aggregate rates to the valve, because we have not verified that this branch executed in the corresponding runs.
+
+FLTrust has a positive constrained-family mean $J$ ($+35.6$ points), whereas the other three decision rules have negative means. This motivates further study of trusted-data signals, but a single root-set implementation cannot show that such signals are necessary or generally superior. FLTrust also assigns zero weight to $11.9$--$33.1\%$ of honest submissions in clean rounds and is subject to the fidelity limits of Section~\ref{sec:fidelity}.
+
+\input{generated/backdoor.tex}
+Table~\ref{tab:backdoor} pairs the composite's patch-backdoor results with attack-disabled controls. On MNIST at $\alpha=0.1$, accuracy under attack is $93.97\%$ against $94.14\%$ in the control, while attack success reaches $99.99\%$; on Fashion and CIFAR at the same concentration, it reaches $99.93\%$ and $96.59\%$. At $\alpha=0.01$ attack success is lower, but main-task accuracy is only $15.5$--$32.8\%$, and even the unpoisoned control assigns the target label to some patched examples ($20.8\%$ on CIFAR). Accuracy, attacked ASR, control ASR, and their difference therefore have to be read together; a low ASR alone does not demonstrate protection.
+
+\section{Decision-Path Analysis}\label{sec:mechanism}
+The replay uses 72 recorded update matrices from MNIST and Fashion, covering three seeds, rounds 0, 9, and 29, and four blocks of 18 matrices: Min-Max and patch attacks and their attack-disabled controls. The attacked matrices contain 18 adversaries among 90 participants, unlike the 27-adversary canonical constrained-probe cells above. Each matrix is evaluated under two gate settings and two neighbourhood-cutoff choices. The matrices are reused checkpoints, not independent training replicates.
+
+\subsection{Gate execution and the measured radius condition}
+Under the deployed gate, the cluster stage executes on 10 of the 72 checkpoints and on none of the 36 attacked ones. A density-only gate removes the requirement for supporting initial rejections. Across both neighbourhood-cutoff settings, this change leaves the accepted set unchanged in all 144 comparisons.
+
+\input{generated/gamma.tex}
+We computed $\Gamma(B_0)$ on the archived matrices using the floored radius in \eqref{eq:consensus}. In every attacked matrix, $B_0$ contains all 90 updates, so every candidate group satisfies $S\subseteq B_0$. The sufficient condition holds on \textbf{35 of 36 distinct attacked matrices}, namely 18 of 18 Min-Max and 17 of 18 patch matrices (Table~\ref{tab:gamma}), with median 1.448095 and maximum 2.017225. The exception is Fashion, seed 137, patch, round 29. Evaluating two gates yields 72 rows from the same 36 matrices, which does not double the sample size.
+
+On the 35 matrices that satisfy the condition, regrouping members of $B_0$ cannot move a centroid outside the acceptance ball of radius $2R_0$. The test therefore rejects no group even when the gate is opened. At the remaining matrix, the sufficient condition fails but the recovered groups are still accepted; this neither contradicts the proposition nor identifies dilution as the cause. Promotion to float64 changes $\Gamma$ by at most $5.43\times10^{-7}$ relative to the native computation and does not alter any threshold classification.
+
+The subset restriction matters outside this attacked block. Six of the 144 gate evaluations with the neighbourhood cutoff enabled contain groups with members outside $B_0$, and the radius ratio of $B_0$ alone cannot certify those groups. The checkpoint-specific explanation therefore does not extend to the algorithm as a whole.
+
+\subsection{Routing and validation are different events}
+Under the density-only gate, patch processing opens on 17 of the 18 attacked checkpoints. Of 306 adversarial observations in the processed partitions, 285 are low-density; with the cutoff enabled, 239 enter recovered groups, and 30 of the 55 groups contain adversaries. None of these groups is rejected. Patch attackers thus reach the group test and pass it, whereas under the deployed gate they do not reach that stage at these attacked checkpoints.
+
+For the constrained probe, the recorded routing does not yield a rejected attacker group either. Exact duplicates are not assigned arbitrarily high density, because the implementation returns 1 at zero distance sums rather than following the ideal reciprocal expression. We therefore report the observed routing and the independently checked radius condition, and we do not invoke Proposition~\ref{prop:density} as an unconditional explanation of the copied-vector attack.
+
+\subsection{Interventions on unclustered updates}
+\input{generated/coverage_replay.tex}
+Policy P0 tests recovered groups only. P1 also tests unclustered low-density points as singletons, and P2 excludes those points directly. Geometry, recorded history, and recovered group membership are held fixed within each comparison.
+
+P1 adds no attacker rejections under either gate, while adding 32 honest rejections under the deployed gate and 77 under the density-only gate (Table~\ref{tab:coverage_replay}). P2 produces a different trade-off in the density-only patch block: $\mathrm{TPR}=46/324=14.20\%$, $\mathrm{FPR}=142/1296=10.96\%$, and $J=+3.24$ points. In the matching attack-disabled block, it rejects 82 honest observations. Under the density-only gate on the Min-Max attacked matrices, P2 would exclude every honest observation, and the valve restores $B_0$ in all 18 of them. These are checkpoint counts; the replay does not remeasure final accuracy or attack success.
+
+The P1 result shows that this extension of test coverage adds no attacker rejections on the recorded geometries. This finding does not establish that other changes to test coverage or to the validation statistic would fail. In particular, the initial and consensus tests use different centres and radii, so the convex-hull bound alone does not order their client-level decisions.
+
+\input{generated/cluster_ratios.tex}
+A further clean MNIST checkpoint shows how the same test treats honest groups (Table~\ref{tab:cluster_ratios}). It comes from a separate run at $\alpha=0.01$ with five fixed local steps and was replayed under three local mini-batch regimes: the standard loader with batch size 32 (A), a fresh 20-example subset at each step (B), and the first 20-example batch repeated five times (C). In every regime, the largest recovered group lies at $0.12$--$0.13$ of the rejection radius $\tau R_0$, whereas every smaller group lies at $1.70$--$2.63$ times that radius and is rejected, although all participants are honest. Two of the rejected groups in regime A lie entirely outside $B_0$. Final rejections fall from 34 in regime A to 25 and 18 in regimes B and C. Of the 16 clients rejected in A but accepted in C, 10 are no longer part of a group tested by the cluster stage. Their acceptance therefore does not mean that their group passed the test. The other six changes arise from initial-filter decisions. Under P1, all three regimes reject 44 clients, although one pair of identities differs in regime C. The example concerns group formation and coverage at one recorded state, not a general relationship between client population size and malicious intent.
+
+\subsection{Endpoint ablations}
+\input{generated/ablation.tex}
+Across 12 matched dataset--condition cells and 36 endpoint runs, the stage-1-only variant differs from the full composite by $-0.081$ percentage points in mean final accuracy. Removing the valve changes the mean by $+0.278$ points, and the variant without gate memory matches all 36 endpoints. The effects vary by condition, and such small mean differences do not establish equivalence between variants or justify choosing one without further validation.
+
+\section{Discussion}\label{sec:discussion}
+The main empirical finding is that the cost to honest clients remains substantial in several configurations even without an attacker. For fixed-cardinality selection, this exclusion is determined by the selected count. Cluster retention instead imposes a bound, and the direct counts show how often it is attained. Neither exclusion metric substitutes for a utility measurement: aggregation can reduce accuracy without rejecting any client, and a model can retain its accuracy while learning a backdoor.
+
+For the composite, the measured radius condition yields a specific design diagnosis. If every candidate group lies in an acceptance pool whose maximum radius is below the centroid-test threshold, changing the grouping cannot make the test reject a group. Geometric coverage is therefore worth checking before clustering complexity is added. The diagnosis does not rule out a different group statistic, reference point, threshold, or training protocol. Likewise, the density argument requires positive distance sums and a separating threshold, and the handling of duplicates is part of the implemented rule that has to be reported.
+
+A useful evaluation should report clean exclusion and utility at the intended heterogeneity levels, the exact admission and fallback rules, and attack-side TPR, FPR, accuracy, and ASR with matched controls. Reported together, these quantities expose failures that any one of them can conceal. Exclusion in a single round should not be described as permanent client removal or as a direct measure of harm to the model.
+
+Several limitations remain. The results rest on three seeds, short horizons, small models, and uneven coverage, and the partition repair alters the sampled heterogeneity. The fidelity of the local baseline implementations to the authors' code and training protocols has been checked only in part. CIFAR repeatability was established under a deterministic profile for a single diagnostic condition, not for the entire matrix. The replays use recorded trajectories. A modified defense would change subsequent inputs, which these replays do not capture. Finally, the analysis was developed retrospectively and does not provide independent confirmation of a new theory; the elementary identities should be read as explanations of these decision paths, not as general impossibility theorems.
+
+Trusted data, temporal information, alternative update representations, and client-side validation are natural sources of additional information, but this study does not show that any of them is necessary or sufficient. The conclusions are bounded by the evaluated rules and conditions, and improving the filtering rules themselves remains open.
+
+\section{Conclusion}\label{sec:conclusion}
+We related adversary-free exclusion and attack-side decisions to the selection behaviour of eight server-side rules in a federated-learning evaluation with 2{,}125 completed runs and five retained failures. Multi-Krum's clean exclusion follows from its fixed cardinality, and direct FLAME counts show when its cluster-size bound is attained. For \method{}, the verified subset condition and measured radius ratio explain why centroid validation cannot reject any candidate group on 35 of 36 attacked checkpoint matrices. Extending the test to previously untested singletons adds no attacker rejections on those replays. These findings support the joint reporting of benign cost, attack detection, and attack success, with implementation boundaries and conditional arguments stated explicitly.
+
+\section*{Artifact Availability}
+The accompanying artifact contains cell and per-unit results, failure accounting, checkpoint summaries, and scripts that regenerate the manuscript tables and figures. The project repository is \url{https://github.com/Bygokcen/fed-mdbscan-g}. Raw training artifacts and frozen sources remain in the local research archive and are not included in a repository clone. The supplied summaries permit checking the reported arithmetic; reproducing the historical identity and checkpoint audits also requires that archive.
+
+\section*{Acknowledgment}
+This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.
+
+\section*{Declaration of Generative AI and AI-Assisted Technologies}
+During the preparation of this work, the authors used generative AI tools for language editing and manuscript formatting assistance, and for developing and checking analysis code. All experimental results derive from the archived run records and analysis scripts. The authors reviewed and edited all AI-generated content, taking full responsibility for the content of the publication.
+
+\section*{Author Contributions}
+S. G. \"Ozden: methodology, software, validation, formal analysis, investigation, data curation, visualization, writing---original draft. K. Sar{\i}kaya: conceptualization, supervision, writing---review and editing.
+
+\section*{Declaration of Competing Interest}
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+\end{document}

@@ -1,0 +1,33 @@
+\begin{table}[!t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Operating Points Under the Constrained Omniscient Adversary}\label{tab:constrained}
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tabular}{llrrrr}
+\toprule
+Dataset & Rule & TPR & FPR & $J$ & Predicted \\
+ &  & (\%) & (\%) & (pp) & FPR (\%) \\
+\midrule
+\multicolumn{6}{l}{\emph{$\alpha=0.1$}} \\
+\quad MNIST & Multi-Krum & 0.00 & 46.03 & $-$46.03 & 46.03 \\
+\quad MNIST & FLAME (HDBSCAN) & 0.00 & 68.11 & $-$68.11 & $\leq69.84$ \\
+\quad Fashion & Multi-Krum & 0.00 & 46.03 & $-$46.03 & 46.03 \\
+\quad Fashion & FLAME (HDBSCAN) & 0.00 & 65.59 & $-$65.59 & $\leq69.84$ \\
+\quad HAR & Multi-Krum & 57.90 & 21.22 & $+$36.68 & 46.03 \\
+\quad HAR & FLAME (HDBSCAN) & 96.67 & 27.25 & $+$69.42 & $\leq69.84$ \\
+\quad CIFAR-10 & FLAME (HDBSCAN) & 8.33 & 62.94 & $-$54.60 & $\leq69.84$ \\
+\addlinespace[3pt]
+\multicolumn{6}{l}{\emph{$\alpha=0.01$}} \\
+\quad MNIST & Multi-Krum & 0.00 & 46.03 & $-$46.03 & 46.03 \\
+\quad MNIST & FLAME (HDBSCAN) & 0.00 & 58.82 & $-$58.82 & $\leq69.84$ \\
+\quad Fashion & Multi-Krum & 0.00 & 46.03 & $-$46.03 & 46.03 \\
+\quad Fashion & FLAME (HDBSCAN) & 0.00 & 63.19 & $-$63.19 & $\leq69.84$ \\
+\quad HAR & Multi-Krum & 0.00 & 46.03 & $-$46.03 & 46.03 \\
+\quad HAR & FLAME (HDBSCAN) & 0.00 & 59.47 & $-$59.47 & $\leq69.84$ \\
+\quad CIFAR-10 & FLAME (HDBSCAN) & 0.00 & 57.51 & $-$57.51 & $\leq69.84$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\par\vspace{3pt}\parbox{\linewidth}{\footnotesize Thirty percent adversaries: 63 honest and 27 adversarial participants per round. Predicted FPR is the value at zero attacker recall ($\mathrm{TPR}=0$): an identity for Multi-Krum and an upper bound for FLAME (Corollaries~\ref{cor:cardinality}--\ref{cor:majority}). FLTrust and Fed-MDBSCAN-G yield no such prediction and appear in Table~\ref{tab:discrimination_method}. Each cell has 90 recorded rounds except CIFAR-10/FLAME/$\alpha=0.1$ (60 rounds from two completed seeds).}
+\end{table}

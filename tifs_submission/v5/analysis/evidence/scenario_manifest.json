@@ -1,0 +1,4662 @@
+[
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "main/har/6.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "6.2",
+      "label": "\u03b1=0.01 Clean",
+      "malicious_ratio": 0.0
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "main/har/3.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "label_flip",
+      "id": "3.3",
+      "label": "\u03b1=0.01 30% LabelFlip",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "main/har/4.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "stealth_gaussian",
+      "id": "4.2",
+      "label": "\u03b1=0.01 20% StealthG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "main/har/5.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.2",
+      "label": "\u03b1=0.01 20% AdaptiveG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "main/har/6.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "gaussian",
+      "id": "6.1",
+      "label": "\u03b1=0.1 Clean",
+      "malicious_ratio": 0.0
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "main/har/3.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "3.1",
+      "label": "\u03b1=0.01 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "main/har/1.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.5,
+      "attack_type": "gaussian",
+      "id": "1.1",
+      "label": "\u03b1=0.5 Clean",
+      "malicious_ratio": 0.0
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "main/har/1.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.5,
+      "attack_type": "gaussian",
+      "id": "1.2",
+      "label": "\u03b1=0.5 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "main/har/1.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.5,
+      "attack_type": "label_flip",
+      "id": "1.3",
+      "label": "\u03b1=0.5 20% LabelFlip",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "main/har/2.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "gaussian",
+      "id": "2.1",
+      "label": "\u03b1=0.1 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "main/har/2.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "label_flip",
+      "id": "2.2",
+      "label": "\u03b1=0.1 20% LabelFlip",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "main/har/2.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "gaussian",
+      "id": "2.3",
+      "label": "\u03b1=0.1 30% Gaussian",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "main/har/3.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "3.2",
+      "label": "\u03b1=0.01 30% Gaussian",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "main/har/4.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "stealth_gaussian",
+      "id": "4.1",
+      "label": "\u03b1=0.1 20% StealthG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "main/har/4.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "stealth_gaussian",
+      "id": "4.3",
+      "label": "\u03b1=0.01 30% StealthG",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "main/har/5.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.1",
+      "label": "\u03b1=0.1 20% AdaptiveG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "main/har/5.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.3",
+      "label": "\u03b1=0.01 30% AdaptiveG",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "ablation/har/6.2",
+    "methods": [
+      "mdbg_l0_only",
+      "mdbg_no_momentum",
+      "mdbg_no_valve",
+      "mdbg_rtr15",
+      "mdbg_rtr20",
+      "mdbg_rtr30",
+      "fed_g2l_25"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "ablation",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "6.2",
+      "label": "\u03b1=0.01 Clean",
+      "malicious_ratio": 0.0
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "ablation/har/3.3",
+    "methods": [
+      "mdbg_l0_only",
+      "mdbg_no_momentum",
+      "mdbg_no_valve",
+      "mdbg_rtr15",
+      "mdbg_rtr20",
+      "mdbg_rtr30",
+      "fed_g2l_25"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "ablation",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "label_flip",
+      "id": "3.3",
+      "label": "\u03b1=0.01 30% LabelFlip",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "ablation/har/4.2",
+    "methods": [
+      "mdbg_l0_only",
+      "mdbg_no_momentum",
+      "mdbg_no_valve",
+      "mdbg_rtr15",
+      "mdbg_rtr20",
+      "mdbg_rtr30",
+      "fed_g2l_25"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "ablation",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "stealth_gaussian",
+      "id": "4.2",
+      "label": "\u03b1=0.01 20% StealthG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "ablation/har/5.2",
+    "methods": [
+      "mdbg_l0_only",
+      "mdbg_no_momentum",
+      "mdbg_no_valve",
+      "mdbg_rtr15",
+      "mdbg_rtr20",
+      "mdbg_rtr30",
+      "fed_g2l_25"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "ablation",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.2",
+      "label": "\u03b1=0.01 20% AdaptiveG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "clean/har/3.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "3.1",
+      "label": "\u03b1=0.01 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "oracle/har/3.1",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "3.1",
+      "label": "\u03b1=0.01 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "clean/har/3.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "label_flip",
+      "id": "3.3",
+      "label": "\u03b1=0.01 30% LabelFlip",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "oracle/har/3.3",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "label_flip",
+      "id": "3.3",
+      "label": "\u03b1=0.01 30% LabelFlip",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "clean/har/4.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "stealth_gaussian",
+      "id": "4.2",
+      "label": "\u03b1=0.01 20% StealthG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "oracle/har/4.2",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "stealth_gaussian",
+      "id": "4.2",
+      "label": "\u03b1=0.01 20% StealthG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "clean/har/5.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.2",
+      "label": "\u03b1=0.01 20% AdaptiveG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "oracle/har/5.2",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.2",
+      "label": "\u03b1=0.01 20% AdaptiveG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_end_round": 20,
+      "attack_start_round": 10,
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "temporal/har/2.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_no_momentum"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "temporal",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "gaussian",
+      "id": "2.1",
+      "label": "\u03b1=0.1 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_end_round": 20,
+      "attack_start_round": 10,
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "temporal/har/3.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_no_momentum"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "temporal",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "3.1",
+      "label": "\u03b1=0.01 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data",
+      "partition_policy": "preserve_empty"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "preserve_empty/har/6.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_l0_only",
+      "fed_g2l_25"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "preserve_empty",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "6.2",
+      "label": "\u03b1=0.01 Clean",
+      "malicious_ratio": 0.0
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data",
+      "partition_policy": "preserve_empty"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "preserve_empty/har/3.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_l0_only",
+      "fed_g2l_25"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "preserve_empty",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "label_flip",
+      "id": "3.3",
+      "label": "\u03b1=0.01 30% LabelFlip",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data",
+      "max_local_steps": 5
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "fixed_steps/har/3.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_l0_only",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "fixed_steps",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "label_flip",
+      "id": "3.3",
+      "label": "\u03b1=0.01 30% LabelFlip",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data",
+      "max_local_steps": 5
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "fixed_steps/har/5.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_l0_only",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "fixed_steps",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.2",
+      "label": "\u03b1=0.01 20% AdaptiveG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "main/har/7.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan",
+      "mdbg_l0_only"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "minmax_omniscient",
+      "id": "7.1",
+      "label": "minmax_omniscient; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "clean/har/7.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "minmax_omniscient",
+      "id": "7.1",
+      "label": "minmax_omniscient; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "oracle/har/7.1",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "minmax_omniscient",
+      "id": "7.1",
+      "label": "minmax_omniscient; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "main/har/7.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan",
+      "mdbg_l0_only"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "minsum_omniscient",
+      "id": "7.2",
+      "label": "minsum_omniscient; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "clean/har/7.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "minsum_omniscient",
+      "id": "7.2",
+      "label": "minsum_omniscient; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "har",
+    "dropout_rate": 0.1,
+    "id": "oracle/har/7.2",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "minsum_omniscient",
+      "id": "7.2",
+      "label": "minsum_omniscient; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/6.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "6.2",
+      "label": "\u03b1=0.01 Clean",
+      "malicious_ratio": 0.0
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/3.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "label_flip",
+      "id": "3.3",
+      "label": "\u03b1=0.01 30% LabelFlip",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/4.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "stealth_gaussian",
+      "id": "4.2",
+      "label": "\u03b1=0.01 20% StealthG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/5.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.2",
+      "label": "\u03b1=0.01 20% AdaptiveG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/6.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "gaussian",
+      "id": "6.1",
+      "label": "\u03b1=0.1 Clean",
+      "malicious_ratio": 0.0
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/3.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "3.1",
+      "label": "\u03b1=0.01 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/1.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.5,
+      "attack_type": "gaussian",
+      "id": "1.1",
+      "label": "\u03b1=0.5 Clean",
+      "malicious_ratio": 0.0
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/1.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.5,
+      "attack_type": "gaussian",
+      "id": "1.2",
+      "label": "\u03b1=0.5 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/1.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.5,
+      "attack_type": "label_flip",
+      "id": "1.3",
+      "label": "\u03b1=0.5 20% LabelFlip",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/2.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "gaussian",
+      "id": "2.1",
+      "label": "\u03b1=0.1 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/2.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "label_flip",
+      "id": "2.2",
+      "label": "\u03b1=0.1 20% LabelFlip",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/2.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "gaussian",
+      "id": "2.3",
+      "label": "\u03b1=0.1 30% Gaussian",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/3.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "3.2",
+      "label": "\u03b1=0.01 30% Gaussian",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/4.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "stealth_gaussian",
+      "id": "4.1",
+      "label": "\u03b1=0.1 20% StealthG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/4.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "stealth_gaussian",
+      "id": "4.3",
+      "label": "\u03b1=0.01 30% StealthG",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/5.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.1",
+      "label": "\u03b1=0.1 20% AdaptiveG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/5.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.3",
+      "label": "\u03b1=0.01 30% AdaptiveG",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "ablation/mnist/6.2",
+    "methods": [
+      "mdbg_l0_only",
+      "mdbg_no_momentum",
+      "mdbg_no_valve",
+      "mdbg_rtr15",
+      "mdbg_rtr20",
+      "mdbg_rtr30",
+      "fed_g2l_25"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "ablation",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "6.2",
+      "label": "\u03b1=0.01 Clean",
+      "malicious_ratio": 0.0
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "ablation/mnist/3.3",
+    "methods": [
+      "mdbg_l0_only",
+      "mdbg_no_momentum",
+      "mdbg_no_valve",
+      "mdbg_rtr15",
+      "mdbg_rtr20",
+      "mdbg_rtr30",
+      "fed_g2l_25"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "ablation",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "label_flip",
+      "id": "3.3",
+      "label": "\u03b1=0.01 30% LabelFlip",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "ablation/mnist/4.2",
+    "methods": [
+      "mdbg_l0_only",
+      "mdbg_no_momentum",
+      "mdbg_no_valve",
+      "mdbg_rtr15",
+      "mdbg_rtr20",
+      "mdbg_rtr30",
+      "fed_g2l_25"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "ablation",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "stealth_gaussian",
+      "id": "4.2",
+      "label": "\u03b1=0.01 20% StealthG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "ablation/mnist/5.2",
+    "methods": [
+      "mdbg_l0_only",
+      "mdbg_no_momentum",
+      "mdbg_no_valve",
+      "mdbg_rtr15",
+      "mdbg_rtr20",
+      "mdbg_rtr30",
+      "fed_g2l_25"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "ablation",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.2",
+      "label": "\u03b1=0.01 20% AdaptiveG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "clean/mnist/3.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "3.1",
+      "label": "\u03b1=0.01 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "oracle/mnist/3.1",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "3.1",
+      "label": "\u03b1=0.01 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "clean/mnist/3.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "label_flip",
+      "id": "3.3",
+      "label": "\u03b1=0.01 30% LabelFlip",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "oracle/mnist/3.3",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "label_flip",
+      "id": "3.3",
+      "label": "\u03b1=0.01 30% LabelFlip",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "clean/mnist/4.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "stealth_gaussian",
+      "id": "4.2",
+      "label": "\u03b1=0.01 20% StealthG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "oracle/mnist/4.2",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "stealth_gaussian",
+      "id": "4.2",
+      "label": "\u03b1=0.01 20% StealthG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "clean/mnist/5.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.2",
+      "label": "\u03b1=0.01 20% AdaptiveG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "oracle/mnist/5.2",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.2",
+      "label": "\u03b1=0.01 20% AdaptiveG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_end_round": 20,
+      "attack_start_round": 10,
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "temporal/mnist/2.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_no_momentum"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "temporal",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "gaussian",
+      "id": "2.1",
+      "label": "\u03b1=0.1 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_end_round": 20,
+      "attack_start_round": 10,
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "temporal/mnist/3.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_no_momentum"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "temporal",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "3.1",
+      "label": "\u03b1=0.01 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data",
+      "partition_policy": "preserve_empty"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "preserve_empty/mnist/6.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_l0_only",
+      "fed_g2l_25"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "preserve_empty",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "6.2",
+      "label": "\u03b1=0.01 Clean",
+      "malicious_ratio": 0.0
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data",
+      "partition_policy": "preserve_empty"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "preserve_empty/mnist/3.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_l0_only",
+      "fed_g2l_25"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "preserve_empty",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "label_flip",
+      "id": "3.3",
+      "label": "\u03b1=0.01 30% LabelFlip",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data",
+      "max_local_steps": 5
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "fixed_steps/mnist/3.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_l0_only",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "fixed_steps",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "label_flip",
+      "id": "3.3",
+      "label": "\u03b1=0.01 30% LabelFlip",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data",
+      "max_local_steps": 5
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "fixed_steps/mnist/5.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_l0_only",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "fixed_steps",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.2",
+      "label": "\u03b1=0.01 20% AdaptiveG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/7.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan",
+      "mdbg_l0_only"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "minmax_omniscient",
+      "id": "7.1",
+      "label": "minmax_omniscient; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "clean/mnist/7.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "minmax_omniscient",
+      "id": "7.1",
+      "label": "minmax_omniscient; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "oracle/mnist/7.1",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "minmax_omniscient",
+      "id": "7.1",
+      "label": "minmax_omniscient; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/7.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan",
+      "mdbg_l0_only"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "minsum_omniscient",
+      "id": "7.2",
+      "label": "minsum_omniscient; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "clean/mnist/7.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "minsum_omniscient",
+      "id": "7.2",
+      "label": "minsum_omniscient; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "oracle/mnist/7.2",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "minsum_omniscient",
+      "id": "7.2",
+      "label": "minsum_omniscient; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/8.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_l0_only",
+      "fedavg",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "patch_backdoor",
+      "id": "8.1",
+      "label": "patch_backdoor; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "clean/mnist/8.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "patch_backdoor",
+      "id": "8.1",
+      "label": "patch_backdoor; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "oracle/mnist/8.1",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "patch_backdoor",
+      "id": "8.1",
+      "label": "patch_backdoor; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "main/mnist/8.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_l0_only",
+      "fedavg",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "patch_backdoor",
+      "id": "8.2",
+      "label": "patch_backdoor; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "clean/mnist/8.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "patch_backdoor",
+      "id": "8.2",
+      "label": "patch_backdoor; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "mnist",
+    "dropout_rate": 0.1,
+    "id": "oracle/mnist/8.2",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "patch_backdoor",
+      "id": "8.2",
+      "label": "patch_backdoor; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/6.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "6.2",
+      "label": "\u03b1=0.01 Clean",
+      "malicious_ratio": 0.0
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/3.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "label_flip",
+      "id": "3.3",
+      "label": "\u03b1=0.01 30% LabelFlip",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/4.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "stealth_gaussian",
+      "id": "4.2",
+      "label": "\u03b1=0.01 20% StealthG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/5.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.2",
+      "label": "\u03b1=0.01 20% AdaptiveG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/6.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "gaussian",
+      "id": "6.1",
+      "label": "\u03b1=0.1 Clean",
+      "malicious_ratio": 0.0
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/3.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "3.1",
+      "label": "\u03b1=0.01 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/1.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.5,
+      "attack_type": "gaussian",
+      "id": "1.1",
+      "label": "\u03b1=0.5 Clean",
+      "malicious_ratio": 0.0
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/1.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.5,
+      "attack_type": "gaussian",
+      "id": "1.2",
+      "label": "\u03b1=0.5 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/1.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.5,
+      "attack_type": "label_flip",
+      "id": "1.3",
+      "label": "\u03b1=0.5 20% LabelFlip",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/2.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "gaussian",
+      "id": "2.1",
+      "label": "\u03b1=0.1 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/2.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "label_flip",
+      "id": "2.2",
+      "label": "\u03b1=0.1 20% LabelFlip",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/2.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "gaussian",
+      "id": "2.3",
+      "label": "\u03b1=0.1 30% Gaussian",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/3.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "3.2",
+      "label": "\u03b1=0.01 30% Gaussian",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/4.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "stealth_gaussian",
+      "id": "4.1",
+      "label": "\u03b1=0.1 20% StealthG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/4.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "stealth_gaussian",
+      "id": "4.3",
+      "label": "\u03b1=0.01 30% StealthG",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/5.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.1",
+      "label": "\u03b1=0.1 20% AdaptiveG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/5.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.3",
+      "label": "\u03b1=0.01 30% AdaptiveG",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "ablation/fashion_mnist/6.2",
+    "methods": [
+      "mdbg_l0_only",
+      "mdbg_no_momentum",
+      "mdbg_no_valve",
+      "mdbg_rtr15",
+      "mdbg_rtr20",
+      "mdbg_rtr30",
+      "fed_g2l_25"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "ablation",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "6.2",
+      "label": "\u03b1=0.01 Clean",
+      "malicious_ratio": 0.0
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "ablation/fashion_mnist/3.3",
+    "methods": [
+      "mdbg_l0_only",
+      "mdbg_no_momentum",
+      "mdbg_no_valve",
+      "mdbg_rtr15",
+      "mdbg_rtr20",
+      "mdbg_rtr30",
+      "fed_g2l_25"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "ablation",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "label_flip",
+      "id": "3.3",
+      "label": "\u03b1=0.01 30% LabelFlip",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "ablation/fashion_mnist/4.2",
+    "methods": [
+      "mdbg_l0_only",
+      "mdbg_no_momentum",
+      "mdbg_no_valve",
+      "mdbg_rtr15",
+      "mdbg_rtr20",
+      "mdbg_rtr30",
+      "fed_g2l_25"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "ablation",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "stealth_gaussian",
+      "id": "4.2",
+      "label": "\u03b1=0.01 20% StealthG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "ablation/fashion_mnist/5.2",
+    "methods": [
+      "mdbg_l0_only",
+      "mdbg_no_momentum",
+      "mdbg_no_valve",
+      "mdbg_rtr15",
+      "mdbg_rtr20",
+      "mdbg_rtr30",
+      "fed_g2l_25"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "ablation",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.2",
+      "label": "\u03b1=0.01 20% AdaptiveG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "clean/fashion_mnist/3.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "3.1",
+      "label": "\u03b1=0.01 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "oracle/fashion_mnist/3.1",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "3.1",
+      "label": "\u03b1=0.01 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "clean/fashion_mnist/3.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "label_flip",
+      "id": "3.3",
+      "label": "\u03b1=0.01 30% LabelFlip",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "oracle/fashion_mnist/3.3",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "label_flip",
+      "id": "3.3",
+      "label": "\u03b1=0.01 30% LabelFlip",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "clean/fashion_mnist/4.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "stealth_gaussian",
+      "id": "4.2",
+      "label": "\u03b1=0.01 20% StealthG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "oracle/fashion_mnist/4.2",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "stealth_gaussian",
+      "id": "4.2",
+      "label": "\u03b1=0.01 20% StealthG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "clean/fashion_mnist/5.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.2",
+      "label": "\u03b1=0.01 20% AdaptiveG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "oracle/fashion_mnist/5.2",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.2",
+      "label": "\u03b1=0.01 20% AdaptiveG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_end_round": 20,
+      "attack_start_round": 10,
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "temporal/fashion_mnist/2.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_no_momentum"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "temporal",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "gaussian",
+      "id": "2.1",
+      "label": "\u03b1=0.1 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_end_round": 20,
+      "attack_start_round": 10,
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "temporal/fashion_mnist/3.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_no_momentum"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "temporal",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "3.1",
+      "label": "\u03b1=0.01 20% Gaussian",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data",
+      "partition_policy": "preserve_empty"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "preserve_empty/fashion_mnist/6.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_l0_only",
+      "fed_g2l_25"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "preserve_empty",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "6.2",
+      "label": "\u03b1=0.01 Clean",
+      "malicious_ratio": 0.0
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data",
+      "partition_policy": "preserve_empty"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "preserve_empty/fashion_mnist/3.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_l0_only",
+      "fed_g2l_25"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "preserve_empty",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "label_flip",
+      "id": "3.3",
+      "label": "\u03b1=0.01 30% LabelFlip",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data",
+      "max_local_steps": 5
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "fixed_steps/fashion_mnist/3.3",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_l0_only",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "fixed_steps",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "label_flip",
+      "id": "3.3",
+      "label": "\u03b1=0.01 30% LabelFlip",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data",
+      "max_local_steps": 5
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "fixed_steps/fashion_mnist/5.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_l0_only",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "fixed_steps",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "adaptive_gaussian",
+      "id": "5.2",
+      "label": "\u03b1=0.01 20% AdaptiveG",
+      "malicious_ratio": 0.2
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/7.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan",
+      "mdbg_l0_only"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "minmax_omniscient",
+      "id": "7.1",
+      "label": "minmax_omniscient; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "clean/fashion_mnist/7.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "minmax_omniscient",
+      "id": "7.1",
+      "label": "minmax_omniscient; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "oracle/fashion_mnist/7.1",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "minmax_omniscient",
+      "id": "7.1",
+      "label": "minmax_omniscient; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/7.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "sample_weighted_mean",
+      "norm_clip",
+      "coord_median",
+      "krum_bound30",
+      "fltrust_normalized",
+      "flame_hdbscan",
+      "mdbg_l0_only"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "minsum_omniscient",
+      "id": "7.2",
+      "label": "minsum_omniscient; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "clean/fashion_mnist/7.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "minsum_omniscient",
+      "id": "7.2",
+      "label": "minsum_omniscient; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "oracle/fashion_mnist/7.2",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "minsum_omniscient",
+      "id": "7.2",
+      "label": "minsum_omniscient; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/8.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_l0_only",
+      "fedavg",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "patch_backdoor",
+      "id": "8.1",
+      "label": "patch_backdoor; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "clean/fashion_mnist/8.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "patch_backdoor",
+      "id": "8.1",
+      "label": "patch_backdoor; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "oracle/fashion_mnist/8.1",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "patch_backdoor",
+      "id": "8.1",
+      "label": "patch_backdoor; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "main/fashion_mnist/8.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "mdbg_l0_only",
+      "fedavg",
+      "fltrust_normalized",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "patch_backdoor",
+      "id": "8.2",
+      "label": "patch_backdoor; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "clean/fashion_mnist/8.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "patch_backdoor",
+      "id": "8.2",
+      "label": "patch_backdoor; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "fashion_mnist",
+    "dropout_rate": 0.1,
+    "id": "oracle/fashion_mnist/8.2",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "patch_backdoor",
+      "id": "8.2",
+      "label": "patch_backdoor; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "cifar10",
+    "dropout_rate": 0.1,
+    "id": "main/cifar10/6.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "gaussian",
+      "id": "6.1",
+      "label": "\u03b1=0.1 Clean",
+      "malicious_ratio": 0.0
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "cifar10",
+    "dropout_rate": 0.1,
+    "id": "main/cifar10/6.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "gaussian",
+      "id": "6.2",
+      "label": "\u03b1=0.01 Clean",
+      "malicious_ratio": 0.0
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "cifar10",
+    "dropout_rate": 0.1,
+    "id": "main/cifar10/7.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "minmax_omniscient",
+      "id": "7.1",
+      "label": "minmax_omniscient; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "cifar10",
+    "dropout_rate": 0.1,
+    "id": "clean/cifar10/7.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "minmax_omniscient",
+      "id": "7.1",
+      "label": "minmax_omniscient; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "cifar10",
+    "dropout_rate": 0.1,
+    "id": "oracle/cifar10/7.1",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "minmax_omniscient",
+      "id": "7.1",
+      "label": "minmax_omniscient; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "cifar10",
+    "dropout_rate": 0.1,
+    "id": "main/cifar10/7.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "minsum_omniscient",
+      "id": "7.2",
+      "label": "minsum_omniscient; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "cifar10",
+    "dropout_rate": 0.1,
+    "id": "clean/cifar10/7.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "minsum_omniscient",
+      "id": "7.2",
+      "label": "minsum_omniscient; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "cifar10",
+    "dropout_rate": 0.1,
+    "id": "oracle/cifar10/7.2",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "minsum_omniscient",
+      "id": "7.2",
+      "label": "minsum_omniscient; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "cifar10",
+    "dropout_rate": 0.1,
+    "id": "main/cifar10/8.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "patch_backdoor",
+      "id": "8.1",
+      "label": "patch_backdoor; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "cifar10",
+    "dropout_rate": 0.1,
+    "id": "clean/cifar10/8.1",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "patch_backdoor",
+      "id": "8.1",
+      "label": "patch_backdoor; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "cifar10",
+    "dropout_rate": 0.1,
+    "id": "oracle/cifar10/8.1",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.1,
+      "attack_type": "patch_backdoor",
+      "id": "8.1",
+      "label": "patch_backdoor; alpha=0.1",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "cifar10",
+    "dropout_rate": 0.1,
+    "id": "main/cifar10/8.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg",
+      "flame_hdbscan"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "main",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "patch_backdoor",
+      "id": "8.2",
+      "label": "patch_backdoor; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "clean",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "cifar10",
+    "dropout_rate": 0.1,
+    "id": "clean/cifar10/8.2",
+    "methods": [
+      "fed_mdbscan_g",
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "clean",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "patch_backdoor",
+      "id": "8.2",
+      "label": "patch_backdoor; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  },
+  {
+    "config_overrides": {
+      "attack_mode": "oracle",
+      "data_dir": "/home/gokcen/Fed_MDBSCAN/new_work/data"
+    },
+    "data_size_sigma": 0.5,
+    "dataset": "cifar10",
+    "dropout_rate": 0.1,
+    "id": "oracle/cifar10/8.2",
+    "methods": [
+      "fedavg"
+    ],
+    "num_clients": 100,
+    "num_rounds": 30,
+    "phase": "oracle",
+    "scenario": {
+      "alpha": 0.01,
+      "attack_type": "patch_backdoor",
+      "id": "8.2",
+      "label": "patch_backdoor; alpha=0.01",
+      "malicious_ratio": 0.3
+    },
+    "seeds": [
+      42,
+      137,
+      2024
+    ]
+  }
+]

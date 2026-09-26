@@ -1,0 +1,21 @@
+\begin{table}[!t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Client-Level Discrimination by Attack Family}\label{tab:discrimination}
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tabular}{lrrrrr}
+\toprule
+Attacker family & Cells & TPR & FPR & $J$ & Benefit \\
+ &  & (\%) & (\%) & (pp) & (pp) \\
+\midrule
+Loud Gaussian ($\sigma=5$) & 60 & 87.5 & 18.9 & $+$68.6 & $+$13.7 \\
+Label flipping & 36 & 69.7 & 24.8 & $+$45.0 & $-$9.0 \\
+Patch backdoor & 16 & 34.0 & 32.3 & $+$1.8 & $-$19.2 \\
+Bounded random direction & 72 & 34.1 & 33.7 & $+$0.4 & $-$23.0 \\
+Constrained omniscient & 28 & 21.8 & 38.0 & $-$16.1 & $-$10.6 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\par\vspace{3pt}\parbox{\linewidth}{\footnotesize $J=\mathrm{TPR}-\mathrm{FPR}$ (Youden's index); $J<0$ means honest clients are rejected in preference to attackers. Benefit is defense accuracy minus undefended accuracy in the same condition. Each row pools rule~$\times$~dataset~$\times$~condition cells of the four rejecting rules; family coverage differs, so the rows are descriptive averages.}
+\end{table}

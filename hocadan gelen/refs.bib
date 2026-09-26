@@ -1,0 +1,366 @@
+% refs.bib -- v3
+% Verification status of every entry is recorded in ../06_OPEN_ITEMS_BEFORE_SUBMISSION.md.
+% DOIs are included only where the record was resolved against Crossref or the
+% publisher's own page during preparation; entries without a DOI field were
+% identified by venue and author list only, and the DOI must be added by the
+% authors before submission rather than guessed here.
+
+% ============================ Federated learning ============================
+
+@inproceedings{mcmahan2017,
+  author    = {Brendan McMahan and Eider Moore and Daniel Ramage and Seth Hampson and Blaise Ag{\"u}era y Arcas},
+  title     = {Communication-Efficient Learning of Deep Networks from Decentralized Data},
+  booktitle = {Proc. 20th Int. Conf. Artificial Intelligence and Statistics (AISTATS)},
+  series    = {PMLR},
+  volume    = {54},
+  pages     = {1273--1282},
+  year      = {2017}
+}
+
+@article{hsu2019,
+  author  = {Tzu-Ming Harry Hsu and Hang Qi and Matthew Brown},
+  title   = {Measuring the Effects of Non-Identical Data Distribution for Federated Visual Classification},
+  journal = {arXiv preprint arXiv:1909.06335},
+  year    = {2019}
+}
+
+% ====================== Robust aggregation and its bounds ====================
+
+@inproceedings{blanchard2017,
+  author    = {Peva Blanchard and El Mahdi El Mhamdi and Rachid Guerraoui and Julien Stainer},
+  title     = {Machine Learning with Adversaries: {B}yzantine Tolerant Gradient Descent},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  volume    = {30},
+  pages     = {119--129},
+  year      = {2017}
+}
+
+@inproceedings{yin2018,
+  author    = {Dong Yin and Yudong Chen and Kannan Ramchandran and Peter L. Bartlett},
+  title     = {Byzantine-Robust Distributed Learning: Towards Optimal Statistical Rates},
+  booktitle = {Proc. 35th Int. Conf. Machine Learning (ICML)},
+  series    = {PMLR},
+  volume    = {80},
+  pages     = {5650--5659},
+  year      = {2018}
+}
+
+@article{pillutla2022rfa,
+  author  = {Krishna Pillutla and Sham M. Kakade and Zaid Harchaoui},
+  title   = {Robust Aggregation for Federated Learning},
+  journal = {IEEE Trans. Signal Process.},
+  volume  = {70},
+  pages   = {1142--1154},
+  year    = {2022},
+  doi     = {10.1109/TSP.2022.3153135}
+}
+
+@inproceedings{cao2021fltrust,
+  author    = {Xiaoyu Cao and Minghong Fang and Jia Liu and Neil Zhenqiang Gong},
+  title     = {{FLTrust}: Byzantine-Robust Federated Learning via Trust Bootstrapping},
+  booktitle = {Proc. Network and Distributed System Security Symp. (NDSS)},
+  year      = {2021},
+  note      = {arXiv:2012.13995}
+}
+
+@inproceedings{karimireddy2022bucketing,
+  author    = {Sai Praneeth Karimireddy and Lie He and Martin Jaggi},
+  title     = {Byzantine-Robust Learning on Heterogeneous Datasets via Bucketing},
+  booktitle = {Proc. 10th Int. Conf. Learning Representations (ICLR)},
+  year      = {2022},
+  note      = {arXiv:2006.09365}
+}
+
+@inproceedings{allouah2023mixing,
+  author    = {Youssef Allouah and Sadegh Farhadkhani and Rachid Guerraoui and Nirupam Gupta and Rafael Pinot and John Stephan},
+  title     = {Fixing by Mixing: A Recipe for Optimal {B}yzantine {ML} under Heterogeneity},
+  booktitle = {Proc. 26th Int. Conf. Artificial Intelligence and Statistics (AISTATS)},
+  series    = {PMLR},
+  volume    = {206},
+  pages     = {1232--1300},
+  year      = {2023},
+  note      = {arXiv:2302.01772}
+}
+
+% ======================== Clustering-based defenses ==========================
+
+@inproceedings{nguyen2022flame,
+  author    = {Thien Duc Nguyen and Phillip Rieger and Huili Chen and Hossein Yalame and Helen M{\"o}llering and Hossein Fereidooni and Samuel Marchal and Markus Miettinen and Azalia Mirhoseini and Shaza Zeitouni and Farinaz Koushanfar and Ahmad-Reza Sadeghi and Thomas Schneider},
+  title     = {{FLAME}: Taming Backdoors in Federated Learning},
+  booktitle = {Proc. 31st USENIX Security Symp.},
+  pages     = {1415--1432},
+  year      = {2022}
+}
+
+@inproceedings{rieger2022deepsight,
+  author    = {Phillip Rieger and Thien Duc Nguyen and Markus Miettinen and Ahmad-Reza Sadeghi},
+  title     = {{DeepSight}: Mitigating Backdoor Attacks in Federated Learning Through Deep Model Inspection},
+  booktitle = {Proc. Network and Distributed System Security Symp. (NDSS)},
+  year      = {2022},
+  note      = {arXiv:2201.00763}
+}
+
+@inproceedings{rieger2024crowdguard,
+  author    = {Phillip Rieger and Torsten Krau{\ss} and Markus Miettinen and Alexandra Dmitrienko and Ahmad-Reza Sadeghi},
+  title     = {{CrowdGuard}: Federated Backdoor Detection in Federated Learning},
+  booktitle = {Proc. Network and Distributed System Security Symp. (NDSS)},
+  year      = {2024},
+  doi       = {10.14722/ndss.2024.23233},
+  note      = {arXiv:2210.07714}
+}
+
+@inproceedings{krauss2023mesas,
+  author    = {Torsten Krau{\ss} and Alexandra Dmitrienko},
+  title     = {{MESAS}: Poisoning Defense for Federated Learning Resilient against Adaptive Attackers},
+  booktitle = {Proc. 2023 ACM SIGSAC Conf. Computer and Communications Security (CCS)},
+  pages     = {1526--1540},
+  year      = {2023},
+  doi       = {10.1145/3576915.3623212}
+}
+
+@inproceedings{kabir2023flshield,
+  author  = {Ehsanul Kabir and Zeyu Song and Md Rafi Ur Rashid and Shagufta Mehnaz},
+  title   = {{FLShield}: A Validation Based Federated Learning Framework to Defend Against Poisoning Attacks},
+  booktitle = {Proc. IEEE Symposium on Security and Privacy (SP)},
+  pages   = {2572--2590},
+  doi     = {10.1109/SP54263.2024.00141},
+  year    = {2024}
+}
+
+@inproceedings{yuan2025flac,
+  author    = {Jidong Yuan and Qihang Zhang and Naiyue Chen and Shengbo Chen and Baomin Xu},
+  title     = {A Multi-Granularity Clustering Approach for Federated Backdoor Defense with the {Adam} Optimizer},
+  booktitle = {Proc. 34th Int. Joint Conf. Artificial Intelligence (IJCAI)},
+  pages     = {6931--6939},
+  year      = {2025},
+  doi       = {10.24963/ijcai.2025/771}
+}
+
+@article{chen2023fedward,
+  author  = {Zekai Chen and Fuyi Wang and Zhiwei Zheng and Ximeng Liu and Yujie Lin},
+  title   = {{Fedward}: Flexible Federated Backdoor Defense Framework with Non-{IID} Data},
+  journal = {arXiv preprint arXiv:2307.00356},
+  year    = {2023}
+}
+
+@article{qian2024mdbscan,
+  author  = {Jiaxin Qian and You Zhou and Xuming Han and Yizhang Wang},
+  title   = {{MDBSCAN}: A Multi-Density {DBSCAN} Based on Relative Density},
+  journal = {Neurocomputing},
+  volume  = {576},
+  pages   = {127329},
+  year    = {2024},
+  doi     = {10.1016/j.neucom.2024.127329}
+}
+
+% ============================== Attacks ======================================
+
+@inproceedings{fang2020,
+  author    = {Minghong Fang and Xiaoyu Cao and Jinyuan Jia and Neil Zhenqiang Gong},
+  title     = {Local Model Poisoning Attacks to {B}yzantine-Robust Federated Learning},
+  booktitle = {Proc. 29th USENIX Security Symp.},
+  pages     = {1623--1640},
+  year      = {2020}
+}
+
+@inproceedings{baruch2019,
+  author    = {Gilad Baruch and Moran Baruch and Yoav Goldberg},
+  title     = {A Little Is Enough: Circumventing Defenses for Distributed Learning},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  volume    = {32},
+  pages     = {8632--8642},
+  year      = {2019}
+}
+
+@inproceedings{shejwalkar2021,
+  author    = {Virat Shejwalkar and Amir Houmansadr},
+  title     = {Manipulating the {B}yzantine: Optimizing Model Poisoning Attacks and Defenses for Federated Learning},
+  booktitle = {Proc. Network and Distributed System Security Symp. (NDSS)},
+  year      = {2021}
+}
+
+@inproceedings{bagdasaryan2020,
+  author    = {Eugene Bagdasaryan and Andreas Veit and Yiqing Hua and Deborah Estrin and Vitaly Shmatikov},
+  title     = {How to Backdoor Federated Learning},
+  booktitle = {Proc. 23rd Int. Conf. Artificial Intelligence and Statistics (AISTATS)},
+  series    = {PMLR},
+  volume    = {108},
+  pages     = {2938--2948},
+  year      = {2020}
+}
+
+@inproceedings{xie2020dba,
+  author    = {Chulin Xie and Keli Huang and Pin-Yu Chen and Bo Li},
+  title     = {{DBA}: Distributed Backdoor Attacks against Federated Learning},
+  booktitle = {Proc. 8th Int. Conf. Learning Representations (ICLR)},
+  year      = {2020}
+}
+
+% =============== Heterogeneity, fairness and critical evaluation =============
+
+@article{ye2025illusion,
+  author  = {Pei Ye and Yuqing Li and Kun He and Qiao Li and Tianjie Qin and Xiong Wang and Kaige Yang and Chujun Zhang and Jing Chen},
+  title   = {Breaking the Illusion: A Critical Study of Backdoor Defense in Federated Learning With Non-{IID} Data},
+  journal = {IEEE Trans. Inf. Forensics Security},
+  volume  = {20},
+  pages   = {13264--13279},
+  year    = {2025},
+  doi     = {10.1109/TIFS.2025.3643155}
+}
+
+@article{li2025heterogeneity,
+  author  = {Qian Li and Di Wu and Dawei Zhou and Chenhao Lin and Shuai Liu and Cong Wang and Chao Shen},
+  title   = {Robust Adversarial Defenses in Federated Learning: Exploring the Impact of Data Heterogeneity},
+  journal = {IEEE Trans. Inf. Forensics Security},
+  volume  = {20},
+  pages   = {6005--6018},
+  year    = {2025},
+  doi     = {10.1109/TIFS.2025.3576594}
+}
+
+@article{singh2023fair,
+  author  = {Ashneet Khandpur Singh and Alberto Blanco-Justicia and Josep Domingo-Ferrer},
+  title   = {Fair Detection of Poisoning Attacks in Federated Learning on Non-i.i.d. Data},
+  journal = {Data Mining and Knowledge Discovery},
+  volume  = {37},
+  number  = {5},
+  pages   = {1998--2023},
+  year    = {2023},
+  doi     = {10.1007/s10618-022-00912-6}
+}
+
+@inproceedings{touat2023bias,
+  author    = {Ousmane Touat and Sara Bouchenak},
+  title     = {Towards Robust and Bias-free Federated Learning},
+  booktitle = {Proc. 3rd Workshop on Machine Learning and Systems (EuroMLSys)},
+  year      = {2023},
+  doi       = {10.1145/3578356.3592576}
+}
+
+@inproceedings{ajibuwa2025fairness,
+  author    = {Opeyemi Ajibuwa and Olusola T. Odeyomi},
+  title     = {On the Hidden Costs of Fairness in {B}yzantine-Robust Decentralized Federated Learning Under Data Heterogeneity},
+  booktitle = {Proc. IEEE Int. Performance, Computing, and Communications Conf. (IPCCC)},
+  year      = {2025},
+  doi       = {10.1109/IPCCC66453.2025.11304645}
+}
+
+@inproceedings{shejwalkar2022drawing,
+  author    = {Virat Shejwalkar and Amir Houmansadr and Peter Kairouz and Daniel Ramage},
+  title     = {Back to the Drawing Board: A Critical Evaluation of Poisoning Attacks on Production Federated Learning},
+  booktitle = {Proc. IEEE Symp. Security and Privacy (S\&P)},
+  pages     = {1354--1371},
+  year      = {2022},
+  doi       = {10.1109/SP46214.2022.9833647}
+}
+
+@article{abad2025evaluation,
+  author  = {Gorka Abad and Marina Kr{\v c}ek and Stefanos Koffas and Behrad Tajalli and Marco Arazzi and Roberto Ria{\~n}o and Xiaoyun Xu and Zhuoran Liu and Antonino Nocera and Stjepan Picek},
+  title   = {{SoK}: The Last Line of Defense: On Backdoor Defense Evaluation},
+  journal = {arXiv preprint arXiv:2511.13143},
+  year    = {2025}
+}
+
+@article{zhang2025flpoison,
+  author  = {Heyi Zhang and Yule Liu and Xinlei He and Jun Wu and Tianshuo Cong and Xinyi Huang},
+  title   = {{SoK}: Benchmarking Poisoning Attacks and Defenses in Federated Learning},
+  journal = {arXiv preprint arXiv:2502.03801},
+  year    = {2025}
+}
+
+@article{bellachia2026sok,
+  author  = {Ahmed Ayoub Bellachia and Mouhamed Amine Bouchiha and Yacine Ghamri-Doudane},
+  title   = {{SoK}: Understanding Backdoor Attacks and Defenses in Federated Learning},
+  journal = {Expert Systems with Applications},
+  volume  = {325},
+  pages   = {132558},
+  year    = {2026},
+  doi     = {10.1016/j.eswa.2026.132558}
+}
+
+@inproceedings{xie2024fedredefense,
+  author    = {Yueqi Xie and Minghong Fang and Neil Zhenqiang Gong},
+  title     = {{FedREDefense}: Defending against Model Poisoning Attacks for Federated Learning using Model Update Reconstruction Error},
+  booktitle = {Proc. 41st Int. Conf. Machine Learning (ICML)},
+  series    = {PMLR},
+  volume    = {235},
+  year      = {2024}
+}
+
+% ==================== External anchors for the structural results ============
+
+@article{viola2004cascade,
+  author  = {Paul Viola and Michael J. Jones},
+  title   = {Robust Real-Time Face Detection},
+  journal = {International Journal of Computer Vision},
+  volume  = {57},
+  number  = {2},
+  pages   = {137--154},
+  year    = {2004},
+  doi     = {10.1023/B:VISI.0000013087.49260.fb}
+}
+
+@article{kloft2012centroid,
+  author  = {Marius Kloft and Pavel Laskov},
+  title   = {Security Analysis of Online Centroid Anomaly Detection},
+  journal = {Journal of Machine Learning Research},
+  volume  = {13},
+  pages   = {3681--3724},
+  year    = {2012}
+}
+
+% ============================== Datasets =====================================
+
+@article{lecun1998,
+  author  = {Yann LeCun and L{\'e}on Bottou and Yoshua Bengio and Patrick Haffner},
+  title   = {Gradient-Based Learning Applied to Document Recognition},
+  journal = {Proceedings of the IEEE},
+  volume  = {86},
+  number  = {11},
+  pages   = {2278--2324},
+  year    = {1998},
+  doi     = {10.1109/5.726791}
+}
+
+@article{xiao2017fmnist,
+  author  = {Han Xiao and Kashif Rasul and Roland Vollgraf},
+  title   = {Fashion-{MNIST}: A Novel Image Dataset for Benchmarking Machine Learning Algorithms},
+  journal = {arXiv preprint arXiv:1708.07747},
+  year    = {2017}
+}
+
+@inproceedings{anguita2013har,
+  author    = {Davide Anguita and Alessandro Ghio and Luca Oneto and Xavier Parra and Jorge L. Reyes-Ortiz},
+  title     = {A Public Domain Dataset for Human Activity Recognition Using Smartphones},
+  booktitle = {Proc. 21st European Symp. Artificial Neural Networks (ESANN)},
+  pages     = {437--442},
+  year      = {2013}
+}
+
+@techreport{krizhevsky2009,
+  author = {Alex Krizhevsky},
+  title = {Learning Multiple Layers of Features from Tiny Images},
+  institution = {University of Toronto},
+  year = {2009},
+  url = {https://www.cs.toronto.edu/~kriz/learning-features-2009-TR.pdf}
+}
+
+@article{djemaa2026heterogeneity,
+  author  = {Aimen Djemaa and Djamel Djenouri and Phil Legg},
+  title   = {Heterogeneity-Aware Poisoning Attacks and Mitigation in Federated Learning: A Comprehensive Survey and Taxonomy},
+  journal = {Electronics},
+  volume  = {15},
+  number  = {13},
+  pages   = {2876},
+  year    = {2026},
+  doi     = {10.3390/electronics15132876}
+}
+
+@inproceedings{ramana2026alldd,
+  author    = {M. Venkata Ramana and Choda Nagabharani and S. Gopi Krishna and Veernapu Victor Mojesh and A. Malathi},
+  title     = {Adaptive Local Density-based Defense Against Poisoning Attacks in Federated Learning},
+  booktitle = {Proc. 5th Int. Conf. Computer Networks, Big Data and IoT (ICCBI)},
+  address   = {Dubai, United Arab Emirates},
+  year      = {2026},
+  doi       = {10.1109/ICCBI68589.2026.11619730}
+}
