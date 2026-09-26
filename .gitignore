@@ -53,8 +53,3 @@ _bmad-output/
 # Retired workspace archives, if copied back into this repository
 /Fed_MDBSCAN_TIFS_arsiv_*/
 /agent_support/
-
-# Reviewed V4 publication bundles only (raw archives remain excluded)
-!/tifs_submission/v4/submission_files.zip
-!/tifs_submission/v4/submission_files/latex_source.zip
-!/tifs_submission/v4/submission_files/reproducibility_artifact.zip

@@ -1,6 +1,6 @@
-# V4 analiz dizini
+# Araştırma analizleri
 
-Bu dizin güncel makalenin kanıt ve doğrulama çalışmalarını içerir. Tarihsel adlar, betik/provenance yolları bozulmasın diye korunmuştur. Eski raporlardaki yorumlar tarihçedir; güncel iddia kapsamı V4 metnidir.
+Bu dizin güncel makalenin kanıt ve doğrulama çalışmalarını içerir. Tarihsel adlar, betik/provenance yolları bozulmasın diye korunmuştur. Eski raporlardaki yorumlar tarihçedir; güncel iddia kapsamı V5 metnidir.
 
 | Dizin | İşlev |
 | --- | --- |
