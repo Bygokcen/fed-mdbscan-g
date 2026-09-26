@@ -153,3 +153,18 @@ Makalede anlatılmayan deney ayrıntıları kod ve kanonik koşu kayıtlarından
 4. **Numaralandırma.** Ana metin tabloları I–XI, ek belge tabloları XII–XXII. Ek belgedeki elle yazılmış göndermeler yeniden eşleştirildi.
 
 **Derleme.** `main.pdf` 11 sayfa; son sayfada yaklaşık 20 satır boş. `supplement.pdf` 6, `main_tr.pdf` 12 sayfa. Taşan satır, tanımsız gönderme ve eksik karakter yok. Sayı kümeleri eşleşiyor. `derived_values.json` değişmedi.
+
+## Genel kontrol ve son düzeltmeler (27 Eylül 2026)
+1. **Şekil 2.** Logaritmik α ekseninde 0.5 değerinin etiketi yoktu. Eksen artık yalnız üç koşulu gösteriyor: 0.5, 0.1 ve 0.01. Türkçe şekil de aynı biçimde düzeltildi.
+2. **Tablo VI'daki veri kümesi adları.** Satırlar "Fashion-MNIST" ve "UCI HAR" yerine diğer tablolardaki gibi "Fashion" ve "HAR" oldu. Nota "Fashion denotes Fashion-MNIST" eklendi. Aynı değişiklik ek belgedeki iki kontrol tablosunda ve Türkçe tabloda da yapıldı.
+3. **Sonuç.** Bölüm VI'daki eşleşmiş FLAME sonucu sonuç bölümüne de eklendi, İngilizce ve Türkçe. Kabul sayısıyla eşleştirilmiş rastgele altkümeler kaybın bir kısmını geri kazandırıyor. Kalanı kırpmadan, daha küçük kabul kümesinden ya da ikisinden geliyor.
+4. **README.** V5'e göre güncellendi. Başlık, yapılacaklar dosyasına gönderme, gönderim paketinin henüz olmadığı, `build_review_tables.py` adımı ve Python ortamı notu eklendi. V4 bölümleri geçmiş olarak işaretlendi.
+
+**Genel kontrol.**
+- Bütün tablolar ve `derived_values.json`, betiklerden birebir aynı üretiliyor.
+- bibtex uyarı vermiyor. Kaynakçada atıf almayan tek girdi `xie2024fedredefense`; kaynak listesine girmediği için zararsız.
+- Üç PDF'te de bütün yazı tipleri gömülü, Type 3 yazı tipi yok.
+- Ana sayılar kanıt dosyalarıyla eşleşiyor. İngilizce yazım denetiminde hata yok.
+- Hiçbir tabloda satır adı olarak uzun veri kümesi adı kalmadı.
+
+**Derleme.** `main.pdf` 11 sayfa. Kaynakçanın tamamı 11. sayfada; sağ sütunda yaklaşık 200 pt boş. `supplement.pdf` 6, `main_tr.pdf` 12 sayfa. Taşan satır, tanımsız gönderme ve hata yok. Sayfa 7 yalnız tablolardan oluşuyor; bu önceki derlemeyle aynı.
