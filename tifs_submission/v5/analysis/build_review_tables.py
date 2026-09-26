@@ -63,6 +63,9 @@ def main():
         for name, fn in (('review_e1.tex', e1_table), ('review_e2.tex', e2_table), ('review_e3.tex', e3_table),
                          ('review_e4.tex', e4_table)):
             open(os.path.join(gen, name), 'w', encoding='utf-8').write(fn(summary))
+        open(os.path.join(gen, 'review_main.tex'), 'w', encoding='utf-8').write(main_table(summary))
+        gen_tr = os.path.join(root, 'manuscript', 'generated_tr')
+        open(os.path.join(gen_tr, 'review_main.tex'), 'w', encoding='utf-8').write(main_table(summary, turkish=True))
     print('review tables written')
 
 
@@ -133,35 +136,62 @@ NAME = {'mnist': 'MNIST', 'fashion_mnist': 'Fashion-MNIST', 'har': 'UCI HAR'}
 
 def e3_table(summary):
     rows = [[NAME[r['dataset']], f"{r['fedavg']:.2f}", f"{r['flame']:.2f}", f"{r['flame_nonoise']:.2f}",
-             f"{r['flame_random']:.2f}", f"{r['multikrum']:.2f}", f"{r['multikrum_random']:.2f}"]
+             f"{r['flame_random']:.2f}", f"{r['flame_matched_random']:.2f}", f"{r['multikrum']:.2f}",
+             f"{r['multikrum_random']:.2f}"]
             for r in summary['e23']]
     return tex_table(
         caption=r"Adversary-Free Final Accuracy at $\alpha=0.01$ With Noise and Selection Controls",
         label="tab:review_e3", star=True,
-        header=["Dataset", "FedAvg", "FLAME", "FLAME", "FLAME", "Multi-Krum", "Multi-Krum"],
-        units=["", "", "", "no noise", "random subset", "", "random subset"],
-        rows=rows, colspec="lrrrrrr",
-        notes=(r"Mean final accuracy (\%) over seeds 42, 137, and 2024. FedAvg, FLAME, and Multi-Krum "
-               r"are the canonical runs. ``No noise'' sets the FLAME noise factor to zero. ``Random "
-               r"subset'' replaces the selected updates in every round with a uniformly random subset "
-               r"of the same size, so clipping, noise, and the number of admitted updates are unchanged. "
-               r"All controls share each seed's data partition, participation schedule, and initial "
-               r"model with the canonical runs."))
+        header=["Dataset", "FedAvg", "FLAME", "FLAME", "FLAME random", "FLAME random", "Multi-Krum", "Multi-Krum"],
+        units=["", "", "", "no noise", "rule-sized", "matched", "", "random"],
+        rows=rows, colspec="lrrrrrrr",
+        notes=(r"Mean final accuracy (\%) over seeds 42, 137, and 2024. FedAvg, FLAME, and Multi-Krum are "
+               r"the canonical runs. ``No noise'' sets the FLAME noise factor to zero. The random controls "
+               r"replace the selected updates in every round with a uniformly random subset; clipping and "
+               r"noise are unchanged. For Multi-Krum the subset has 61 members in both arms. ``Rule-sized'' "
+               r"uses the size that FLAME selects on the control's own updates, so admitted counts can "
+               r"drift from the canonical run. ``Matched'' uses the admitted count that the canonical FLAME "
+               r"run recorded in each round, so admitted counts and BER equal those of canonical FLAME. All "
+               r"controls share each seed's data partition, participation schedule, and initial model with "
+               r"the canonical runs."))
 
 
 def e4_table(summary):
     rows = [[NAME[r['dataset']], span(r['noise_effect']), span(r['flame_minus_random']),
-             span(r['multikrum_minus_random']), span(r['fedavg_minus_multikrum_random'])]
+             span(r['flame_minus_matched_random']), span(r['multikrum_minus_random']),
+             span(r['fedavg_minus_multikrum_random'])]
             for r in summary['e23']]
     return tex_table(
         caption=r"Paired Final-Accuracy Differences for the Controls of Table~\ref{tab:review_e3}",
         label="tab:review_e4", star=True,
-        header=["Dataset", "No noise", "FLAME", "Multi-Krum", "FedAvg"],
-        units=["", r"$-$ FLAME", r"$-$ random subset", r"$-$ random subset", r"$-$ Multi-Krum random"],
-        rows=rows, colspec="lrrrr",
+        header=["Dataset", "No noise", "FLAME", "FLAME", "Multi-Krum", "FedAvg"],
+        units=["", r"$-$ FLAME", r"$-$ rule-sized", r"$-$ matched", r"$-$ random", r"$-$ Multi-Krum random"],
+        rows=rows, colspec="lrrrrr",
         notes=(r"Percentage points, mean [minimum, maximum] over the three seed pairs. A negative entry "
-               r"in the FLAME or Multi-Krum column means that the rule's own selection yields lower "
-               r"accuracy than a random subset of the same size."))
+               r"in a FLAME or Multi-Krum column means that the rule's own selection yields lower "
+               r"accuracy than a random subset."))
+
+
+def main_table(summary, turkish=False):
+    rows = [[NAME[r['dataset']], f"{r['fedavg']:.2f}", f"{r['multikrum']:.2f}", f"{r['multikrum_random']:.2f}",
+             f"{r['flame']:.2f}", f"{r['flame_matched_random']:.2f}"] for r in summary['e23']]
+    if turkish:
+        return tex_table(
+            caption=r"$\alpha=0.01$'de Saldırgansız Son Doğruluk (\%): Kurallar ve Aynı Büyüklükte Rastgele Altkümeler",
+            label="tab:random", header=["Veri kümesi", "FedAvg", "Multi-Krum", "Multi-Krum", "FLAME", "FLAME"],
+            units=["", "", "kural", "rastgele", "kural", "rastgele"], rows=rows, colspec="lrrrrr",
+            notes=(r"Üç tohum üzerinden ortalamalar. Rastgele altkümeler her turda kuralın seçtiği "
+                   r"güncellemelerin yerini alır ve kabul sayısını korur: Multi-Krum için 61, FLAME için "
+                   r"kanonik FLAME koşumunun o turda kaydettiği sayı. Kırpma ve gürültü değişmez; "
+                   r"eşleştirilmiş farklar ek belgededir."))
+    return tex_table(
+        caption=r"Adversary-Free Final Accuracy (\%) at $\alpha=0.01$: Rules Versus Random Subsets of the Same Size",
+        label="tab:random", header=["Dataset", "FedAvg", "Multi-Krum", "Multi-Krum", "FLAME", "FLAME"],
+        units=["", "", "rule", "random", "rule", "random"], rows=rows, colspec="lrrrrr",
+        notes=(r"Means over three seeds. Random subsets replace a rule's selected updates in every round "
+               r"and keep its admitted count: 61 for Multi-Krum and, for FLAME, the count that the "
+               r"canonical FLAME run recorded in that round. Clipping and noise are unchanged; paired "
+               r"differences are in the supplement."))
 
 
 if __name__ == '__main__':

@@ -3,9 +3,11 @@
   "plan_sha256": "e7a3c4ab77c7c0a4ba6fd6c3a0513cc5b63eaf87bd48dfd31bcc875cd884183d",
   "runner_sha256": "3ffb7f060643dea33bc51d8ba9ed6b03b69b58003d82ad2a65362f6aff0dddd1",
   "protocol_sha256": "cf7dca80719ee40e007d24d3273886b0200a49891d585f92858698f78d9c0cb6",
-  "script_sha256": "9fee6076a05eb888e5aac4dde68bf794dbf72e94493a6d93d518fa71d1018ceb",
+  "script_sha256": "73f639281f311f0d5650004ac43a4db12719100676582ea28d2ce676e59838a4",
   "units_done": 66,
-  "units_missing_or_failed": []
+  "units_missing_or_failed": [],
+  "addendum_units_done": 9,
+  "addendum_plan_sha256": "6db636dace6784f18c2608acf8787771974894905f570bc3297efc3c6cf38300"
  },
  "e1": [
   {
@@ -154,6 +156,12 @@
    "attackers_outside_b0": 0
   }
  ],
+ "e1_attacked_pooled": {
+  "matrices": 72,
+  "gamma_le_tau": 22,
+  "gamma_median": 2.248158,
+  "gamma_max": 13.023808
+ },
  "e2a": [
   {
    "dataset": "mnist",
@@ -196,6 +204,17 @@
    "flame": 20.1,
    "flame_nonoise": 20.08,
    "flame_random": 45.53,
+   "flame_matched_random": 44.65,
+   "flame_minus_matched_random": {
+    "mean": -24.56,
+    "min": -33.04,
+    "max": -8.44
+   },
+   "fedavg_minus_flame_matched_random": {
+    "mean": 40.99,
+    "min": 32.86,
+    "max": 53.84
+   },
    "multikrum": 40.71,
    "multikrum_random": 84.36,
    "noise_effect": {
@@ -230,6 +249,17 @@
    "flame": 27.74,
    "flame_nonoise": 27.61,
    "flame_random": 43.79,
+   "flame_matched_random": 41.86,
+   "flame_minus_matched_random": {
+    "mean": -14.12,
+    "min": -21.97,
+    "max": -3.69
+   },
+   "fedavg_minus_flame_matched_random": {
+    "mean": 31.77,
+    "min": 22.11,
+    "max": 46.66
+   },
    "multikrum": 40.04,
    "multikrum_random": 72.58,
    "noise_effect": {
@@ -264,6 +294,17 @@
    "flame": 30.35,
    "flame_nonoise": 30.37,
    "flame_random": 36.93,
+   "flame_matched_random": 37.5,
+   "flame_minus_matched_random": {
+    "mean": -7.15,
+    "min": -12.05,
+    "max": -0.81
+   },
+   "fedavg_minus_flame_matched_random": {
+    "mean": 8.03,
+    "min": 0.48,
+    "max": 14.52
+   },
    "multikrum": 34.57,
    "multikrum_random": 50.44,
    "noise_effect": {

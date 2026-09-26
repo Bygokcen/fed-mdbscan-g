@@ -1,0 +1,19 @@
+\begin{table}[!t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Adversary-Free Final Accuracy (\%) at $\alpha=0.01$: Rules Versus Random Subsets of the Same Size}\label{tab:random}
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tabular}{lrrrrr}
+\toprule
+Dataset & FedAvg & Multi-Krum & Multi-Krum & FLAME & FLAME \\
+ &  & rule & random & rule & random \\
+\midrule
+MNIST & 85.65 & 40.71 & 84.36 & 20.10 & 44.65 \\
+Fashion-MNIST & 73.63 & 40.04 & 72.58 & 27.74 & 41.86 \\
+UCI HAR & 45.53 & 34.57 & 50.44 & 30.35 & 37.50 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\par\vspace{3pt}\parbox{\linewidth}{\footnotesize Means over three seeds. Random subsets replace a rule's selected updates in every round and keep its admitted count: 61 for Multi-Krum and, for FLAME, the count that the canonical FLAME run recorded in that round. Clipping and noise are unchanged; paired differences are in the supplement.}
+\end{table}

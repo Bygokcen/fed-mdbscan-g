@@ -134,3 +134,14 @@ Makalede anlatılmayan deney ayrıntıları kod ve kanonik koşu kayıtlarından
 **Tablo betikleri.** `build_tables.py`, `build_checks.py` ve `build_tr.py` içinde yalnızca taşınan tablolara yapılan göndermeler ve iki başlık değişti. Bütün tablo gövdeleri ve türetilmiş değerler aynı kaldı.
 
 **Derleme.** pdfLaTeX ile `main.pdf` 11, `supplement.pdf` 6, `main_tr.pdf` 12 sayfa. Taşan satır, tanımsız gönderme ve eksik karakter yok. İngilizce ve Türkçe metinlerdeki sayı kümeleri eşleşiyor.
+
+## Üçüncü değerlendirme sonrası düzeltmeler (27 Eylül 2026)
+Üçüncü dış değerlendirmenin dört tespiti de doğrulandı ve işlendi.
+
+1. **FLAME kontrolünün tanımı.** E3'teki FLAME rastgele kontrolünün kabul sayıları kanonik koşudan sapıyordu; ortalama fark 0.07 ile 1.37 güncelleme. Bu yüzden plana bir ek yazılıp koşulardan önce kaydedildi (`PROTOCOL_ADDENDUM.md`, SHA-256 `a4733cd4…`). Bu ekle 9 koşuluk eşleşmiş kontrol yapıldı. Her turda büyüklük kanonik kayıttaki kabul sayısına sabitlendi; kabul sayıları ve BER kanonik FLAME ile birebir aynı. FLAME'in seçimi eşleşmiş rastgele altkümeden 7.2 ile 24.6 puan, her tohum çiftinde kötü. Ek belgedeki "kabul sayısı değişmez" ifadesi düzeltildi ve iki FLAME kontrolü ayrı ayrı tanımlandı.
+2. **Daraltılan üç ifade.** Özetteki kopya saldırgan açıklaması kısıtlı yoklamalarla sınırlandı. "Yarıçap argümanı kanonik matrisleri açıklamaz" ifadesi "yalnızca bir kısmını açıklar" oldu. Bölüm VI'daki "hangi güncellemelerin tutulduğu daha önemlidir" ifadesi α=0.01'deki Multi-Krum ile sınırlandı; tartışmadaki cümleye de α=0.01 eklendi.
+3. **Koşu sayıları.** Bölüm V-A'ya 39 yeniden yürütme ve 36 kontrol koşusunun ayrı raporlandığını ve arşiv toplamlarını değiştirmediğini söyleyen cümle eklendi. Ek belgede koşuların dökümü var.
+4. **Görünürlük.** Ana metne rastgele seçim tablosu eklendi (Tablo VI; Multi-Krum ve eşleşmiş FLAME). Γ tablosu beş adımlı ve kanonik satırları birlikte gösteriyor (Tablo XI; 35/36 ve 22/72). Girişteki katkı cümlesi, kabul sayısını koruyan rastgele altkümelere göre yeniden yazıldı.
+5. **Sayfa bütçesi.** Bölüm planı paragrafı tek cümleye indi, literatürdeki oran paragrafı kısaldı. Kapsam yeniden oynatma tablosu ek belgeye taşındı ve beş adımlı küme örneği tek cümleye indi. Ana metin tabloları I–XII, ek belge tabloları XIII–XXI. Ek belgedeki elle yazılmış tablo numaraları yeni sıraya göre güncellendi.
+
+**Derleme.** `main.pdf` 11 sayfa ve son sayfası dolu; `supplement.pdf` 6, `main_tr.pdf` 12 sayfa. Taşan satır, tanımsız gönderme ve eksik karakter yok. Özet 250 kelime. İngilizce ve Türkçe metinlerdeki sayı kümeleri eşleşiyor. Mevcut tablo gövdeleri ve `derived_values.json` değişmedi.

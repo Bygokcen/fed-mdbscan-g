@@ -104,7 +104,7 @@ TABLES = {
         rows=[(r"Attacker family & Cells & TPR & FPR & $J$ & Benefit \\", r"Saldırgan ailesi & Hücre & TPR & FPR & $J$ & Fayda \\"), UNITS6]),
     "discrimination_method": dict(
         caption=r"Kurala ve Saldırı Ailesine Göre Ayırt Etme",
-        notes=r"Mevcut hücreler üzerinden ortalamalar; sütunlar ana metindeki Tablo~VII ile aynıdır. FLTrust sıfır ağırlık kararlarını sayar.",
+        notes=r"Mevcut hücreler üzerinden ortalamalar; sütunlar ana metindeki Tablo~VIII ile aynıdır. FLTrust sıfır ağırlık kararlarını sayar.",
         rows=[(r"Attack family / rule & Cells & TPR & FPR & $J$ & Benefit \\", r"Saldırı ailesi / kural & Hücre & TPR & FPR & $J$ & Fayda \\"), UNITS6]),
     "flame_sizes": dict(
         caption=r"Saldırgansız Koşullarda FLAME'in Tuttuğu Küme Boyutları",
@@ -112,11 +112,13 @@ TABLES = {
         rows=[(r"Dataset & $\alpha$ & Mean size & Range & Size 46 \\",
                r"Veri kümesi & $\alpha$ & Ort. boyut & Aralık & Boyut 46 \\")]),
     "gamma": dict(
-        caption=r"Saldırılı Beş Adımlı Kontrol Noktalarında İlk Kabul Havuzunun Radyal Oranı",
-        notes=r"Farklı saldırılı beş adımlı kontrol noktası matrisleri; eşik $\tau=2$ değeridir. İki kapı değerlendirmesi aynı matrisi kullandığından her matris bir kez sayılmıştır. 36 matrisin hepsinde $B_0$ 90 katılımcının tamamını içerir. İstisna Fashion, tohum 137, yama, tur 29'dur.",
+        caption=r"Saldırılı Kontrol Noktalarında İlk Kabul Havuzunun Radyal Oranı",
+        notes=r"Farklı saldırılı kontrol noktası matrisleri; eşik $\tau=2$ değeridir. Beş adımlı matrisler 90 katılımcıdan 18'inin saldırgan olduğu ayrı kesme çalışmasından, kanonik matrisler ise 90 katılımcıdan 27'sinin saldırgan olduğu yeniden yürütülmüş kanonik koşumlardan gelir. Her beş adımlı matriste $B_0$ 90 katılımcının tamamını içerir; beş adımlı istisna Fashion, tohum 137, yama, tur 29'dur.",
         rows=[(r"Attack & Matrices & $\Gamma\leq2$ & Median & Maximum \\",
                r"Saldırı & Matris & $\Gamma\leq2$ & Medyan & En büyük \\"),
-              ("\nPatch & ", "\nYama & "), ("\nAll attacked & ", "\nTüm saldırılı & ")]),
+              (r"\emph{Five-step development runs}", r"\emph{Beş adımlı geliştirme koşumları}"),
+              (r"\emph{Canonical runs}", r"\emph{Kanonik koşumlar}"),
+              ("\nPatch, ", "\nYama, "), ("\nAll attacked & ", "\nTüm saldırılı & ")]),
 }
 
 CAPTION = re.compile(r"(\\caption\{)(.*?)(\}\\label\{)", re.S)

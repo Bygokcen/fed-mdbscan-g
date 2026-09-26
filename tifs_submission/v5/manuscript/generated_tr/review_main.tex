@@ -1,0 +1,19 @@
+\begin{table}[!t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{$\alpha=0.01$'de Saldırgansız Son Doğruluk (\%): Kurallar ve Aynı Büyüklükte Rastgele Altkümeler}\label{tab:random}
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tabular}{lrrrrr}
+\toprule
+Veri kümesi & FedAvg & Multi-Krum & Multi-Krum & FLAME & FLAME \\
+ &  & kural & rastgele & kural & rastgele \\
+\midrule
+MNIST & 85.65 & 40.71 & 84.36 & 20.10 & 44.65 \\
+Fashion-MNIST & 73.63 & 40.04 & 72.58 & 27.74 & 41.86 \\
+UCI HAR & 45.53 & 34.57 & 50.44 & 30.35 & 37.50 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\par\vspace{3pt}\parbox{\linewidth}{\footnotesize Üç tohum üzerinden ortalamalar. Rastgele altkümeler her turda kuralın seçtiği güncellemelerin yerini alır ve kabul sayısını korur: Multi-Krum için 61, FLAME için kanonik FLAME koşumunun o turda kaydettiği sayı. Kırpma ve gürültü değişmez; eşleştirilmiş farklar ek belgededir.}
+\end{table}

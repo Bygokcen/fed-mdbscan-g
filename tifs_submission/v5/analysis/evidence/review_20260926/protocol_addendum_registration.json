@@ -1,0 +1,9 @@
+{
+  "protocol": "PROTOCOL_ADDENDUM.md",
+  "sha256": "a4733cd476a60371a96270493fe1f5ce5e9d8a3ffc60a5aa4bcc71f7b572757c",
+  "parent_protocol_sha256": "cf7dca80719ee40e007d24d3273886b0200a49891d585f92858698f78d9c0cb6",
+  "registered_utc": "2026-09-26T21:56:10+00:00",
+  "registered_unix": 1790459770.6044776,
+  "outcome_runs_started": false,
+  "note": "Registered before any E3m run."
+}

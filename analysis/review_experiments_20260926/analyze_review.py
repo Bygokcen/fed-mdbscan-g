@@ -18,6 +18,7 @@ from collections import defaultdict
 ROOT = pathlib.Path('/home/gokcen/Fed_MDBSCAN_TIFS')
 CANON = ROOT / 'new_work/results/validated/audit-v2/full_20260910'
 OUT = ROOT / 'new_work/results/review_20260926'
+ADDENDUM_OUT = ROOT / 'new_work/results/review_20260926_addendum'
 HERE = pathlib.Path(__file__).resolve().parent
 SEEDS = (42, 137, 2024)
 SCENARIO = {'7.1': 'Min-Max, alpha=0.1', '7.2': 'Min-Sum, alpha=0.01', '8.1': 'patch, alpha=0.1',
@@ -64,6 +65,7 @@ def main():
 
     # ---------------- E1
     e1_rows, e1_pool = [], defaultdict(lambda: defaultdict(float))
+    e1_matrix_rows = []
     for sc in SCENARIO:
         for ds in ('mnist', 'fashion_mnist'):
             acc = defaultdict(float)
@@ -81,6 +83,11 @@ def main():
                     by = {(b['gate'], b['cutoff']): b for b in branches if b['round'] == r}
                     deployed, forced = by[('original', True)], by[('density_only', True)]
                     acc['matrices'] += 1
+                    e1_matrix_rows.append(dict(scenario=sc, dataset=ds, seed=seed, round=r, attackers=m['malicious_count'],
+                                               b0_size=m['b0_size'], gamma=m['gamma'], gamma_le_tau=m['gamma_le_tau'],
+                                               forced_groups=forced['n_groups'], forced_groups_outside_b0=forced['groups_outside_b0'],
+                                               deployed_gate_ran=deployed['partition_executed'],
+                                               deployed_removed_from_b0=deployed['removed_from_b0']))
                     acc['attacked'] += int(m['malicious_count'] > 0)
                     acc['b0_full'] += int(m['b0_size'] == deployed['n'])
                     acc['gamma_le_tau'] += int(m['gamma_le_tau'])
@@ -116,6 +123,13 @@ def main():
         w = csv.DictWriter(fh, fieldnames=fields)
         w.writeheader()
         w.writerows(e1_rows)
+    with open(HERE / 'e1_matrices.csv', 'w', newline='') as fh:
+        w = csv.DictWriter(fh, fieldnames=list(e1_matrix_rows[0]))
+        w.writeheader()
+        w.writerows(e1_matrix_rows)
+    attacked = [r['gamma'] for r in e1_matrix_rows if r['attackers'] > 0]
+    e1_attacked_pooled = dict(matrices=len(attacked), gamma_le_tau=sum(g <= 2.0 for g in attacked),
+                              gamma_median=round(st.median(attacked), 6), gamma_max=round(max(attacked), 6))
     e1_summary = []
     for sc, v in e1_pool.items():
         g = v.pop('gammas')
@@ -155,6 +169,16 @@ def main():
                        fedavg=canonical_final(ds, '6.2', 'fedavg', seed),
                        flame=canonical_final(ds, '6.2', 'flame_hdbscan', seed),
                        multikrum=canonical_final(ds, '6.2', 'krum_bound30', seed))
+            m_done = ADDENDUM_OUT / 'units' / f'E3m_{ds}_6.2_{seed}' / 'done.json'
+            if m_done.exists():
+                rec = load(m_done.parent / 'records.json')
+                row['flame_matched_random'] = rec['records'][-1]['accuracy']
+                row['flame_matched_random_ber'] = ber(rec['records'])
+                audit = rec['selection_audit']
+                row['flame_matched_random_mean_overlap'] = st.mean(a['overlap_with_rule'] / a['size'] for a in audit)
+            else:
+                row['flame_matched_random'] = None
+            row['flame_ber'] = ber(load(CANON / 'runs/main' / ds / 'scenario_6.2' / 'runs' / f'flame_hdbscan_seed{seed}.json')['records'])
             for tag, uid in (('flame_nonoise', f'E2b_{ds}_6.2_{seed}'), ('flame_random', f'E3f_{ds}_6.2_{seed}'),
                              ('multikrum_random', f'E3k_{ds}_6.2_{seed}')):
                 if uid in done:
@@ -186,6 +210,9 @@ def main():
         e23_summary.append(dict(
             dataset=ds, fedavg=mean_of(ds, 'fedavg'), flame=mean_of(ds, 'flame'),
             flame_nonoise=mean_of(ds, 'flame_nonoise'), flame_random=mean_of(ds, 'flame_random'),
+            flame_matched_random=mean_of(ds, 'flame_matched_random'),
+            flame_minus_matched_random=paired(ds, 'flame', 'flame_matched_random'),
+            fedavg_minus_flame_matched_random=paired(ds, 'fedavg', 'flame_matched_random'),
             multikrum=mean_of(ds, 'multikrum'), multikrum_random=mean_of(ds, 'multikrum_random'),
             noise_effect=paired(ds, 'flame_nonoise', 'flame'),
             flame_minus_random=paired(ds, 'flame', 'flame_random'),
@@ -193,7 +220,11 @@ def main():
             fedavg_minus_flame_random=paired(ds, 'fedavg', 'flame_random'),
             fedavg_minus_multikrum_random=paired(ds, 'fedavg', 'multikrum_random')))
 
-    summary = dict(provenance=provenance, e1=e1_summary, e2a=e2a_rows, e23=e23_summary)
+    matched_done = sorted(p.parent.name for p in (ADDENDUM_OUT / 'units').glob('E3m_*/done.json')) if (ADDENDUM_OUT / 'units').exists() else []
+    provenance['addendum_units_done'] = len(matched_done)
+    if (ADDENDUM_OUT / 'plan.json').exists():
+        provenance['addendum_plan_sha256'] = sha(ADDENDUM_OUT / 'plan.json')
+    summary = dict(provenance=provenance, e1=e1_summary, e1_attacked_pooled=e1_attacked_pooled, e2a=e2a_rows, e23=e23_summary)
     (HERE / 'review_summary.json').write_text(json.dumps(summary, indent=1) + '\n')
     print(json.dumps(summary, indent=1))
 

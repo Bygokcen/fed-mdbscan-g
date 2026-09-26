@@ -1,18 +1,26 @@
 \begin{table}[!t]
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
-\caption{Radial Ratio of the Initial Acceptance Pool on Attacked Five-Step Checkpoints}\label{tab:gamma}
+\caption{Radial Ratio of the Initial Acceptance Pool on Attacked Checkpoints}\label{tab:gamma}
 \begin{adjustbox}{max width=\columnwidth}
 \begin{tabular}{lrrrr}
 \toprule
 Attack & Matrices & $\Gamma\leq2$ & Median & Maximum \\
 \midrule
-Min-Max & 18 & 18 & 1.257 & 1.622 \\
-Patch & 18 & 17 & 1.666 & 2.017 \\
+\multicolumn{5}{l}{\emph{Five-step development runs}} \\
+Min-Max, $\alpha=0.01$ & 18 & 18 & 1.257 & 1.622 \\
+Patch, $\alpha=0.1$ & 18 & 17 & 1.666 & 2.017 \\
 All attacked & 36 & 35 & 1.448 & 2.017 \\
+\midrule
+\multicolumn{5}{l}{\emph{Canonical runs}} \\
+Min-Max, $\alpha=0.1$ & 18 & 10 & 1.956 & 2.355 \\
+Min-Sum, $\alpha=0.01$ & 18 & 3 & 2.429 & 5.360 \\
+Patch, $\alpha=0.1$ & 18 & 9 & 2.023 & 2.415 \\
+Patch, $\alpha=0.01$ & 18 & 0 & 5.520 & 13.024 \\
+All attacked & 72 & 22 & 2.248 & 13.024 \\
 \bottomrule
 \end{tabular}
 \end{adjustbox}
 
-\par\vspace{3pt}\parbox{\linewidth}{\footnotesize Distinct attacked five-step checkpoint matrices; the threshold is $\tau=2$. Both gate evaluations reuse each matrix and are counted once. In all 36 matrices, $B_0$ contains all 90 participants. The exception is Fashion, seed 137, patch, round 29.}
+\par\vspace{3pt}\parbox{\linewidth}{\footnotesize Distinct attacked checkpoint matrices; the threshold is $\tau=2$. Five-step matrices come from the separate cutoff study with 18 of 90 adversaries, canonical ones from re-executed canonical runs with 27 of 90. In every five-step matrix $B_0$ contains all 90 participants; the five-step exception is Fashion, seed 137, patch, round 29.}
 \end{table}
