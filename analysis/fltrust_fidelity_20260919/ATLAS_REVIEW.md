@@ -1,4 +1,4 @@
-> **DÜZELTME — 294c693 sonrası gerçek yürütme:** Aşağıdaki ilk incelemenin 2. maddesinde sunucunun boş kabul kümesinde güncellemeyi atladığı yorumu yanlıştı. Önceki accept_all_degraded dalını atlamıştım. Server.aggregate sınır testi çalıştırılarak doğrulandı: tüm güvenler sıfırsa tüm istemciler kabul edilip ortalama alınır, degraded/no_accepted_updates işaretlenir. Bu benim inceleme hatamdır. Yeni sayımın sessiz sıfır-kök yolunu dışlamadığına ilişkin ayrıntı `ATLAS_SECOND_REVIEW.md` içindedir.
+> **DÜZELTME — 319e819 sonrası gerçek yürütme:** Aşağıdaki ilk incelemenin 2. maddesinde sunucunun boş kabul kümesinde güncellemeyi atladığı yorumu yanlıştı. Önceki accept_all_degraded dalını atlamıştım. Server.aggregate sınır testi çalıştırılarak doğrulandı: tüm güvenler sıfırsa tüm istemciler kabul edilip ortalama alınır, degraded/no_accepted_updates işaretlenir. Bu benim inceleme hatamdır. Yeni sayımın sessiz sıfır-kök yolunu dışlamadığına ilişkin ayrıntı `ATLAS_SECOND_REVIEW.md` içindedir.
 
 # FLTrust kural kontrolünün bağımsız kapsam incelemesi
 
