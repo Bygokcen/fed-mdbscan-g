@@ -1,0 +1,19 @@
+\begin{table*}[!tp]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Paired Final-Accuracy Differences for the Controls of Table~\ref{tab:review_e3}}\label{tab:review_e4}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrr}
+\toprule
+Dataset & No noise & FLAME & Multi-Krum & FedAvg \\
+ & $-$ FLAME & $-$ random subset & $-$ random subset & $-$ Multi-Krum random \\
+\midrule
+MNIST & $-$0.01 [$-$0.02, +0.00] & $-$25.44 [$-$35.97, $-$8.60] & $-$43.65 [$-$49.69, $-$35.88] & +1.29 [$-$0.86, +2.92] \\
+Fashion-MNIST & $-$0.12 [$-$0.33, +0.00] & $-$16.06 [$-$21.97, $-$4.73] & $-$32.54 [$-$37.07, $-$30.23] & +1.05 [$-$0.43, +2.36] \\
+UCI HAR & +0.02 [+0.00, +0.07] & $-$6.58 [$-$13.67, +3.97] & $-$15.87 [$-$27.32, $-$2.41] & $-$4.91 [$-$11.33, $-$0.10] \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\par\vspace{3pt}\parbox{\linewidth}{\footnotesize Percentage points, mean [minimum, maximum] over the three seed pairs. A negative entry in the FLAME or Multi-Krum column means that the rule's own selection yields lower accuracy than a random subset of the same size.}
+\end{table*}

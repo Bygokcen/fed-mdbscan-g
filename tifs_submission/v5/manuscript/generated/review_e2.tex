@@ -1,0 +1,19 @@
+\begin{table}[!t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{FLAME Clustering: Local Selector Versus Reference HDBSCAN}\label{tab:review_e2}
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tabular}{lrrrr}
+\toprule
+Clean cell & Exact & Clustered & Identical & Max. sym. \\
+ & runs & rounds & selections & difference \\
+\midrule
+MNIST, $\alpha=0.5$ & 3/3 & 90 & 90 & 0 \\
+MNIST, $\alpha=0.01$ & 3/3 & 90 & 90 & 0 \\
+HAR, $\alpha=0.01$ & 3/3 & 90 & 90 & 0 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\par\vspace{3pt}\parbox{\linewidth}{\footnotesize Canonical FLAME runs were re-executed; in every round the precomputed cosine-distance matrix of the local selector was also passed to the reference \texttt{hdbscan} library (0.8.44) with $\texttt{min\_cluster\_size}=\lfloor n/2\rfloor+1$, $\texttt{min\_samples}=1$, and a single cluster allowed. The runs kept the local selection, so reproduction of the archive could be checked.}
+\end{table}

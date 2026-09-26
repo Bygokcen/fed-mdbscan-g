@@ -1,0 +1,4 @@
+dataset,scenario,max_symmetric_difference,runs,exact_runs,clustered_rounds,equal_rounds,reference_larger,reference_smaller
+mnist,1.1,0,3,3,90,90,0,0
+mnist,6.2,0,3,3,90,90,0,0
+har,6.2,0,3,3,90,90,0,0

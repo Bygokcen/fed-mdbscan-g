@@ -75,9 +75,9 @@ def build(root, tex_table, derived):
         grows.append([label,str(len(rs)),str(sum(x<=2 for x in values)),f'{st.median(values):.3f}',f'{max(values):.3f}'])
     assert grows[-1][2]=='35'
     (gen/'gamma.tex').write_text(tex_table(
-        caption=r'Radial Ratio of the Initial Acceptance Pool on Attacked Checkpoints',
+        caption=r'Radial Ratio of the Initial Acceptance Pool on Attacked Five-Step Checkpoints',
         label='tab:gamma',header=['Attack','Matrices',r'$\Gamma\leq2$','Median','Maximum'],rows=grows,colspec='lrrrr',
-        notes=r'Distinct attacked checkpoint matrices; the threshold is $\tau=2$. Both gate evaluations reuse each matrix and are counted once. In all 36 matrices, $B_0$ contains all 90 participants. The exception is Fashion, seed 137, patch, round 29.'))
+        notes=r'Distinct attacked five-step checkpoint matrices; the threshold is $\tau=2$. Both gate evaluations reuse each matrix and are counted once. In all 36 matrices, $B_0$ contains all 90 participants. The exception is Fashion, seed 137, patch, round 29.'))
     derived['gamma_unique']={'attacked':36,'satisfying':35,'median':st.median(float(r['gamma']) for r in unique.values()),'maximum':max(float(r['gamma']) for r in unique.values())}
 
     # Per-seed differences use matching identities, not independently pooled means.

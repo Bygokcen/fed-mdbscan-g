@@ -112,3 +112,25 @@ Makalede anlatılmayan deney ayrıntıları kod ve kanonik koşu kayıtlarından
 8. **Ek belge**: alternatif kapı ve kesme ayarlarının kayıtlı matrislerde çevrim dışı değerlendirildiği, eğitime geri beslenmediği eklendi.
 
 **Derleme**: `main.pdf` 11 sayfa, son sayfa dolu; `supplement.pdf` 3, `main_tr.pdf` 12 sayfa. Taşan satır, tanımsız gönderme ve eksik karakter yok. İngilizce ve Türkçe metinlerdeki sayı kümeleri birebir eşleşiyor.
+
+## Hakem sonrası hedefli deneyler (26–27 Eylül 2026)
+İkinci dış değerlendirmenin açık bıraktığı sorular için 66 koşuluk bir kampanya ve iki eğitimsiz ölçüm yapıldı. Planın özeti koşulardan önce kaydedildi. Rapor: `analysis/review_experiments_20260926/REPORT.md`. Kanıt özetleri: `analysis/evidence/review_20260926/`. Mevcut tablolar ve `derived_values.json` değişmedi.
+
+**Bulunan olgu hatası ve düzeltmesi.** Makale, bit düzeyinde özdeş saldırgan kopyalarına yoğunluk 1 atandığını ve Önerme 4'ün kopyalanan saldırıyı açıklamadığını söylüyordu. Gerçek matrislerde bu yanlış. En yakın komşu araması özdeş vektörler arasında küçük pozitif uzaklıklar döndürüyor. Bu yüzden kopyaların yoğunluğu 4.6e6'nın üstünde çıkıyor ve hepsi yüksek yoğunluk tarafına düşüyor; küme aşaması onları hiç test etmiyor. Bölüm IV, VIII-B, IX ve ek belgenin özdeş kopya bölümü düzeltildi.
+
+**Ana metin (İngilizce ve Türkçe):**
+1. Özet: 35/36 sonucunun beş adımlı koşulara ait olduğu, kanonik matrislerde 72'de 22 olduğu ve kopyaların yoğunluk nedeniyle testi atladığı yazıldı. Rastgele 61 seçimin Multi-Krum doğruluğunu düz ortalamanın 1.3 puan yakınına getirdiği eklendi. Özet 250 kelime.
+2. Giriş: ilk katkıya rastgele altküme kontrolü, ikinci katkıya yeniden yürütülmüş kanonik koşumlar eklendi.
+3. Şekil 1 başlığı: "saldırılı kontrol noktalarının hepsinde B0 bütün katılımcıları içerir" ifadesi kanonik α=0.01 yama matrisleri için yanlıştı, düzeltildi.
+4. Bölüm VI: rastgele seçim ve gürültü kontrollerinin sonucu eklendi.
+5. Bölüm VIII: açılış kanonik tur kayıtlarına göre yeniden yazıldı. İki matris kümesi tanımlandı. Kanonik Γ sonuçları, kopyaların yönlendirmesi ve α=0.01'deki çıkarımlar eklendi. Tablo X ve XI başlıklarına "beş adımlı" eklendi.
+6. Bölüm IX: yönlendirme ikinci tasarım dersi olarak, rastgele kontrol de fayda kaybının seçime bağlı olduğunun kanıtı olarak eklendi.
+7. Bölüm X: FLAME kümelemesinin 270 turda referans kütüphaneyle aynı sonucu verdiği ve gürültünün etkisi eklendi. Yarıçap koşulunun kapsamı güncellendi.
+8. Bölüm XI: kanonik sonuçlar ve rastgele kontrol eklendi.
+9. Sayfa bütçesi: kural bazında ayırt etme tablosu ve beş adımlı küme oranları örneği ek belgeye taşındı. Ana metin 11 sayfa ve son sayfası dolu. Ek belgedeki elle yazılmış tablo numaraları yeni sıraya göre güncellendi; ana metin Tablo XII'de bitiyor.
+
+**Ek belge.** "Targeted checks after review" bölümü eklendi. İçinde kanonik kayıt sayımları, kanonik kontrol noktası ölçümleri, FLAME kümeleme karşılaştırması, gürültü ve rastgele seçim kontrolleri var; tablolar XVI–XX. Ayrıca "Tables moved from the main text" bölümü eklendi. Tablolar `analysis/build_review_tables.py` ile üretiliyor.
+
+**Tablo betikleri.** `build_tables.py`, `build_checks.py` ve `build_tr.py` içinde yalnızca taşınan tablolara yapılan göndermeler ve iki başlık değişti. Bütün tablo gövdeleri ve türetilmiş değerler aynı kaldı.
+
+**Derleme.** pdfLaTeX ile `main.pdf` 11, `supplement.pdf` 6, `main_tr.pdf` 12 sayfa. Taşan satır, tanımsız gönderme ve eksik karakter yok. İngilizce ve Türkçe metinlerdeki sayı kümeleri eşleşiyor.

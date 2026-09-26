@@ -1,0 +1,36 @@
+\begin{table}[!t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Cluster-Stage Activity in the Canonical Fed-MDBSCAN-G Runs}\label{tab:review_e0}
+\begin{adjustbox}{max width=\columnwidth}
+\begin{tabular}{llrrrr}
+\toprule
+Attack family & $\alpha$ & Rounds & Gate open & Rounds removing & Removed \\
+ &  &  &  & from $B_0$ & updates \\
+\midrule
+Adversary-free & 0.5 & 270 & 19 & 0 & 0 \\
+ & 0.1 & 360 & 89 & 26 & 200 \\
+ & 0.01 & 360 & 360 & 67 & 738 \\
+\midrule
+Constrained probes & 0.1 & 360 & 101 & 0 & 0 \\
+ & 0.01 & 360 & 360 & 0 & 0 \\
+\midrule
+Patch backdoor & 0.1 & 270 & 0 & 0 & 0 \\
+ & 0.01 & 270 & 270 & 89 & 397 \\
+\midrule
+Loud Gaussian & 0.5 & 270 & 270 & 0 & 0 \\
+ & 0.1 & 540 & 540 & 24 & 114 \\
+ & 0.01 & 540 & 540 & 151 & 777 \\
+\midrule
+Label flipping & 0.5 & 270 & 241 & 18 & 32 \\
+ & 0.1 & 270 & 201 & 25 & 117 \\
+ & 0.01 & 270 & 270 & 94 & 825 \\
+\midrule
+Bounded perturbation & 0.1 & 540 & 177 & 60 & 444 \\
+ & 0.01 & 1080 & 1080 & 266 & 2978 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\par\vspace{3pt}\parbox{\linewidth}{\footnotesize Counts over every dataset and seed of the canonical main block, read from the recorded round fields; no run was repeated. The gate is open when the recorded layer is not Stage~1 alone. A removed update is a Stage-1-accepted update that the cluster stage excludes from the final set, $|B_0|-|B|$; in adversary-free rounds all of them are honest.}
+\end{table}

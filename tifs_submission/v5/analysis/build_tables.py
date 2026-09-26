@@ -374,7 +374,7 @@ def main():
         header=["Attack family / rule", "Cells", "TPR", "FPR", r"$J$", "Benefit"],
         units=["", "", r"(\%)", r"(\%)", "(pp)", "(pp)"],
         rows=t4_rows, colspec="lrrrrr",
-        notes=(r"Means over available cells; columns as in Table~\ref{tab:discrimination}. "
+        notes=(r"Means over available cells; columns as in Table~VII of the main text. "
                r"FLTrust counts zero-weight decisions."))
     open(os.path.join(gen, "discrimination_method.tex"), "w", encoding="utf-8").write(t4)
 
@@ -426,8 +426,8 @@ def main():
                r"round. Predicted FPR is the value at zero attacker recall ($\mathrm{TPR}=0$): an "
                r"identity for Multi-Krum and an upper bound for FLAME "
                r"(Corollaries~\ref{cor:cardinality}--\ref{cor:majority}). FLTrust and "
-               r"Fed-MDBSCAN-G yield no such prediction and appear in "
-               r"Table~\ref{tab:discrimination_method}. Each cell has 90 recorded rounds except "
+               r"Fed-MDBSCAN-G yield no such prediction; their per-rule rates are in the "
+               r"supplement. Each cell has 90 recorded rounds except "
                r"CIFAR-10/FLAME/$\alpha=0.1$ (60 rounds from two completed seeds)."))
     open(os.path.join(gen, "constrained.tex"), "w", encoding="utf-8").write(t4b)
     derived["constrained_prediction"] = {
@@ -496,7 +496,7 @@ def main():
     valve = prow[("density_only", "cutoff_attacked", "scenario_cut_minmax", "P2")]
     assert (int(valve["valves"]), int(valve["pre_fp"]), int(valve["final_fp"])) == (18, 1296, 0)
     t6 = tex_table(
-        caption=r"Consensus-Test Coverage Replay on 72 Recorded Update Matrices",
+        caption=r"Consensus-Test Coverage Replay on 72 Five-Step Update Matrices",
         label="tab:coverage_replay",
         header=["Gate", "Attack", "P0", "P1", "P2"],
         rows=t6_rows, colspec="llrrr",
@@ -535,8 +535,8 @@ def main():
         notes=(r"Seed 2024, round 9; every client is honest. Mini-batch regimes: A, standard "
                r"loader with batch size 32; B, a fresh 20-example subset at each local step; C, "
                r"the first 20-example batch repeated five times. Ratio is "
-               r"$\lVert c_S-m_{B_0}\rVert/(\tau R_0)$ with $\tau=2$ and $R_0$ from "
-               r"\eqref{eq:consensus}; a group is rejected when the ratio exceeds 1."))
+               r"$\lVert c_S-m_{B_0}\rVert/(\tau R_0)$ with $\tau=2$ and $R_0$ as in the consensus test "
+               r"of the main text; a group is rejected when the ratio exceeds 1."))
     open(os.path.join(gen, "cluster_ratios.tex"), "w", encoding="utf-8").write(t7)
     ratios = [float(x["ratio"]) for x in cl]
     derived["cluster_ratio_range"] = {"min": min(ratios), "max": max(ratios),
