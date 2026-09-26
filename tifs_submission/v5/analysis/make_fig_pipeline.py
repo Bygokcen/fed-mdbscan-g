@@ -10,13 +10,17 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch, Circle, Polygon
 from scipy.spatial import ConvexHull
 
-sys.path.insert(0, "/Users/gokcen/fed-mdbscan-g/new_work")
+from pathlib import Path
+
+REPO = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO / "new_work"))
 from simulation import mdbscan as MD
 
 C_S1 = "#2C6FAC"    # Stage 1 (geometric-median anchor)
 C_S3 = "#C9791A"    # Stages 2-3 (MDBSCAN adaptation)
 C_ACC = "#3A3A3A"   # accepted
 C_BOX = "#F2F2F2"
+LBL = dict(boxstyle="square,pad=0.1", fc="white", ec="none")  # label backing over circle lines
 
 
 def scene(seed=3):
@@ -88,8 +92,8 @@ def draw(out_stem, apply_style):
          r"reset $B_0=U$ if $|B_0|<n/2$", C_S1),
         (0.455, 0.195, "Stage 2: relative-density gate",
          r"$\mathrm{rd}_i=k'/\sum$ of $k'$-NN distances, $k'=5$" "\n"
-         "opens if a density gap (max/median > 10) coincides\n"
-         r"with $\geq\max(2,\lceil 0.05n\rceil)$ Stage-1 rejections; 3-round memory", C_S3),
+         r"opens if the largest rd gap $>10\times$ the median gap" "\n"
+         r"and $\geq\max(2,\lceil 0.05n\rceil)$ Stage-1 rejections; 3-round memory", C_S3),
         (0.225, 0.190, "Stage 3: cluster validation",
          r"SNN clustering of the low-density set $L=\{i:\mathrm{rd}_i<t\}$" "\n"
          r"reject group $S$ if $\|c_S-m_{B_0}\|>\tau R_0$, $\tau=2$" "\n"
@@ -140,14 +144,14 @@ def draw(out_stem, apply_style):
         hull = cen + (hull - cen) * 1.0 + np.sign(hull - cen) * 0.18
         axB.add_patch(Polygon(hull, closed=True, fill=False, ec=C_S3, lw=0.9, zorder=2))
     # direct labels
-    axB.text(S["m"][0] + S["r_s1"] * 0.70, S["m"][1] + S["r_s1"] * 0.74, "Stage-1\nboundary", color=C_S1, fontsize=6,
+    axB.text(S["m"][0] + S["r_s1"] * 0.78, S["m"][1] + S["r_s1"] * 0.80, "Stage-1\nboundary", color=C_S1, fontsize=6,
              ha="left", va="bottom")
     axB.text(S["m0"][0], S["m0"][1] - 2 * S["R0"] - 0.10, r"consensus radius $\tau R_0$",
-             color=C_S3, fontsize=6, ha="center", va="top")
+             color=C_S3, fontsize=6, ha="center", va="top", bbox=LBL, zorder=2.5)
     advc = X[lab == 3].mean(0)
     axB.text(advc[0], advc[1] + 0.50, "attackers", fontsize=6, ha="center", va="bottom", color="0.2")
     hBc = X[lab == 2].mean(0)
-    axB.text(hBc[0], hBc[1] - 0.55, "sparse honest\ngroup", fontsize=6, ha="center", va="top", color="0.2")
+    axB.text(hBc[0], hBc[1] - 0.55, "sparse honest\ngroup", fontsize=6, ha="center", va="top", color="0.2", bbox=LBL, zorder=2.5)
     pts = np.vstack([X, S["m"] + S["r_s1"] * np.array([[1, 1], [-1, -1]])])
     lo, hi = pts.min(0) - 0.45, pts.max(0) + 0.45
     axB.set_xlim(lo[0], hi[0]); axB.set_ylim(lo[1] - 0.35, hi[1] + 0.25)
@@ -167,3 +171,16 @@ def draw(out_stem, apply_style):
     for ext in ("pdf", "png"):
         fig.savefig(f"{out_stem}.{ext}", dpi=300)
     return fig, S, X, lab
+
+
+def apply_style(sizes=(8, 7, 6)):
+    base, mid, small = sizes
+    mpl.rcParams.update({"pdf.fonttype": 42, "ps.fonttype": 42, "font.size": base,
+                         "axes.titlesize": mid, "legend.fontsize": small,
+                         "savefig.bbox": "tight", "savefig.pad_inches": 0.1})
+
+
+if __name__ == "__main__":
+    mpl.use("Agg")
+    out = REPO / "tifs_submission" / "v5" / "manuscript" / "figures" / "fed_mdbscan_g_pipeline"
+    draw(str(out), apply_style)
