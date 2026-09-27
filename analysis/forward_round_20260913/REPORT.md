@@ -1,8 +1,8 @@
-> **14 Eylül bağımsız inceleme:** Koşum bütünlüğü doğrulandı; ancak aşağıdaki “hiçbir turda fark yok” ve “ilk turda ret yok” yorumları seed bazındaki sonuçlarla çelişiyor. MNIST/2024/tur9’da C−A FPR farkı −17,78 yüzde puan. Tarihsel rapor korunmuştur; bilimsel yorum için [bağımsız düzeltmeyi](../forward_round_review_20260914/REVIEW.md) okuyun.
+> **14 Eylül düzeltmesi:** Koşum bütünlüğü doğrulandı; ancak aşağıdaki “hiçbir turda fark yok” ve “ilk turda ret yok” yorumları seed bazındaki sonuçlarla çelişiyor. MNIST/2024/tur9’da C−A FPR farkı −17,78 yüzde puan. Tarihsel rapor korunmuştur; bu iki yorum geçersizdir.
 
 # İleri tur A/B/C deneyi — tamamlandı
 
-`NEXT_EXPERIMENT.md` ve `PILOT_REPORT.md`'de tasarlanan ileri tur karşılaştırması
+`step_control_stratified` pilotunda (`PILOT_REPORT.md`) tasarlanan ileri tur karşılaştırması
 uygulandı ve koşuldu. Pilot yalnız başlangıç modelinde ölçüyordu; bu koşum aynı
 soruyu model öğrenmeye başladıktan sonra soruyor.
 

@@ -38,6 +38,5 @@ Tabandaki farkın `repair_minimum` algoritmasından, veri miktarından, etiket b
 - `per_run.csv`: seed içi özetler, geçerli tur sayıları ve ilk tur ilişkileri.
 - `by_dataset.csv` / `summary.json`: yöntem ve veri kümesi kırılımı.
 - `provenance.json`: 63 ham girdi ve analiz betiği hashleri.
-- `NEXT_EXPERIMENT.md`: yeni deney için önceden yazılmış ayrıştırma planı.
 
 Yeniden üretim: `.venv/bin/python analysis/step_control_stratified/analyze.py`.
