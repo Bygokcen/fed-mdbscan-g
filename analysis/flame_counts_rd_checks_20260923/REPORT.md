@@ -94,8 +94,8 @@ Bu klasördeki `check_feedback.py`, RD ve ham tur sayımlarını; `compare_telem
 
 ```sh
 # Proje kökü; çıktı klasörü henüz mevcut olmamalı.
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python analysis/advisor_feedback_20260923/check_feedback.py --root "$PWD" --output /tmp/advisor_feedback_fresh
-PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python analysis/advisor_feedback_20260923/compare_telemetry.py --root "$PWD" --output /tmp/advisor_feedback_fresh/telemetry_comparison.json
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python analysis/flame_counts_rd_checks_20260923/check_feedback.py --root "$PWD" --output /tmp/advisor_feedback_fresh
+PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python analysis/flame_counts_rd_checks_20260923/compare_telemetry.py --root "$PWD" --output /tmp/advisor_feedback_fresh/telemetry_comparison.json
 PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python -m pytest new_work/tests -q -p no:cacheprovider
 ```
 

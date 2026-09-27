@@ -4,13 +4,14 @@ Bu dizin güncel makalenin kanıt ve doğrulama çalışmalarını içerir. Tari
 
 | Dizin | İşlev |
 | --- | --- |
-| [advisor_feedback_20260923](advisor_feedback_20260923/) | RD sınır davranışı ve FLAME doğrudan sayımları |
 | [baseline_fidelity_20260914](baseline_fidelity_20260914/) | Kanonik/ileri tur karar yolu, geliştirme bağımlılığı veya baseline doğrulaması |
 | [clean_geometry_20260913](clean_geometry_20260913/) | Kanonik/ileri tur karar yolu, geliştirme bağımlılığı veya baseline doğrulaması |
 | [cutoff_development_20260914](cutoff_development_20260914/) | Kanonik/ileri tur karar yolu, geliştirme bağımlılığı veya baseline doğrulaması |
+| [flame_counts_rd_checks_20260923](flame_counts_rd_checks_20260923/) | RD sınır davranışı ve FLAME doğrudan sayımları (V3 danışman geri bildirimi) |
 | [flame_fidelity_20260920](flame_fidelity_20260920/) | Kanonik/ileri tur karar yolu, geliştirme bağımlılığı veya baseline doğrulaması |
 | [fltrust_fidelity_20260919](fltrust_fidelity_20260919/) | Kanonik/ileri tur karar yolu, geliştirme bağımlılığı veya baseline doğrulaması |
 | [forward_round_20260913](forward_round_20260913/) | Kanonik/ileri tur karar yolu, geliştirme bağımlılığı veya baseline doğrulaması |
+| [gamma_measurement_20260921](gamma_measurement_20260921/) | Gamma ölçümü ve doğrulaması; Multi-Krum sayımlarının yeniden hesabı (`checks.json`) |
 | [gate_diagnosis_20260914](gate_diagnosis_20260914/) | Kanonik/ileri tur karar yolu, geliştirme bağımlılığı veya baseline doğrulaması |
 | [gate_replay_20260914](gate_replay_20260914/) | Kanonik/ileri tur karar yolu, geliştirme bağımlılığı veya baseline doğrulaması |
 | [multikrum_fidelity_20260919](multikrum_fidelity_20260919/) | Kanonik/ileri tur karar yolu, geliştirme bağımlılığı veya baseline doğrulaması |
@@ -19,7 +20,6 @@ Bu dizin güncel makalenin kanıt ve doğrulama çalışmalarını içerir. Tari
 | [snnc_factorial_20260914](snnc_factorial_20260914/) | Kanonik/ileri tur karar yolu, geliştirme bağımlılığı veya baseline doğrulaması |
 | [step_control_stratified](step_control_stratified/) | Kanonik/ileri tur karar yolu, geliştirme bağımlılığı veya baseline doğrulaması |
 | [unclustered_policy_20260920](unclustered_policy_20260920/) | P0/P1/P2 sabit matris karşılaştırması |
-| [gamma_measurement_20260921](gamma_measurement_20260921/) | Gamma ölçümü ve doğrulaması; Multi-Krum sayımlarının yeniden hesabı (`checks.json`) |
 
 ## Gamma ölçümünü yeniden üretme
 
