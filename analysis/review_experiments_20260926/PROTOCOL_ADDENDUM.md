@@ -1,26 +1,26 @@
-# Plan eki: kabul sayısı eşleşmiş FLAME rastgele kontrolü (27 Eylül 2026)
+# Plan addendum: acceptance-count-matched FLAME random control (27 September 2026)
 
-Bu ek, ana plandaki (PROTOCOL.md, SHA-256 `cf7dca80…`) E3 FLAME kontrolünün bir tasarım eksiğini giderir. Koşulardan önce yazıldı. SHA-256 özeti ve zaman damgası `protocol_addendum_registration.json` dosyasına kaydedildi.
+This addendum fixes a design gap in the E3 FLAME control in the main plan (PROTOCOL.md, SHA-256 `cf7dca80…`). It was written before the runs. Its SHA-256 digest and timestamp are recorded in `protocol_addendum_registration.json`.
 
-## Neden
+## Why
 
-E3'teki FLAME rastgele kontrolünde altküme büyüklüğü, kontrolün kendi eğitim yörüngesinde FLAME'in o turda seçtiği sayıdır. Yörüngeler ayrıştığı için kabul sayıları kanonik FLAME koşusundan farklılaşır. Ortalama fark MNIST'te 0.07, Fashion-MNIST'te 0.96, HAR'da 1.37 güncellemedir. Bu yüzden E3 kabul sayıları eşleşmiş iki kollu bir karşılaştırma değildir. Multi-Krum kontrolünde bu sorun yoktur, çünkü iki kolda da sayı sabit 61'dir.
+In the E3 FLAME random control, the subset size is whatever number FLAME selected that round along the control's own training trajectory. Because trajectories diverge, the acceptance counts differ from the canonical FLAME run. The mean gap is 0.07 updates on MNIST, 0.96 on Fashion-MNIST, and 1.37 on HAR. So the E3 acceptance counts are not a matched two-arm comparison. The Multi-Krum control does not have this problem, since the count is fixed at 61 in both arms.
 
-## Tasarım (E3m)
+## Design (E3m)
 
-- **Koşullar:** Temiz, α=0.01 (senaryo 6.2); MNIST, Fashion-MNIST, HAR; tohumlar 42, 137, 2024. Toplam 9 koşu.
-- **Müdahale:** Her tur r'de dondurulmuş FLAME seçicisi olağan biçimde çalışır; kırpma normu ve gürültü ölçeği ondan gelir. Seçilen indeksler, **kanonik FLAME koşusunun aynı turdaki kayıtlı kabul sayısı** büyüklüğünde tekdüze rastgele bir altkümeyle değiştirilir. Kırpma ve gürültü değişmez.
-- **Rastgelelik:** `derive_seed(seed, 'review_matched_random_selection', r)` akışından gelir. Eğitim, saldırgan ve katılım akışları tüketilmez.
-- **Ortam:** E3 ile aynıdır. Kanonik dondurulmuş kaynak, kanonik başlatma ortamı ve dondurulmuş fonksiyonu çalışma anında saran bir betik kullanılır. Simülasyon kodu değişmez.
+- **Conditions:** clean, α=0.01 (scenario 6.2); MNIST, Fashion-MNIST, HAR; seeds 42, 137, 2024. 9 runs total.
+- **Intervention:** in each round r, the frozen FLAME selector runs as usual; the clipping norm and noise scale come from it. The selected indices are replaced with a uniformly random subset sized to **the canonical FLAME run's recorded acceptance count for that same round**. Clipping and noise are unchanged.
+- **Randomness:** comes from the stream `derive_seed(seed, 'review_matched_random_selection', r)`. The training, attacker, and participation streams are not consumed.
+- **Environment:** same as E3. The canonical frozen source, the canonical launch environment, and a script that wraps the frozen function at run time are used. The simulation code is unchanged.
 
-## Doğrulama
+## Validation
 
-- Her turda kabul sayısı, kanonik kayıttaki sayıya eşit olmalıdır.
-- Bütün katılımcılar dürüst olduğu için ret sayıları turdan tura aynıdır. Bu yüzden koşunun BER değeri kanonik FLAME ile birebir aynı çıkmalıdır.
-- Veri bölüşümü, katılım çizelgesi ve başlangıç modeli kanonik koşuyla aynı olmalıdır.
+- The acceptance count in every round must equal the count in the canonical record.
+- Since all participants are honest, the rejection counts are the same from round to round. So the run's BER must come out identical to canonical FLAME.
+- The data partition, participation schedule, and initial model must match the canonical run.
 
-Doğrulamayı geçmeyen koşu başarısız sayılır; yeniden tohumlanmaz.
+A run that fails validation is counted as failed; it is not re-seeded.
 
-## Ölçümler ve raporlama
+## Measurements and reporting
 
-Her tohum için son doğruluk ölçülür. Raporlanan farklar şunlardır: FLAME eksi eşleşmiş rastgele ve FedAvg eksi eşleşmiş rastgele, ortalama, en küçük ve en büyük değerleriyle. Sonuç hangi yönde çıkarsa çıksın ek belgeye yazılır. Makalede FLAME için eşleşmiş kontrol esas alınır; E3'teki eşleşmemiş kontrol de açıkça tanımlanarak ek belgede kalır.
+Final accuracy is measured for each seed. The reported gaps are FLAME minus matched random and FedAvg minus matched random, with their mean, minimum, and maximum. The result is written to the supplement regardless of which direction it goes. The manuscript treats the matched control as the basis for FLAME; the unmatched control from E3 remains in the supplement, explicitly labeled as such.
