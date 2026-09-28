@@ -1,1 +1,0 @@
-Unmodified IEEEtran.cls and IEEEtran.bst from https://mirrors.ctan.org/macros/latex/contrib/IEEEtran.zip, retrieved 2026-09-13. License and copyright notices retained inside files.
