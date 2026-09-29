@@ -2,7 +2,7 @@
 
 Current work: **Benign Exclusion and Consensus-Test Limits in Heterogeneous Federated Learning**.
 
-This repository holds the code and evidence/validation material supporting the manuscript. Manuscript sources (LaTeX, PDF, cover letter) and raw simulation output are not kept here; they live in a separate research archive.
+This repository holds the code and evidence/validation material supporting the manuscript. Manuscript sources (LaTeX, PDF, cover letter) are not kept here. The raw simulation output is being deposited on Zenodo; [archive/](archive/README.md) holds its file manifest and the frozen sources that produced it.
 
 ## Repository layout
 
@@ -11,8 +11,9 @@ This repository holds the code and evidence/validation material supporting the m
 - `new_work/*.py`, `new_work/*.sh`: campaign runner, audit recovery, and reproducibility scripts.
 - `analysis/`: evidence and validation studies backing the manuscript's claims, organized as dated folders; each folder's purpose is listed in [analysis/README.md](analysis/README.md).
 - `environment/`: package versions of the canonical experiment environment (`audit-v2-pip-freeze.txt`).
+- `archive/`: frozen source snapshots of the historical campaigns and the SHA-256 manifest of the raw archive; see [archive/README.md](archive/README.md).
 
-Raw data, experiment checkpoints, and the frozen environment are kept in a separate research archive; they are not part of this repository. Reproducing the summary evidence tables (the CSV/JSON files under `analysis/`) is a different operation from re-running the historical training campaigns.
+The raw archive (per-run records, the saved update matrices at rounds 0, 9 and 29, 12 GB in total) is too large for git and is being deposited on Zenodo as four bundles (the DOI will be added once the record is published); [archive/README.md](archive/README.md) explains how to fetch, verify and extract them. The historical runs were produced by the snapshots in `archive/frozen_sources/`, not by the current `new_work/simulation/`. Reproducing the summary evidence tables (the CSV/JSON files under `analysis/`) is a different operation from re-running the historical training campaigns.
 
 ## Setup
 
