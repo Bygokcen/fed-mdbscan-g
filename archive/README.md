@@ -54,4 +54,14 @@ Scripts that take `--root`, such as `measure_gamma.py`, need no change.
 
 - **Datasets.** MNIST, Fashion-MNIST, UCI HAR and CIFAR-10 are public and are not redistributed. Each run record stores the dataset identity with its SHA-256 (`run_metadata.dataset_identity`).
 - **Partitions, schedules and initial models as separate files.** Each run's participation schedule is stored in its record (`run_metadata.participation_schedule`). Partitions and initial models are derived from the seed at run start; the record keeps their SHA-256 (`partition_sha256`, `initial_model_sha256`) together with per-client class histograms.
-- **The Python environment.** The five snapshots with provenance files also include a `pip-freeze.txt`; the canonical one is identical to `environment/audit-v2-pip-freeze.txt`.
+- **The Python environment as a directory.** It is rebuilt instead; see the next section.
+
+## Frozen environment
+
+The canonical runs used Python 3.12.3 and the 53 packages in `environment/audit-v2-pip-freeze.txt`, which is identical to the snapshot's `pip-freeze.txt`. To rebuild that environment:
+
+```sh
+environment/create_frozen_env.sh .venv-frozen
+```
+
+The script installs the freeze with `--no-deps`, checks that `pip freeze` of the new environment matches it line for line, and compares Python, package versions and the deterministic-mode flag with the canonical campaign's recorded environment (`environment/canonical_environment.json`). The launch settings need no separate step: the frozen runner sets one thread for OpenMP, MKL and OpenBLAS and calls `torch.set_num_threads(1)` itself (`run_audit_campaign.py`, lines 179 and 251). PyTorch's deterministic mode was off, so GPU results need not repeat bit for bit.

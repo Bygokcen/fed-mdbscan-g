@@ -1,0 +1,12 @@
+{
+  "cuda_available": true,
+  "dependency_lock_digest": "c5aedc010cfd4770ad542ce8d51fa25d72b0c6fd18c6bb448fd78155fd6c55e5",
+  "deterministic_backend": false,
+  "numpy": "2.4.4",
+  "pandas": "3.0.2",
+  "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "scikit_learn": "1.8.0",
+  "scipy": "1.17.1",
+  "torch": "2.11.0+cu130"
+}
