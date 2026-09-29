@@ -1,6 +1,6 @@
 # Raw research archive
 
-The summaries under `analysis/` are computed from a raw archive: the per-run records of the canonical campaign, the client-update matrices saved at rounds 0, 9 and 29, and the frozen source snapshots that produced them. The archive is 12 GB uncompressed. It is being deposited on Zenodo as four `tar.gz` bundles (6.5 GB); the record's DOI will be added here once it is published.
+The summaries under `analysis/` are computed from a raw archive: the per-run records of the canonical campaign, the client-update matrices saved at rounds 0, 9 and 29, and the frozen source snapshots that produced them. The archive is 12 GB uncompressed. It is deposited on Zenodo as four `tar.gz` bundles (6.5 GB): [doi:10.5281/zenodo.23048019](https://doi.org/10.5281/zenodo.23048019).
 
 This folder holds the parts that fit in git:
 

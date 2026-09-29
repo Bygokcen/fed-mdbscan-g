@@ -2,7 +2,7 @@
 
 Current work: **Benign Exclusion and Consensus-Test Limits in Heterogeneous Federated Learning**.
 
-This repository holds the code and evidence/validation material supporting the manuscript. Manuscript sources (LaTeX, PDF, cover letter) are not kept here. The raw simulation output is being deposited on Zenodo; [archive/](archive/README.md) holds its file manifest and the frozen sources that produced it.
+This repository holds the code and evidence/validation material supporting the manuscript. Manuscript sources (LaTeX, PDF, cover letter) are not kept here. The raw simulation output is deposited on Zenodo ([doi:10.5281/zenodo.23048019](https://doi.org/10.5281/zenodo.23048019)); [archive/](archive/README.md) holds its file manifest and the frozen sources that produced it.
 
 ## Repository layout
 
@@ -13,7 +13,7 @@ This repository holds the code and evidence/validation material supporting the m
 - `environment/`: package versions of the canonical experiment environment (`audit-v2-pip-freeze.txt`) and `create_frozen_env.sh`, which rebuilds that environment and checks it against the campaign's record.
 - `archive/`: frozen source snapshots of the historical campaigns and the SHA-256 manifest of the raw archive; see [archive/README.md](archive/README.md).
 
-The raw archive (per-run records, the saved update matrices at rounds 0, 9 and 29, 12 GB in total) is too large for git and is being deposited on Zenodo as four bundles (the DOI will be added once the record is published); [archive/README.md](archive/README.md) explains how to fetch, verify and extract them. The historical runs were produced by the snapshots in `archive/frozen_sources/`, not by the current `new_work/simulation/`. Reproducing the summary evidence tables (the CSV/JSON files under `analysis/`) is a different operation from re-running the historical training campaigns.
+The raw archive (per-run records, the saved update matrices at rounds 0, 9 and 29, 12 GB in total) is too large for git and is deposited on Zenodo as four bundles ([doi:10.5281/zenodo.23048019](https://doi.org/10.5281/zenodo.23048019)); [archive/README.md](archive/README.md) explains how to fetch, verify and extract them. The historical runs were produced by the snapshots in `archive/frozen_sources/`, not by the current `new_work/simulation/`. Reproducing the summary evidence tables (the CSV/JSON files under `analysis/`) is a different operation from re-running the historical training campaigns.
 
 ## Setup
 
