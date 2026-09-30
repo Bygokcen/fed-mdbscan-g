@@ -1,0 +1,11 @@
+condition,dataset,scenario,attacked,attackers_outside_b0,attackers_total,b0_full,deployed_gate_ran,deployed_matrices_with_removal,deployed_removed_attackers,deployed_removed_honest,exact_runs,forced_gate_ran,forced_matrices_with_removal,forced_removed_attackers,forced_removed_honest,gamma_le_tau,gamma_max,gamma_median,groups_in_b0,matrices,runs,sufficient_condition,x_b0_size_total,x_forced_matrices_groups_nonempty_in_b0,x_forced_matrices_with_group_rejection,x_forced_matrices_with_groups,x_forced_rejection_without_b0_effect
+"Min-Max, alpha=0.1",mnist,7.1,9,0,243,9,0,0,0,0,3,9,0,0,0,3,2.337719,2.091659,9,9,3,3,810,0,0,0,0
+"Min-Max, alpha=0.1",fashion_mnist,7.1,9,0,243,9,0,0,0,0,3,9,0,0,0,7,2.355399,1.754099,9,9,3,7,810,0,0,0,0
+"Min-Sum, alpha=0.01",mnist,7.2,9,0,243,0,9,0,0,0,3,9,0,0,0,3,4.408628,2.426954,9,9,3,3,551,0,0,0,0
+"Min-Sum, alpha=0.01",fashion_mnist,7.2,9,0,243,0,9,0,0,0,3,9,0,0,0,0,5.359722,2.567869,9,9,3,0,574,0,0,0,0
+"patch, alpha=0.1",mnist,8.1,9,0,243,9,0,0,0,0,3,9,0,0,0,4,2.405458,2.054831,9,9,3,4,810,9,0,9,0
+"patch, alpha=0.1",fashion_mnist,8.1,9,2,243,5,0,0,0,0,3,9,0,0,0,5,2.415058,1.99155,9,9,3,5,806,9,0,9,0
+"patch, alpha=0.01",mnist,8.2,9,103,243,0,9,3,6,10,3,9,3,6,10,0,13.023808,6.01822,7,9,3,0,477,6,4,8,1
+"patch, alpha=0.01",fashion_mnist,8.2,9,87,243,0,9,4,7,20,3,9,4,7,20,0,5.562914,3.954502,7,9,3,0,510,7,7,9,3
+"clean, alpha=0.01",mnist,6.2,0,0,0,0,9,0,0,0,3,9,0,0,0,0,9.406947,7.243559,6,9,3,0,472,6,3,9,3
+"clean, alpha=0.01",fashion_mnist,6.2,0,0,0,0,9,1,0,4,3,9,1,0,4,0,7.552815,3.37297,7,9,3,0,518,7,3,9,2

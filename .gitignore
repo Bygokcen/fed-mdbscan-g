@@ -54,3 +54,8 @@ _bmad-output/
 # Retired workspace archives, if copied back into this repository
 /Fed_MDBSCAN_TIFS_arsiv_*/
 /agent_support/
+
+# Outputs of the tifs_submission/v5/analysis scripts; manuscript sources are not kept here
+/tifs_submission/v5/manuscript/
+# Journal submission proofs
+/T-IFS-*.pdf

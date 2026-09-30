@@ -6,6 +6,9 @@ This repository holds the code and evidence/validation material supporting the m
 
 ## Repository layout
 
+- `tifs_submission/v5/analysis/`: scripts and summary evidence that regenerate the manuscript's tables and figures; see below.
+
+
 - `new_work/simulation/`: federated learning simulation, attack and audit scripts.
 - `new_work/tests/`: test suite for the simulation and audit logic.
 - `new_work/*.py`, `new_work/*.sh`: campaign runner, audit recovery, and reproducibility scripts.
@@ -39,3 +42,4 @@ python analysis/gamma_measurement_20260921/verify_gamma.py --root "$PWD" --gamma
 See [analysis/README.md](analysis/README.md) for the other studies.
 
 The historical campaign comprises 2,125 completed runs and 5 failures out of 2,130 planned units. The 39 re-runs and 36 control runs from the latest checks are reported separately. This work does not claim general defense superiority or statistical significance.
+
