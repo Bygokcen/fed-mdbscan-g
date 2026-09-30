@@ -30,6 +30,23 @@ pip install -r requirements.txt -r requirements-dev.txt
 python -m pytest new_work/tests -q -p no:cacheprovider
 ```
 
+## Regenerating the manuscript tables and figures
+
+`tifs_submission/v5/` is the "V5 submission directory" named in the supplement. Its `analysis/` folder holds the scripts and summary evidence from which the manuscript's tables and figures were generated. The LaTeX sources were supplied with the submission and are not kept here.
+
+```sh
+cd tifs_submission/v5
+python analysis/build_tables.py --root .
+mkdir -p manuscript/generated_tr
+python analysis/build_review_tables.py --root .
+python analysis/make_fig_pipeline.py
+```
+
+`build_tables.py` needs only matplotlib. It checks the copied report hashes and the condition metadata, verifies the direct-count and checkpoint summaries, and writes the tables to `manuscript/generated/` and Fig. 2 to `manuscript/figures/`. `build_review_tables.py` writes the tables of the targeted re-executions and controls, including a Turkish copy (hence the `mkdir`). `make_fig_pipeline.py` draws Fig. 1 with `new_work/simulation/mdbscan.py` and also needs NumPy, SciPy and scikit-learn. The output folder is ignored by git. Run from a fresh clone with the package versions in `environment/audit-v2-pip-freeze.txt`, this sequence reproduces all 21 tables byte for byte and both manuscript figures pixel for pixel.
+
+
+
+
 ## Reproducing evidence studies
 
 Each `analysis/<study>/` folder contains its own scripts, e.g. the gamma measurement:
