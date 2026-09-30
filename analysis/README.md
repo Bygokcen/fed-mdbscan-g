@@ -2,6 +2,8 @@
 
 This directory holds the evidence and validation studies for the current manuscript. Historical folder names are kept so script/provenance paths stay intact; only review folders unused by V5 were removed (these paths from the old `tifs_submission/evidence/` records persist in git history). Comments in older reports are historical; the current claim scope is the V5 text.
 
+In this directory and in `tifs_submission/v5/analysis/evidence/review_20260926/`, "review" and "external review" mean informal feedback on pre-submission drafts of the manuscript, not peer review by a journal or conference.
+
 | Directory | Purpose |
 | --- | --- |
 | [baseline_fidelity_20260914](baseline_fidelity_20260914/) | Canonical/forward-round decision path, development dependency, or baseline validation |
