@@ -1,4 +1,4 @@
-# Local environments and caches
+# Python environments and caches
 .venv/
 .venv-frozen/
 venv/
@@ -7,55 +7,44 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
-.DS_Store
-# Credentials and machine settings
+
+# Credentials, editor settings and OS files
 .env
 .env.*
 !.env.example
 .idea/
 .vscode/
-# Agent tooling and session state; machine-local, not part of the research record
-.agents/
-.claude/
-_bmad/
-_bmad-output/
-# Third-party publisher source material: kept locally for the method comparison,
-# never redistributed from this repository.
-/new_work/1-s2.0-S0925231224001000-main.pdf
-/new_work/makale.md
-# Datasets and immutable experiment archives are distributed separately
+.DS_Store
+
+# Markdown is kept only as README.md files
+*.md
+!README.md
+
+# Datasets and the raw archive are distributed separately (see archive/README.md)
 /new_work/data/
 /new_work/results/
-# Build intermediates; reviewed PDFs and small evidence CSVs are intentional
-*.aux
+/SHA256SUMS
+*.zip
+*.tar
+*.tar.gz
+
+# Model checkpoints
+*.pt
+*.pth
+*.ckpt
+
+# Logs and LaTeX build files
 *.log
+*.aux
 *.out
 *.blg
 *.synctex.gz
 *.fls
 *.fdb_latexmk
-*.zip
-*.tar
-*.tar.gz
-*.pt
-*.pth
-*.ckpt
-# Local transfer inventory; keep its summary in version control
-/migration_file_inventory.json
-
-# Local agent instructions and handoff notes
-/AGENTS.md
-/Agents.md
-/CLAUDE.md
-/CODEX_TAKIP.md
-/START_HERE.md
-/TEYIT_BRIEFI.md
-/HANDOFF*.md
-# Retired workspace archives, if copied back into this repository
-/Fed_MDBSCAN_TIFS_arsiv_*/
-/agent_support/
 
 # Outputs of the tifs_submission/v5/analysis scripts; manuscript sources are not kept here
 /tifs_submission/v5/manuscript/
 # Journal submission proofs
 /T-IFS-*.pdf
+# Papers kept locally for reference; not redistributed
+/new_work/*.pdf
