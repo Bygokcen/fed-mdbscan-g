@@ -4,7 +4,7 @@ The summaries under `analysis/` are computed from a raw archive: the per-run rec
 
 This folder holds the parts that fit in git:
 
-- `frozen_sources/`: byte-identical copies of the seven source snapshots stored with the runs. Each path mirrors `new_work/results/<study>/source/` in the archive. Five snapshots carry a `source_provenance.json` with per-file SHA-256 values, and every copied file matches them; the batch-control pilot and forward-round snapshots have no provenance file.
+- `frozen_sources/`: byte-identical copies of the seven source snapshots stored with the runs. Each path mirrors `new_work/results/<study>/source/` in the archive. Before training, each study copied `new_work/simulation/` and `new_work/tests/` into its `source/new_work/` and ran from that copy, so the `new_work/` folder inside a snapshot is the code as it stood when that study started, not a copy of the current `new_work/`. The layout is kept because the imports and the hash lists stored with the runs (`campaign.json`, or `manifest.json` for the batch-control pilot and forward-round snapshots) rely on it. Five snapshots carry a `source_provenance.json` with per-file SHA-256 values, and every copied file matches them; the batch-control pilot and forward-round snapshots have no provenance file.
 - `raw_archive.sha256`: SHA-256 of all 5,028 archive files, in `sha256sum` format, with paths relative to the repository root.
 
 ## Frozen source and the current tree
@@ -45,10 +45,10 @@ These scripts set their root to `/home/gokcen/Fed_MDBSCAN_TIFS`, the machine the
 - `analysis/fltrust_fidelity_20260919/compare.py`, `server_path.py`
 - `analysis/gate_replay_20260914/run_replay.py`
 - `analysis/multikrum_fidelity_20260919/compare.py`
-- `analysis/review_experiments_20260926/analyze_review.py`, `e0_canonical_stage_counts.py`, `e1b_density_routing.py`, `review_runner.py`
 - `analysis/root_data_audit_20260919/analyze.py`
+- `analysis/targeted_checks_20260926/analyze_review.py`, `e0_canonical_stage_counts.py`, `e1b_density_routing.py`, `review_runner.py`
 
-Scripts that take `--root`, such as `measure_gamma.py`, need no change.
+Scripts that take `--root`, such as `measure_gamma.py`, need no change. `unclustered_policy_20260920/analyze.py` also hashes its protocol, which is no longer in the tree; restore it first with `git show 0d763f6:analysis/unclustered_policy_20260920/PROTOCOL.md > analysis/unclustered_policy_20260920/PROTOCOL.md`.
 
 ## Not in the archive
 

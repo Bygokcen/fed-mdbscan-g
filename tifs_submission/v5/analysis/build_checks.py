@@ -75,7 +75,7 @@ def build(root, tex_table, derived):
     for label,suffix in [(r'Min-Max, $\alpha=0.01$','scenario_cut_minmax'),(r'Patch, $\alpha=0.1$','scenario_cut_backdoor'),('All attacked',None)]:
         grows.append(gamma_row(label,[r for r in unique.values() if suffix is None or r['scenario']==suffix]))
     assert grows[-1][2]=='35'
-    # Canonical checkpoints re-executed after review (analysis/review_experiments_20260926).
+    # Canonical checkpoints re-executed by the targeted checks (analysis/targeted_checks_20260926).
     with (ev/'review_20260926/e1_matrices.csv').open(newline='') as handle:
         canon=[r for r in csv.DictReader(handle) if int(r['attackers'])>0]
     grows+=[None,r'\multicolumn{5}{l}{\emph{Canonical runs}} \\']

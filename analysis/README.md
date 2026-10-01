@@ -1,6 +1,6 @@
 # Research analyses
 
-This directory holds the evidence and validation studies for the current manuscript. Historical folder names are kept so script/provenance paths stay intact; only review folders unused by V5 were removed (these paths from the old `tifs_submission/evidence/` records persist in git history). Comments in older reports are historical; the current claim scope is the V5 text.
+This directory holds the evidence and validation studies for the current manuscript. Folders unused by V5 were removed; their paths in the old `tifs_submission/evidence/` records persist in git history.
 
 In this directory and in `tifs_submission/v5/analysis/evidence/review_20260926/`, "review" and "external review" mean informal feedback on pre-submission drafts of the manuscript, not peer review by a journal or conference.
 
@@ -17,10 +17,10 @@ In this directory and in `tifs_submission/v5/analysis/evidence/review_20260926/`
 | [gate_diagnosis_20260914](gate_diagnosis_20260914/) | Canonical/forward-round decision path, development dependency, or baseline validation |
 | [gate_replay_20260914](gate_replay_20260914/) | Canonical/forward-round decision path, development dependency, or baseline validation |
 | [multikrum_fidelity_20260919](multikrum_fidelity_20260919/) | Canonical/forward-round decision path, development dependency, or baseline validation |
-| [review_experiments_20260926](review_experiments_20260926/) | Post-review targeted experiments: Γ on canonical matrices, replica routing, FLAME clustering fidelity, noise and random-selection controls ([report](review_experiments_20260926/REPORT.md)) |
 | [root_data_audit_20260919](root_data_audit_20260919/) | Scope audit of trusted root data |
 | [snnc_factorial_20260914](snnc_factorial_20260914/) | Canonical/forward-round decision path, development dependency, or baseline validation |
 | [step_control_stratified](step_control_stratified/) | Canonical/forward-round decision path, development dependency, or baseline validation |
+| [targeted_checks_20260926](targeted_checks_20260926/) | Targeted checks: Γ on canonical matrices, replica routing, FLAME clustering fidelity, noise and random-selection controls |
 | [unclustered_policy_20260920](unclustered_policy_20260920/) | P0/P1/P2 fixed-matrix comparison |
 
 ## Reproducing the gamma measurement
